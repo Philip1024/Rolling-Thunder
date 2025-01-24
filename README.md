@@ -1,2 +1,2 @@
-# Rolling-Thunder
+# Rolling Thunder
 Arcade game
