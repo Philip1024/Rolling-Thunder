@@ -1,12 +1,22 @@
-﻿// Rolling Thunder.cpp : Defines the entry point for the application.
-//
-#include "main.h"
-#include <SFML/Graphics.hpp>
+﻿#include <SFML/Graphics.hpp>
 
 
 int main()
 {
-	std::cout << "Hello CMake." << std::endl;
+    sf::RenderWindow window(sf::VideoMode({ 200, 200 }), "SFML works!");
+    sf::CircleShape shape(100.f);
+    shape.setFillColor(sf::Color::Green);
 
-	return 0;
+    while (window.isOpen())
+    {
+        while (const std::optional event = window.pollEvent())
+        {
+            if (event->is<sf::Event::Closed>())
+                window.close();
+        }
+
+        window.clear();
+        window.draw(shape);
+        window.display();
+    }
 }
