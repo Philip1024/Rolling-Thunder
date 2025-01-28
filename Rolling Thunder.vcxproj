@@ -19,11 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Entity\Bomb\Bomb.cpp" />
+    <ClCompile Include="src\Entity\Bullet\Bullet.cpp" />
+    <ClCompile Include="src\Entity\Door\BulletDoor\BulletDoor.cpp" />
+    <ClCompile Include="src\Entity\Door\Door.cpp" />
+    <ClCompile Include="src\Entity\Entity.cpp" />
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\Entity\Enemy\Enemy.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Entity\Bomb\Bomb.h" />
+    <ClInclude Include="src\Entity\Bullet\Bullet.h" />
+    <ClInclude Include="src\Entity\Door\BulletDoor\BulletDoor.h" />
+    <ClInclude Include="src\Entity\Door\Door.h" />
+    <ClInclude Include="src\Entity\Entity.h" />
     <ClInclude Include="src\Game\Game.h" />
     <ClInclude Include="src\Entity\Enemy\Enemy.h" />
   </ItemGroup>
