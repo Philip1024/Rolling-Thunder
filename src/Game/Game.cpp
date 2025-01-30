@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <SFML/Graphics.hpp>
+#include "../Entity/Player/Player.h"
 
 //Constructor
 Game::Game()
@@ -32,6 +33,7 @@ void Game::run()
 		//draw the foreground 
         window.setView(view);
 		window.draw(stage1Sprite);
+        //window.draw(player.sprite);
         window.display();
     }
 }
