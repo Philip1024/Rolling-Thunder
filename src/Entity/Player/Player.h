@@ -1,10 +1,11 @@
 #pragma once
 #include<SFML/Graphics.hpp>
+#include"../Entity.h"
 #include<optional>
-class Player
+class Player: public Entity
 {
-	std::optional<sf::Sprite> sprite;
-
+	Player();
+	void collide(Entity* other) = 0;
 
 
 };

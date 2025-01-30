@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "../Entity/Player/Player.h"
 class Game
 {
 public:
