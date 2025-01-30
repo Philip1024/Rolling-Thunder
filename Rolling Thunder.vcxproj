@@ -19,23 +19,31 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Entity\Platform\Platform.cpp" />
     <ClCompile Include="src\Entity\Bomb\Bomb.cpp" />
     <ClCompile Include="src\Entity\Bullet\Bullet.cpp" />
     <ClCompile Include="src\Entity\Door\BulletDoor\BulletDoor.cpp" />
     <ClCompile Include="src\Entity\Door\Door.cpp" />
     <ClCompile Include="src\Entity\Entity.cpp" />
+    <ClCompile Include="src\Entity\Enemy\Shooter\Shooter2\Shooter2.cpp" />
+    <ClCompile Include="src\Entity\Enemy\Shooter\Shooter.cpp" />
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\Entity\Enemy\Enemy.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Entity\Enemy\TwoLives\TwoLives.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Entity\Platform\Platform.h" />
     <ClInclude Include="src\Entity\Bomb\Bomb.h" />
     <ClInclude Include="src\Entity\Bullet\Bullet.h" />
     <ClInclude Include="src\Entity\Door\BulletDoor\BulletDoor.h" />
     <ClInclude Include="src\Entity\Door\Door.h" />
     <ClInclude Include="src\Entity\Entity.h" />
+    <ClInclude Include="src\Entity\Enemy\Shooter\Shooter2\Shooter2.h" />
+    <ClInclude Include="src\Entity\Enemy\Shooter\Shooter.h" />
     <ClInclude Include="src\Game\Game.h" />
     <ClInclude Include="src\Entity\Enemy\Enemy.h" />
+    <ClInclude Include="src\Entity\Enemy\TwoLives\TwoLives.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

@@ -9,7 +9,7 @@ Game::Game()
 
 
 //Runs the game
-void Game::Run()
+void Game::run()
 {
     sf::RenderWindow window(sf::VideoMode({ 1000, 175 }), "Rolling Thunder");
 
