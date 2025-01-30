@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <SFML/Graphics.hpp>
+#include "../Entity/Player/Player.h"
 
 //Constructor
 Game::Game()
@@ -11,11 +12,11 @@ Game::Game()
 //Runs the game
 void Game::run()
 {
-    sf::RenderWindow window(sf::VideoMode({ 1000, 175 }), "Rolling Thunder");
-
-   
+    sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "Rolling Thunder");
 	sf::Sprite stage1Sprite(stage1);
-    stage1Sprite.setPosition({ 0, 0 });
+    stage1Sprite.setPosition({ 500,500 });
+ 
+
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
@@ -25,7 +26,9 @@ void Game::run()
         }
 	
         window.clear();
+		//draw the foreground 
 		window.draw(stage1Sprite);
+        //window.draw(player.sprite);
         window.display();
     }
 }
