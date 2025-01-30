@@ -1,5 +1,7 @@
 #include "Game.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Window/Keyboard.hpp>
+#include <SFML/System/Clock.hpp>
 #include "../Entity/Player/Player.h"
 
 //Constructor
@@ -12,7 +14,9 @@ Game::Game()
 //Runs the game
 void Game::run()
 {
+	//window/clock setup
     sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "Rolling Thunder");
+    window.setFramerateLimit(60);
 	//Sprtie for the background
 	sf::Sprite stage1Sprite(stage1);
     //main view subject to change 
@@ -23,11 +27,20 @@ void Game::run()
     //Main gameplay loop
     while (window.isOpen())
     {
+       
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
             {
                 window.close();
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+			{
+				view.move({ .8,0 });
+			}
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+            {
+                view.move({ -.8,0 });
             }
         }
         window.clear();
