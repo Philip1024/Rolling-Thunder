@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\SpriteData\TextureData.cpp" />
     <ClCompile Include="src\Entity\Platform\Platform.cpp" />
     <ClCompile Include="src\Entity\Bomb\Bomb.cpp" />
     <ClCompile Include="src\Entity\Bullet\Bullet.cpp" />
@@ -33,6 +34,7 @@
     <ClCompile Include="src\Entity\Enemy\TwoLives\TwoLives.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\SpriteData\TextureData.h" />
     <ClInclude Include="src\Entity\Platform\Platform.h" />
     <ClInclude Include="src\Entity\Bomb\Bomb.h" />
     <ClInclude Include="src\Entity\Bullet\Bullet.h" />
