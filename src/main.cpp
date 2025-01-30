@@ -2,7 +2,6 @@
 #include "Game/Game.h"
 #include"Entity/Player/Player.h"
 
-
 int main()
 {
     Game game;

@@ -1,15 +1,12 @@
-#include <SFML/Graphics.hpp>
-#include<optional>
 #pragma once
-
-
-class Player
+#include<SFML/Graphics.hpp>
+#include"../Entity.h"
+#include<optional>
+class Player: public Entity
 {
-public:
-	int sheetPos;
-	std::optional<sf::Sprite> sprite;
-	sf::Texture texture;
-	//Player();
-	//void updateRight();
+	Player();
+	void collide(Entity* other) = 0;
+
+
 };
 
