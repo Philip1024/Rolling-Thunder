@@ -13,22 +13,23 @@ Game::Game()
 void Game::run()
 {
     sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "Rolling Thunder");
+	//Sprtie for the background
 	sf::Sprite stage1Sprite(stage1);
+    //main view subject to change 
     sf::View view(sf::FloatRect({ 0, 0 }, { 1920, 1080 }));
-    view.setViewport(sf::FloatRect({ 0.f, 0.f }, { 6.2, 6.2 }));
+    //DO NOT CHANGE THESE VALUES! IT IS EXACT TO THE PIXELS OF THE IMAGE!
+    view.setViewport(sf::FloatRect({ 0.f, -.1023f }, { 6.72, 6.72 }));
  
-
+    //Main gameplay loop
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
+            {
                 window.close();
-
-
-
+            }
         }
-	
         window.clear();
 		//draw the foreground 
         window.setView(view);
