@@ -4,7 +4,7 @@ class Game
 {
 public:
 	Game();
-	void Run();
+	void run();
 	sf::Texture stage1;
 	sf::Texture stage2;
 	sf::Texture stage3;
