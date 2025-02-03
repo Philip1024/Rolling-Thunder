@@ -15,6 +15,7 @@ Game::Game()
 //Runs the game
 void Game::run()
 {
+    Player* player = new Player();
     //glogbal postion of the level
     double gamePosX = 0;
     double gamePosY = 0;
@@ -53,6 +54,7 @@ void Game::run()
 		//draw the foreground 
         window.setView(view);
 		window.draw(stage1Sprite);
+        window.draw(player->sprite());
         //window.draw(player.sprite);
         window.display();
     }

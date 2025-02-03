@@ -5,7 +5,7 @@
 int main()
 {
     Game game;
-    Player player;
+
     game.run();
     return 0;
 }
