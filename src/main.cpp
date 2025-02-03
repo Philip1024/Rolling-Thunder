@@ -5,7 +5,6 @@
 int main()
 {
     Game game;
-    Player albatross;
     game.run();
     
 }

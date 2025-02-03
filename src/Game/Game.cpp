@@ -36,6 +36,7 @@ void Game::run()
                 window.close();
             }
 	    //check for input
+            
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 			{
 				view.move({ .8,0 });

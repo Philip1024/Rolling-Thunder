@@ -7,6 +7,5 @@ class Player: public Entity
 	Player();
 	void collide(Entity* other) = 0;
 
-
 };
 
