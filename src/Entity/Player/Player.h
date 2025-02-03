@@ -1,11 +1,10 @@
 #pragma once
-#include<SFML/Graphics.hpp>
-#include"../Entity.h"
-#include<optional>
-class Player: public Entity
+//#include"../Entity.h"
+class Player
 {
+public:
 	Player();
-	void collide(Entity* other) = 0;
-
+	
+private:
+	int i; // garbage
 };
-

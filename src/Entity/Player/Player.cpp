@@ -1,15 +1,9 @@
-#include<SFML/Graphics.hpp>
-#include<iostream>
 #include "Player.h"
-
+//#include"../Entity.h"
+#include<iostream>
 
 Player::Player()
 {
-	if (!texture.loadFromFile("res/SpriteSheets/Albatross.png"))
-	{
-		std::cout << "Fail";
-	}
-	sprite.setTexture(texture);
-
-
+	i = 2; //garbage
+	std::cout << "Yes" << std::endl;
 }
