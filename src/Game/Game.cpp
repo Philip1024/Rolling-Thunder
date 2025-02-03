@@ -15,6 +15,9 @@ Game::Game()
 //Runs the game
 void Game::run()
 {
+    //glogbal postion of the level
+    double gamePosX = 0;
+    double gamePosY = 0;
 	//window/clock setup
     sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "Rolling Thunder");
     window.setFramerateLimit(60);
@@ -24,7 +27,6 @@ void Game::run()
     sf::View view(sf::FloatRect({ 0, 0 }, { 1920, 1080 }));
     //DO NOT CHANGE THESE VALUES! IT IS EXACT TO THE PIXELS OF THE IMAGE!
     view.setViewport(sf::FloatRect({ 0.f, -.1023f }, { 6.72, 6.72 }));
- 
     //Main gameplay loop
     while (window.isOpen())
     {
@@ -36,14 +38,15 @@ void Game::run()
                 window.close();
             }
 	    //check for input
-            
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 			{
 				view.move({ .8,0 });
+				gamePosX += .8;
 			}
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A) && gamePosX > 0)
             {
                 view.move({ -.8,0 });
+				gamePosX -= .8;
             }
         }
         window.clear();
