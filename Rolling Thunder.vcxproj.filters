@@ -54,7 +54,7 @@
     <ClCompile Include="src\Entity\Enemy\TwoLives\TwoLives.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Player\Player.cpp">
+    <ClCompile Include="src\Entity\Player\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,7 +95,7 @@
     <ClInclude Include="src\Entity\Enemy\TwoLives\TwoLives.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Player\Player.h">
+    <ClInclude Include="src\Entity\Player\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
