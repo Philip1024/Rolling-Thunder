@@ -9,12 +9,21 @@ Player::Player()
 	sprite.emplace(texture);
 	//since sprite is in optional class it is treated as a pointer
 	sprite->setPosition(sf::Vector2f(100, 100));
-	sf::Vector2i position(200, 58);
+	sf::Vector2i position(230, 58);
 	sf::Vector2i size(30, 60);
 	xPos = 230;
 	yPos = 58;
 	sf::IntRect frame(position, size);
 	sprite->setTextureRect(frame);
+}
+
+
+Player::~Player()
+{
+
+
+
+
 }
 
 
@@ -49,9 +58,5 @@ void Player::updateLeft()
 	sf::IntRect frame(position, size);
 	sprite->setTextureRect(frame);
 	sprite->move({ -5.5,0 });//not exact yet
-
-
-
-
 
 }
