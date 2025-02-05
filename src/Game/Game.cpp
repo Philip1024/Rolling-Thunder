@@ -26,7 +26,8 @@ Game::~Game()
 //Runs the game
 void Game::run()
 {
-    Door* door = new Door(80,-70);
+    //door 1
+    Door* door = new Door(84,111);
     //keeps track of time between sprite updates
     sf::Clock clock;
     //used to not have to wait for clock to reach 0.075 to move
@@ -57,8 +58,14 @@ void Game::run()
 	    //check for input
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 			{
+                
                 if (clock.getElapsedTime().asSeconds() > 0.075f)
                 {
+                    //test
+                    door->open();
+
+
+
                     view.move({ 7.5,0 });
                     gamePosX += .8;
                     player->updateRight();

@@ -5,6 +5,8 @@
 #include<optional>
 Door::Door(int x,int y)
 {
+	xPos = 215;
+	yPos = 0;
 	texture.loadFromFile("res/SpriteSheets/Door.png");
 	sprite.emplace(texture);
 	sprite->setPosition(sf::Vector2f(x, y));
@@ -18,5 +20,12 @@ Door::Door(int x,int y)
 
 void Door::open()
 {
-	//
+	if (xPos >= 315)
+		xPos = 215;
+	else
+		xPos += 43;
+	sf::Vector2i position(xPos, yPos);
+	sf::Vector2i size(50,60);
+	sf::IntRect frame(position, size);
+	sprite->setTextureRect(frame);
 }
