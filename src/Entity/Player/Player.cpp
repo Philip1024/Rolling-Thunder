@@ -8,13 +8,14 @@ Player::Player()
 	texture.loadFromFile("res/SpriteSheets/Albatross.png");
 	sprite.emplace(texture);
 	//since sprite is in optional class it is treated as a pointer
-	sprite->setPosition(sf::Vector2f(100, 100));
+	sprite->setPosition(sf::Vector2f(100, 120));
 	sf::Vector2i position(230, 58);
 	sf::Vector2i size(30, 60);
 	xPos = 230;
 	yPos = 58;
 	sf::IntRect frame(position, size);
 	sprite->setTextureRect(frame);
+	sprite->setScale({0.8,0.8});
 }
 
 
@@ -39,7 +40,7 @@ void Player::updateRight()
 	sf::Vector2i size(30, 60);
 	sf::IntRect frame(position, size);
 	sprite->setTextureRect(frame);
-	sprite->move({ 5.5,0 });//not exact yet
+	sprite->move({ 7.5,0 });//not exact yet
 }
 
 

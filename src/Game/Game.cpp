@@ -35,7 +35,7 @@ void Game::run()
     double gamePosY = 0;
 	//window/clock setup
     sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "Rolling Thunder");
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(30);
 	//Sprtie for the background
 	sf::Sprite stage1Sprite(stage1);
     //main view subject to change 
@@ -57,7 +57,7 @@ void Game::run()
 			{
                 if (clock.getElapsedTime().asSeconds() > 0.075f)
                 {
-                    view.move({ 5.5,0 });
+                    view.move({ 7.5,0 });
                     gamePosX += .8;
                     player->updateRight();
                     clock.restart();
