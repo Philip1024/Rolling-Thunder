@@ -1,12 +1,14 @@
 #pragma once
 #include"../Entity.h"
-class Player
+#include<optional>
+class Player:public Entity
 {
 public:
 	Player();
-	int x=200;
-	sf::Texture texture;
-	sf::Sprite sprite();
+	int xPos, yPos; //represents position on sprite sheet
+	//updates player sprite based on input
+	void updateRight();
+private:
 	
 };
 

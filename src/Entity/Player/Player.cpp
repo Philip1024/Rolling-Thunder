@@ -6,21 +6,28 @@
 Player::Player()
 {
 	texture.loadFromFile("res/SpriteSheets/Albatross.png");
-}
-
-sf::Sprite Player::sprite()
-{
-	sf::Vector2i position(x, 60);
+	sprite.emplace(texture);
+	//since sprite is in optional class it is treated as a pointer
+	sprite->setPosition(sf::Vector2f(100, 100));
+	sf::Vector2i position(200, 58);
 	sf::Vector2i size(30, 60);
-
-	return sf::Sprite(texture);
-
-
+	xPos = 200;
+	yPos = 58;
+	sf::IntRect frame(position, size);
+	sprite->setTextureRect(frame);
 }
 
-/*
-sf::Sprite Player::sprite()
+
+//updates sprite frames for walking right animation
+void Player::updateRight()
 {
-	Entity::texture->loadFromFile("res/SpriteSheets/Albatross.png");
-	return sf::Sprite(*Entity::texture);
-*/
+	if (xPos == 380)
+		xPos = 230;
+	else
+		xPos += 30;
+	sf::Vector2i position(xPos, yPos);
+	sf::Vector2i size(30, 60);
+	sf::IntRect frame(position, size);
+	sprite->setTextureRect(frame);
+	sprite->move({ 5.5,0 });//not exact yet
+}

@@ -8,11 +8,12 @@ class Entity
 {
 public:
 	Entity();
-	//static std::vector<Entity*>& getEntities() { return entities; }
+	static std::vector<Entity*>& getEntities() { return entities; }
 	//virtual void collide(Entity* other) = 0;
-	static std::optional<sf::Sprite> sprite;
-	//static sf::Texture* texture;
-	//virtual sf::Sprite sprite() = 0;
+	std::optional<sf::Sprite> sprite;
+	//optional makes it so that sprite isn't
+	//constructed until texture is loaded from file
+	sf::Texture texture;
 private:
 	static std::vector<Entity*> entities;
 };
