@@ -4,6 +4,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/System/Clock.hpp>
 #include "../Entity/Player/Player.h"
+#include "../Entity/Door/Door.h"
 
 //Constructor
 Game::Game()
@@ -25,6 +26,7 @@ Game::~Game()
 //Runs the game
 void Game::run()
 {
+    Door* door = new Door(80,-70);
     //keeps track of time between sprite updates
     sf::Clock clock;
     //used to not have to wait for clock to reach 0.075 to move
@@ -79,7 +81,8 @@ void Game::run()
 		//draw the foreground 
         window.setView(view);
 		window.draw(stage1Sprite);
-        window.draw(*player->sprite);
+        //window.draw(*player->sprite);
+		window.draw(*door->sprite);
         //window.draw(player.sprite);
         window.display();
     }

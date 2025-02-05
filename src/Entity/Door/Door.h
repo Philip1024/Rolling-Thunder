@@ -6,7 +6,7 @@ class Door:public Entity
 
 {
 public:
-	Door();
+	Door(int x, int y);
 	~Door();
 	//represents position on sprite sheet
     //updates player sprite based on input
