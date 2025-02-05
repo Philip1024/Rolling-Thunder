@@ -9,13 +9,22 @@
 Game::Game()
 {
 	stage1.loadFromFile("res/Background/stage1(final).png");
+    player = new Player();
+}
+
+
+Game::~Game()
+{
+    delete player;
+
+
+
 }
 
 
 //Runs the game
 void Game::run()
 {
-    Player* player = new Player();
     //keeps track of time between sprite updates
     sf::Clock clock;
     //used to not have to wait for clock to reach 0.075 to move
@@ -74,5 +83,4 @@ void Game::run()
         //window.draw(player.sprite);
         window.display();
     }
-    delete player;
 }

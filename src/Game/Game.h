@@ -5,7 +5,9 @@ class Game
 {
 public:
 	Game();
+	~Game();
 	void run();
+	Player* player;
 	sf::Texture stage1;
 	sf::Texture stage2;
 	sf::Texture stage3;
