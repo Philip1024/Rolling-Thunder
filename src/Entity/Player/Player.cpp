@@ -11,7 +11,7 @@ Player::Player()
 	sprite->setPosition(sf::Vector2f(100, 100));
 	sf::Vector2i position(200, 58);
 	sf::Vector2i size(30, 60);
-	xPos = 200;
+	xPos = 230;
 	yPos = 58;
 	sf::IntRect frame(position, size);
 	sprite->setTextureRect(frame);
@@ -33,3 +33,13 @@ void Player::updateRight()
 	sprite->move({ 5.5,0 });//not exact yet
 }
 
+
+void Player::updateLeft()
+{
+	
+
+
+
+
+
+}
