@@ -18,6 +18,7 @@ void Game::run()
     Player* player = new Player();
     //keeps track of time between sprite updates
     sf::Clock clock;
+    
     //glogbal postion of the level
     double gamePosX = 0;
     double gamePosY = 0;
@@ -43,18 +44,26 @@ void Game::run()
 	    //check for input
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 			{
-				view.move({ .8,0 });
-				gamePosX += .8;
-                if (clock.getElapsedTime().asSeconds() > 0.1f)
+				
+                if (clock.getElapsedTime().asSeconds() > 0.075f)
                 {
+                    view.move({ 5.5,0 });
+                    gamePosX += .8;
                     player->updateRight();
                     clock.restart();
                 }
 			}
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A) && gamePosX > 0)
             {
-                view.move({ -.8,0 });
-				gamePosX -= .8;
+           
+                if (clock.getElapsedTime().asSeconds() > 0.075f)
+                {
+                    view.move({ -5.5,0 });
+                    gamePosX -= .8;
+                    player->updateRight();
+                    clock.restart();
+                }
+               
             }
         }
         window.clear();

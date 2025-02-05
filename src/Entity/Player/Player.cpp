@@ -21,6 +21,7 @@ Player::Player()
 //updates sprite frames for walking right animation
 void Player::updateRight()
 {
+	//changes pos in sprite sheet 
 	if (xPos == 380)
 		xPos = 230;
 	else
@@ -31,3 +32,4 @@ void Player::updateRight()
 	sprite->setTextureRect(frame);
 	sprite->move({ 5.5,0 });//not exact yet
 }
+
