@@ -60,7 +60,7 @@ void Game::run()
                 {
                     view.move({ -5.5,0 });
                     gamePosX -= .8;
-
+                    player->updateLeft();
                     clock.restart();
                 }
                

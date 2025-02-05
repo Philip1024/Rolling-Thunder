@@ -36,7 +36,19 @@ void Player::updateRight()
 
 void Player::updateLeft()
 {
-	
+	if (xPos > 170)
+	{
+		xPos = 170;
+	}
+	if (xPos == 50)
+		xPos = 170;
+	else
+		xPos -= 30;
+	sf::Vector2i position(xPos, yPos);
+	sf::Vector2i size(30, 60);
+	sf::IntRect frame(position, size);
+	sprite->setTextureRect(frame);
+	sprite->move({ -5.5,0 });//not exact yet
 
 
 
