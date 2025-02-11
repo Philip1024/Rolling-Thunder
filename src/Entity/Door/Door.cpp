@@ -31,3 +31,9 @@ void Door::open()
 	sf::IntRect frame(position, size);
 	sprite->setTextureRect(frame);
 }
+
+
+void Door::collide(Entity* other)
+{
+
+}
