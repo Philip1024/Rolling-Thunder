@@ -90,5 +90,4 @@ void Player::collide(Entity* other)
 	{
 		doorCast->open();
 	}
-
 }
