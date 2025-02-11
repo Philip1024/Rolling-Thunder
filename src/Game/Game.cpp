@@ -121,12 +121,15 @@ void Game::isColliding()
     static std::vector<Entity*> entities = Entity::getEntities();
         if (entities.size() > 1)
         {
-            for (int i = 1; i < entities.size(); i++)
+            for (int i = 0; i < entities.size(); i++)
             {
-                if (entities.at(i)->sprite->getGlobalBounds().findIntersection(entities.at(0)->sprite->getGlobalBounds()))
+                for (int j = i + 1; j < entities.size(); j++)
                 {
-                    entities.at(i)->collide(entities.at(0));
-                    entities.at(0)->collide(entities.at(i));
+                    if (entities.at(i)->sprite->getGlobalBounds().findIntersection(entities.at(j)->sprite->getGlobalBounds()))
+                    {
+                        entities.at(i)->collide(entities.at(j));
+                        entities.at(j)->collide(entities.at(i));
+                    }
                 }
             }
 
