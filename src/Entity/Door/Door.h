@@ -15,6 +15,8 @@ public:
 	//this opens the door if the player interacts with it 
 	void open();
 
+	void collide(Entity* other);
+
 private:
 };
 
