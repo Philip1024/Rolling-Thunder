@@ -9,7 +9,7 @@ class Entity
 public:
 	Entity();
 	static std::vector<Entity*>& getEntities() { return entities; }
-	//virtual void collide(Entity* other) = 0;
+	virtual void collide(Entity* other) = 0;
 	std::optional<sf::Sprite> sprite;
 	//optional makes it so that sprite isn't
 	//constructed until texture is loaded from file

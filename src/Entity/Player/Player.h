@@ -1,6 +1,8 @@
 #pragma once
-#include"../Entity.h"
 #include<optional>
+#include "../Entity.h"
+#include "../Door/Door.h"
+
 class Player:public Entity
 {
 public:
@@ -14,5 +16,6 @@ public:
 	void jumpToRail(float);
 private:
 	bool faceRight;
+	void collide(Entity* other) override;
 };
 

@@ -2,7 +2,7 @@
 #include"../Entity.h"
 
 
-class Door:public Entity
+class Door : public Entity
 
 {
 public:

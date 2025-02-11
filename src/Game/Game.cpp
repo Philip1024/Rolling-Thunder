@@ -17,9 +17,6 @@ Game::Game()
 Game::~Game()
 {
     delete player;
-
-
-
 }
 
 
@@ -50,6 +47,7 @@ void Game::run()
     sf::View view(sf::FloatRect({ 0, 0 }, { 1920, 1080 }));
     //DO NOT CHANGE THESE VALUES! IT IS EXACT TO THE PIXELS OF THE IMAGE!
     view.setViewport(sf::FloatRect({ 0.f, -.1023f }, { 6.72, 6.72 }));
+
     //Main gameplay loop
     while (window.isOpen())
     {
@@ -60,7 +58,8 @@ void Game::run()
             {
                 window.close();
             }
-	    //check for input
+
+			//check for input
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 			{
                 

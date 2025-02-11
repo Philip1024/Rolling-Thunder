@@ -42,7 +42,7 @@
     <ClCompile Include="src\Entity\Platform\Platform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\SpriteData\TextureData.cpp">
+    <ClCompile Include="src\SpriteData\AnimationData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Entity\Enemy\Shooter\Shooter2\Shooter2.cpp">
@@ -83,7 +83,7 @@
     <ClInclude Include="src\Entity\Platform\Platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\SpriteData\TextureData.h">
+    <ClInclude Include="src\SpriteData\AnimationData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Entity\Enemy\Shooter\Shooter2\Shooter2.h">

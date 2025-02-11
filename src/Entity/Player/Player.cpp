@@ -80,3 +80,15 @@ void Player::jumpToRail(float distance)
 
 
 }
+
+
+void Player::collide(Entity* other)
+{
+	Door* doorCast = dynamic_cast<Door*>(other);
+
+	if (doorCast != nullptr)
+	{
+		doorCast->open();
+	}
+
+}

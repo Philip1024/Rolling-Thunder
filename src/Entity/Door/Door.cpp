@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include<optional>
+
+
 Door::Door(int x,int y)
 {
 	xPos = 215;
