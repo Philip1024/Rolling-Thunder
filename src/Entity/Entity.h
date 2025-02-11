@@ -9,7 +9,8 @@ class Entity
 public:
 	Entity();
 	static std::vector<Entity*>& getEntities() { return entities; }
-	virtual void collide(Entity* other) = 0;
+	// this does not check collision, it is called when entities collide
+	virtual void collide(Entity* other) {}
 	std::optional<sf::Sprite> sprite;
 	//optional makes it so that sprite isn't
 	//constructed until texture is loaded from file
