@@ -114,3 +114,27 @@ void Game::run()
         window.display();
     }
 }
+
+
+void Game::isColliding()
+{
+    static std::vector<Entity*> entities = Entity::getEntities();
+        if (entities.size() > 1)
+        {
+            for (int i = 1; i < entities.size(); i++)
+            {
+                if (entities.at(i)->sprite->getGlobalBounds().findIntersection(entities.at(0)->sprite->getGlobalBounds()))
+                {
+                    entities.at(i)->collide(entities.at(0));
+                    entities.at(0)->collide(entities.at(i));
+                }
+            }
+
+
+
+        }
+
+
+
+
+}
