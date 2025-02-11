@@ -16,6 +16,7 @@ Player::Player()
 	sf::IntRect frame(position, size);
 	sprite->setTextureRect(frame);
 	sprite->setScale({0.8,0.8});
+	faceRight = true;
 }
 
 
@@ -29,7 +30,7 @@ Player::~Player()
 
 
 //updates sprite frames for walking right animation
-void Player::updateRight()
+void Player::updateRight(float distance)
 {
 	//changes pos in sprite sheet 
 	if (xPos == 380)
@@ -40,11 +41,11 @@ void Player::updateRight()
 	sf::Vector2i size(30, 60);
 	sf::IntRect frame(position, size);
 	sprite->setTextureRect(frame);
-	sprite->move({ 7.5,0 });//not exact yet
+	sprite->move({ distance,0 });//not exact yet
 }
 
 
-void Player::updateLeft()
+void Player::updateLeft(float distance)
 {
 	if (xPos > 170)
 	{
@@ -58,6 +59,24 @@ void Player::updateLeft()
 	sf::Vector2i size(30, 60);
 	sf::IntRect frame(position, size);
 	sprite->setTextureRect(frame);
-	sprite->move({ -5.5,0 });//not exact yet
+	sprite->move({ distance,0 });//not exact yet
+	faceRight = false;
+}
+
+
+
+void Player::jumpToRail(float distance)
+{
+	int distanceTravelled = 0;
+	sf::Clock clock;
+	if (faceRight)
+	{
+		sf::Vector2i position(260, 178);
+		sf::Vector2i size(30, 60);
+		sf::IntRect frame(position, size);
+		sprite->setTextureRect(frame);
+		sprite->move({ 0,distance });
+	}
+
 
 }

@@ -31,8 +31,13 @@ void Game::run()
     //keeps track of time between sprite updates
     sf::Clock clock;
     //used to not have to wait for clock to reach 0.075 to move
+
     bool firstD = true;
     bool firstA = true;
+    //used to determine height of jump
+    double jumpHeight=0;
+    //used to determine if jumping
+    bool jumping = false;
     //glogbal postion of the level
     double gamePosX = 0;
     double gamePosY = 0;
@@ -68,7 +73,7 @@ void Game::run()
 
                     view.move({ 7.5,0 });
                     gamePosX += .8;
-                    player->updateRight();
+                    player->updateRight(7.5);
                     clock.restart();
                 }
 			}
@@ -76,20 +81,36 @@ void Game::run()
             {
                 if (clock.getElapsedTime().asSeconds() > 0.075f)
                 {
-                    view.move({ -5.5,0 });
+                    view.move({ -7.5,0 });
                     gamePosX -= .8;
-                    player->updateLeft();
+                    player->updateLeft(-7.5);
                     clock.restart();
                 }
                
             }
+            /*
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)||jumping)
+            {
+                if (jumpHeight < 50)
+                    jumping = true;
+                else
+                    jumping = false;
+                if (clock.getElapsedTime().asSeconds() > 0.075f)
+                {
+                    player->jumpToRail(-5);
+                    jumpHeight += 5;
+                    clock.restart();
+                }
+            }
+            should do player jumping animation, not working yet
+            */
         }
         window.clear();
 		//draw the foreground 
         window.setView(view);
 		window.draw(stage1Sprite);
-        //window.draw(*player->sprite);
-		window.draw(*door->sprite);
+        window.draw(*player->sprite);
+		//window.draw(*door->sprite);
         //window.draw(player.sprite);
         window.display();
     }
