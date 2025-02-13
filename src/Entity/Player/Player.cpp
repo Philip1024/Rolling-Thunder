@@ -34,22 +34,24 @@ void Player::update()
 		animationFrame = 5;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
+		animationFrame = 0;
 		sprite->setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(animationFrame++));
 		sprite->move({ 7.5,0 });//not exact yet
+		faceRight = true;
 
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
+		animationFrame = 4;
 		sprite->setTextureRect(AnimationData::getSection("albatross_move_left")->getFrame(animationFrame--));
 		sprite->move({ -7.5,0 });//not exact yet
 		faceRight = false;
 
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F))
 	{
-		sprite->setTextureRect(AnimationData::getSection("albatross_move_left")->getFrame(animationFrame--));
-		sprite->move({ -7.5,0 });//not exact yet
-		faceRight = false;
+		animationFrame = 0;
+		sprite->setTextureRect(AnimationData::getSection("albatross_standard_jump")->getFrame(animationFrame));
 
 	}
 }
