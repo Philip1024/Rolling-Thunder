@@ -10,14 +10,14 @@ void Enemy::collide(Entity* other)
 	Player* playerCast = dynamic_cast<Player*>(other);
 	if (playerCast != nullptr)
 	{
-		playerCast->update();
+		//playerCast->update();
 	}
 
 	//take away health from the enemy and start bullet death animation
 	Bullet* bulletCast = dynamic_cast<Bullet*>(other);
 	if (bulletCast != nullptr)
 	{
-		bulletCast->update();
+		//bulletCast->update();
 	}
 
 
