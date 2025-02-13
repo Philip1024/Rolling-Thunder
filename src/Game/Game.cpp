@@ -87,7 +87,7 @@ void Game::run()
         window.setView(view);
 		window.draw(stage1Sprite);
         window.draw(*player->sprite);
-		//window.draw(*door->sprite);
+		window.draw(*door->sprite);
         window.display();
     }
 }
@@ -109,12 +109,5 @@ void Game::isColliding()
                  }
              }
         }
-
-
-
     }
-
-
-
-
 }
