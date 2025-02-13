@@ -81,13 +81,14 @@ void Game::run()
                 clock.restart();
             }
         }
+        isColliding();
         //used to update all entites
         window.clear();
 		//draw the foreground 
         window.setView(view);
 		window.draw(stage1Sprite);
         window.draw(*player->sprite);
-		//window.draw(*door->sprite);
+		window.draw(*door->sprite);
         window.display();
     }
 }
