@@ -17,14 +17,12 @@ Player::Player()
 	sprite->setTextureRect(frame);
 	sprite->setScale({0.8,0.8});
 	faceRight = true;
+	animationFrame = 5;
 }
 
 
 Player::~Player()
 {
-
-
-
 
 }
 
@@ -32,22 +30,24 @@ Player::~Player()
 //updates sprite frames for walking right animation
 void Player::updateRight(float distance)
 {
-	//changes pos in sprite sheet 
+	/*//changes pos in sprite sheet 
 	if (xPos == 380)
 		xPos = 230;
 	else
 		xPos += 30;
 	sf::Vector2i position(xPos, yPos);
 	sf::Vector2i size(30, 60);
-	sf::IntRect frame(position, size);
-	sprite->setTextureRect(frame);
+	sf::IntRect frame(position, size);*/
+	if (animationFrame > 5)
+		animationFrame = 0;
+	sprite->setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(animationFrame++));
 	sprite->move({ distance,0 });//not exact yet
 }
 
 
 void Player::updateLeft(float distance)
 {
-	if (xPos > 170)
+	/*if (xPos > 170)
 	{
 		xPos = 170;
 	}
@@ -57,8 +57,10 @@ void Player::updateLeft(float distance)
 		xPos -= 30;
 	sf::Vector2i position(xPos, yPos);
 	sf::Vector2i size(30, 60);
-	sf::IntRect frame(position, size);
-	sprite->setTextureRect(frame);
+	sf::IntRect frame(position, size);*/
+	if (animationFrame < 0)
+		animationFrame = 5;
+	sprite->setTextureRect(AnimationData::getSection("albatross_move_left")->getFrame(animationFrame--));
 	sprite->move({ distance,0 });//not exact yet
 	faceRight = false;
 }

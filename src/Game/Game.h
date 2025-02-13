@@ -1,6 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "../Entity/Player/Player.h"
+#include "../SpriteData/AnimationData.h"
+
+
 class Game
 {
 public:

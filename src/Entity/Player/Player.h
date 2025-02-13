@@ -1,9 +1,10 @@
 #pragma once
 #include<optional>
+#include "../../SpriteData/AnimationData.h"
 #include "../Entity.h"
 #include "../Door/Door.h"
 
-class Player:public Entity
+class Player : public Entity
 {
 public:
 	Player();
@@ -16,6 +17,8 @@ public:
 	void jumpToRail(float);
 private:
 	bool faceRight;
+
+	int animationFrame;
 	void collide(Entity* other) override;
 };
 

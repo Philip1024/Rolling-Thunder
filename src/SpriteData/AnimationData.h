@@ -30,11 +30,11 @@ public:
 	static void load();
 	static void unload();
 
-	static Section getSection(std::string sectionName);
+	static Section* getSection(std::string sectionName);
 private:
 	static std::string toLowerCase(std::string i);
 
-	static std::unordered_map<std::string, Section> sectionMap;
+	static std::unordered_map<std::string, Section*> sectionMap;
 	static std::unordered_map<TextureName, sf::Texture*> textureMap;
 };
 
@@ -50,15 +50,26 @@ class AnimationData::Section
 {
 public:
 	Section(std::string name, sf::Texture* texture, unsigned int horizontalFrames,
-		unsigned int verticalFrames, sf::Vector2i start, sf::Vector2i end)
+		unsigned int verticalFrames, sf::Vector2u start, sf::Vector2u end)
 		: name(name), texture(texture), horizontalFrames(horizontalFrames),
 		verticalFrames(verticalFrames), start(start), end(end)
 	{
-
+		unsigned int xDiff = end.x - start.x, yDiff = end.y - start.y;
+		xSize = xDiff / horizontalFrames;
+		ySize = yDiff / verticalFrames;
 	}
+
+	// the one with one int gets the frame from top left to bottom right
+	sf::IntRect getFrame(unsigned int c) const;
+	// this getFrame gets the frame with x indicating the left to right position, and the y indicating the top to bottom position.
+	sf::IntRect getFrame(unsigned int x, unsigned int y) const;
+	unsigned int getMaxFramesHorizontal() const { return horizontalFrames; }
+	unsigned int getMaxFramesVertical() const { return verticalFrames; }
+	unsigned int getMaxFrames() const { return horizontalFrames*verticalFrames; }
 private:
 	std::string name;
 	sf::Texture* texture;
 	unsigned int horizontalFrames, verticalFrames;
+	unsigned int xSize, ySize;
 	sf::Vector2i start, end;
 };
