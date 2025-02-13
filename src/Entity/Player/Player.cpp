@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include<optional>
+
 Player::Player()
 {
 	texture.loadFromFile("res/SpriteSheets/Albatross.png");

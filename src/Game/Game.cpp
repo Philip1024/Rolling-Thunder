@@ -110,12 +110,5 @@ void Game::isColliding()
                  }
              }
         }
-
-
-
     }
-
-
-
-
 }
