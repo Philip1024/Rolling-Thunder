@@ -29,54 +29,41 @@ Player::~Player()
 }
 
 
-//updates sprite frames for walking right animation
-void Player::updateRight(float distance)
+void Player::update()
 {
-	//changes pos in sprite sheet 
-	if (xPos == 380)
-		xPos = 230;
-	else
-		xPos += 30;
-	sf::Vector2i position(xPos, yPos);
-	sf::Vector2i size(30, 60);
-	sf::IntRect frame(position, size);
-	sprite->setTextureRect(frame);
-	sprite->move({ distance,0 });//not exact yet
-}
-
-
-void Player::updateLeft(float distance)
-{
-	if (xPos > 170)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
-		xPos = 170;
-	}
-	if (xPos == 50)
-		xPos = 170;
-	else
-		xPos -= 30;
-	sf::Vector2i position(xPos, yPos);
-	sf::Vector2i size(30, 60);
-	sf::IntRect frame(position, size);
-	sprite->setTextureRect(frame);
-	sprite->move({ distance,0 });//not exact yet
-	faceRight = false;
-}
-
-
-
-void Player::jumpToRail(float distance)
-{
-	int distanceTravelled = 0;
-	sf::Clock clock;
-	if (faceRight)
-	{
-		sf::Vector2i position(260, 178);
+		if (xPos == 380)
+			xPos = 230;
+		else
+			xPos += 30;
+		sf::Vector2i position(xPos, yPos);
 		sf::Vector2i size(30, 60);
 		sf::IntRect frame(position, size);
 		sprite->setTextureRect(frame);
-		sprite->move({ 0,distance });
+		sprite->move({ 7.5,0 });//not exact yet
+
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+	{
+		if (xPos > 170)
+		{
+			xPos = 170;
+		}
+		if (xPos == 50)
+			xPos = 170;
+		else
+			xPos -= 30;
+		sf::Vector2i position(xPos, yPos);
+		sf::Vector2i size(30, 60);
+		sf::IntRect frame(position, size);
+		sprite->setTextureRect(frame);
+		sprite->move({ -7.5,0 });//not exact yet
+		faceRight = false;
+
+	}
+
+
 
 
 }
@@ -88,6 +75,7 @@ void Player::collide(Entity* other)
 
 	if (doorCast != nullptr)
 	{
-		doorCast->open();
+		//doorCast->open();
+		std::cout << "Works" << std::endl;
 	}
 }

@@ -67,12 +67,8 @@ void Game::run()
                 {
                     //test
                     door->open();
-
-
-
                     view.move({ 7.5,0 });
                     gamePosX += .8;
-                    player->updateRight(7.5);
                     clock.restart();
                 }
 			}
@@ -82,7 +78,6 @@ void Game::run()
                 {
                     view.move({ -7.5,0 });
                     gamePosX -= .8;
-                    player->updateLeft(-7.5);
                     clock.restart();
                 }
                
@@ -104,13 +99,13 @@ void Game::run()
             should do player jumping animation, not working yet
             */
         }
+
         window.clear();
 		//draw the foreground 
         window.setView(view);
 		window.draw(stage1Sprite);
         window.draw(*player->sprite);
 		//window.draw(*door->sprite);
-        //window.draw(player.sprite);
         window.display();
     }
 }
@@ -119,23 +114,23 @@ void Game::run()
 void Game::isColliding()
 {
     static std::vector<Entity*> entities = Entity::getEntities();
-        if (entities.size() > 1)
+    if (entities.size() > 1)
+    {
+        for (int i = 0; i < entities.size(); i++)
         {
-            for (int i = 0; i < entities.size(); i++)
-            {
-                for (int j = i + 1; j < entities.size(); j++)
-                {
-                    if (entities.at(i)->sprite->getGlobalBounds().findIntersection(entities.at(j)->sprite->getGlobalBounds()))
-                    {
-                        entities.at(i)->collide(entities.at(j));
-                        entities.at(j)->collide(entities.at(i));
-                    }
-                }
-            }
-
-
-
+             for (int j = i + 1; j < entities.size(); j++)
+             {
+                 if (entities.at(i)->sprite->getGlobalBounds().findIntersection(entities.at(j)->sprite->getGlobalBounds()))
+                 {
+                     entities.at(i)->collide(entities.at(j));
+                     entities.at(j)->collide(entities.at(i));
+                 }
+             }
         }
+
+
+
+    }
 
 
 
