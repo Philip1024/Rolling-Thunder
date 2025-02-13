@@ -10,6 +10,7 @@ public:
 	Game();
 	~Game();
 	void run();
+	void isColliding();
 	Player* player;
 	sf::Texture stage1;
 	sf::Texture stage2;

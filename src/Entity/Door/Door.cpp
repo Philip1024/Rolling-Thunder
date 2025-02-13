@@ -20,6 +20,7 @@ Door::Door(int x,int y)
 }
 
 
+//The door will open
 void Door::open()
 {
 	if (xPos >= 315)
@@ -31,3 +32,4 @@ void Door::open()
 	sf::IntRect frame(position, size);
 	sprite->setTextureRect(frame);
 }
+
