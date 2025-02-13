@@ -50,6 +50,13 @@ void Player::update(char actionFlags)
 		sprite->move({ -7.5,0 });//not exact yet
 		faceRight = false;
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+	{
+		sprite->setTextureRect(AnimationData::getSection("albatross_move_left")->getFrame(animationFrame--));
+		sprite->move({ -7.5,0 });//not exact yet
+		faceRight = false;
+
+	}
 }
 
 

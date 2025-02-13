@@ -11,7 +11,8 @@ public:
 	//represents position on sprite sheet
     //updates player sprite based on input
 	int xPos, yPos;
-
+	int animationFrame = 0;
+	void update() override;
 	//this opens the door if the player interacts with it 
 	void open();
 

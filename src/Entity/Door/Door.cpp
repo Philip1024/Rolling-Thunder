@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include<optional>
+#include "../../SpriteData/AnimationData.h"
 
 
 Door::Door(int x,int y)
@@ -23,13 +24,8 @@ Door::Door(int x,int y)
 //The door will open
 void Door::open()
 {
-	if (xPos >= 315)
-		xPos = 215;
-	else
-		xPos += 43;
-	sf::Vector2i position(xPos, yPos);
-	sf::Vector2i size(50,60);
-	sf::IntRect frame(position, size);
-	sprite->setTextureRect(frame);
+	if (animationFrame == 2)
+		animationFrame = 0;
+	sprite->setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(animationFrame++));
 }
 
