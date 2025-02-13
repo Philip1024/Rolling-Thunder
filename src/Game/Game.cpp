@@ -62,46 +62,26 @@ void Game::run()
             }
 
 			//check for input
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-			{
-                
-                if (clock.getElapsedTime().asSeconds() > 0.075f)
-                {
-                    //test
-                    door->open();
-                    view.move({ 7.5,0 });
-                    gamePosX += .8;
-                    clock.restart();
-                }
-			}
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A) && gamePosX > 0)
+            
+            
+            if (clock.getElapsedTime().asSeconds() > 0.05f)
             {
-                if (clock.getElapsedTime().asSeconds() > 0.075f)
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A) && gamePosX > 0)
                 {
                     view.move({ -7.5,0 });
                     gamePosX -= .8;
-                    clock.restart();
                 }
-               
-            }
-            /*
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)||jumping)
-            {
-                if (jumpHeight < 50)
-                    jumping = true;
-                else
-                    jumping = false;
-                if (clock.getElapsedTime().asSeconds() > 0.075f)
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
                 {
-                    player->jumpToRail(-5);
-                    jumpHeight += 5;
-                    clock.restart();
-                }
-            }
-            should do player jumping animation, not working yet
-            */
-        }
 
+                        view.move({ 7.5,0 });
+                        gamePosX += .8;
+                }
+                player->update();
+                clock.restart();
+            }
+        }
+        //used to update all entites
         window.clear();
 		//draw the foreground 
         window.setView(view);

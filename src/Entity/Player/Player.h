@@ -9,14 +9,11 @@ class Player : public Entity
 public:
 	Player();
 	~Player();
-	int xPos, yPos; //represents position on sprite sheet
-	//updates player sprite based on input
-	void update();
-	//updates player sprite so it does jumping to rail animation
+	void collide(Entity* other) override;
+	void update() override;
 private:
 	bool faceRight;
 
 	int animationFrame;
-	void collide(Entity* other) override;
 };
 

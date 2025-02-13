@@ -11,8 +11,6 @@ Player::Player()
 	sprite->setPosition(sf::Vector2f(100, 120));
 	sf::Vector2i position(230, 58);
 	sf::Vector2i size(30, 60);
-	xPos = 230;
-	yPos = 58;
 	sf::IntRect frame(position, size);
 	sprite->setTextureRect(frame);
 	sprite->setScale({0.8,0.8});
@@ -29,18 +27,18 @@ Player::~Player()
 
 void Player::update()
 {
+	if (animationFrame > 5)
+		animationFrame = 0;
+	if (animationFrame < 0)
+		animationFrame = 5;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
-		if (animationFrame > 5)
-			animationFrame = 0;
 		sprite->setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(animationFrame++));
 		sprite->move({ 7.5,0 });//not exact yet
 
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
-		if (animationFrame < 0)
-			animationFrame = 5;
 		sprite->setTextureRect(AnimationData::getSection("albatross_move_left")->getFrame(animationFrame--));
 		sprite->move({ -7.5,0 });//not exact yet
 		faceRight = false;
