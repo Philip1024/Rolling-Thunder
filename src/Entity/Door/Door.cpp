@@ -8,8 +8,7 @@
 
 Door::Door(int x,int y)
 {
-	xPos = 215;
-	yPos = 0;
+	
 	texture.loadFromFile("res/SpriteSheets/Door.png");
 	sprite.emplace(texture);
 	sprite->setPosition(sf::Vector2f(x, y));
@@ -17,15 +16,16 @@ Door::Door(int x,int y)
 	sf::Vector2i position(215, 0);
 	sf::Vector2i size(50, 60);
 	sf::IntRect frame(position, size);
-	sprite->setTextureRect(frame);
+	sprite->setTextureRect(AnimationData::getSection("door_open")->getFrame(animationFrame));
 }
 
 
 //The door will open
-void Door::open()
+void Door::update()
 {
-	if (animationFrame == 2)
+	if (animationFrame == 3)
 		animationFrame = 0;
-	sprite->setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(animationFrame++));
-}
+		
+	sprite->setTextureRect(AnimationData::getSection("door_open")->getFrame(animationFrame++));
 
+}

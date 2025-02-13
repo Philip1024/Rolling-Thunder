@@ -15,7 +15,7 @@ void AnimationData::load()
 		6, 1, sf::Vector2u(230, 60), sf::Vector2u(410, 117));
 
 	sectionMap["door_open"] = new Section("door_open", textureMap[DOOR],
-		3, 1, sf::Vector2u(228, 3), sf::Vector2u(347, 63));
+		3, 1, sf::Vector2u(215, 3), sf::Vector2u(347, 63));
 }
 
 
