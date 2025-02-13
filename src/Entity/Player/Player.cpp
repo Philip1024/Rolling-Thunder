@@ -29,47 +29,23 @@ Player::~Player()
 
 void Player::update()
 {
-	if (animationFrame > 5)
-		animationFrame = 0;
-	sprite->setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(animationFrame++));
-	if (animationFrame < 0)
-		animationFrame = 5;
-	sprite->setTextureRect(AnimationData::getSection("albatross_move_left")->getFrame(animationFrame--));
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
-		if (xPos == 380)
-			xPos = 230;
-		else
-			xPos += 30;
-		sf::Vector2i position(xPos, yPos);
-		sf::Vector2i size(30, 60);
-		sf::IntRect frame(position, size);
-		sprite->setTextureRect(frame);
+		if (animationFrame > 5)
+			animationFrame = 0;
+		sprite->setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(animationFrame++));
 		sprite->move({ 7.5,0 });//not exact yet
 
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
-		if (xPos > 170)
-		{
-			xPos = 170;
-		}
-		if (xPos == 50)
-			xPos = 170;
-		else
-			xPos -= 30;
-		sf::Vector2i position(xPos, yPos);
-		sf::Vector2i size(30, 60);
-		sf::IntRect frame(position, size);
-		sprite->setTextureRect(frame);
+		if (animationFrame < 0)
+			animationFrame = 5;
+		sprite->setTextureRect(AnimationData::getSection("albatross_move_left")->getFrame(animationFrame--));
 		sprite->move({ -7.5,0 });//not exact yet
 		faceRight = false;
 
 	}
-
-
-
-
 }
 
 
