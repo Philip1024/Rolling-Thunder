@@ -33,6 +33,8 @@ void Game::run()
 
     bool firstD = true;
     bool firstA = true;
+    // if the player is moving right or left
+    bool movingLeft = false, movingRight = false;
     //used to determine height of jump
     double jumpHeight=0;
     //used to determine if jumping
@@ -49,37 +51,58 @@ void Game::run()
     sf::View view(sf::FloatRect({ 0, 0 }, { 1920, 1080 }));
     //DO NOT CHANGE THESE VALUES! IT IS EXACT TO THE PIXELS OF THE IMAGE!
     view.setViewport(sf::FloatRect({ 0.f, -.1023f }, { 6.72, 6.72 }));
+    window.setKeyRepeatEnabled(false);
 
     //Main gameplay loop
     while (window.isOpen())
     {
-       
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
-            {
                 window.close();
-            }
-
-			//check for input
-            
-            
-            if (clock.getElapsedTime().asSeconds() > 0.05f)
+            if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
             {
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A) && gamePosX > 0)
+                switch (keyPressed->scancode)
                 {
-                    view.move({ -7.5,0 });
-                    gamePosX -= .8;
+                case sf::Keyboard::Scan::A:
+                    movingLeft = true;
+                    break;
+                case sf::Keyboard::Scan::D:
+                    movingRight = true;
+                    break;
                 }
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-                {
-
-                        view.move({ 7.5,0 });
-                        gamePosX += .8;
-                }
-                player->update();
-                clock.restart();
             }
+            if (const auto* keyReleased = event->getIf<sf::Event::KeyReleased>())
+            {
+                switch (keyReleased->scancode)
+                {
+                case sf::Keyboard::Scan::A:
+                    movingLeft = false;
+                    break;
+                case sf::Keyboard::Scan::D:
+                    movingRight = false;
+                    break;
+                }
+            }
+        }
+        
+        if (clock.getElapsedTime().asSeconds() > 0.05f)
+        {
+            if (movingLeft && gamePosX > 0)
+            {
+                view.move({ -7.5,0 });
+                gamePosX -= .8;
+            }
+            if (movingRight)
+            {
+                view.move({ 7.5,0 });
+                gamePosX += .8;
+            }
+            char actionFlags = 0b0;
+            if (movingRight) actionFlags |= 0b00000001;
+            if (movingLeft) actionFlags |= 0b00000010;
+            player->update(actionFlags);
+            clock.restart();
         }
         isColliding();
         //used to update all entites
