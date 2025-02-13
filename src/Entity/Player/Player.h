@@ -10,7 +10,7 @@ public:
 	Player();
 	~Player();
 	void collide(Entity* other) override;
-	void update() override;
+	void update(char actionFlags) override;
 private:
 	bool faceRight;
 

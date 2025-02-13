@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include<optional>
+
+
 Player::Player()
 {
 	texture.loadFromFile("res/SpriteSheets/Albatross.png");
@@ -25,24 +27,28 @@ Player::~Player()
 }
 
 
-void Player::update()
+/*
+action flags structure:
+right most bit (00000001): move right
+7th bit (00000010): move left
+*/
+void Player::update(char actionFlags)
 {
 	if (animationFrame > 5)
 		animationFrame = 0;
 	if (animationFrame < 0)
 		animationFrame = 5;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+	if (actionFlags & 0b00000001)
 	{
 		sprite->setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(animationFrame++));
 		sprite->move({ 7.5,0 });//not exact yet
 
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+	if (actionFlags & 0b00000010)
 	{
 		sprite->setTextureRect(AnimationData::getSection("albatross_move_left")->getFrame(animationFrame--));
 		sprite->move({ -7.5,0 });//not exact yet
 		faceRight = false;
-
 	}
 }
 
