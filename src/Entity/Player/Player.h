@@ -1,9 +1,10 @@
 #pragma once
 #include<optional>
+#include "../../SpriteData/AnimationData.h"
 #include "../Entity.h"
 #include "../Door/Door.h"
 
-class Player:public Entity
+class Player : public Entity
 {
 public:
 	Player();
@@ -14,6 +15,8 @@ public:
 	//updates player sprite so it does jumping to rail animation
 private:
 	bool faceRight;
+
+	int animationFrame;
 	void collide(Entity* other) override;
 };
 

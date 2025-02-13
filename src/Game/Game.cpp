@@ -23,6 +23,8 @@ Game::~Game()
 //Runs the game
 void Game::run()
 {
+    // this must be calle
+    AnimationData::load();
     //door 1
     Door* door = new Door(84,111);
     //keeps track of time between sprite updates
