@@ -12,6 +12,8 @@ public:
 	void collide(Entity* other) override;
 	void update(char actionFlags) override;
 private:
+	//keeps track of time between sprite updates
+	sf::Clock clock;
 	bool faceRight;
 
 	int animationFrame;

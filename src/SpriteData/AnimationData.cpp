@@ -6,19 +6,22 @@ std::unordered_map<std::string, AnimationData::Section*> AnimationData::sectionM
 void AnimationData::load()
 {
 	textureMap[ENEMY] = new sf::Texture("res/SpriteSheets/Enemy.png");
+	textureMap[ENEMY_FLIPPED] = new sf::Texture("res/SpriteSheets/Enemy_flipped.png");
 	textureMap[ALBATROSS] = new sf::Texture("res/SpriteSheets/Albatross.png");
 	textureMap[DOOR] = new sf::Texture("res/SpriteSheets/Door.png");
 
-	sectionMap["albatross_move_left"] = new Section("albatross_move_left", textureMap[ALBATROSS], 
+	sectionMap["albatross_move_left"] = new Section(textureMap[ALBATROSS], 
 		6, 1, sf::Vector2u(20, 60), sf::Vector2u(200, 117));
-	sectionMap["albatross_move_right"] = new Section("albatross_move_left", textureMap[ALBATROSS],
+	sectionMap["albatross_move_right"] = new Section(textureMap[ALBATROSS],
 		6, 1, sf::Vector2u(230, 60), sf::Vector2u(410, 117));
-	sectionMap["door_open"] = new Section("door_open", textureMap[DOOR],
+	sectionMap["albatross_standard_jump"] = new Section(textureMap[ALBATROSS],
+		1, 1, sf::Vector2u(230, 550), sf::Vector2u(260, 600));
+
+	sectionMap["enemy_move_left"] = new Section(textureMap[ENEMY_FLIPPED],
+		5, 1, sf::Vector2u(870, 0), sf::Vector2u(1023, 61));
+
+	sectionMap["door_open"] = new Section(textureMap[DOOR],
 		3, 1, sf::Vector2u(228, 3), sf::Vector2u(347, 63));
-	sectionMap["albatross_standard_jump"] = new Section("albatross_standard_jump", textureMap[ALBATROSS],
-		1, 1, sf::Vector2u(230,550), sf::Vector2u(260, 600));
-
-
 }
 
 

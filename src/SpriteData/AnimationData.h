@@ -19,6 +19,8 @@
 ///
 /// Why are we doing this? Many of the frames in the spritesheets are spaced differently. Each section has consistent spacing.
 /// It also allows us to split them up by their action, such as "MoveLeft" or "Die"
+///
+///	Note: Frames go from top-left to bottom-right or left to right if verticalFrames = 1
 /// </summary>
 class AnimationData
 {
@@ -31,6 +33,7 @@ public:
 	static void unload();
 
 	static Section* getSection(std::string sectionName);
+	static sf::Texture* getTexture(TextureName name) { return textureMap[name]; }
 private:
 	static std::string toLowerCase(std::string i);
 
@@ -41,6 +44,7 @@ private:
 enum AnimationData::TextureName
 {
 	ENEMY,
+	ENEMY_FLIPPED,
 	ALBATROSS,
 	DOOR
 };
@@ -49,9 +53,9 @@ enum AnimationData::TextureName
 class AnimationData::Section
 {
 public:
-	Section(std::string name, sf::Texture* texture, unsigned int horizontalFrames,
+	Section(sf::Texture* texture, unsigned int horizontalFrames,
 		unsigned int verticalFrames, sf::Vector2u start, sf::Vector2u end)
-		: name(name), texture(texture), horizontalFrames(horizontalFrames),
+		: texture(texture), horizontalFrames(horizontalFrames),
 		verticalFrames(verticalFrames), start(start), end(end)
 	{
 		unsigned int xDiff = end.x - start.x, yDiff = end.y - start.y;
@@ -67,7 +71,6 @@ public:
 	unsigned int getMaxFramesVertical() const { return verticalFrames; }
 	unsigned int getMaxFrames() const { return horizontalFrames*verticalFrames; }
 private:
-	std::string name;
 	sf::Texture* texture;
 	unsigned int horizontalFrames, verticalFrames;
 	unsigned int xSize, ySize;
