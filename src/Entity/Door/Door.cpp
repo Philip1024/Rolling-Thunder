@@ -20,7 +20,9 @@ Door::Door(int x,int y)
 }
 
 
-//The door will open
+//The door will open 
+//AMKE THE DOOR CHANGE POS AFTER THE FRAME IS SWITHCED. THEN RESET
+//THE POS TO THE ORGIONAL DOOR POS
 void Door::open()
 {
 	if (animationFrame == 2)
