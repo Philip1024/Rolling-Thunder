@@ -15,7 +15,7 @@ void AnimationData::load()
 	sectionMap["albatross_move_right"] = new Section(textureMap[ALBATROSS],
 		6, 1, sf::Vector2u(230, 60), sf::Vector2u(410, 117));
 	sectionMap["albatross_standard_jump"] = new Section(textureMap[ALBATROSS],
-		1, 1, sf::Vector2u(230, 550), sf::Vector2u(260, 600));
+		1, 2, sf::Vector2u(230, 550), sf::Vector2u(260, 650));
 
 	sectionMap["enemy_move_left"] = new Section(textureMap[ENEMY_FLIPPED],
 		5, 1, sf::Vector2u(870, 0), sf::Vector2u(1023, 61));

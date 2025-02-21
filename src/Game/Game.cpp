@@ -72,6 +72,9 @@ void Game::run()
                 case sf::Keyboard::Scan::D:
                     movingRight = true;
                     break;
+                case sf::Keyboard::Scan::F:
+                    jumping = true;
+                    break;
                 }
             }
             if (const auto* keyReleased = event->getIf<sf::Event::KeyReleased>())
@@ -83,6 +86,9 @@ void Game::run()
                     break;
                 case sf::Keyboard::Scan::D:
                     movingRight = false;
+                    break;
+                case sf::Keyboard::Scan::F:
+                    jumping = false;
                     break;
                 }
             }
@@ -97,6 +103,7 @@ void Game::run()
         char actionFlags = 0b0;
         if (movingRight) actionFlags |= 0b00000001;
         if (movingLeft) actionFlags |= 0b00000010;
+        if (jumping) actionFlags |= 0b00000100;
         player->update(actionFlags);
 
         isColliding();
