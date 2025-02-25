@@ -38,6 +38,7 @@ void Player::update(char actionFlags)
 		animationFrame = 0;
 	if (animationFrame < 0)
 		animationFrame = 5;
+
 	if (actionFlags & 0b00000001)
 	{
 		animationFrame = 0;
@@ -56,7 +57,7 @@ void Player::update(char actionFlags)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::F))
 	{
 		animationFrame = 0;
-		sprite->setTextureRect(AnimationData::getSection("albatross_standard_jump")->getFrame(animationFrame));
+		sprite->setTextureRect(AnimationData::getSection("albatross_standard_jump")->getFrame(0));
 
 	}
 }

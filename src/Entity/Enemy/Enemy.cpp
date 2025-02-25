@@ -19,6 +19,4 @@ void Enemy::collide(Entity* other)
 	{
 		//bulletCast->update();
 	}
-
-
 }
