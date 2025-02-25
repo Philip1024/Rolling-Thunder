@@ -1,7 +1,12 @@
 #pragma once
 #include "../Entity.h"
 
-class Enemy
+class Enemy : public Entity
 {
+public:
+	Enemy();
+
 	void collide(Entity* other);
+	void update(char actionFlags);
+
 };

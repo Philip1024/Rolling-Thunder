@@ -3,6 +3,13 @@
 #include"../Bullet/Bullet.h"
 
 
+Enemy::Enemy()
+	: Entity(AnimationData::getTexture(AnimationData::ENEMY))
+{
+
+}
+
+
 void Enemy::collide(Entity* other)
 {
 	//if they collide set the player bounce bool to true
@@ -19,4 +26,11 @@ void Enemy::collide(Entity* other)
 	{
 		//bulletCast->update();
 	}
+
+
+}
+
+void Enemy::update(char actionFlags)
+{
+	Entity::update(actionFlags);
 }
