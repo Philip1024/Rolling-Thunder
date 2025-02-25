@@ -12,9 +12,9 @@ public:
     //updates player sprite based on input
 	int xPos, yPos;
 	int animationFrame = 0;
-	//This is used for opening  the door wwwww
-	void update() override;
-
+	//void update() override;
+	//this opens the door if the player interacts with it 
+	void open();
 
 	//void collide(Entity* other) override;
 
