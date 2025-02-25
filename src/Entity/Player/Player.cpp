@@ -49,7 +49,7 @@ void Player::update(char actionFlags)
 		animationFrame = 5;
 	if (jumpFrame > 1)
 		jumpFrame = 0;
-	if ((actionFlags & 0b00000001)&&!activeJump) // moving right. 
+	if ((actionFlags & 0b00000001) && !activeJump) // moving right. 
 	{
 		sprite.setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(animationFrame++));
 		view->move({ 7.5,0 });
@@ -58,9 +58,9 @@ void Player::update(char actionFlags)
 		faceRight = true;
 
 	}
-	if ((actionFlags & 0b00000010)&&!activeJump) // moving left TODO: bound check on the left using view
+	if ((actionFlags & 0b00000010) && !activeJump) // moving left TODO: bound check on the left using view
 	{
-		sprite.setTextureRect(AnimationData::getSection("albatross_move_left")->getFrame(animationFrame--));
+		sprite.setTextureRect(AnimationData::getSection("albatross_move_left")->nextFrame());
 		view->move({ -7.5,0 });
 
 		sprite.move({ -7.5,0 });//not exact yet
@@ -68,7 +68,7 @@ void Player::update(char actionFlags)
 	}
 	//jump follows a parabolic path
 	//not done yet
-	if ((actionFlags & 0b00000100)||activeJump)//jump
+	if ((actionFlags & 0b00000100) || activeJump)//jump
 	{
 		activeJump = true;
 		sprite.move({ xMov,yMov });
@@ -98,7 +98,6 @@ void Player::update(char actionFlags)
 		view->move({ 1,0 });
 	}
 	clock.restart();
-
 }
 
 

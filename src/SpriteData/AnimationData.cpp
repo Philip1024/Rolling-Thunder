@@ -12,6 +12,12 @@ void AnimationData::load()
 
 	sectionMap["albatross_move_left"] = new Section(textureMap[ALBATROSS], 
 		6, 1, sf::Vector2u(20, 60), sf::Vector2u(200, 117));
+	getSection("albatross_move_left")->setNextFrameFunction([](unsigned int& curFrame, unsigned int maxFrames) -> void { // LAMBDA
+		if (curFrame == 0)
+			curFrame = maxFrames;
+		curFrame--;
+	});
+
 	sectionMap["albatross_move_right"] = new Section(textureMap[ALBATROSS],
 		6, 1, sf::Vector2u(230, 60), sf::Vector2u(410, 117));
 	sectionMap["albatross_standard_jump"] = new Section(textureMap[ALBATROSS],
@@ -20,7 +26,7 @@ void AnimationData::load()
 	sectionMap["enemy_move_left"] = new Section(textureMap[ENEMY_FLIPPED],
 		5, 1, sf::Vector2u(870, 0), sf::Vector2u(1023, 61));
 
-	sectionMap["door_open"] = new Section("door_open", textureMap[DOOR],
+	sectionMap["door_open"] = new Section(textureMap[DOOR],
 		3, 1, sf::Vector2u(215, 3), sf::Vector2u(347, 63));
 }
 
@@ -47,6 +53,12 @@ std::string AnimationData::toLowerCase(std::string i)
 	return i;
 }
 
+
+sf::IntRect AnimationData::Section::nextFrame()
+{
+	nextFrameFunc(curFrame, getMaxFrames());
+	return getFrame(curFrame);
+}
 
 sf::IntRect AnimationData::Section::getFrame(unsigned int c) const
 {

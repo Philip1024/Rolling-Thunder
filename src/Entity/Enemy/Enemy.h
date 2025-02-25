@@ -8,5 +8,4 @@ public:
 
 	void collide(Entity* other);
 	void update(char actionFlags);
-
 };

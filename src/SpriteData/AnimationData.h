@@ -58,10 +58,22 @@ public:
 		: texture(texture), horizontalFrames(horizontalFrames),
 		verticalFrames(verticalFrames), start(start), end(end)
 	{
+		curFrame = 0;
 		unsigned int xDiff = end.x - start.x, yDiff = end.y - start.y;
 		xSize = xDiff / horizontalFrames;
 		ySize = yDiff / verticalFrames;
+		nextFrameFunc = [](unsigned int& curFrame, unsigned int maxFrames) -> void { // LAMBDA
+			curFrame++;
+			curFrame %= maxFrames; // if bigger, reset to 0
+		};
 	}
+
+	// this calls the nextFrameFunc then returns getFrame(curFrame);
+	sf::IntRect nextFrame();
+	unsigned int getCurFrame() { return curFrame; }
+
+	// this updates the function called in nextFrame. By default this simply does curFrame++ (and checks bounds)
+	void setNextFrameFunction(void (*func)(unsigned int&, unsigned int)) { this->nextFrameFunc = func; }
 
 	// the one with one int gets the frame from top left to bottom right
 	sf::IntRect getFrame(unsigned int c) const;
@@ -72,7 +84,10 @@ public:
 	unsigned int getMaxFrames() const { return horizontalFrames*verticalFrames; }
 private:
 	sf::Texture* texture;
-	unsigned int horizontalFrames, verticalFrames;
+	unsigned int horizontalFrames, verticalFrames, curFrame;
 	unsigned int xSize, ySize;
 	sf::Vector2i start, end;
+
+	// this is a function pointer. when called, curFrame and maxFrames from this object will be passed in.
+	void (*nextFrameFunc)(unsigned int& curFrame, unsigned int maxFrames);
 };

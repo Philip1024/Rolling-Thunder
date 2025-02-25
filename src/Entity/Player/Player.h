@@ -10,7 +10,7 @@ public:
 	Player();
 	~Player();
 	void collide(Entity* other) override;
-	void update(char actionFlags) override;
+	void update(char actionFlags);
 private:
 	//keeps track of time between sprite updates
 	sf::Clock clock;

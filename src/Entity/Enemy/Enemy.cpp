@@ -32,5 +32,7 @@ void Enemy::collide(Entity* other)
 
 void Enemy::update(char actionFlags)
 {
+	//AnimationData::getSection("enemy_move_left")->getFrame();
+	//sframe++;
 	Entity::update(actionFlags);
 }
