@@ -5,6 +5,7 @@
 #include <SFML/System/Clock.hpp>
 #include "../Entity/Player/Player.h"
 #include "../Entity/Door/Door.h"
+#include<vector>
 
 //Constructor
 Game::Game()
@@ -14,6 +15,12 @@ Game::Game()
 
 	stage1.loadFromFile("res/Background/stage1(final).png");
     player = new Player();
+    ground.push_back(sf::FloatRect({ 20.f,160.f }, { 1720.f,159.f }));
+    ground.push_back(sf::FloatRect({ 1717.f,88.f }, { 1763.f,87.f }));
+    ground.push_back(sf::FloatRect({ 1763.f,146.f }, { 1811.f,145.f }));
+    ground.push_back(sf::FloatRect({ 1811.f,204.f }, { 1859.f,203.f }));
+    ground.push_back(sf::FloatRect({ 1859.f,274.f }, { 1905.f,273.f }));
+    ground.push_back(sf::FloatRect({ 1905.f,343.f }, { 1956.f,342.f }));
 }
 
 
@@ -104,7 +111,7 @@ void Game::run()
         if (movingRight) actionFlags |= 0b00000001;
         if (movingLeft) actionFlags |= 0b00000010;
         if (jumping) actionFlags |= 0b00000100;
-        player->update(actionFlags);
+        player->update(actionFlags,ground);
 
         isColliding();
         //used to update all entites
