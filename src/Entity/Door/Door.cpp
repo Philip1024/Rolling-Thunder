@@ -25,8 +25,7 @@ Door::Door(int x,int y)
 //THE POS TO THE ORGIONAL DOOR POS
 void Door::open()
 {
-	if (animationFrame == 2)
+	if (animationFrame == 3)
 		animationFrame = 0;
 	sprite.setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(animationFrame++));
 }
-

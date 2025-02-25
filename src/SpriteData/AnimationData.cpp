@@ -20,8 +20,8 @@ void AnimationData::load()
 	sectionMap["enemy_move_left"] = new Section(textureMap[ENEMY_FLIPPED],
 		5, 1, sf::Vector2u(870, 0), sf::Vector2u(1023, 61));
 
-	sectionMap["door_open"] = new Section(textureMap[DOOR],
-		3, 1, sf::Vector2u(228, 3), sf::Vector2u(347, 63));
+	sectionMap["door_open"] = new Section("door_open", textureMap[DOOR],
+		3, 1, sf::Vector2u(215, 3), sf::Vector2u(347, 63));
 }
 
 
