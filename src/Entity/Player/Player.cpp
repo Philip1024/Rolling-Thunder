@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include<optional>
+#include<math.h>
 
 
 
@@ -81,9 +82,14 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect> ground)
 		double t = 0;
 		double velo = 1;
 		double g = 9.8;
-		double angle = 45;
-		//sprite.move({ 0,-5 });
-		//view->move({ 1,0 });
+		double angle=45*PI/180;
+		t++;
+		xMov = velo * cos(angle) * t - xPos;
+		xPos = velo * cos(angle) * t;
+		yMov = -0.5 * g * t * t + velo * sin(angle) * t-yPos;
+		yPos = -0.5 * g * t * t + velo * sin(angle) * t;
+		sprite.move({ xMov,-1 * yMov });
+		view->move({ xMov,0 });
 		for (int i = 0; i < ground.size(); i++)
 		{
 			if (sprite.getGlobalBounds().findIntersection(ground.at(i)))
