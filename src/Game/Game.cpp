@@ -107,7 +107,7 @@ void Game::run()
                 }
             }
         }
-       
+        std::cout<<movingRight<<' '<<movingLeft
         window.clear();
         window.draw(stage1Sprite);
         window.draw(rectangle);
@@ -119,8 +119,9 @@ void Game::run()
         char actionFlags = 0b0;
         if (movingRight) actionFlags |= 0b00000001;
         if (movingLeft) actionFlags |= 0b00000010;
-        if (movingRight&&jumping) actionFlags |= 0b00000100;
-        player->update(actionFlags,ground);
+        if(jumping) actionFlags |= 0b00000100;
+        if (movingRight&&jumping) actionFlags |= 0b00001000;
+        player->update(actionFlags,&ground);
         isColliding();
         //used to update all entites
 		//draw the foreground
