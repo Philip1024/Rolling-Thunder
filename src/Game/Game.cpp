@@ -126,7 +126,7 @@ void Game::run()
         if (movingRight) actionFlags |= 0b00000001;
         if (movingLeft) actionFlags |= 0b00000010;
         if (movingRight&&jumping) actionFlags |= 0b00000100;
-        player->update(actionFlags,ground);
+        player->update(actionFlags,&ground);
         door->update(actionFlags);
         isColliding();
         //used to update all entites
