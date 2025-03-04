@@ -15,6 +15,10 @@ public:
 	//void update() override;
 	//this opens the door if the player interacts with it 
 	void open();
+	void update(char actionFlags);
+	sf::Clock clock;
+	bool opening = false;
+	int doorCount = 0;
 
 	//void collide(Entity* other) override;
 
