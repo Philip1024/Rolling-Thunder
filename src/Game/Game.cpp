@@ -34,8 +34,9 @@ Game::~Game()
 void Game::run()
 {
     //door 1
-    Door* door = new Door(84,111);
+    Door* door = new Door(84,111); // this is memory leaking lol
     //used to not have to wait for clock to reach 0.075 to move
+    Enemy* enemy = new Enemy(sf::Vector2f(84, 111)); // mem leak
     char dummy = 0;
     bool firstD = true;
     bool firstA = true;
@@ -48,9 +49,12 @@ void Game::run()
     //glogbal postion of the level
     double gamePosX = 0;
     double gamePosY = 0;
+    // what tick the game is on.
+    unsigned int currentTick = 0;
 	//window/clock setup
     sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "Rolling Thunder");
     Entity::setWindow(&window);
+    Entity::setCurrentTick(&currentTick);
     window.setFramerateLimit(30);
 	//Sprtie for the background
 	sf::Sprite stage1Sprite(stage1);
@@ -104,6 +108,7 @@ void Game::run()
         window.clear();
         window.draw(stage1Sprite);
         door->update(dummy);
+        enemy->update(dummy);
 
         // actions flags defines booleans in Game.cpp that are passed to the entity.
         // done this way to allow input to be read in Game.cpp
@@ -118,6 +123,7 @@ void Game::run()
 		//draw the foreground
         window.setView(view);
         window.display();
+        currentTick++; // keep track of the ticks that have passed
     }
 }
 

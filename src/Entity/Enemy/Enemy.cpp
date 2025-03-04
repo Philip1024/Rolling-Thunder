@@ -3,10 +3,10 @@
 #include"../Bullet/Bullet.h"
 
 
-Enemy::Enemy()
+Enemy::Enemy(sf::Vector2f pos)
 	: Entity(AnimationData::getTexture(AnimationData::ENEMY))
 {
-
+	sprite.setPosition(pos);
 }
 
 
@@ -32,7 +32,8 @@ void Enemy::collide(Entity* other)
 
 void Enemy::update(char actionFlags)
 {
-	//AnimationData::getSection("enemy_move_left")->getFrame();
-	//sframe++;
+	if (getCurrentTick() % 5 == 0)
+	sprite.setTextureRect(AnimationData::getSection("enemy_move_left")->nextFrame());
+
 	Entity::update(actionFlags);
 }

@@ -17,7 +17,6 @@ Player::Player()
 	sprite.setScale({0.8f,0.8f});
 	faceRight = true;
 	activeJump = false;
-	animationFrame = 5;
 	jumpFrame = 1;
 	xMov = 0;
 	yMov = 0;//pushes sprite down initally so sprite starts at floor
@@ -45,15 +44,11 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect> ground)
 	if (clock.getElapsedTime().asSeconds() <= 0.05f)
 		return; // only update the animation past this point
 
-	if (animationFrame > 5)
-		animationFrame = 0;
-	if (animationFrame < 0)
-		animationFrame = 5;
 	if (jumpFrame > 1)
 		jumpFrame = 0;
 	if ((actionFlags & 0b00000001) && !activeJump) // moving right. 
 	{
-		sprite.setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(animationFrame++));
+		sprite.setTextureRect(AnimationData::getSection("albatross_move_right")->nextFrame());
 		view->move({ 7.5,0 });
 
 		sprite.move({ 7.5,0 });//not exact yet
@@ -106,6 +101,6 @@ void Player::collide(Entity* other)
 	if (doorCast != nullptr)
 	{
 		//doorCast->open();
-		std::cout << "Works" << std::endl;
+		//std::cout << "Works" << std::endl;
 	}
 }

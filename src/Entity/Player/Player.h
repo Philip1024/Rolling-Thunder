@@ -18,7 +18,7 @@ private:
 	bool faceRight;
 	bool activeJump;//used to determine whether player is actively jumping
 	bool heightJumped;
-	int animationFrame, jumpFrame;
+	int jumpFrame;
 	float xMov, yMov,xPos,yPos;//used to keep track of movement of sprite in jumping animation
 	const double PI = 3.14159235;
 };

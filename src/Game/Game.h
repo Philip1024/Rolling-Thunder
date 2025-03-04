@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "../Entity/Player/Player.h"
 #include "../SpriteData/AnimationData.h"
+#include "../Entity/Enemy/Enemy.h"
 
 
 class Game
