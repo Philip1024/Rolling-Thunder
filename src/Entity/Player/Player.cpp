@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include<optional>
+#include<math.h>
 
 
 
@@ -19,9 +20,13 @@ Player::Player()
 	activeJump = false;
 	jumpFrame = 1;
 	xMov = 0;
-	yMov = 0;//pushes sprite down initally so sprite starts at floor
+	yMov = 0;
 	xPos = 0;
 	yPos = 0;
+	t = 0;
+	velo = 10;
+	g = 9.8;
+	angle = 45 * PI / 180;
 }
 
 
@@ -40,7 +45,6 @@ right most bit (00000001): move right
 void Player::update(char actionFlags, std::vector<sf::FloatRect> ground)
 {
 	Entity::update(actionFlags);
-
 	if (clock.getElapsedTime().asSeconds() <= 0.05f)
 		return; // only update the animation past this point
 
@@ -72,18 +76,30 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect> ground)
 		{
 			sprite.move({ 0,7 });//when switchiong to jump animation player move up, this offsets that
 			activeJump = true;
+			t = 0;
+			velo = 25;
+			g = 9.8;
+			angle = 75 * PI / 180;
 		}
-		double t = 0;
-		double velo = 1;
-		double g = 9.8;
-		double angle = 45;
-		//sprite.move({ 0,-5 });
-		//view->move({ 1,0 });
+		t += 0.2;
+		xMov = velo * cos(angle) * t - xPos;
+		xPos = velo * cos(angle) * t;
+		yMov = -0.5 * g * t * t + velo * sin(angle) * t-yPos;
+		yPos = -0.5 * g * t * t + velo * sin(angle) * t;
+		sprite.move({ xMov, -1*yMov });
+		view->move({ xMov,0 });
+		sprite.setTextureRect(AnimationData::getSection("albatross_standard_jump")->getFrame(0));
 		for (int i = 0; i < ground.size(); i++)
 		{
-			if (sprite.getGlobalBounds().findIntersection(ground.at(i)))
+			if (sprite.getGlobalBounds().findIntersection(ground.at(i))&&t>1)
 			{
 				activeJump = false;
+				sprite.setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(0));
+				sprite.move({ 0,-7 });
+				xMov = 0;
+				yMov = 0;
+				xPos = 0;
+				yPos = 0;
 			}
 
 
@@ -101,6 +117,5 @@ void Player::collide(Entity* other)
 	if (doorCast != nullptr)
 	{
 		//doorCast->open();
-		//std::cout << "Works" << std::endl;
 	}
 }
