@@ -18,6 +18,7 @@ Player::Player()
 	sprite.setScale({0.8f,0.8f});
 	faceRight = true;
 	activeJump = false;
+	activeRightJump = false;
 	jumpFrame = 1;
 	xMov = 0;
 	yMov = 0;
@@ -46,15 +47,12 @@ right most bit (00000001): move right
 7th bit (00000010): move left
 6th bit (00000100): jump
 */
-void Player::update(char actionFlags, std::vector<sf::FloatRect> ground)
+void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
 	Entity::update(actionFlags);
 	if (clock.getElapsedTime().asSeconds() <= 0.05f)
 		return; // only update the animation past this point
-
-	if (jumpFrame > 1)
-		jumpFrame = 0;
-	if ((actionFlags & 0b00000001) && !activeJump) // moving right. 
+	if ((actionFlags & 0b00000001) && !activeRightJump && !activeJump) // moving right. 
 	{
 		sprite.setTextureRect(moveLeft->nextFrame());
 		view->move({ 7.5,0 });
@@ -63,7 +61,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect> ground)
 		faceRight = true;
 
 	}
-	if ((actionFlags & 0b00000010) && !activeJump) // moving left TODO: bound check on the left using view
+	if ((actionFlags & 0b00000010) && !activeRightJump && !activeJump) // moving left TODO: bound check on the left using view
 	{
 		sprite.setTextureRect(moveRight->nextFrame());
 		view->move({ -7.5,0 });
@@ -71,9 +69,8 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect> ground)
 		sprite.move({ -7.5,0 });//not exact yet
 		faceRight = false;
 	}
-	//jump follows a parabolic path
-	//not done yet
-	if ((actionFlags & 0b00000100) || activeJump)//jump
+
+	if (((actionFlags & 0b00000100)||activeJump) &&!activeRightJump)//jump
 	{
 		//represents time
 		if (!activeJump)
@@ -81,33 +78,28 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect> ground)
 			sprite.move({ 0,7 });//when switchiong to jump animation player move up, this offsets that
 			activeJump = true;
 			t = 0;
-			velo = 25;
+			velo = 30;
+			g = 9.8;
+			angle = 90 * PI / 180;
+		}
+		activeJump = jump(angle, ground);
+	}
+
+	//jump follows a parabolic path using parametric physics equations
+	//this is the jumping while moving right animation
+	if (((actionFlags & 0b00001000) || activeRightJump) && !activeJump)//jump
+	{
+		//represents time
+		if (!activeRightJump)
+		{
+			sprite.move({ 0,7 });//when switchiong to jump animation player move up, this offsets that
+			activeRightJump = true;
+			t = 0;
+			velo = 30;
 			g = 9.8;
 			angle = 75 * PI / 180;
 		}
-		t += 0.2;
-		xMov = velo * cos(angle) * t - xPos;
-		xPos = velo * cos(angle) * t;
-		yMov = -0.5 * g * t * t + velo * sin(angle) * t-yPos;
-		yPos = -0.5 * g * t * t + velo * sin(angle) * t;
-		sprite.move({ xMov, -1*yMov });
-		view->move({ xMov,0 });
-		sprite.setTextureRect(AnimationData::getSection("albatross_standard_jump")->getFrame(0));
-		for (int i = 0; i < ground.size(); i++)
-		{
-			if (sprite.getGlobalBounds().findIntersection(ground.at(i))&&t>1)
-			{
-				activeJump = false;
-				sprite.setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(0));
-				sprite.move({ 0,-7 });
-				xMov = 0;
-				yMov = 0;
-				xPos = 0;
-				yPos = 0;
-			}
-
-
-		}
+		activeRightJump = jump(angle, ground);
 	}
 	
 	clock.restart();
@@ -122,4 +114,33 @@ void Player::collide(Entity* other)
 	{
 		//doorCast->open();
 	}
+}
+
+
+
+bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
+{
+	t += 0.4;
+	xMov = velo * cos(angle) * t - xPos;
+	xPos = velo * cos(angle) * t;
+	yMov = -0.5 * g * t * t + velo * sin(angle) * t - yPos;
+	yPos = -0.5 * g * t * t + velo * sin(angle) * t;
+	sprite.move({ xMov, -1 * yMov });
+	view->move({ xMov,0 });
+	sprite.setTextureRect(AnimationData::getSection("albatross_standard_jump")->getFrame(0));
+	for (int i = 0; i < ground->size(); i++)
+	{
+		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) && t > 1)
+		{
+			sprite.setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(0));
+			sprite.move({ 0,-7 });
+			xMov = 0;
+			yMov = 0;
+			xPos = 0;
+			yPos = 0;
+			return false;
+		}
+	}
+	return true;
+
 }

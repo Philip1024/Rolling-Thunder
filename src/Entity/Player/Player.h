@@ -10,12 +10,13 @@ public:
 	Player();
 	~Player();
 	void collide(Entity* other) override;
-	void update(char actionFlags,std::vector<sf::FloatRect>);
+	void update(char actionFlags,std::vector<sf::FloatRect>*);
 	//sf::Vector2f getPosition();
 private:
 	//keeps track of time between sprite updates
 	sf::Clock clock;
 	bool faceRight;
+	bool activeRightJump;
 	bool activeJump;//used to determine whether player is actively jumping
 	bool heightJumped;
 	int jumpFrame;
@@ -27,5 +28,6 @@ private:
 	double angle;
 
 	AnimationData::SectionData* moveLeft, * moveRight;
+	bool jump(double angle, std::vector<sf::FloatRect>*);
 };
 
