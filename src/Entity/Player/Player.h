@@ -25,5 +25,7 @@ private:
 	double velo;
 	double g;
 	double angle;
+
+	AnimationData::SectionData* moveLeft, * moveRight;
 };
 

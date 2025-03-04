@@ -39,7 +39,7 @@ void Game::run()
     //door 1
     Door* door = new Door(84,111); // this is memory leaking lol
     //used to not have to wait for clock to reach 0.075 to move
-    Enemy* enemy = new Enemy(sf::Vector2f(84, 111)); // mem leak
+    Enemy* enemy = new Enemy(sf::Vector2f(160, 107)); // mem leak
     char dummy = 0;
     bool firstD = true;
     bool firstA = true;

@@ -24,8 +24,12 @@ void AnimationData::load()
 		1, 2, sf::Vector2u(230, 550), sf::Vector2u(260, 650));
 
 	sectionMap["enemy_move_left"] = new Section(textureMap[ENEMY_FLIPPED],
-		5, 1, sf::Vector2u(870, 0), sf::Vector2u(1023, 61));
-	getSection("albatross_move_left")->setNextFrameFunction(rightToLeftFunction);
+		7, 1, sf::Vector2u(800, 0), sf::Vector2u(1024, 64));
+	getSection("enemy_move_left")->setNextFrameFunction(rightToLeftFunction);
+	sectionMap["enemy_move_right"] = new Section(textureMap[ENEMY],
+		7, 1, sf::Vector2u(0, 0), sf::Vector2u(224, 64));
+	sectionMap["enemy_idle_sneak"] = new Section(textureMap[ENEMY],
+		9, 1, sf::Vector2u(160, 78), sf::Vector2u(494, 127));
 
 	sectionMap["door_open"] = new Section(textureMap[DOOR],
 		3, 1, sf::Vector2u(215, 3), sf::Vector2u(347, 63));
@@ -55,12 +59,6 @@ std::string AnimationData::toLowerCase(std::string i)
 }
 
 
-sf::IntRect AnimationData::Section::nextFrame()
-{
-	nextFrameFunc(curFrame, getMaxFrames());
-	return getFrame(curFrame);
-}
-
 sf::IntRect AnimationData::Section::getFrame(unsigned int c) const
 {
 	sf::IntRect ret;
@@ -81,4 +79,11 @@ sf::IntRect AnimationData::Section::getFrame(unsigned int c) const
 sf::IntRect AnimationData::Section::getFrame(unsigned int x, unsigned int y) const
 {
 	return getFrame(horizontalFrames * y + x);
+}
+
+
+sf::IntRect AnimationData::SectionData::nextFrame()
+{
+	linkedSection->getNextFrameFunction()(curFrame, linkedSection->getMaxFrames());
+	return linkedSection->getFrame(curFrame);
 }

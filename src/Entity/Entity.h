@@ -2,6 +2,7 @@
 #include <vector>
 #include<SFML/Graphics.hpp>
 #include<optional>
+#include "../SpriteData/AnimationData.h"
 
 
 class Entity

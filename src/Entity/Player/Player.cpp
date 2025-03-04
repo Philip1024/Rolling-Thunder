@@ -27,12 +27,16 @@ Player::Player()
 	velo = 10;
 	g = 9.8;
 	angle = 45 * PI / 180;
+
+	moveLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_move_right"));
+	moveRight = new AnimationData::SectionData(AnimationData::getSection("albatross_move_left"));
 }
 
 
 Player::~Player()
 {
-
+	delete moveLeft;
+	delete moveRight;
 }
 
 
@@ -52,7 +56,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect> ground)
 		jumpFrame = 0;
 	if ((actionFlags & 0b00000001) && !activeJump) // moving right. 
 	{
-		sprite.setTextureRect(AnimationData::getSection("albatross_move_right")->nextFrame());
+		sprite.setTextureRect(moveLeft->nextFrame());
 		view->move({ 7.5,0 });
 
 		sprite.move({ 7.5,0 });//not exact yet
@@ -61,7 +65,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect> ground)
 	}
 	if ((actionFlags & 0b00000010) && !activeJump) // moving left TODO: bound check on the left using view
 	{
-		sprite.setTextureRect(AnimationData::getSection("albatross_move_left")->nextFrame());
+		sprite.setTextureRect(moveRight->nextFrame());
 		view->move({ -7.5,0 });
 
 		sprite.move({ -7.5,0 });//not exact yet
