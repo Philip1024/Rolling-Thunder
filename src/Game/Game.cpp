@@ -6,6 +6,7 @@
 #include "../Entity/Player/Player.h"
 #include "../Entity/Door/Door.h"
 #include<vector>
+#include<iostream>
 
 //Constructor
 Game::Game()
@@ -15,7 +16,7 @@ Game::Game()
 
 	stage1.loadFromFile("res/Background/stage1(final).png");
     player = new Player();
-    ground.push_back(sf::FloatRect({ 20.f,160.f }, { 1720.f,159.f }));
+    ground.push_back(sf::FloatRect({ 20.f,167.f }, { 1720.f,166.f }));
     ground.push_back(sf::FloatRect({ 1717.f,88.f }, { 1763.f,87.f }));
     ground.push_back(sf::FloatRect({ 1763.f,146.f }, { 1811.f,145.f }));
     ground.push_back(sf::FloatRect({ 1811.f,204.f }, { 1859.f,203.f }));
@@ -33,6 +34,8 @@ Game::~Game()
 //Runs the game
 void Game::run()
 {
+    sf::RectangleShape rectangle(sf::Vector2f(1700, 1));
+    rectangle.setPosition(sf::Vector2f(20, 159));
     //door 1
     Door* door = new Door(84,111);
     //used to not have to wait for clock to reach 0.075 to move
@@ -103,16 +106,15 @@ void Game::run()
        
         window.clear();
         window.draw(stage1Sprite);
+        window.draw(rectangle);
         door->update(dummy);
-
         // actions flags defines booleans in Game.cpp that are passed to the entity.
         // done this way to allow input to be read in Game.cpp
         char actionFlags = 0b0;
         if (movingRight) actionFlags |= 0b00000001;
         if (movingLeft) actionFlags |= 0b00000010;
-        if (jumping) actionFlags |= 0b00000100;
+        if (movingRight&&jumping) actionFlags |= 0b00000100;
         player->update(actionFlags,ground);
-
         isColliding();
         //used to update all entites
 		//draw the foreground
