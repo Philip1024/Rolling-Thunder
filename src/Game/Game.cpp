@@ -107,7 +107,6 @@ void Game::run()
                 }
             }
         }
-        std::cout<<movingRight<<' '<<movingLeft
         window.clear();
         window.draw(stage1Sprite);
         window.draw(rectangle);
