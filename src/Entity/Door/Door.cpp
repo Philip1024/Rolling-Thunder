@@ -40,11 +40,10 @@ void Door::update(char actionFlags)
 		}
 		open();
 		doorCount++;
-		if (doorCount == 3)
+		if (doorCount == 4)
 		{
 			doorCount = 0;
 			opening = false;
-			sprite.setColor(sf::Color::Black);
 		}
 
 	}

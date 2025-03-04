@@ -19,6 +19,7 @@ public:
 	sf::Clock clock;
 	bool opening = false;
 	int doorCount = 0;
+	sf::RectangleShape door;
 
 	//void collide(Entity* other) override;
 
