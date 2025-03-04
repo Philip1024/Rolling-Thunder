@@ -125,7 +125,8 @@ void Game::run()
 		if (doorOpen) actionFlags |= 0b10000000;
         if (movingRight) actionFlags |= 0b00000001;
         if (movingLeft) actionFlags |= 0b00000010;
-        if (movingRight&&jumping) actionFlags |= 0b00000100;
+        if(jumping) actionFlags |= 0b00000100;
+        if (movingRight&&jumping) actionFlags |= 0b00001000;
         player->update(actionFlags,&ground);
         door->update(actionFlags);
         isColliding();
