@@ -113,7 +113,6 @@ void Game::run()
                 }
             }
         }
-       
         window.clear();
         window.draw(stage1Sprite);
         window.draw(door->getSprite());
