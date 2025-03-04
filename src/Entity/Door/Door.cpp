@@ -25,7 +25,28 @@ Door::Door(int x,int y)
 //THE POS TO THE ORGIONAL DOOR POS
 void Door::open()
 {
-	if (animationFrame == 3)
-		animationFrame = 0;
-	sprite.setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(animationFrame++));
+	sprite.setTextureRect(AnimationData::getSection("door_open")->nextFrame());
+}
+
+void Door::update(char actionFlags)
+{
+	if (clock.getElapsedTime().asSeconds() <= 0.25f)
+		return;
+	if (actionFlags & 0b100000000 || opening)
+	{
+		if (!opening)
+		{
+			opening = true;
+		}
+		open();
+		doorCount++;
+		if (doorCount == 3)
+		{
+			doorCount = 0;
+			opening = false;
+			sprite.setColor(sf::Color::Black);
+		}
+
+	}
+	clock.restart();
 }

@@ -37,6 +37,7 @@ void Game::run()
     sf::RectangleShape rectangle(sf::Vector2f(1700, 1));
     rectangle.setPosition(sf::Vector2f(20, 159));
     //door 1
+    bool doorOpen = false;
     Door* door = new Door(84,111); // this is memory leaking lol
     //used to not have to wait for clock to reach 0.075 to move
     Enemy* enemy = new Enemy(sf::Vector2f(84, 111)); // mem leak
@@ -89,6 +90,8 @@ void Game::run()
                 case sf::Keyboard::Scan::F:
                     jumping = true;
                     break;
+                case sf::Keyboard::Scan::W:
+                    doorOpen = true;
                 }
             }
             if (const auto* keyReleased = event->getIf<sf::Event::KeyReleased>())
@@ -104,23 +107,27 @@ void Game::run()
                 case sf::Keyboard::Scan::F:
                     jumping = false;
                     break;
+                case sf::Keyboard::Scan::W:
+                    doorOpen = false;
+                    break;
                 }
             }
         }
         window.clear();
         window.draw(stage1Sprite);
+        window.draw(door->getSprite());
         window.draw(rectangle);
-        door->update(dummy);
         enemy->update(dummy);
 
         // actions flags defines booleans in Game.cpp that are passed to the entity.
         // done this way to allow input to be read in Game.cpp
         char actionFlags = 0b0;
+		if (doorOpen) actionFlags |= 0b10000000;
         if (movingRight) actionFlags |= 0b00000001;
         if (movingLeft) actionFlags |= 0b00000010;
-        if(jumping) actionFlags |= 0b00000100;
-        if (movingRight&&jumping) actionFlags |= 0b00001000;
-        player->update(actionFlags,&ground);
+        if (movingRight&&jumping) actionFlags |= 0b00000100;
+        player->update(actionFlags,ground);
+        door->update(actionFlags);
         isColliding();
         //used to update all entites
 		//draw the foreground
