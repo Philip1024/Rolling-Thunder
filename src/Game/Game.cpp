@@ -40,7 +40,7 @@ void Game::run()
     bool doorOpen = false;
     Door* door = new Door(84,111); // this is memory leaking lol
     //used to not have to wait for clock to reach 0.075 to move
-    Enemy* enemy = new Enemy(sf::Vector2f(160, 107)); // mem leak
+    Enemy* enemy = new Enemy(sf::Vector2f(200, 107)); // mem leak
     char dummy = 0;
     bool firstD = true;
     bool firstA = true;
@@ -117,7 +117,7 @@ void Game::run()
         window.draw(stage1Sprite);
         window.draw(door->getSprite());
         window.draw(rectangle);
-        enemy->update(dummy);
+        enemy->update(player->getSprite().getPosition());
 
         // actions flags defines booleans in Game.cpp that are passed to the entity.
         // done this way to allow input to be read in Game.cpp

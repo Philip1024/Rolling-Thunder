@@ -30,6 +30,11 @@ void AnimationData::load()
 		7, 1, sf::Vector2u(0, 0), sf::Vector2u(224, 64));
 	sectionMap["enemy_idle_sneak"] = new Section(textureMap[ENEMY],
 		9, 1, sf::Vector2u(160, 78), sf::Vector2u(494, 127));
+	sectionMap["enemy_idle_right"] = new Section(textureMap[ENEMY],
+		2, 1, sf::Vector2u(928, 8), sf::Vector2u(992, 61));
+	sectionMap["enemy_shoot_right"] = new Section(textureMap[ENEMY],
+		3, 1, sf::Vector2u(123, 128), sf::Vector2u(266, 189));
+
 
 	sectionMap["door_open"] = new Section(textureMap[DOOR],
 		3, 1, sf::Vector2u(215, 3), sf::Vector2u(347, 63));

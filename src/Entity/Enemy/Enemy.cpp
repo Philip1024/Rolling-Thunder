@@ -11,6 +11,9 @@ Enemy::Enemy(sf::Vector2f pos)
 	animationMap[WALK_LEFT] = new AnimationData::SectionData(AnimationData::getSection("enemy_move_left"));
 	animationMap[WALK_RIGHT] = new AnimationData::SectionData(AnimationData::getSection("enemy_move_right"));
 	animationMap[IDLE_CROUCH] = new AnimationData::SectionData(AnimationData::getSection("enemy_idle_sneak"));
+	animationMap[IDLE_RIGHT] = new AnimationData::SectionData(AnimationData::getSection("enemy_idle_right"));
+	animationMap[IDLE_LEFT] = new AnimationData::SectionData(AnimationData::getSection("enemy_idle_left"));
+	animationMap[SHOOT_RIGHT] = new AnimationData::SectionData(AnimationData::getSection("enemy_shoot_right"));
 }
 
 
@@ -41,9 +44,39 @@ void Enemy::collide(Entity* other)
 
 }
 
+
 void Enemy::update(char actionFlags)
 {
-	curMove = IDLE_CROUCH;
+	throw std::exception("dont call this");
+}
+
+
+void Enemy::update(sf::Vector2f playerPos)
+{
+	sprite.setScale(sf::Vector2f(0.9, 0.9));
+
+	/*if (moveTicks <= 0)
+	{
+		if (rand() % 100 == 1)
+		{
+			curMove = IDLE_CROUCH;
+			moveTicks = 9*4;
+			sprite.move(sf::Vector2f(0, 13));
+		}
+		else
+		{
+			if (lastMove == IDLE_CROUCH)
+				sprite.move(sf::Vector2f(0, -13));
+
+			if (playerPos.x < sprite.getPosition().x)
+				curMove = WALK_LEFT;
+			else
+				curMove = WALK_RIGHT;
+		}
+	}
+	moveTicks--;*/
+	curMove = SHOOT_RIGHT;
+	
 
 	sprite.setTexture(*AnimationData::getTexture(AnimationData::ENEMY));
 
@@ -51,8 +84,10 @@ void Enemy::update(char actionFlags)
 	{
 	case WALK_LEFT:
 		sprite.setTexture(*AnimationData::getTexture(AnimationData::ENEMY_FLIPPED));
+		sprite.move(sf::Vector2f(-1, 0));
 		break;
 	case WALK_RIGHT:
+		sprite.move(sf::Vector2f(1, 0));
 		break;
 	case DIE_LEFT:
 		break;
@@ -79,16 +114,16 @@ void Enemy::update(char actionFlags)
 	}
 	if (getCurrentTick() % 4 == 0)
 		sprite.setTextureRect(animationMap[curMove]->nextFrame());
+	lastMove = curMove;
+
+	Entity::update(0b0);
+#ifndef NDEBUG
 	sf::RectangleShape bounds;
 	bounds.setSize(sprite.getGlobalBounds().size);
 	bounds.setPosition(sprite.getGlobalBounds().position);
 	bounds.setFillColor(sf::Color::Transparent);
 	bounds.setOutlineColor(sf::Color::Green);
 	bounds.setOutlineThickness(1);
-	window->draw(bounds);
-	lastMove = curMove;
-	
-	Entity::update(actionFlags);
-#ifdef DEBUG
+	//window->draw(bounds);
 #endif
 }

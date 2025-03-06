@@ -1,6 +1,7 @@
 #pragma once
 #include "../Entity.h"
 
+
 class Enemy : public Entity
 {
 public:
@@ -25,7 +26,9 @@ public:
 
 	void collide(Entity* other);
 	void update(char actionFlags);
+	void update(sf::Vector2f playerPos);
 private:
 	Movement curMove, lastMove;
+	int moveTicks;
 	std::unordered_map<Movement, AnimationData::SectionData*> animationMap;
 };
