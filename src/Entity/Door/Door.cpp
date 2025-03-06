@@ -17,8 +17,8 @@ Door::Door(int x,int y)
 	sf::Vector2i size(50, 60);
 	sf::IntRect frame(position, size);
 	sprite.setTextureRect(frame);
-
 	sectionData = new AnimationData::SectionData(AnimationData::getSection("door_open"));
+	sprite.setTextureRect(AnimationData::getSection("door_open")->getFrame(0));
 }
 
 Door::~Door()
@@ -37,7 +37,8 @@ void Door::open()
 
 void Door::update(char actionFlags)
 {
-	/*/if (clock.getElapsedTime().asSeconds() <= 0.25f)
+	
+	if (clock.getElapsedTime().asSeconds() <= 0.25f)
 		return;
 	if (actionFlags & 0b100000000 || opening)
 	{
@@ -47,14 +48,13 @@ void Door::update(char actionFlags)
 		}
 		open();
 		doorCount++;
-		if (doorCount == 3)
+		if (doorCount == 4)
 		{
 			doorCount = 0;
 			opening = false;
 		}
-
 	}
 	clock.restart();
-	*/
-	open();ww
+	
+
 }

@@ -8,7 +8,7 @@ void AnimationData::load()
 	textureMap[ENEMY] = new sf::Texture("res/SpriteSheets/Enemy.png");
 	textureMap[ENEMY_FLIPPED] = new sf::Texture("res/SpriteSheets/Enemy_flipped.png");
 	textureMap[ALBATROSS] = new sf::Texture("res/SpriteSheets/Albatross.png");
-	textureMap[DOOR] = new sf::Texture("res/SpriteSheets/doorFinal.png");
+	textureMap[DOOR] = new sf::Texture("res/SpriteSheets/Door.png");
 	auto rightToLeftFunction = [](unsigned int& curFrame, unsigned int maxFrames) -> void { // LAMBDA
 		if (curFrame == 0)
 			curFrame = maxFrames;
@@ -32,7 +32,7 @@ void AnimationData::load()
 		9, 1, sf::Vector2u(160, 78), sf::Vector2u(494, 127));
 
 	sectionMap["door_open"] = new Section(textureMap[DOOR],
-		3, 1, sf::Vector2u(0, 3), sf::Vector2u(158, 63));
+		4, 1, sf::Vector2u(24, 2), sf::Vector2u(222, 62));
 }
 
 
