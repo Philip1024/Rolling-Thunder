@@ -26,6 +26,6 @@ public:
 	void collide(Entity* other);
 	void update(char actionFlags);
 private:
-	Movement curMove;
+	Movement curMove, lastMove;
 	std::unordered_map<Movement, AnimationData::SectionData*> animationMap;
 };

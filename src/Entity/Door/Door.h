@@ -24,5 +24,6 @@ public:
 	//void collide(Entity* other) override;
 
 private:
+	AnimationData::SectionData* sectionData;
 };
 

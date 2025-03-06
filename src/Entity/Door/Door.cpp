@@ -17,6 +17,13 @@ Door::Door(int x,int y)
 	sf::Vector2i size(50, 60);
 	sf::IntRect frame(position, size);
 	sprite.setTextureRect(frame);
+
+	sectionData = new AnimationData::SectionData(AnimationData::getSection("door_open"));
+}
+
+Door::~Door()
+{
+	delete sectionData;
 }
 
 
@@ -25,7 +32,7 @@ Door::Door(int x,int y)
 //THE POS TO THE ORGIONAL DOOR POS
 void Door::open()
 {
-	sprite.setTextureRect(AnimationData::getSection("door_open")->nextFrame());
+	sprite.setTextureRect(sectionData->nextFrame());
 }
 
 void Door::update(char actionFlags)

@@ -28,8 +28,8 @@ protected:
 	sf::Sprite sprite;
 	static sf::View* view;
 	static unsigned int& getCurrentTick() { return *currentTick; }
+	static sf::RenderWindow* window;
 private:
 	static unsigned int* currentTick;
 	static std::vector<Entity*> entities;
-	static sf::RenderWindow* window;
 };

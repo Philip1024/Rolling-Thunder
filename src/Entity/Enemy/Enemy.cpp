@@ -44,6 +44,7 @@ void Enemy::collide(Entity* other)
 void Enemy::update(char actionFlags)
 {
 	curMove = IDLE_CROUCH;
+
 	sprite.setTexture(*AnimationData::getTexture(AnimationData::ENEMY));
 
 	switch (curMove)
@@ -78,6 +79,16 @@ void Enemy::update(char actionFlags)
 	}
 	if (getCurrentTick() % 4 == 0)
 		sprite.setTextureRect(animationMap[curMove]->nextFrame());
-
+	sf::RectangleShape bounds;
+	bounds.setSize(sprite.getGlobalBounds().size);
+	bounds.setPosition(sprite.getGlobalBounds().position);
+	bounds.setFillColor(sf::Color::Transparent);
+	bounds.setOutlineColor(sf::Color::Green);
+	bounds.setOutlineThickness(1);
+	window->draw(bounds);
+	lastMove = curMove;
+	
 	Entity::update(actionFlags);
+#ifdef DEBUG
+#endif
 }
