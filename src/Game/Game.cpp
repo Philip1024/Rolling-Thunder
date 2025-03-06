@@ -17,11 +17,11 @@ Game::Game()
 	stage1.loadFromFile("res/Background/stage1(final).png");
     player = new Player();
     ground.push_back(sf::FloatRect({ 20.f,167.f }, { 1720.f,166.f }));
-    ground.push_back(sf::FloatRect({ 1717.f,88.f }, { 1763.f,87.f }));
+    //ground.push_back(sf::FloatRect({ 1717.f,88.f }, { 1763.f,87.f }));
     ground.push_back(sf::FloatRect({ 1763.f,146.f }, { 1811.f,145.f }));
     ground.push_back(sf::FloatRect({ 1811.f,204.f }, { 1859.f,203.f }));
     ground.push_back(sf::FloatRect({ 1859.f,274.f }, { 1905.f,273.f }));
-    ground.push_back(sf::FloatRect({ 1905.f,343.f }, { 1956.f,342.f }));
+   // ground.push_back(sf::FloatRect({ 1905.f,343.f }, { 1956.f,342.f }));
 }
 
 
@@ -34,11 +34,23 @@ Game::~Game()
 //Runs the game
 void Game::run()
 {
+    //for testing
     sf::RectangleShape rectangle(sf::Vector2f(1700, 1));
-    rectangle.setPosition(sf::Vector2f(20, 159));
+    sf::RectangleShape rectangle2(sf::Vector2f(46, 1));
+    sf::RectangleShape rectangle3(sf::Vector2f(48, 1));
+    sf::RectangleShape rectangle4(sf::Vector2f(48, 1));
+    sf::RectangleShape rectangle5(sf::Vector2f(46, 1));
+    sf::RectangleShape rectangle6(sf::Vector2f(51, 1));
+    rectangle.setPosition(sf::Vector2f(20, 166));
+    rectangle2.setPosition(sf::Vector2f(1717, 87));
+    rectangle3.setPosition(sf::Vector2f(1763, 145));
+    rectangle4.setPosition(sf::Vector2f(1811, 203));
+    rectangle5.setPosition(sf::Vector2f(1859, 273));
+    rectangle6.setPosition(sf::Vector2f(1905, 342));
+
     //door 1
     bool doorOpen = false;
-    Door* door = new Door(84,111); // this is memory leaking lol
+    Door* door = new Door(94,113); // this is memory leaking lol
     //used to not have to wait for clock to reach 0.075 to move
     Enemy* enemy = new Enemy(sf::Vector2f(200, 107)); // mem leak
     char dummy = 0;
@@ -92,6 +104,7 @@ void Game::run()
                     break;
                 case sf::Keyboard::Scan::W:
                     doorOpen = true;
+                 
                 }
             }
             if (const auto* keyReleased = event->getIf<sf::Event::KeyReleased>())
@@ -119,14 +132,20 @@ void Game::run()
         window.draw(rectangle);
         enemy->update(player->getSprite().getPosition());
 
+        window.draw(rectangle2);
+        window.draw(rectangle3);
+        window.draw(rectangle4);
+        window.draw(rectangle5);
+        window.draw(rectangle6);
         // actions flags defines booleans in Game.cpp that are passed to the entity.
         // done this way to allow input to be read in Game.cpp
         char actionFlags = 0b0;
 		if (doorOpen) actionFlags |= 0b10000000;
         if (movingRight) actionFlags |= 0b00000001;
         if (movingLeft) actionFlags |= 0b00000010;
-        if(jumping) actionFlags |= 0b00000100;
         if (movingRight&&jumping) actionFlags |= 0b00001000;
+        if (jumping&&!movingRight&&!movingLeft) actionFlags |= 0b00000100;
+        if (movingLeft && jumping) actionFlags |= 0b00010000;
         player->update(actionFlags,&ground);
         door->update(actionFlags);
         isColliding();
@@ -136,6 +155,7 @@ void Game::run()
         window.display();
         currentTick++; // keep track of the ticks that have passed
     }
+    delete door;
 }
 
 
