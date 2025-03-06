@@ -50,7 +50,7 @@ void Game::run()
 
     //door 1
     bool doorOpen = false;
-    Door* door = new Door(84,111); // this is memory leaking lol
+    Door* door = new Door(94,113); // this is memory leaking lol
     //used to not have to wait for clock to reach 0.075 to move
     Enemy* enemy = new Enemy(sf::Vector2f(160, 107)); // mem leak
     char dummy = 0;
@@ -104,6 +104,7 @@ void Game::run()
                     break;
                 case sf::Keyboard::Scan::W:
                     doorOpen = true;
+                 
                 }
             }
             if (const auto* keyReleased = event->getIf<sf::Event::KeyReleased>())
@@ -153,6 +154,7 @@ void Game::run()
         window.display();
         currentTick++; // keep track of the ticks that have passed
     }
+    delete door;
 }
 
 
