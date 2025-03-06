@@ -16,9 +16,7 @@ private:
 	//keeps track of time between sprite updates
 	sf::Clock clock;
 	bool faceRight;
-	bool activeRightJump;
-	bool activeJump;//used to determine whether player is actively jumping
-	bool heightJumped;
+	bool activeJump, activeRightJump, activeLeftJump;//used to determine whether player is actively jumping
 	int jumpFrame;
 	float xMov, yMov,xPos,yPos;//used to keep track of movement of sprite in jumping animation
 	const double PI = 3.14159235;
