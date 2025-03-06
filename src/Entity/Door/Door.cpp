@@ -47,7 +47,7 @@ void Door::update(char actionFlags)
 		}
 		open();
 		doorCount++;
-		if (doorCount == 4)
+		if (doorCount == 3)
 		{
 			doorCount = 0;
 			opening = false;
