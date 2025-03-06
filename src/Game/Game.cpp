@@ -92,6 +92,7 @@ void Game::run()
                     break;
                 case sf::Keyboard::Scan::W:
                     doorOpen = true;
+                    door->open();
                 }
             }
             if (const auto* keyReleased = event->getIf<sf::Event::KeyReleased>())
@@ -128,7 +129,7 @@ void Game::run()
         if(jumping) actionFlags |= 0b00000100;
         if (movingRight&&jumping) actionFlags |= 0b00001000;
         player->update(actionFlags,&ground);
-        door->update(actionFlags);
+       // door->update(actionFlags);
         isColliding();
         //used to update all entites
 		//draw the foreground

@@ -37,7 +37,7 @@ void Door::open()
 
 void Door::update(char actionFlags)
 {
-	if (clock.getElapsedTime().asSeconds() <= 0.25f)
+	/*/if (clock.getElapsedTime().asSeconds() <= 0.25f)
 		return;
 	if (actionFlags & 0b100000000 || opening)
 	{
@@ -55,4 +55,6 @@ void Door::update(char actionFlags)
 
 	}
 	clock.restart();
+	*/
+	open();ww
 }
