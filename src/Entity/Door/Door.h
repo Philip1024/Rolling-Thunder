@@ -16,6 +16,7 @@ public:
 	//this opens the door if the player interacts with it 
 	void open();
 	void close();
+	void setPos(sf::Vector2f);
 	void update(char actionFlags);
 	sf::Clock clock;
 	bool opening = false;

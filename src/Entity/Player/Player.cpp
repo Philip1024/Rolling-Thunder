@@ -118,7 +118,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		}
 		activeRightJump = jump(angle, ground);
 	}
-	std::cout << sprite.getPosition().x <<' '<< sprite.getPosition().y << std::endl;
+	//std::cout << sprite.getPosition().x <<' '<< sprite.getPosition().y << std::endl;
 	clock.restart();
 }
 

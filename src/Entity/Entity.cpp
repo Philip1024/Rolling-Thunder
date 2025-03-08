@@ -1,5 +1,6 @@
 #include "Entity.h"
 std::vector<Entity*> Entity::entities;
+std::vector<Entity*> Entity::doors;
 sf::View* Entity::view = nullptr;
 sf::RenderWindow* Entity::window = nullptr;
 unsigned int* Entity::currentTick = nullptr;
@@ -9,3 +10,4 @@ Entity::Entity(sf::Texture* initTexture)
 {
 	entities.push_back(this);
 }
+

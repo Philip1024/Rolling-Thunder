@@ -31,9 +31,31 @@ Game::~Game()
 }
 
 
+
 //Runs the game
 void Game::run()
 {
+	//doors
+    Door* door = new Door(94, 113);
+    Door* door2 = new Door(258, 113);
+    Door* door3 = new Door(282, 42);
+    Door* door4 = new Door(424, 112);
+	Door* door5 = new Door(495, 42);
+	Door* door6 = new Door(636, 112);
+	Door* door7 = new Door(707, 112);
+	Door* door8 = new Door(778, 112);
+	Door* door9 = new Door(823, 41);
+	Door* door10 = new Door(1012, 112);
+	Door* door11 = new Door(1083, 42);
+	Door* door12 = new Door(1200, 112);
+	Door* door13 = new Door(1271, 112);
+	Door* door14 = new Door(1388, 41);
+	Door* door15 = new Door(1436, 41);
+	Door* door16 = new Door(1483, 41);
+	Door* door17 = new Door(1530, 41);
+
+
+    
     //for testing
     sf::RectangleShape rectangle(sf::Vector2f(1700, 1));
     sf::RectangleShape rectangle2(sf::Vector2f(46, 1));
@@ -48,9 +70,14 @@ void Game::run()
     rectangle5.setPosition(sf::Vector2f(1859, 273));
     rectangle6.setPosition(sf::Vector2f(1905, 342));
 
-    //door 1
+    //debug objects
+	bool debug = false;
+	Door* debugDoor = new Door(50, 50);
+    sf::Vector2f worldPos;
+
+    //doors
     bool doorOpen = false;
-    Door* door = new Door(94,113); // this is memory leaking lol
+
     //used to not have to wait for clock to reach 0.075 to move
     Enemy* enemy = new Enemy(sf::Vector2f(200, 107)); // mem leak
     char dummy = 0;
@@ -102,6 +129,13 @@ void Game::run()
                 case sf::Keyboard::Scan::F:
                     jumping = true;
                     break;
+                case sf::Keyboard::Scan::F5:
+                    debug = true;
+                    break;
+                case sf::Keyboard::Scan::F6:
+					std::cout << window.mapPixelToCoords(sf::Mouse::getPosition()).x <<
+                        ' ' << window.mapPixelToCoords(sf::Mouse::getPosition()).y << std::endl;
+                    break;
                 case sf::Keyboard::Scan::W:
                     doorOpen = true;
 					break;
@@ -127,10 +161,26 @@ void Game::run()
                 }
             }
         }
+
+        //draw 
         window.clear();
         window.draw(stage1Sprite);
-        window.draw(door->getSprite());
+        //this is subject to change
+        if (debug)
+        {
+            worldPos = window.mapPixelToCoords(sf::Mouse::getPosition());
+            debugDoor->setPos(worldPos);
+           // window.draw(debugDoor->getSprite());
+        }
+        
+        //test
         window.draw(rectangle);
+
+        //update/draw doors
+        for (int i =0; i < debugDoor->getDoors().size(); i++)
+        {
+            window.draw(debugDoor->getDoors().at(i)->getSprite());
+        }
         enemy->update(player->getSprite().getPosition());
 
         window.draw(rectangle2);
@@ -148,7 +198,8 @@ void Game::run()
         if (jumping&&!movingRight&&!movingLeft) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
         player->update(actionFlags,&ground);
-        door->update(actionFlags);
+		debugDoor->update(actionFlags);
+
         isColliding();
         //used to update all entites
 		//draw the foreground
@@ -156,7 +207,6 @@ void Game::run()
         window.display();
         currentTick++; // keep track of the ticks that have passed
     }
-    delete door;
 }
 
 
@@ -177,4 +227,12 @@ void Game::isColliding()
              }
         }
     }
+}
+
+//duh
+
+//duh
+void deleteLevel()
+{
+
 }

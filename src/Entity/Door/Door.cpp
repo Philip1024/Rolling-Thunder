@@ -20,7 +20,7 @@ Door::Door(int x,int y)
 	doorOpen = new AnimationData::SectionData(AnimationData::getSection("door_open"));
 	doorClose = new AnimationData::SectionData(AnimationData::getSection("door_close"));
 	sprite.setTextureRect(AnimationData::getSection("door_open")->getFrame(0));
-	
+	doors.push_back(this);
 }
 
 Door::~Door()
@@ -29,6 +29,13 @@ Door::~Door()
 	delete doorClose;
 }
 
+
+void Door::setPos(sf::Vector2f a)
+{
+	int x = a.x;
+	int y = a.y;
+	sprite.setPosition(sf::Vector2f(x, y));
+}
 
 //This opens the door for when the enmeyy leaves the room
 //still need to add sound for this 
@@ -57,6 +64,7 @@ void Door::close()
 	{
 		closing = true;
 	}
+	
 	doorFrameCount++;
 	if (doorFrameCount == 4)
 	{

@@ -11,6 +11,7 @@ public:
 	Game();
 	~Game();
 	void run();
+	void genLevel();
 	void isColliding();
 	Player* player;
 	sf::Texture stage1;
