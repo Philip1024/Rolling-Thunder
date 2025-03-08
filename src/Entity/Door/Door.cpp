@@ -38,7 +38,7 @@ void Door::open()
 void Door::update(char actionFlags)
 {
 	
-	if (clock.getElapsedTime().asSeconds() <= 0.25f)
+	if (clock.getElapsedTime().asSeconds() <= 0.12f)
 		return;
 	if (actionFlags & 0b100000000 || opening)
 	{
@@ -47,10 +47,10 @@ void Door::update(char actionFlags)
 			opening = true;
 		}
 		open();
-		doorCount++;
-		if (doorCount == 4)
+		doorFrameCount++;
+		if (doorFrameCount == 4)
 		{
-			doorCount = 0;
+			doorFrameCount = 0;
 			opening = false;
 		}
 	}
