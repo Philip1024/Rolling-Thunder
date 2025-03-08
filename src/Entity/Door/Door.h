@@ -15,15 +15,18 @@ public:
 	//void update() override;
 	//this opens the door if the player interacts with it 
 	void open();
+	void close();
 	void update(char actionFlags);
 	sf::Clock clock;
 	bool opening = false;
+	bool closing = false;
 	int doorFrameCount = 0;
+	bool doorOpened = false;
 	sf::RectangleShape door;
 
 	//void collide(Entity* other) override;
 
 private:
-	AnimationData::SectionData* sectionData;
+	AnimationData::SectionData* doorOpen, * doorClose;
 };
 

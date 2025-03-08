@@ -17,44 +17,70 @@ Door::Door(int x,int y)
 	sf::Vector2i size(50, 60);
 	sf::IntRect frame(position, size);
 	sprite.setTextureRect(frame);
-	sectionData = new AnimationData::SectionData(AnimationData::getSection("door_open"));
+	doorOpen = new AnimationData::SectionData(AnimationData::getSection("door_open"));
+	doorClose = new AnimationData::SectionData(AnimationData::getSection("door_close"));
 	sprite.setTextureRect(AnimationData::getSection("door_open")->getFrame(0));
+	
 }
 
 Door::~Door()
 {
-	delete sectionData;
+	delete doorOpen;
+	delete doorClose;
 }
 
 
-//The door will open 
-//AMKE THE DOOR CHANGE POS AFTER THE FRAME IS SWITHCED. THEN RESET
-//THE POS TO THE ORGIONAL DOOR POS
+//This opens the door for when the enmeyy leaves the room
+//still need to add sound for this 
 void Door::open()
 {
-	sprite.setTextureRect(sectionData->nextFrame());
+	sprite.setTextureRect(doorOpen->nextFrame());
+	if (!opening)
+	{
+		opening = true;
+	}
+	doorFrameCount++;
+	if (doorFrameCount == 4)
+	{
+		doorFrameCount = 0;
+		opening = false;
+		doorOpened = true;
+	}
 }
 
+//this just  a reverse of the the door opening animation
+//still need to add sound for this
+void Door::close()
+{
+	sprite.setTextureRect(doorClose->nextFrame());
+	if (!closing)
+	{
+		closing = true;
+	}
+	doorFrameCount++;
+	if (doorFrameCount == 4)
+	{
+		doorFrameCount = 0;
+		closing = false;
+		doorOpened = false;
+	}
+}
+
+//This controls the door opening and closing
 void Door::update(char actionFlags)
 {
 	
-	if (clock.getElapsedTime().asSeconds() <= 0.12f)
+	if (clock.getElapsedTime().asSeconds() <= 0.13f)
 		return;
+
 	if (actionFlags & 0b100000000 || opening)
 	{
-		if (!opening)
-		{
-			opening = true;
-		}
 		open();
-		doorFrameCount++;
-		if (doorFrameCount == 4)
-		{
-			doorFrameCount = 0;
-			opening = false;
-		}
+	}
+
+	if (doorOpened)
+	{
+		close();
 	}
 	clock.restart();
-	
-
 }

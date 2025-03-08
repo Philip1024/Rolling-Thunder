@@ -104,6 +104,7 @@ void Game::run()
                     break;
                 case sf::Keyboard::Scan::W:
                     doorOpen = true;
+					break;
                  
                 }
             }
