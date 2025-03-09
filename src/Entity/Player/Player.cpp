@@ -143,7 +143,7 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 	yMov = -0.5 * g * t * t + velo * sin(angle) * t - yPos;
 	yPos = -0.5 * g * t * t + velo * sin(angle) * t;
 	sprite.move({ xMov, -1 * yMov });
-	view->move({ xMov,0 });
+	view->move({ xMov, -1 * yMov });
 	if(faceRight)
 		sprite.setTextureRect(AnimationData::getSection("albatross_standard_right_jump")->getFrame(0));
 	else
@@ -152,7 +152,6 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 	{
 		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) && t > 1)
 		{
-			
 			sprite.setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(0));
 			sprite.move({ 0,-7 });
 			xMov = 0;

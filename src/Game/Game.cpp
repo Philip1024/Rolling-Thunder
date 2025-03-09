@@ -16,12 +16,12 @@ Game::Game()
 
 	stage1.loadFromFile("res/Background/stage1(final).png");
     player = new Player();
-    ground.push_back(sf::FloatRect({ 20.f,167.f }, { 1720.f,166.f }));
-    //ground.push_back(sf::FloatRect({ 1717.f,88.f }, { 1763.f,87.f }));
-    ground.push_back(sf::FloatRect({ 1763.f,146.f }, { 1811.f,145.f }));
-    ground.push_back(sf::FloatRect({ 1811.f,204.f }, { 1859.f,203.f }));
-    ground.push_back(sf::FloatRect({ 1859.f,274.f }, { 1905.f,273.f }));
-   // ground.push_back(sf::FloatRect({ 1905.f,343.f }, { 1956.f,342.f }));
+    ground.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,1.f }));
+    ground.push_back(sf::FloatRect({ 1717.f,87.f }, { 46.f, 1.f }));
+    ground.push_back(sf::FloatRect({ 1763.f,145.f }, { 48.f,1.f }));
+    ground.push_back(sf::FloatRect({ 1811.f,203.f }, { 48.f, 1.f }));
+    ground.push_back(sf::FloatRect({ 1859.f,273.f }, { 46.f,1.f }));
+    ground.push_back(sf::FloatRect({ 1905.f,342.f }, { 51.f,1.f }));
 }
 
 
