@@ -55,11 +55,16 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	Entity::update(actionFlags);
 	if (clock.getElapsedTime().asSeconds() <= 0.05f)
 		return; // only update the animation past this point
+	//meant to determine whether player is on ground, if not player should fall
+	//not working yet
 	for (int i = 0; i < ground->size(); i++)
 	{
-		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) && t > 1)
+		if (!sprite.getGlobalBounds().findIntersection(ground->at(i)) && !activeRightJump && !activeJump && !activeLeftJump)
 		{
-			sprite.setTextureRect(moveRight->nextFrame());
+			if(!faceRight)
+				sprite.setTextureRect(AnimationData::getSection("albatross_falling_left")->getFrame(0));
+			else
+				sprite.setTextureRect(AnimationData::getSection("albatross_falling_right")->getFrame(0));
 		}
 	}
 	if ((actionFlags & 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump) // moving right. 
@@ -143,7 +148,7 @@ void Player::collide(Entity* other,char actionFlags)
 		//add player animation
 		doorTime.restart();
 	}
-	if (doorCast != nullptr && doorOpen && doorTime.getElapsedTime().asSeconds() > .5)
+	if (doorCast != nullptr && doorOpen && doorTime.getElapsedTime().asSeconds() > .13)
 	{
 		doorCast->update(actionFlags);
 		doorOpen = false;
