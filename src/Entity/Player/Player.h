@@ -9,6 +9,8 @@ class Player : public Entity
 public:
 	Player();
 	~Player();
+	sf::Clock doorTime;
+	bool doorOpen;
 	void collide(Entity* other,char ActionFlags) override;
 	void update(char actionFlags,std::vector<sf::FloatRect>*);
 	//sf::Vector2f getPosition();
