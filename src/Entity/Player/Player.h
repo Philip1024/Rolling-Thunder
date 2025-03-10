@@ -9,7 +9,7 @@ class Player : public Entity
 public:
 	Player();
 	~Player();
-	void collide(Entity* other) override;
+	void collide(Entity* other,char ActionFlags) override;
 	void update(char actionFlags,std::vector<sf::FloatRect>*);
 	//sf::Vector2f getPosition();
 private:

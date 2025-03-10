@@ -12,7 +12,7 @@ public:
 	~Game();
 	void run();
 	void genLevel();
-	void isColliding();
+	void isColliding(char);
 	Player* player;
 	sf::Texture stage1;
 	sf::Texture stage2;

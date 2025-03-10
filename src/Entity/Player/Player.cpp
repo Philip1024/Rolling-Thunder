@@ -125,13 +125,13 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 }
 
 
-void Player::collide(Entity* other)
+void Player::collide(Entity* other,char actionFlags)
 {
 	Door* doorCast = dynamic_cast<Door*>(other);
 
 	if (doorCast != nullptr)
 	{
-		doorCast->open();
+		doorCast->update(actionFlags);
 	}
 }
 

@@ -202,7 +202,7 @@ void Game::run()
 
         //find which door is being collied with if "W" is pressed
 
-        isColliding();
+        isColliding(actionFlags);
         //used to update all entites
 		//draw the foreground
         window.setView(view);
@@ -211,8 +211,8 @@ void Game::run()
     }
 }
 
-
-void Game::isColliding()
+//checks if any entities are colliding
+void Game::isColliding(char actionFlags)
 {
     std::vector<Entity*>& entities = Entity::getEntities();
     if (entities.size() > 1)
@@ -221,11 +221,11 @@ void Game::isColliding()
         {
              for (int j = i + 1; j < entities.size(); j++)
              {
-                 if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
-                 {
-                     entities.at(i)->collide(entities.at(j));
-                     entities.at(j)->collide(entities.at(i));
-                 }
+                if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
+                {
+                    entities.at(i)->collide(entities.at(j), actionFlags);
+                    entities.at(j)->collide(entities.at(i), actionFlags);
+                }
              }
         }
     }
