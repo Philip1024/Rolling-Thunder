@@ -71,7 +71,7 @@ void Game::run()
     //debug objects
 	bool debug = false;
 	Door* debugDoor = new Door(50, 50);
-	debugDoor->changeOpacity(true);
+	//debugDoor->changeOpacity(true);
     sf::Vector2f worldPos;
 
     //doors
