@@ -75,9 +75,9 @@ void Door::close()
 }
 
 //This controls the door opening and closing
+
 void Door::update(char actionFlags)
 {
-	
 	if (clock.getElapsedTime().asSeconds() <= 0.13f)
 		return;
 
