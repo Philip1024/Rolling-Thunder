@@ -53,8 +53,7 @@ void Game::run()
 	Door* door15 = new Door(1436, 41);
 	Door* door16 = new Door(1483, 41);
 	Door* door17 = new Door(1530, 41);
-
-
+    std::vector<Entity*>& doors = Entity::getDoors();
     
     //for testing
     sf::RectangleShape rectangle(sf::Vector2f(1700, 1));
@@ -177,9 +176,9 @@ void Game::run()
         window.draw(rectangle);
 
         //update/draw doors
-        for (int i =0; i < debugDoor->getDoors().size(); i++)
+        for (int i =0; i < doors.size(); i++)
         {
-            window.draw(debugDoor->getDoors().at(i)->getSprite());
+            window.draw(doors.at(i)->getSprite());
         }
         enemy->update(player->getSprite().getPosition());
 
