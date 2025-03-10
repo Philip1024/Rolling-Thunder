@@ -32,6 +32,8 @@ Player::Player()
 
 	moveLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_move_right"));
 	moveRight = new AnimationData::SectionData(AnimationData::getSection("albatross_move_left"));
+	jumpLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_jump_left"));
+	jumpRight = new AnimationData::SectionData(AnimationData::getSection("albatross_jump_right"));
 }
 
 
@@ -129,7 +131,7 @@ void Player::collide(Entity* other)
 
 	if (doorCast != nullptr)
 	{
-		//doorCast->open();
+		doorCast->open();
 	}
 }
 

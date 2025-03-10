@@ -25,7 +25,7 @@ private:
 	double g;
 	double angle;
 
-	AnimationData::SectionData* moveLeft, * moveRight;
+	AnimationData::SectionData* moveLeft, * moveRight,*jumpLeft, *jumpRight;
 	bool jump(double angle, std::vector<sf::FloatRect>*);
 };
 

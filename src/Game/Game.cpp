@@ -72,7 +72,7 @@ void Game::run()
     //debug objects
 	bool debug = false;
 	Door* debugDoor = new Door(50, 50);
-	debugDoor->changeOpacity(true);
+	//debugDoor->changeOpacity(true);
     sf::Vector2f worldPos;
 
     //doors
@@ -181,7 +181,7 @@ void Game::run()
         {
             window.draw(doors.at(i)->getSprite());
         }
-        enemy->update(player->getSprite().getPosition());
+        //enemy->update(player->getSprite().getPosition());
 
         window.draw(rectangle2);
         window.draw(rectangle3);
