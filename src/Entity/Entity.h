@@ -16,7 +16,7 @@ public:
 	virtual void update(char actionFlags) { window->draw(sprite); }
 	const sf::Sprite& getSprite() const { return sprite;  }
 	static std::vector<Entity*>& getEntities() { return entities; }
-	static std::vector<Entity*>& getDoors() { return entities; }
+	static std::vector<Entity*>& getDoors() { return doors; }
 	// call these methods early or else unspecified behavior
 	static void setWindow(sf::RenderWindow* w) { window = w; }
 	static void setView(sf::View* v) { view = v; }

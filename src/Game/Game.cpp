@@ -43,7 +43,6 @@ void Game::run()
 	Door* door5 = new Door(495, 42);
 	Door* door6 = new Door(636, 112);
 	Door* door7 = new Door(707, 112);
-	Door* door8 = new Door(778, 112);
 	Door* door9 = new Door(823, 41);
 	Door* door10 = new Door(1012, 112);
 	Door* door11 = new Door(1083, 42);
@@ -181,7 +180,7 @@ void Game::run()
         {
             window.draw(doors.at(i)->getSprite());
         }
-        enemy->update(player->getSprite().getPosition());
+        //enemy->update(player->getSprite().getPosition());
 
         window.draw(rectangle2);
         window.draw(rectangle3);
