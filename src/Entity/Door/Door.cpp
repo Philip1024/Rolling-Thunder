@@ -78,7 +78,7 @@ void Door::close()
 
 void Door::update(char actionFlags)
 {
-	if (clock.getElapsedTime().asSeconds() <= 0.13f)
+	if (clock.getElapsedTime().asSeconds() <= 0.08)
 		return;
 
 	if ((actionFlags & 0b100000000 || opening)&&!doorOpened)

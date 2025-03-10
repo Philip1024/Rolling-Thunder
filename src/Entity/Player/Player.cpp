@@ -129,18 +129,12 @@ void Player::collide(Entity* other,char actionFlags)
 {
 	Door* doorCast = dynamic_cast<Door*>(other);
 
-	if (doorCast != nullptr && !doorOpen)
+	if (doorCast != nullptr)
 	{
 		doorCast->update(actionFlags);
-		doorOpen = true;
-		//add player animation
-		doorTime.restart();
+
 	}
-	if (doorCast != nullptr && doorOpen && doorTime.getElapsedTime().asSeconds() > .5)
-	{
-		doorCast->update(actionFlags);
-		doorOpen = false;
-	}
+
 }
 
 
