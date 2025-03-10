@@ -92,3 +92,16 @@ void Door::update(char actionFlags)
 	}
 	clock.restart();
 }
+
+
+void Door::changeOpacity(bool visible)
+{
+	if (visible)
+	{
+		sprite.setColor(sf::Color(255, 255, 255, 0));
+	}
+	else
+	{
+		sprite.setColor(sf::Color(255, 255, 255, 255));
+	}
+}

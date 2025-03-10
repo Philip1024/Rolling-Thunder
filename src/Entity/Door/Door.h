@@ -20,6 +20,7 @@ public:
 	void update(char actionFlags);
 	sf::Clock clock;
 	bool opening = false;
+	void changeOpacity(bool visible);
 	bool closing = false;
 	int doorFrameCount = 0;
 	bool doorOpened = false;

@@ -72,6 +72,7 @@ void Game::run()
     //debug objects
 	bool debug = false;
 	Door* debugDoor = new Door(50, 50);
+	debugDoor->changeOpacity(true);
     sf::Vector2f worldPos;
 
     //doors
@@ -169,13 +170,13 @@ void Game::run()
         {
             worldPos = window.mapPixelToCoords(sf::Mouse::getPosition());
             debugDoor->setPos(worldPos);
-           // window.draw(debugDoor->getSprite());
+			debugDoor->changeOpacity(true);
         }
         
         //test
         window.draw(rectangle);
 
-        //update/draw doors
+        //draw doors
         for (int i =0; i < doors.size(); i++)
         {
             window.draw(doors.at(i)->getSprite());
@@ -198,6 +199,8 @@ void Game::run()
         if (movingLeft && jumping) actionFlags |= 0b00010000;
         player->update(actionFlags,&ground);
 		debugDoor->update(actionFlags);
+
+        //find which door is being collied with if "W" is pressed
 
         isColliding();
         //used to update all entites
