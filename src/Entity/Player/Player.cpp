@@ -55,6 +55,13 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	Entity::update(actionFlags);
 	if (clock.getElapsedTime().asSeconds() <= 0.05f)
 		return; // only update the animation past this point
+	for (int i = 0; i < ground->size(); i++)
+	{
+		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) && t > 1)
+		{
+			sprite.setTextureRect(moveRight->nextFrame());
+		}
+	}
 	if ((actionFlags & 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump) // moving right. 
 	{
 		sprite.setTextureRect(moveLeft->nextFrame());
