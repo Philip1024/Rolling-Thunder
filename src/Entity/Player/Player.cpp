@@ -140,7 +140,6 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 void Player::collide(Entity* other,char actionFlags)
 {
 	Door* doorCast = dynamic_cast<Door*>(other);
-
 	if (doorCast != nullptr && !doorOpen)
 	{
 		doorCast->update(actionFlags);
@@ -148,7 +147,7 @@ void Player::collide(Entity* other,char actionFlags)
 		//add player animation
 		doorTime.restart();
 	}
-	if (doorCast != nullptr && doorOpen && doorTime.getElapsedTime().asSeconds() > .13)
+	if (doorCast != nullptr && doorOpen && doorTime.getElapsedTime().asSeconds() > .06)
 	{
 		doorCast->update(actionFlags);
 		doorOpen = false;
