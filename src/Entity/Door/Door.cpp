@@ -6,11 +6,10 @@
 #include "../../SpriteData/AnimationData.h"
 
 
-Door::Door(int x,int y)
-	: Entity(AnimationData::getTexture(AnimationData::DOOR))
+Door::Door(int x,int y): Entity(AnimationData::getTexture(AnimationData::DOOR))
 {
 	xPos = 215;
-	yPos = 0;
+	yPos = 0; 
 	sprite.setPosition(sf::Vector2f((float)x, (float)y));
 	sprite.setScale({ 0.8f,0.8f });
 	sf::Vector2i position(215, 0);
