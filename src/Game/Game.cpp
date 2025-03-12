@@ -5,6 +5,7 @@
 #include <SFML/System/Clock.hpp>
 #include "../Entity/Player/Player.h"
 #include "../Entity/Door/Door.h"
+#include "../Entity/Raill/Rail.h"
 #include<vector>
 #include<iostream>
 
@@ -53,6 +54,10 @@ void Game::run()
 	Door* door16 = new Door(1483, 41);
 	Door* door17 = new Door(1530, 41);
     std::vector<Entity*>& doors = Entity::getDoors();
+
+    //rails
+    Rail* rail = new Rail(82, 55);
+    std::vector<Entity*>& rails = Entity::getRails();
     
     //for testing
     sf::RectangleShape rectangle(sf::Vector2f(1700, 1));
@@ -69,9 +74,11 @@ void Game::run()
     rectangle6.setPosition(sf::Vector2f(1905, 342));
 
     //debug objects
-	bool debug = false;
-	Door* debugDoor = new Door(50, 50);
-	debugDoor->changeOpacity(true);
+	bool debug = true;
+    Rail* debugRail = new Rail(50, 50);
+	Door* debugDoor = new Door(0, 0);
+	debugDoor->changeOpacity(false);
+    debugRail->changeOpacity(true);
     sf::Vector2f worldPos;
 
     //doors
@@ -169,11 +176,11 @@ void Game::run()
         if (debug)
         {
             worldPos = window.mapPixelToCoords(sf::Mouse::getPosition());
-            debugDoor->setPos(worldPos);
-			debugDoor->changeOpacity(true);
+            debugRail->setPos(worldPos);
+			debugRail->changeOpacity(false);
         }
         
-        //test
+        //testa
         window.draw(rectangle);
 
         //draw doors
@@ -181,8 +188,13 @@ void Game::run()
         {
             window.draw(doors.at(i)->getSprite());
         }
+        //draw rails
+        for (int i = 0; i < rails.size(); i++)
+        {
+            window.draw(rails.at(i)->getSprite());
+        }
         //enemy->update(player->getSprite().getPosition());
-
+        window.draw(debugRail->getSprite());
         window.draw(rectangle2);
         window.draw(rectangle3);
         window.draw(rectangle4);
