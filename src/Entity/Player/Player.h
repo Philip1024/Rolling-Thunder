@@ -19,6 +19,7 @@ private:
 	sf::Clock clock;
 	bool faceRight;
 	bool activeJump, activeRightJump, activeLeftJump;//used to determine whether player is actively jumping
+	bool falling;//used to determine if player is falling
 	int jumpFrame;
 	float xMov, yMov,xPos,yPos;//used to keep track of movement of sprite in jumping animation
 	const double PI = 3.14159235;

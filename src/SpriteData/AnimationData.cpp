@@ -9,6 +9,7 @@ void AnimationData::load()
 	textureMap[ENEMY_FLIPPED] = new sf::Texture("res/SpriteSheets/Enemy_flipped.png");
 	textureMap[ALBATROSS] = new sf::Texture("res/SpriteSheets/Albatross.png");
 	textureMap[DOOR] = new sf::Texture("res/SpriteSheets/Door(1).png");
+	textureMap[RAIL] = new sf::Texture("res/SpriteSheets/Rail.png");
 	auto rightToLeftFunction = [](unsigned int& curFrame, unsigned int maxFrames) -> void { // LAMBDA
 		if (curFrame == 0)
 			curFrame = maxFrames;
@@ -25,7 +26,9 @@ void AnimationData::load()
 	sectionMap["albatross_standard_left_jump"] = new Section(textureMap[ALBATROSS],
 		1, 2, sf::Vector2u(165, 550), sf::Vector2u(195, 650));
 	sectionMap["albatross_falling_left"] = new Section(textureMap[ALBATROSS],
-		1, 1, sf::Vector2u(20, 530), sf::Vector2u(195, 650));
+		1, 1, sf::Vector2u(22, 540), sf::Vector2u(70, 600));
+	sectionMap["albatross_falling_right"] = new Section(textureMap[ALBATROSS],
+		1, 1, sf::Vector2u(353, 540), sf::Vector2u(401, 600));
 
 
 	sectionMap["enemy_move_left"] = new Section(textureMap[ENEMY_FLIPPED],
@@ -44,6 +47,8 @@ void AnimationData::load()
 	sectionMap["door_close"] = new Section(textureMap[DOOR],
 		4, 1, sf::Vector2u(24, 2), sf::Vector2u(222, 62));
 	getSection("door_close")->setNextFrameFunction(rightToLeftFunction);
+	sectionMap["rail"] = new Section(textureMap[RAIL],
+		2, 1, sf::Vector2u(0, 0), sf::Vector2u(725, 186));
 }
 
 

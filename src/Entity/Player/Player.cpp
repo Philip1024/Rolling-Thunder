@@ -20,6 +20,7 @@ Player::Player()
 	activeJump = false;
 	activeRightJump = false;
 	activeLeftJump = false;
+	falling = false;
 	jumpFrame = 1;
 	xMov = 0;
 	yMov = 0;
@@ -55,6 +56,32 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	Entity::update(actionFlags);
 	if (clock.getElapsedTime().asSeconds() <= 0.05f)
 		return; // only update the animation past this point
+	//meant to determine whether player is on ground, if not player should fall
+	//not working yet
+	falling = true;
+	for (int i = 0; i < ground->size(); i++)
+	{
+		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) && !activeRightJump && !activeJump && !activeLeftJump)
+		{
+			falling = false;
+		}
+	}
+	if (falling)
+	{
+		if (!faceRight)
+			sprite.setTextureRect(AnimationData::getSection("albatross_falling_left")->getFrame(0));
+		else
+			sprite.setTextureRect(AnimationData::getSection("albatross_falling_right")->getFrame(0));
+		sprite.move({ 0, 1 });
+		view->move({ 0,1 });
+	}
+	else
+	{
+		if(!faceRight)
+			sprite.setTextureRect(moveLeft->nextFrame());
+		else
+			sprite.setTextureRect(moveRight->nextFrame());
+	}
 	if ((actionFlags & 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump) // moving right. 
 	{
 		sprite.setTextureRect(moveLeft->nextFrame());
@@ -128,13 +155,16 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 void Player::collide(Entity* other,char actionFlags)
 {
 	Door* doorCast = dynamic_cast<Door*>(other);
-
-	if (doorCast != nullptr)
+	if (doorCast != nullptr && !doorOpen)
 	{
 		doorCast->update(actionFlags);
 
 	}
-
+	if (doorCast != nullptr && doorOpen && doorTime.getElapsedTime().asSeconds() > .06)
+	{
+		doorCast->update(actionFlags);
+		doorOpen = false;
+	}
 }
 
 
@@ -156,7 +186,10 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 	{
 		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) && t > 1)
 		{
-			sprite.setTextureRect(AnimationData::getSection("albatross_move_right")->getFrame(0));
+			if (!faceRight)
+				sprite.setTextureRect(moveLeft->nextFrame());
+			else
+				sprite.setTextureRect(moveRight->nextFrame());
 			sprite.move({ 0,-7 });
 			xMov = 0;
 			yMov = 0;

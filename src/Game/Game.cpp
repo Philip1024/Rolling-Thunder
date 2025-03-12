@@ -71,11 +71,12 @@ void Game::run()
     //debug objects
 	bool debug = false;
 	Door* debugDoor = new Door(50, 50);
-	//debugDoor->changeOpacity(true);
+	debugDoor->changeOpacity(true);
     sf::Vector2f worldPos;
 
     //doors
-    bool doorOpen = false;
+    bool wPressed = false;
+
 
     //used to not have to wait for clock to reach 0.075 to move
     Enemy* enemy = new Enemy(sf::Vector2f(200, 107)); // mem leak
@@ -136,7 +137,7 @@ void Game::run()
                         ' ' << window.mapPixelToCoords(sf::Mouse::getPosition()).y << std::endl;
                     break;
                 case sf::Keyboard::Scan::W:
-                    doorOpen = true;
+                    wPressed = true;
 					break;
                  
                 }
@@ -155,7 +156,7 @@ void Game::run()
                     jumping = false;
                     break;
                 case sf::Keyboard::Scan::W:
-                    doorOpen = false;
+                    wPressed = false;
                     break;
                 }
             }
@@ -190,7 +191,7 @@ void Game::run()
         // actions flags defines booleans in Game.cpp that are passed to the entity.
         // done this way to allow input to be read in Game.cpp
         char actionFlags = 0b0;
-		if (doorOpen) actionFlags |= 0b10000000;
+		if (wPressed) actionFlags |= 0b10000000;
         if (movingRight) actionFlags |= 0b00000001;
         if (movingLeft) actionFlags |= 0b00000010;
         if (movingRight&&jumping) actionFlags |= 0b00001000;

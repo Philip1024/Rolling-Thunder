@@ -6,11 +6,10 @@
 #include "../../SpriteData/AnimationData.h"
 
 
-Door::Door(int x,int y)
-	: Entity(AnimationData::getTexture(AnimationData::DOOR))
+Door::Door(int x,int y): Entity(AnimationData::getTexture(AnimationData::DOOR))
 {
 	xPos = 215;
-	yPos = 0;
+	yPos = 0; 
 	sprite.setPosition(sf::Vector2f((float)x, (float)y));
 	sprite.setScale({ 0.8f,0.8f });
 	sf::Vector2i position(215, 0);
@@ -22,6 +21,7 @@ Door::Door(int x,int y)
 	sprite.setTextureRect(AnimationData::getSection("door_open")->getFrame(0));
 	doors.push_back(this);
 }
+
 
 Door::~Door()
 {
@@ -36,6 +36,7 @@ void Door::setPos(sf::Vector2f a)
 	int y = a.y;
 	sprite.setPosition(sf::Vector2f(x, y));
 }
+
 
 //This opens the door for when the enmeyy leaves the room
 //still need to add sound for this 
@@ -55,10 +56,12 @@ void Door::open()
 	}
 }
 
+
 //this just  a reverse of the the door opening animation
 //still need to add sound for this
-void Door::close()
+bool Door::close()
 {
+
 	sprite.setTextureRect(doorClose->nextFrame());
 	if (!closing)
 	{
@@ -71,14 +74,18 @@ void Door::close()
 		doorFrameCount = 0;
 		closing = false;
 		doorOpened = false;
+		return true;
 	}
+	return false;
 }
 
-//This controls the door opening and closing
 
+//This controls the door opening and closing
+//Im trying to implemnent a way to hold the door closed 
+//by holding the w key after entering the door
 void Door::update(char actionFlags)
 {
-	if (clock.getElapsedTime().asSeconds() <= 0.08)
+	if (clock.getElapsedTime().asSeconds() <= 0.06f)
 		return;
 
 	if ((actionFlags & 0b100000000 || opening)&&!doorOpened)
@@ -88,9 +95,11 @@ void Door::update(char actionFlags)
 
 	if (doorOpened)
 	{
+		//if this is true the door animation is done
 		close();
 	}
 	clock.restart();
+
 }
 
 

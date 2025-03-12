@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Entity\Raill\Rail.cpp" />
     <ClCompile Include="src\Entity\Player\Player.cpp" />
     <ClCompile Include="src\SpriteData\AnimationData.cpp" />
     <ClCompile Include="src\Entity\Platform\Platform.cpp" />
@@ -35,6 +36,7 @@
     <ClCompile Include="src\Entity\Enemy\TwoLives\TwoLives.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Entity\Raill\Rail.h" />
     <ClInclude Include="src\Entity\Player\Player.h" />
     <ClInclude Include="src\SpriteData\AnimationData.h" />
     <ClInclude Include="src\Entity\Platform\Platform.h" />
