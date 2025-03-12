@@ -9,16 +9,18 @@ void AnimationData::load()
 	textureMap[ENEMY_FLIPPED] = new sf::Texture("res/SpriteSheets/Enemy_flipped.png");
 	textureMap[ALBATROSS] = new sf::Texture("res/SpriteSheets/Albatross.png");
 	textureMap[DOOR] = new sf::Texture("res/SpriteSheets/Door(1).png");
-	textureMap[RAIL] = new sf::Texture("res/SpriteSheets/Rail.png");
+	textureMap[RAIL_LEFT] = new sf::Texture("res/SpriteSheets/RailLeft.png");
+	textureMap[RAIL_MIDDLE] = new sf::Texture("res/SpriteSheets/RailMiddle.png");
 	auto rightToLeftFunction = [](unsigned int& curFrame, unsigned int maxFrames) -> void { // LAMBDA
 		if (curFrame == 0)
 			curFrame = maxFrames;
 		curFrame--;
 	};
+
+	//player
 	sectionMap["albatross_move_left"] = new Section(textureMap[ALBATROSS], 
 		6, 1, sf::Vector2u(20, 60), sf::Vector2u(200, 117));
 	getSection("albatross_move_left")->setNextFrameFunction(rightToLeftFunction);
-
 	sectionMap["albatross_move_right"] = new Section(textureMap[ALBATROSS],
 		6, 1, sf::Vector2u(230, 60), sf::Vector2u(410, 117));
 	sectionMap["albatross_standard_right_jump"] = new Section(textureMap[ALBATROSS],
@@ -33,7 +35,7 @@ void AnimationData::load()
 		1, 3, sf::Vector2u(200, 180), sf::Vector2u(220, 358));
 	getSection("albatross_walk_in_door")->setNextFrameFunction(rightToLeftFunction);
 
-
+	//enemys
 	sectionMap["enemy_move_left"] = new Section(textureMap[ENEMY_FLIPPED],
 		7, 1, sf::Vector2u(800, 0), sf::Vector2u(1024, 64));
 	getSection("enemy_move_left")->setNextFrameFunction(rightToLeftFunction);
@@ -45,16 +47,24 @@ void AnimationData::load()
 		2, 1, sf::Vector2u(928, 8), sf::Vector2u(992, 61));
 	sectionMap["enemy_shoot_right"] = new Section(textureMap[ENEMY],
 		3, 1, sf::Vector2u(123, 128), sf::Vector2u(266, 189));
+
+	//doors
 	sectionMap["door_open"] = new Section(textureMap[DOOR],
 		4, 1, sf::Vector2u(24, 2), sf::Vector2u(222, 62));
 	sectionMap["door_close"] = new Section(textureMap[DOOR],
 		4, 1, sf::Vector2u(24, 2), sf::Vector2u(222, 62));
 	getSection("door_close")->setNextFrameFunction(rightToLeftFunction);
-	sectionMap["rail"] = new Section(textureMap[RAIL],
-		2, 1, sf::Vector2u(0, 0), sf::Vector2u(725, 186));
+
+	//rails
+	sectionMap["Rail_Left"] = new Section(textureMap[RAIL_LEFT],
+		1, 1, sf::Vector2u(0, 0), sf::Vector2u(1000, 186));
+	sectionMap["Rail_Middle"] = new Section(textureMap[RAIL_MIDDLE],
+		1, 1, sf::Vector2u(0, 0), sf::Vector2u(1000, 186));
+	sectionMap["Rail_Right"] = new Section(textureMap[RAIL_RIGHT],
+		1, 1, sf::Vector2u(0, 0), sf::Vector2u(1000, 186));
 }
 
-
+//This deletes all of the data so no leak
 void AnimationData::unload()
 {
 	for (std::pair<const TextureName, sf::Texture*> texture : textureMap)
@@ -64,6 +74,7 @@ void AnimationData::unload()
 }
 
 
+//This returns a map of the section for the desired spriteSheet
 AnimationData::Section* AnimationData::getSection(std::string sectionName)
 {
 	return sectionMap[toLowerCase(sectionName)];

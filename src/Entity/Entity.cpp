@@ -1,6 +1,7 @@
 #include "Entity.h"
 std::vector<Entity*> Entity::entities;
 std::vector<Entity*> Entity::doors;
+std::vector<Entity*> Entity::rails;
 sf::View* Entity::view = nullptr;
 sf::RenderWindow* Entity::window = nullptr;
 unsigned int* Entity::currentTick = nullptr;

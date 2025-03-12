@@ -103,6 +103,8 @@ void Door::update(char actionFlags)
 }
 
 
+//this changes the visibilty of the debug door
+//
 void Door::changeOpacity(bool visible)
 {
 	if (visible)
