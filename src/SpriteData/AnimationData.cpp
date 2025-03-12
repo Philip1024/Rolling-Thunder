@@ -16,10 +16,11 @@ void AnimationData::load()
 			curFrame = maxFrames;
 		curFrame--;
 	};
+
+	//player
 	sectionMap["albatross_move_left"] = new Section(textureMap[ALBATROSS], 
 		6, 1, sf::Vector2u(20, 60), sf::Vector2u(200, 117));
 	getSection("albatross_move_left")->setNextFrameFunction(rightToLeftFunction);
-
 	sectionMap["albatross_move_right"] = new Section(textureMap[ALBATROSS],
 		6, 1, sf::Vector2u(230, 60), sf::Vector2u(410, 117));
 	sectionMap["albatross_standard_right_jump"] = new Section(textureMap[ALBATROSS],
@@ -31,7 +32,7 @@ void AnimationData::load()
 	sectionMap["albatross_falling_right"] = new Section(textureMap[ALBATROSS],
 		1, 1, sf::Vector2u(353, 540), sf::Vector2u(401, 600));
 
-
+	//enemys
 	sectionMap["enemy_move_left"] = new Section(textureMap[ENEMY_FLIPPED],
 		7, 1, sf::Vector2u(800, 0), sf::Vector2u(1024, 64));
 	getSection("enemy_move_left")->setNextFrameFunction(rightToLeftFunction);
@@ -43,16 +44,24 @@ void AnimationData::load()
 		2, 1, sf::Vector2u(928, 8), sf::Vector2u(992, 61));
 	sectionMap["enemy_shoot_right"] = new Section(textureMap[ENEMY],
 		3, 1, sf::Vector2u(123, 128), sf::Vector2u(266, 189));
+
+	//doors
 	sectionMap["door_open"] = new Section(textureMap[DOOR],
 		4, 1, sf::Vector2u(24, 2), sf::Vector2u(222, 62));
 	sectionMap["door_close"] = new Section(textureMap[DOOR],
 		4, 1, sf::Vector2u(24, 2), sf::Vector2u(222, 62));
 	getSection("door_close")->setNextFrameFunction(rightToLeftFunction);
-	sectionMap["rail_left"] = new Section(textureMap[RAIL_LEFT],
+
+	//rails
+	sectionMap["Rail_Left"] = new Section(textureMap[RAIL_LEFT],
+		1, 1, sf::Vector2u(0, 0), sf::Vector2u(1000, 186));
+	sectionMap["Rail_Middle"] = new Section(textureMap[RAIL_MIDDLE],
+		1, 1, sf::Vector2u(0, 0), sf::Vector2u(1000, 186));
+	sectionMap["Rail_Right"] = new Section(textureMap[RAIL_RIGHT],
 		1, 1, sf::Vector2u(0, 0), sf::Vector2u(1000, 186));
 }
 
-
+//This deletes all of the data so no leak
 void AnimationData::unload()
 {
 	for (std::pair<const TextureName, sf::Texture*> texture : textureMap)
@@ -62,6 +71,7 @@ void AnimationData::unload()
 }
 
 
+//This returns a map of the section for the desired spriteSheet
 AnimationData::Section* AnimationData::getSection(std::string sectionName)
 {
 	return sectionMap[toLowerCase(sectionName)];

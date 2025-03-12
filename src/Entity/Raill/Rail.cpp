@@ -5,7 +5,7 @@
 #include<optional>
 #include "../../SpriteData/AnimationData.h"
 
-Rail::Rail(int x, int y, int rail) : Entity(AnimationData::getTexture(AnimationData::RAIL))
+Rail::Rail(int x, int y, int raill) : Entity(AnimationData::getTexture(AnimationData::RAIL_LEFT))
 {
 	xPos = x;
 	yPos = y;
@@ -15,18 +15,20 @@ Rail::Rail(int x, int y, int rail) : Entity(AnimationData::getTexture(AnimationD
 	sf::Vector2i size(100, 60);
 	sf::IntRect frame(position, size);
 	sprite.setTextureRect(frame);
-	if (rail == 1)
+	if (raill == 1)
 	{
 		rail = new AnimationData::SectionData(AnimationData::getSection("Rail_Left"));
 		sprite.setTextureRect(AnimationData::getSection("Rail_left")->getFrame(0));
 	}
-	else if (rail == 2)
+	else if (raill == 2)
 	{
-
+		rail = new AnimationData::SectionData(AnimationData::getSection("Rail_Middle"));
+		sprite.setTextureRect(AnimationData::getSection("Rail_Middle")->getFrame(0));
 	}
-	else if (rail == 3)
+	else if (raill == 3)
 	{
-
+		rail = new AnimationData::SectionData(AnimationData::getSection("Rail_Right"));
+		sprite.setTextureRect(AnimationData::getSection("Rail_Right")->getFrame(0));
 	}
 	rails.push_back(this);
 }
