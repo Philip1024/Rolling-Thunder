@@ -7,6 +7,8 @@
 
 Rail::Rail(int x, int y, int raill) : Entity(AnimationData::getTexture(AnimationData::RAIL_LEFT))
 {
+	Entity(AnimationData::getTexture(AnimationData::RAIL_MIDDLE));
+	Entity(AnimationData::getTexture(AnimationData::RAIL_RIGHT));
 	xPos = x;
 	yPos = y;
 	sprite.setPosition(sf::Vector2f((float)x, (float)y));
