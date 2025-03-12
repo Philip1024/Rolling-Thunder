@@ -21,6 +21,7 @@ Player::Player()
 	activeRightJump = false;
 	activeLeftJump = false;
 	falling = false;
+	shouldFall = true;
 	jumpFrame = 1;
 	xMov = 0;
 	yMov = 0;
@@ -31,10 +32,11 @@ Player::Player()
 	g = 9.8;
 	angle = 45 * PI / 180;
 
-	moveLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_move_right"));
-	moveRight = new AnimationData::SectionData(AnimationData::getSection("albatross_move_left"));
+	moveRight = new AnimationData::SectionData(AnimationData::getSection("albatross_move_right"));
+	moveLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_move_left"));
 	jumpLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_jump_left"));
 	jumpRight = new AnimationData::SectionData(AnimationData::getSection("albatross_jump_right"));
+	walkInDoor = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_in_door"));
 }
 
 
@@ -58,49 +60,53 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		return; // only update the animation past this point
 	//meant to determine whether player is on ground, if not player should fall
 	//not working yet
-	falling = true;
+	shouldFall = true;
 	for (int i = 0; i < ground->size(); i++)
 	{
-		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) && !activeRightJump && !activeJump && !activeLeftJump)
+		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) || activeRightJump || activeJump || activeLeftJump)
 		{
-			falling = false;
+			shouldFall = false;
 		}
 	}
+	if (shouldFall)
+		falling = true;
 	if (falling)
 	{
-		if (!faceRight)
-			sprite.setTextureRect(AnimationData::getSection("albatross_falling_left")->getFrame(0));
-		else
+		if (faceRight)
 			sprite.setTextureRect(AnimationData::getSection("albatross_falling_right")->getFrame(0));
-		sprite.move({ 0, 1 });
-		view->move({ 0,1 });
-	}
-	else
-	{
-		if(!faceRight)
-			sprite.setTextureRect(moveLeft->nextFrame());
 		else
-			sprite.setTextureRect(moveRight->nextFrame());
+			sprite.setTextureRect(AnimationData::getSection("albatross_falling_left")->getFrame(0));
+		sprite.move({ 0,5 });
+		view->move({ 0,5 });
+		if (!shouldFall)
+		{
+			falling = false;
+			if (faceRight)
+				sprite.setTextureRect(moveRight->nextFrame());
+			else
+				sprite.setTextureRect(moveLeft->nextFrame());
+		}
+			
 	}
-	if ((actionFlags & 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump) // moving right. 
+	if ((actionFlags & 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump&&!falling) // moving right. 
 	{
-		sprite.setTextureRect(moveLeft->nextFrame());
+		sprite.setTextureRect(moveRight->nextFrame());
 		view->move({ 7.5,0 });
 
 		sprite.move({ 7.5,0 });//not exact yet
 		faceRight = true;
 
 	}
-	if ((actionFlags & 0b00000010) && !activeRightJump && !activeJump && !activeLeftJump) // moving left TODO: bound check on the left using view
+	if ((actionFlags & 0b00000010) && !activeRightJump && !activeJump && !activeLeftJump && !falling) // moving left TODO: bound check on the left using view
 	{
-		sprite.setTextureRect(moveRight->nextFrame());
+		sprite.setTextureRect(moveLeft->nextFrame());
 		view->move({ -7.5,0 });
 
 		sprite.move({ -7.5,0 });//not exact yet
 		faceRight = false;
 	}
 
-	if (((actionFlags & 0b00000100)||activeJump) &&!activeRightJump && !activeLeftJump)//jump
+	if (((actionFlags & 0b00000100)||activeJump) &&!activeRightJump && !activeLeftJump && !falling)//jump
 	{
 		//represents time
 		if (!activeJump)
@@ -117,7 +123,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 
 	//jump follows a parabolic path using parametric physics equations
 	//this is the jumping while moving right animation
-	if (((actionFlags & 0b00001000) || activeRightJump) && !activeJump && !activeLeftJump)//jump
+	if (((actionFlags & 0b00001000) || activeRightJump) && !activeJump && !activeLeftJump && !falling)//jump
 	{
 		//represents time
 		if (!activeRightJump)
@@ -132,7 +138,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		}
 		activeRightJump = jump(angle, ground);
 	}
-	if (((actionFlags & 0b00010000) || activeLeftJump) && !activeJump && !activeRightJump)//jump
+	if (((actionFlags & 0b00010000) || activeLeftJump) && !activeJump && !activeRightJump && !falling)//jump
 	{
 		//represents time
 		if (!activeLeftJump)
@@ -151,16 +157,25 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	clock.restart();
 }
 
-
+//foor colliding with door will need to take in user input is the collide function
 void Player::collide(Entity* other,char actionFlags)
 {
 	Door* doorCast = dynamic_cast<Door*>(other);
 	if (doorCast != nullptr && !doorOpen)
 	{
+		//will be used to take in input
+		while (const std::optional event = window->pollEvent())
+		{
+			if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
+			{
+
+			}
+		}
 		doorCast->update(actionFlags);
 		doorOpen = true;
 		//add player animation
 		doorTime.restart();
+		sprite.setTextureRect(walkInDoor->nextFrame());
 	}
 	if (doorCast != nullptr && doorOpen && doorTime.getElapsedTime().asSeconds() > .06)
 	{
@@ -201,5 +216,4 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 		}
 	}
 	return true;
-
 }

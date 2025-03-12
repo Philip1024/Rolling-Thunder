@@ -20,6 +20,7 @@ private:
 	bool faceRight;
 	bool activeJump, activeRightJump, activeLeftJump;//used to determine whether player is actively jumping
 	bool falling;//used to determine if player is falling
+	bool shouldFall;//used to determine if falling animation should occur
 	int jumpFrame;
 	float xMov, yMov,xPos,yPos;//used to keep track of movement of sprite in jumping animation
 	const double PI = 3.14159235;
@@ -28,7 +29,7 @@ private:
 	double g;
 	double angle;
 
-	AnimationData::SectionData* moveLeft, * moveRight,*jumpLeft, *jumpRight;
+	AnimationData::SectionData* moveLeft, * moveRight,*jumpLeft, *jumpRight, *walkInDoor;
 	bool jump(double angle, std::vector<sf::FloatRect>*);
 };
 
