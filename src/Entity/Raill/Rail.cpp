@@ -7,6 +7,7 @@
 
 Rail::Rail(int x, int y, int raill) : Entity(AnimationData::getTexture(AnimationData::RAIL_LEFT))
 {
+	/*
 	Entity(AnimationData::getTexture(AnimationData::RAIL_MIDDLE));
 	Entity(AnimationData::getTexture(AnimationData::RAIL_RIGHT));
 	xPos = x;
@@ -33,6 +34,7 @@ Rail::Rail(int x, int y, int raill) : Entity(AnimationData::getTexture(Animation
 		sprite.setTextureRect(AnimationData::getSection("Rail_Right")->getFrame(0));
 	}
 	rails.push_back(this);
+	*/
 }
 
 //this changes the visibilty of the debug door

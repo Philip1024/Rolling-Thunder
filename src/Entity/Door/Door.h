@@ -18,6 +18,7 @@ public:
 	void setOpening(bool);
 	void setClosing(bool);
 	bool getOpen();//returns when door is opening or open
+	//retruns when door is open of closing
 	bool getClosing();
 
 	void changeOpacity(bool visible);

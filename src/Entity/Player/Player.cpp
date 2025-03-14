@@ -23,7 +23,9 @@ Player::Player()
 	falling = false;
 	shouldFall = true;
 	enterDoor = false;
-	doorOpen = true;
+	inDoor = false;
+	exitDoor = false;
+	exitOnce = false;
 	jumpFrame = 1;
 	xMov = 0;
 	yMov = 0;
@@ -39,6 +41,7 @@ Player::Player()
 	jumpLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_jump_left"));
 	jumpRight = new AnimationData::SectionData(AnimationData::getSection("albatross_jump_right"));
 	walkInDoor = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_in_door"));
+	walkOutDoor = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_out_door"));
 }
 
 
@@ -46,6 +49,10 @@ Player::~Player()
 {
 	delete moveLeft;
 	delete moveRight;
+	delete jumpLeft;
+	delete jumpRight;
+	delete walkInDoor;
+	delete walkOutDoor;
 }
 
 
@@ -64,13 +71,15 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	shouldFall = true;
 	for (int i = 0; i < ground->size(); i++)
 	{
-		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) || activeRightJump || activeJump || activeLeftJump)
+		//if intersects with ground or in any of the other unique animations don't fall
+		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) || activeRightJump || activeJump || activeLeftJump||inDoor)
 		{
 			shouldFall = false;
 		}
 	}
 	if (shouldFall)
 		falling = true;
+	//falling animation
 	if (falling)
 	{
 		if (faceRight)
@@ -161,25 +170,55 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 //foor colliding, not functional for door collision yet
 void Player::collide(Entity* other,char actionFlags)
 {
-	if (doorTime.getElapsedTime().asSeconds() <= 0.01f)
+	if (doorTime.getElapsedTime().asSeconds() <= 0.06f)
 		return;
 
 	Door* doorCast = dynamic_cast<Door*>(other);
-	if (doorCast != nullptr && ((actionFlags & 0b10000000)||enterDoor))
+	if (doorCast != nullptr && ((actionFlags & 0b10000000)||inDoor))
 	{
 		//starts door opening and has player walk into door
-		if ((doorCast->getOpen()||doorOpen)&&!enterDoor)
+		if (!enterDoor&&!inDoor)
 		{
-			sprite.setTextureRect(walkInDoor->nextFrame());
-			sprite.move({ 0,-1 }); //player animation
-			doorOpen = false;;//causing issue
+			inDoor = true;
 			doorCast->setOpening(true);
+			sprite.setTextureRect(walkInDoor->nextFrame());
+			sprite.move({ 0,-1 });
 			enterDoor = true;
 		}
-		if (!doorCast->getOpen())
+		if (doorCast->getOpen()&&enterDoor)
+		{
+			sprite.setTextureRect(walkInDoor->nextFrame());
+			sprite.move({ 0,-1 });//player animation
+		}
+		if (!doorCast->getOpen()&&enterDoor)
 		{
 			sprite.setColor(sf::Color(255, 255, 255, 0));
-			//enterDoor = false;
+			enterDoor = false;
+		}
+		if (!(actionFlags & 0b10000000))
+		{
+			exitDoor = true;
+		}
+		if (!enterDoor && exitDoor)
+		{
+			if (!exitOnce)
+			{
+				doorCast->setOpening(true);
+				exitOnce = true;
+			}
+			if (doorCast->getClosing())
+			{
+				sprite.setTextureRect(walkOutDoor->nextFrame());
+				sprite.move({ 0,1 });
+				sprite.setColor(sf::Color(255, 255, 255, 255));
+			}
+			else if(!doorCast->getOpen())
+			{
+				std::cout << "works" << std::endl;;
+				inDoor = false;
+				exitDoor = false;
+				exitOnce = false;
+			}
 		}
 	}
 	doorTime.restart();

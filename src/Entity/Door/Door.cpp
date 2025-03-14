@@ -142,5 +142,5 @@ bool Door::getOpen()
 
 bool Door::getClosing()
 {
-	return closing;
+	return closing||(pause<4);
 }

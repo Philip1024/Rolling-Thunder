@@ -78,7 +78,7 @@ void Game::run()
     Rail* debugRail = new Rail(50, 50,1);
 	Door* debugDoor = new Door(0, 0);
 	debugDoor->changeOpacity(false);
-    debugRail->changeOpacity(true);
+    debugRail->changeOpacity(false);
     sf::Vector2f worldPos;
 
     //doors

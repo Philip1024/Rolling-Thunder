@@ -20,8 +20,10 @@ private:
 	bool activeJump, activeRightJump, activeLeftJump;//used to determine whether player is actively jumping
 	bool falling;//used to determine if player is falling
 	bool shouldFall;//used to determine if falling animation should occur
-	bool enterDoor;
-	bool doorOpen;
+	bool enterDoor;//used to determine if player is entering door
+	bool inDoor;//used to determine if player-door interaction is taking place
+	bool exitDoor;
+	bool exitOnce;//used to make sure door is only exited once
 	int jumpFrame;
 	float xMov, yMov,xPos,yPos;//used to keep track of movement of sprite in jumping animation
 	const double PI = 3.14159235;
@@ -30,7 +32,7 @@ private:
 	double g;
 	double angle;
 	int doorCount; //used to determine how door should open when collides with door
-	AnimationData::SectionData* moveLeft, * moveRight,*jumpLeft, *jumpRight, *walkInDoor;
+	AnimationData::SectionData* moveLeft, * moveRight,*jumpLeft, *jumpRight, *walkInDoor, * walkOutDoor;
 	bool jump(double angle, std::vector<sf::FloatRect>*);
 };
 
