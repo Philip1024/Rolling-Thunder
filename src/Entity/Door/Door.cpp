@@ -20,6 +20,7 @@ Door::Door(int x,int y): Entity(AnimationData::getTexture(AnimationData::DOOR))
 	doorClose = new AnimationData::SectionData(AnimationData::getSection("door_close"));
 	sprite.setTextureRect(AnimationData::getSection("door_open")->getFrame(0));
 	doors.push_back(this);
+	pause = 0;
 }
 
 
@@ -48,11 +49,12 @@ void Door::open()
 		opening = true;
 	}
 	doorFrameCount++;
-	if (doorFrameCount == 4)
+	if (doorFrameCount == 3)
 	{
 		doorFrameCount = 0;
 		opening = false;
 		doorOpened = true;
+		pause = true;
 	}
 }
 
@@ -83,17 +85,20 @@ bool Door::close()
 //This controls the door opening and closing
 //Im trying to implemnent a way to hold the door closed 
 //by holding the w key after entering the door
-void Door::update(char actionFlags)
+void Door::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
 	if (clock.getElapsedTime().asSeconds() <= 0.06f)
 		return;
 
-	if ((actionFlags & 0b100000000 || opening)&&!doorOpened)
+	if ((opening)&&!doorOpened)
 	{
 		open();
 	}
-
-	if (doorOpened)
+	else if (pause < 4)
+	{
+		pause++;
+	}
+	else if  (doorOpened||closing)
 	{
 		//if this is true the door animation is done
 		close();
@@ -115,4 +120,27 @@ void Door::changeOpacity(bool visible)
 	{
 		sprite.setColor(sf::Color(255, 255, 255, 255));
 	}
+}
+
+
+void Door::setOpening(bool newOpening)
+{
+	opening = newOpening;
+}
+
+
+void Door::setClosing(bool newClosing)
+{
+	closing = newClosing;
+}
+
+bool Door::getOpen()
+{
+	return opening||(pause<4);
+}
+
+
+bool Door::getClosing()
+{
+	return closing;
 }

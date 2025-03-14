@@ -210,7 +210,8 @@ void Game::run()
         if (jumping&&!movingRight&&!movingLeft) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
         player->update(actionFlags,&ground);
-		debugDoor->update(actionFlags);
+        door->update(actionFlags, &ground);
+		debugDoor->update(actionFlags,&ground);
 
         //find which door is being collied with if "W" is pressed
 

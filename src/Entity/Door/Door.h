@@ -12,23 +12,27 @@ public:
     //updates player sprite based on input
 	int xPos, yPos;
 	int animationFrame = 0;
-	//void update() override;
+	void update(char actionFlags, std::vector<sf::FloatRect>* ground);
 	//this opens the door if the player interacts with it 
-	void open();
-	bool close();
 	void setPos(sf::Vector2f);
-	void update(char actionFlags);
-	sf::Clock clock;
-	bool opening = false;
-	void changeOpacity(bool visible);
-	bool closing = false;
-	int doorFrameCount = 0;
-	bool doorOpened = false;
-	sf::RectangleShape door;
+	void setOpening(bool);
+	void setClosing(bool);
+	bool getOpen();//returns when door is opening or open
+	bool getClosing();
 
+	void changeOpacity(bool visible);
 	//void collide(Entity* other) override;
 
 private:
 	AnimationData::SectionData* doorOpen, * doorClose;
+	void open();
+	bool close();
+	sf::Clock clock;
+	bool opening = false;
+	bool closing = false;
+	int pause;
+	int doorFrameCount = 0;
+	bool doorOpened = false;
+	sf::RectangleShape door;
 };
 

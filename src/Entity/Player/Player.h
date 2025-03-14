@@ -10,7 +10,6 @@ public:
 	Player();
 	~Player();
 	sf::Clock doorTime;
-	bool doorOpen;
 	void collide(Entity* other,char ActionFlags) override;
 	void update(char actionFlags,std::vector<sf::FloatRect>*);
 	//sf::Vector2f getPosition();
@@ -21,6 +20,8 @@ private:
 	bool activeJump, activeRightJump, activeLeftJump;//used to determine whether player is actively jumping
 	bool falling;//used to determine if player is falling
 	bool shouldFall;//used to determine if falling animation should occur
+	bool enterDoor;
+	bool doorOpen;
 	int jumpFrame;
 	float xMov, yMov,xPos,yPos;//used to keep track of movement of sprite in jumping animation
 	const double PI = 3.14159235;
@@ -28,7 +29,7 @@ private:
 	double velo;
 	double g;
 	double angle;
-
+	int doorCount; //used to determine how door should open when collides with door
 	AnimationData::SectionData* moveLeft, * moveRight,*jumpLeft, *jumpRight, *walkInDoor;
 	bool jump(double angle, std::vector<sf::FloatRect>*);
 };

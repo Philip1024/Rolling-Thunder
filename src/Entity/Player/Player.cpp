@@ -22,6 +22,8 @@ Player::Player()
 	activeLeftJump = false;
 	falling = false;
 	shouldFall = true;
+	enterDoor = false;
+	doorOpen = true;
 	jumpFrame = 1;
 	xMov = 0;
 	yMov = 0;
@@ -59,7 +61,6 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	if (clock.getElapsedTime().asSeconds() <= 0.05f)
 		return; // only update the animation past this point
 	//meant to determine whether player is on ground, if not player should fall
-	//not working yet
 	shouldFall = true;
 	for (int i = 0; i < ground->size(); i++)
 	{
@@ -157,31 +158,31 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	clock.restart();
 }
 
-//foor colliding with door will need to take in user input is the collide function
+//foor colliding, not functional for door collision yet
 void Player::collide(Entity* other,char actionFlags)
 {
-	Door* doorCast = dynamic_cast<Door*>(other);
-	if (doorCast != nullptr && !doorOpen)
-	{
-		//will be used to take in input
-		while (const std::optional event = window->pollEvent())
-		{
-			if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>())
-			{
+	if (doorTime.getElapsedTime().asSeconds() <= 0.01f)
+		return;
 
-			}
-		}
-		doorCast->update(actionFlags);
-		doorOpen = true;
-		//add player animation
-		doorTime.restart();
-		sprite.setTextureRect(walkInDoor->nextFrame());
-	}
-	if (doorCast != nullptr && doorOpen && doorTime.getElapsedTime().asSeconds() > .06)
+	Door* doorCast = dynamic_cast<Door*>(other);
+	if (doorCast != nullptr && ((actionFlags & 0b10000000)||enterDoor))
 	{
-		doorCast->update(actionFlags);
-		doorOpen = false;
+		//starts door opening and has player walk into door
+		if ((doorCast->getOpen()||doorOpen)&&!enterDoor)
+		{
+			sprite.setTextureRect(walkInDoor->nextFrame());
+			sprite.move({ 0,-1 }); //player animation
+			doorOpen = false;;//causing issue
+			doorCast->setOpening(true);
+			enterDoor = true;
+		}
+		if (!doorCast->getOpen())
+		{
+			sprite.setColor(sf::Color(255, 255, 255, 0));
+			//enterDoor = false;
+		}
 	}
+	doorTime.restart();
 }
 
 
