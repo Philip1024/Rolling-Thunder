@@ -10,6 +10,7 @@ Door::Door(int x,int y): Entity(AnimationData::getTexture(AnimationData::DOOR))
 {
 	xPos = 215;
 	yPos = 0; 
+	closed = true;
 	sprite.setPosition(sf::Vector2f((float)x, (float)y));
 	sprite.setScale({ 0.8f,0.8f });
 	sf::Vector2i position(215, 0);
@@ -48,6 +49,7 @@ void Door::open()
 	{
 		opening = true;
 	}
+	std::cout << doorFrameCount << std::endl;
 	doorFrameCount++;
 	if (doorFrameCount == 3)
 	{
@@ -63,16 +65,16 @@ void Door::open()
 //still need to add sound for this
 bool Door::close()
 {
-
 	sprite.setTextureRect(doorClose->nextFrame());
 	if (!closing)
 	{
 		closing = true;
 	}
-	
+	std::cout << doorFrameCount << std::endl;
 	doorFrameCount++;
 	if (doorFrameCount == 4)
 	{
+		pause = 0;
 		doorFrameCount = 0;
 		closing = false;
 		doorOpened = false;
@@ -90,19 +92,26 @@ void Door::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	if (clock.getElapsedTime().asSeconds() <= 0.06f)
 		return;
 
-	if ((opening)&&!doorOpened)
+
+
+	if ((opening) && !doorOpened)
 	{
 		open();
+		closed = false;
 	}
 	else if (pause < 4)
 	{
 		pause++;
+		closed = false;
 	}
-	else if  (doorOpened||closing)
+	else if (doorOpened || closing)
 	{
 		//if this is true the door animation is done
 		close();
+		closed = false;
 	}
+	else
+		closed = true;
 	clock.restart();
 
 }
@@ -143,4 +152,12 @@ bool Door::getOpen()
 bool Door::getClosing()
 {
 	return closing||(pause<4);
+}
+
+
+bool Door::isClosed()
+{
+	return closed;
+
+
 }

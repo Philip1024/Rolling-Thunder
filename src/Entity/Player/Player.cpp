@@ -65,7 +65,7 @@ right most bit (00000001): move right
 
 void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
-	Entity::update(actionFlags);
+	Entity::update(actionFlags,ground);
 	if (clock.getElapsedTime().asSeconds() <= 0.05f)
 		return; // only update the animation past this point
 	//meant to determine whether player is on ground, if not player should fall
@@ -88,7 +88,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		else
 			sprite.setTextureRect(AnimationData::getSection("albatross_falling_left")->getFrame(0));
 		sprite.move({ 0,5 });
-		view->move({ 0,5 });
+		//view->move({ 0,5 });
 		if (!shouldFall)
 		{
 			falling = false;
@@ -99,7 +99,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		}
 			
 	}
-	if ((actionFlags & 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump&&!falling) // moving right. 
+	if ((actionFlags & 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump&&!falling&&!inDoor) // moving right. 
 	{
 		sprite.setTextureRect(moveRight->nextFrame());
 		view->move({ 7.5,0 });
@@ -108,7 +108,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		faceRight = true;
 
 	}
-	if ((actionFlags & 0b00000010) && !activeRightJump && !activeJump && !activeLeftJump && !falling) // moving left TODO: bound check on the left using view
+	if ((actionFlags & 0b00000010) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor) // moving left TODO: bound check on the left using view
 	{
 		sprite.setTextureRect(moveLeft->nextFrame());
 		view->move({ -7.5,0 });
@@ -117,7 +117,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		faceRight = false;
 	}
 
-	if (((actionFlags & 0b00000100)||activeJump) &&!activeRightJump && !activeLeftJump && !falling)//jump
+	if (((actionFlags & 0b00000100)||activeJump) &&!activeRightJump && !activeLeftJump && !falling && !inDoor)//jump
 	{
 		//represents time
 		if (!activeJump)
@@ -134,7 +134,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 
 	//jump follows a parabolic path using parametric physics equations
 	//this is the jumping while moving right animation
-	if (((actionFlags & 0b00001000) || activeRightJump) && !activeJump && !activeLeftJump && !falling)//jump
+	if (((actionFlags & 0b00001000) || activeRightJump) && !activeJump && !activeLeftJump && !falling && !inDoor)//jump
 	{
 		//represents time
 		if (!activeRightJump)
@@ -149,7 +149,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		}
 		activeRightJump = jump(angle, ground);
 	}
-	if (((actionFlags & 0b00010000) || activeLeftJump) && !activeJump && !activeRightJump && !falling)//jump
+	if (((actionFlags & 0b00010000) || activeLeftJump) && !activeJump && !activeRightJump && !falling && !inDoor)//jump
 	{
 		//represents time
 		if (!activeLeftJump)
@@ -200,7 +200,7 @@ void Player::collide(Entity* other,char actionFlags)
 		{
 			exitDoor = true;
 		}
-		if (!enterDoor && exitDoor)
+		if (!enterDoor && exitDoor )
 		{
 			if (!exitOnce)
 			{
@@ -258,3 +258,11 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 	}
 	return true;
 }
+
+void Player::setPos(sf::Vector2f a)
+{
+	int x = a.x;
+	int y = a.y;
+	sprite.setPosition(sf::Vector2f(x, y));
+}
+

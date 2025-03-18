@@ -12,6 +12,7 @@ public:
 	sf::Clock doorTime;
 	void collide(Entity* other,char ActionFlags) override;
 	void update(char actionFlags,std::vector<sf::FloatRect>*);
+	void setPos(sf::Vector2f);
 	//sf::Vector2f getPosition();
 private:
 	//keeps track of time between sprite updates

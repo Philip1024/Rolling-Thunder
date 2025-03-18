@@ -115,7 +115,7 @@ void Enemy::update(sf::Vector2f playerPos)
 		sprite.setTextureRect(animationMap[curMove]->nextFrame());
 	lastMove = curMove;
 
-	Entity::update(0b0);
+	//Entity::update(0b0,);
 #ifndef NDEBUG
 	sf::RectangleShape bounds;
 	bounds.setSize(sprite.getGlobalBounds().size);

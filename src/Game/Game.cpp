@@ -56,7 +56,7 @@ void Game::run()
     std::vector<Entity*>& doors = Entity::getDoors();
 
     //rails
-    Rail* rail = new Rail(82, 55,1);
+    Rail* rail = new Rail(82, 55);
     std::vector<Entity*>& rails = Entity::getRails();
     
     //for testing
@@ -75,7 +75,7 @@ void Game::run()
 
     //debug objects
 	bool debug = true;
-    Rail* debugRail = new Rail(50, 50,1);
+    Rail* debugRail = new Rail(50, 50);
 	Door* debugDoor = new Door(0, 0);
 	debugDoor->changeOpacity(false);
     debugRail->changeOpacity(false);
@@ -146,6 +146,9 @@ void Game::run()
                 case sf::Keyboard::Scan::W:
                     wPressed = true;
 					break;
+                case sf::Keyboard::Scan::R:
+                    player->setPos(sf::Vector2f(100, 120));
+                    break;
                  
                 }
             }
@@ -165,10 +168,10 @@ void Game::run()
                 case sf::Keyboard::Scan::W:
                     wPressed = false;
                     break;
+
                 }
             }
         }
-
         //draw 
         window.clear();
         window.draw(stage1Sprite);
@@ -210,7 +213,10 @@ void Game::run()
         if (jumping&&!movingRight&&!movingLeft) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
         player->update(actionFlags,&ground);
-        door->update(actionFlags, &ground);
+        for (int i = 0; i < doors.size(); i++)
+        {
+            doors.at(i)->update(actionFlags, &ground);
+        }
 		debugDoor->update(actionFlags,&ground);
 
         //find which door is being collied with if "W" is pressed
@@ -244,9 +250,7 @@ void Game::isColliding(char actionFlags)
     }
 }
 
-//duh
 
-//duh
 void deleteLevel()
 {
 
