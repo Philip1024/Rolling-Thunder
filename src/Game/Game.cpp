@@ -168,7 +168,6 @@ void Game::run()
                 }
             }
         }
-
         //draw 
         window.clear();
         window.draw(stage1Sprite);
@@ -210,7 +209,10 @@ void Game::run()
         if (jumping&&!movingRight&&!movingLeft) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
         player->update(actionFlags,&ground);
-        door->update(actionFlags, &ground);
+        for (int i = 0; i < doors.size(); i++)
+        {
+            doors.at(i)->update(actionFlags, &ground);
+        }
 		debugDoor->update(actionFlags,&ground);
 
         //find which door is being collied with if "W" is pressed

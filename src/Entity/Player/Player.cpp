@@ -64,7 +64,7 @@ right most bit (00000001): move right
 */
 void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
-	Entity::update(actionFlags);
+	Entity::update(actionFlags,ground);
 	if (clock.getElapsedTime().asSeconds() <= 0.05f)
 		return; // only update the animation past this point
 	//meant to determine whether player is on ground, if not player should fall
@@ -87,7 +87,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		else
 			sprite.setTextureRect(AnimationData::getSection("albatross_falling_left")->getFrame(0));
 		sprite.move({ 0,5 });
-		view->move({ 0,5 });
+		//view->move({ 0,5 });
 		if (!shouldFall)
 		{
 			falling = false;
@@ -199,7 +199,7 @@ void Player::collide(Entity* other,char actionFlags)
 		{
 			exitDoor = true;
 		}
-		if (!enterDoor && exitDoor)
+		if (!enterDoor && exitDoor )
 		{
 			if (!exitOnce)
 			{

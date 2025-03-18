@@ -20,7 +20,7 @@ public:
 	bool getOpen();//returns when door is opening or open
 	//retruns when door is open of closing
 	bool getClosing();
-
+	bool isClosed();
 	void changeOpacity(bool visible);
 	//void collide(Entity* other) override;
 
@@ -31,6 +31,7 @@ private:
 	sf::Clock clock;
 	bool opening = false;
 	bool closing = false;
+	bool closed;
 	int pause;
 	int doorFrameCount = 0;
 	bool doorOpened = false;
