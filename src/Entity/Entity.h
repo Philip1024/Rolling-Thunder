@@ -13,7 +13,7 @@ public:
 	// this does not check collision, it is called when entities collide
 	virtual void collide(Entity* other,char actionFlags) {}
 	// entities are expected to do their functions and draw themselves in this method
-	virtual void update(char actionFlags) { window->draw(sprite); }
+	virtual void update(char actionFlags, std::vector<sf::FloatRect>* ground) { window->draw(sprite); }
 	const sf::Sprite& getSprite() const { return sprite;  }
 	static std::vector<Entity*>& getEntities() { return entities; }
 	static std::vector<Entity*>& getDoors() { return doors; }
