@@ -48,9 +48,7 @@ enum AnimationData::TextureName
 	ENEMY_FLIPPED,
 	ALBATROSS,
 	DOOR,
-	RAIL_LEFT,
-	RAIL_MIDDLE,
-	RAIL_RIGHT,
+	RAIL,
 };
 
 // interior class to AnimationData

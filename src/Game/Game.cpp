@@ -56,7 +56,7 @@ void Game::run()
     std::vector<Entity*>& doors = Entity::getDoors();
 
     //rails
-    Rail* rail = new Rail(82, 55,1);
+    Rail* rail = new Rail(82, 55);
     std::vector<Entity*>& rails = Entity::getRails();
     
     //for testing
@@ -75,7 +75,7 @@ void Game::run()
 
     //debug objects
 	bool debug = true;
-    Rail* debugRail = new Rail(50, 50,1);
+    Rail* debugRail = new Rail(50, 50);
 	Door* debugDoor = new Door(0, 0);
 	debugDoor->changeOpacity(false);
     debugRail->changeOpacity(false);
@@ -244,9 +244,7 @@ void Game::isColliding(char actionFlags)
     }
 }
 
-//duh
 
-//duh
 void deleteLevel()
 {
 
