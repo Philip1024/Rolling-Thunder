@@ -98,7 +98,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		}
 			
 	}
-	if ((actionFlags & 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump&&!falling) // moving right. 
+	if ((actionFlags & 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump&&!falling&&!inDoor) // moving right. 
 	{
 		sprite.setTextureRect(moveRight->nextFrame());
 		view->move({ 7.5,0 });
@@ -107,7 +107,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		faceRight = true;
 
 	}
-	if ((actionFlags & 0b00000010) && !activeRightJump && !activeJump && !activeLeftJump && !falling) // moving left TODO: bound check on the left using view
+	if ((actionFlags & 0b00000010) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor) // moving left TODO: bound check on the left using view
 	{
 		sprite.setTextureRect(moveLeft->nextFrame());
 		view->move({ -7.5,0 });
@@ -116,7 +116,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		faceRight = false;
 	}
 
-	if (((actionFlags & 0b00000100)||activeJump) &&!activeRightJump && !activeLeftJump && !falling)//jump
+	if (((actionFlags & 0b00000100)||activeJump) &&!activeRightJump && !activeLeftJump && !falling && !inDoor)//jump
 	{
 		//represents time
 		if (!activeJump)
@@ -133,7 +133,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 
 	//jump follows a parabolic path using parametric physics equations
 	//this is the jumping while moving right animation
-	if (((actionFlags & 0b00001000) || activeRightJump) && !activeJump && !activeLeftJump && !falling)//jump
+	if (((actionFlags & 0b00001000) || activeRightJump) && !activeJump && !activeLeftJump && !falling && !inDoor)//jump
 	{
 		//represents time
 		if (!activeRightJump)
@@ -148,7 +148,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		}
 		activeRightJump = jump(angle, ground);
 	}
-	if (((actionFlags & 0b00010000) || activeLeftJump) && !activeJump && !activeRightJump && !falling)//jump
+	if (((actionFlags & 0b00010000) || activeLeftJump) && !activeJump && !activeRightJump && !falling && !inDoor)//jump
 	{
 		//represents time
 		if (!activeLeftJump)
@@ -257,3 +257,11 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 	}
 	return true;
 }
+
+void Player::setPos(sf::Vector2f a)
+{
+	int x = a.x;
+	int y = a.y;
+	sprite.setPosition(sf::Vector2f(x, y));
+}
+

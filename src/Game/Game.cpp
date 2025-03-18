@@ -146,6 +146,9 @@ void Game::run()
                 case sf::Keyboard::Scan::W:
                     wPressed = true;
 					break;
+                case sf::Keyboard::Scan::R:
+                    player->setPos(sf::Vector2f(100, 120));
+                    break;
                  
                 }
             }
@@ -165,6 +168,7 @@ void Game::run()
                 case sf::Keyboard::Scan::W:
                     wPressed = false;
                     break;
+
                 }
             }
         }

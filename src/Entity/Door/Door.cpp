@@ -65,7 +65,6 @@ void Door::open()
 //still need to add sound for this
 bool Door::close()
 {
-
 	sprite.setTextureRect(doorClose->nextFrame());
 	if (!closing)
 	{
@@ -75,6 +74,7 @@ bool Door::close()
 	doorFrameCount++;
 	if (doorFrameCount == 4)
 	{
+		pause = 0;
 		doorFrameCount = 0;
 		closing = false;
 		doorOpened = false;
@@ -91,6 +91,8 @@ void Door::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
 	if (clock.getElapsedTime().asSeconds() <= 0.06f)
 		return;
+
+
 
 	if ((opening) && !doorOpened)
 	{
