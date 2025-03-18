@@ -38,21 +38,21 @@ void Game::run()
 {
 	//doors
     Door* door = new Door(94, 113);
-    Door* door2 = new Door(258, 113);
-    Door* door3 = new Door(282, 42);
-    Door* door4 = new Door(424, 112);
-	Door* door5 = new Door(495, 42);
-	Door* door6 = new Door(636, 112);
-	Door* door7 = new Door(707, 112);
-	Door* door9 = new Door(823, 41);
-	Door* door10 = new Door(1012, 112);
-	Door* door11 = new Door(1083, 42);
-	Door* door12 = new Door(1200, 112);
-	Door* door13 = new Door(1271, 112);
-	Door* door14 = new Door(1388, 41);
-	Door* door15 = new Door(1436, 41);
-	Door* door16 = new Door(1483, 41);
-	Door* door17 = new Door(1530, 41);
+    new Door(258, 113);
+    new Door(282, 42);
+    new Door(424, 112);
+	new Door(495, 42);
+	new Door(636, 112);
+	new Door(707, 112);
+	new Door(823, 41);
+	new Door(1012, 112);
+	new Door(1083, 42);
+	new Door(1200, 112);
+	new Door(1271, 112);
+	new Door(1388, 41);
+	new Door(1436, 41);
+	new Door(1483, 41);
+	new Door(1530, 41);
     std::vector<Entity*>& doors = Entity::getDoors();
 
     //rails

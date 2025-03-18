@@ -62,6 +62,7 @@ right most bit (00000001): move right
 7th bit (00000010): move left
 6th bit (00000100): jump
 */
+
 void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
 	Entity::update(actionFlags);

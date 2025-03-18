@@ -83,7 +83,6 @@ void Enemy::update(sf::Vector2f playerPos)
 	switch (curMove)
 	{
 	case WALK_LEFT:
-		sprite.setTexture(*AnimationData::getTexture(AnimationData::ENEMY_FLIPPED));
 		sprite.move(sf::Vector2f(-1, 0));
 		break;
 	case WALK_RIGHT:
