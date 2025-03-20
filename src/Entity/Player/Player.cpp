@@ -69,14 +69,14 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	if (clock.getElapsedTime().asSeconds() <= 0.05f)
 		return; // only update the animation past this point
 	//meant to determine whether player is on ground, if not player should fall
+	//test
+	std::cout << (sprite.getGlobalBounds().findIntersection(ground->at(0)) != std::nullopt) << ' '<< sprite.getGlobalBounds().position.y + sprite.getGlobalBounds().size.y <<' '<< ground->at(0).position.y << std::endl;
 	shouldFall = true;
 	for (int i = 0; i < ground->size(); i++)
 	{
 		//if intersects with ground or in any of the other unique animations don't fall
-		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) || activeRightJump || activeJump || activeLeftJump||inDoor)
-		{
+		if (sprite.getGlobalBounds().findIntersection(ground->at(0)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor)
 			shouldFall = false;
-		}
 	}
 	if (shouldFall)
 		falling = true;
@@ -88,7 +88,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		else
 			sprite.setTextureRect(AnimationData::getSection("albatross_falling_left")->getFrame(0));
 		sprite.move({ 0,5 });
-		//view->move({ 0,5 });
+		view->move({ 0,5 });
 		if (!shouldFall)
 		{
 			falling = false;
@@ -164,6 +164,13 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		}
 		activeRightJump = jump(angle, ground);
 	}
+	sf::RectangleShape bounds;
+	bounds.setSize(sprite.getLocalBounds().size);
+	bounds.setPosition(sprite.getLocalBounds().position);
+	bounds.setFillColor(sf::Color::Transparent);
+	bounds.setOutlineColor(sf::Color::Green);
+	bounds.setOutlineThickness(1);
+	window->draw(bounds);
 	//std::cout << sprite.getPosition().x <<' '<< sprite.getPosition().y << std::endl;
 	clock.restart();
 }
@@ -171,11 +178,11 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 //foor colliding, not functional for door collision yet
 void Player::collide(Entity* other,char actionFlags)
 {
-	if (doorTime.getElapsedTime().asSeconds() <= 0.06f)
+	if (doorTime.getElapsedTime().asSeconds() <= 0.5f)
 		return;
 
 	Door* doorCast = dynamic_cast<Door*>(other);
-	if (doorCast != nullptr && ((actionFlags & 0b10000000)||inDoor))
+	if (doorCast != nullptr && ((actionFlags & 0b10000000)||inDoor) && !activeRightJump && !activeJump && !activeLeftJump && !falling)
 	{
 		//starts door opening and has player walk into door
 		if (!enterDoor&&!inDoor)
@@ -242,7 +249,7 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 		sprite.setTextureRect(AnimationData::getSection("albatross_standard_left_jump")->getFrame(0));
 	for (int i = 0; i < ground->size(); i++)
 	{
-		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) && t > 1)
+		if (sprite.getLocalBounds().findIntersection(ground->at(i)))
 		{
 			if (!faceRight)
 				sprite.setTextureRect(moveLeft->nextFrame());

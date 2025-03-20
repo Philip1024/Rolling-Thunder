@@ -26,6 +26,7 @@ private:
 	bool exitDoor;
 	bool exitOnce;//used to make sure door is only exited once
 	int jumpFrame;
+	float xGlobal, yGlobal;
 	float xMov, yMov,xPos,yPos;//used to keep track of movement of sprite in jumping animation
 	const double PI = 3.14159235;
 	double t;

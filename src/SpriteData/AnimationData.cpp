@@ -18,10 +18,10 @@ void AnimationData::load()
 
 	//player
 	sectionMap["albatross_move_left"] = new Section(textureMap[ALBATROSS], 
-		6, 1, sf::Vector2u(20, 60), sf::Vector2u(200, 117));
+		6, 1, sf::Vector2u(20, 60), sf::Vector2u(200, 120));
 	getSection("albatross_move_left")->setNextFrameFunction(rightToLeftFunction);
 	sectionMap["albatross_move_right"] = new Section(textureMap[ALBATROSS],
-		6, 1, sf::Vector2u(230, 60), sf::Vector2u(410, 117));
+		6, 1, sf::Vector2u(230, 60), sf::Vector2u(410, 120));
 	sectionMap["albatross_standard_right_jump"] = new Section(textureMap[ALBATROSS],
 		1, 2, sf::Vector2u(230, 550), sf::Vector2u(260, 650));
 	sectionMap["albatross_standard_left_jump"] = new Section(textureMap[ALBATROSS],
