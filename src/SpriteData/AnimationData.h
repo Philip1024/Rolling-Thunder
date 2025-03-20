@@ -55,12 +55,23 @@ enum AnimationData::TextureName
 class AnimationData::Section
 {
 public:
+	/// Sections are animation strips to provide data for animating other objects.
+	/// 
+	/// @param texture The reference to the texture for the section to use.
+	/// @param horizontalFrames The amount of frames left to right.
+	/// @param verticalFrames The amount of frames top to bottom.
+	/// @param topLeft Top left corner of the animation strip.
+	/// @param bottomRight Either the bottom right corner or the size of the animation.
+	/// @param useSize If true, will use the size of the animations instead of the bottom right corner.
 	Section(sf::Texture* texture, unsigned int horizontalFrames,
-		unsigned int verticalFrames, sf::Vector2u start, sf::Vector2u end)
+	        unsigned int verticalFrames, sf::Vector2u topLeft, sf::Vector2u bottomRight, bool useSize = false)
 		: texture(texture), horizontalFrames(horizontalFrames),
-		verticalFrames(verticalFrames), start(start), end(end)
+		verticalFrames(verticalFrames)
 	{
-		unsigned int xDiff = end.x - start.x, yDiff = end.y - start.y;
+		sf::Vector2u end = useSize ? sf::Vector2u(topLeft.x + bottomRight.x * horizontalFrames, topLeft.y + bottomRight.y * verticalFrames) : bottomRight;
+		start = topLeft;
+		this->end = end;
+		unsigned int xDiff = end.x - topLeft.x, yDiff = end.y - topLeft.y;
 		xSize = xDiff / horizontalFrames;
 		ySize = yDiff / verticalFrames;
 		nextFrameFunc = [](unsigned int& curFrame, unsigned int maxFrames) -> void { // LAMBDA
@@ -84,7 +95,7 @@ private:
 	sf::Texture* texture;
 	unsigned int horizontalFrames, verticalFrames;
 	unsigned int xSize, ySize;
-	sf::Vector2i start, end;
+	sf::Vector2u start, end;
 
 	// this is a function pointer. when called, curFrame and maxFrames from this object will be passed in.
 	void (*nextFrameFunc)(unsigned int& curFrame, unsigned int maxFrames);

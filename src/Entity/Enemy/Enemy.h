@@ -30,5 +30,6 @@ public:
 private:
 	Movement curMove, lastMove;
 	int moveTicks;
+	std::vector<sf::FloatRect>* vec = new std::vector<sf::FloatRect>;
 	std::unordered_map<Movement, AnimationData::SectionData*> animationMap;
 };

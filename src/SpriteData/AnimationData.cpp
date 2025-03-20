@@ -38,18 +38,18 @@ void AnimationData::load()
 
 	//enemies
 	sectionMap["enemy_move_left"] = new Section(textureMap[ENEMY],
-		7, 1, sf::Vector2u(800, 0), sf::Vector2u(1024, 64));
+		5, 1, sf::Vector2u(0, 320), sf::Vector2u(48, 64), true);
 	getSection("enemy_move_left")->setNextFrameFunction(rightToLeftFunction);
 	sectionMap["enemy_move_right"] = new Section(textureMap[ENEMY],
-		7, 1, sf::Vector2u(0, 0), sf::Vector2u(224, 64));
+		5, 1, sf::Vector2u(0, 192), sf::Vector2u(48, 64), true);
 	sectionMap["enemy_idle_sneak"] = new Section(textureMap[ENEMY],
-		9, 1, sf::Vector2u(160, 78), sf::Vector2u(494, 127));
+		9, 1, sf::Vector2u(0, 384), sf::Vector2u(48, 64), true);
 	sectionMap["enemy_idle_right"] = new Section(textureMap[ENEMY],
-		2, 1, sf::Vector2u(928, 8), sf::Vector2u(992, 61));
+		2, 1, sf::Vector2u(0, 512), sf::Vector2u(48, 64), true);
 	sectionMap["enemy_shoot_right"] = new Section(textureMap[ENEMY],
-		4, 1, sf::Vector2u(0, 0), sf::Vector2u(240, 63));
+		4, 1, sf::Vector2u(0, 0), sf::Vector2u(48, 64), true);
 	sectionMap["enemy_shoot_left"] = new Section(textureMap[ENEMY],
-		4, 1, sf::Vector2u(0, 63), sf::Vector2u(240, 127));
+		4, 1, sf::Vector2u(0, 64), sf::Vector2u(48, 64), true);
 
 	//doors
 	sectionMap["door_open"] = new Section(textureMap[DOOR],

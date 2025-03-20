@@ -1,0 +1,3 @@
+This is the documentation for the spritesheets.
+
+EnemyRemake is the current used spritesheet for enemies. Each animation strip is on a grid 48 x 64.

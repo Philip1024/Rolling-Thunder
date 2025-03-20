@@ -55,26 +55,26 @@ void Enemy::update(sf::Vector2f playerPos)
 {
 	sprite.setScale(sf::Vector2f(0.9, 0.9));
 
+	// when the animation ends
 	/*if (moveTicks <= 0)
 	{
-		if (rand() % 100 == 1)
+
+		if ()
+		else if (rand() % 100 == 1)
 		{
 			curMove = IDLE_CROUCH;
 			moveTicks = 9*4;
-			sprite.move(sf::Vector2f(0, 13));
 		}
 		else
 		{
-			if (lastMove == IDLE_CROUCH)
-				sprite.move(sf::Vector2f(0, -13));
 
 			if (playerPos.x < sprite.getPosition().x)
 				curMove = WALK_LEFT;
 			else
 				curMove = WALK_RIGHT;
 		}
-	}
-	moveTicks--;*/
+	}*/
+	moveTicks--;
 	curMove = SHOOT_RIGHT;
 	
 
@@ -99,6 +99,7 @@ void Enemy::update(sf::Vector2f playerPos)
 	case SHOOT_LEFT:
 		break;
 	case SHOOT_RIGHT:
+
 		break;
 	case DOOR_WALK_OUT:
 		break;
@@ -115,7 +116,7 @@ void Enemy::update(sf::Vector2f playerPos)
 		sprite.setTextureRect(animationMap[curMove]->nextFrame());
 	lastMove = curMove;
 
-	//Entity::update(0b0,);
+	Entity::update(0b0, vec);
 #ifndef NDEBUG
 	sf::RectangleShape bounds;
 	bounds.setSize(sprite.getGlobalBounds().size);
@@ -123,6 +124,6 @@ void Enemy::update(sf::Vector2f playerPos)
 	bounds.setFillColor(sf::Color::Transparent);
 	bounds.setOutlineColor(sf::Color::Green);
 	bounds.setOutlineThickness(1);
-	//window->draw(bounds);
+	window->draw(bounds);
 #endif
 }

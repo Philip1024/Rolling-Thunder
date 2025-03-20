@@ -84,7 +84,6 @@ void Game::run()
     //doors
     bool wPressed = false;
 
-
     //used to not have to wait for clock to reach 0.075 to move
     Enemy* enemy = new Enemy(sf::Vector2f(200, 107)); // mem leak
     char dummy = 0;
@@ -196,7 +195,6 @@ void Game::run()
         {
             window.draw(rails.at(i)->getSprite());
         }
-        //enemy->update(player->getSprite().getPosition());
         window.draw(debugRail->getSprite());
         window.draw(rectangle2);
         window.draw(rectangle3);
@@ -213,6 +211,8 @@ void Game::run()
         if (jumping&&!movingRight&&!movingLeft) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
         player->update(actionFlags,&ground);
+        enemy->update(player->getSprite().getPosition());
+
         for (int i = 0; i < doors.size(); i++)
         {
             doors.at(i)->update(actionFlags, &ground);
