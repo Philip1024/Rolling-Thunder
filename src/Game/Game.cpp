@@ -17,12 +17,12 @@ Game::Game()
 
 	stage1.loadFromFile("res/Background/stage1(final).png");
     player = new Player();
-    ground.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,1.f }));
-    ground.push_back(sf::FloatRect({ 1717.f,87.f }, { 46.f, 1.f }));
-    ground.push_back(sf::FloatRect({ 1763.f,145.f }, { 48.f,1.f }));
-    ground.push_back(sf::FloatRect({ 1811.f,203.f }, { 48.f, 1.f }));
-    ground.push_back(sf::FloatRect({ 1859.f,273.f }, { 46.f,1.f }));
-    ground.push_back(sf::FloatRect({ 1905.f,342.f }, { 51.f,1.f }));
+    ground.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,5.f }));
+    ground.push_back(sf::FloatRect({ 1717.f,87.f }, { 46.f, 5.f }));
+    ground.push_back(sf::FloatRect({ 1763.f,145.f }, { 48.f,5.f }));
+    ground.push_back(sf::FloatRect({ 1811.f,203.f }, { 48.f, 5.f }));
+    ground.push_back(sf::FloatRect({ 1859.f,273.f }, { 46.f,5.f }));
+    ground.push_back(sf::FloatRect({ 1905.f,342.f }, { 51.f,5.f }));
 }
 
 
@@ -60,18 +60,13 @@ void Game::run()
     std::vector<Entity*>& rails = Entity::getRails();
     
     //for testing
-    sf::RectangleShape rectangle(sf::Vector2f(1700, 1));
-    sf::RectangleShape rectangle2(sf::Vector2f(46, 1));
-    sf::RectangleShape rectangle3(sf::Vector2f(48, 1));
-    sf::RectangleShape rectangle4(sf::Vector2f(48, 1));
-    sf::RectangleShape rectangle5(sf::Vector2f(46, 1));
-    sf::RectangleShape rectangle6(sf::Vector2f(51, 1));
-    rectangle.setPosition(sf::Vector2f(20, 166));
-    rectangle2.setPosition(sf::Vector2f(1717, 87));
-    rectangle3.setPosition(sf::Vector2f(1763, 145));
-    rectangle4.setPosition(sf::Vector2f(1811, 203));
-    rectangle5.setPosition(sf::Vector2f(1859, 273));
-    rectangle6.setPosition(sf::Vector2f(1905, 342));
+    std::vector<sf::RectangleShape> groundSprites;
+
+    for (sf::FloatRect rect : ground)
+    {
+        groundSprites.push_back(sf::RectangleShape(rect.size));
+        groundSprites[groundSprites.size() - 1].setPosition(rect.position);
+    }
 
     //debug objects
 	bool debug = true;
@@ -183,8 +178,7 @@ void Game::run()
 			debugRail->changeOpacity(false);
         }
         
-        //testa
-        window.draw(rectangle);
+        
 
         //draw doors
         for (int i =0; i < doors.size(); i++)
@@ -198,11 +192,9 @@ void Game::run()
         }
         //enemy->update(player->getSprite().getPosition());
         window.draw(debugRail->getSprite());
-        window.draw(rectangle2);
-        window.draw(rectangle3);
-        window.draw(rectangle4);
-        window.draw(rectangle5);
-        window.draw(rectangle6);
+        for (sf::RectangleShape sprite : groundSprites)
+            window.draw(sprite);
+
         // actions flags defines booleans in Game.cpp that are passed to the entity.
         // done this way to allow input to be read in Game.cpp
         char actionFlags = 0b0;

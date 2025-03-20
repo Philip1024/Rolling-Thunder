@@ -44,7 +44,8 @@ void Door::setPos(sf::Vector2f a)
 //still need to add sound for this 
 void Door::open()
 {
-	sprite.setTextureRect(doorOpen->nextFrame());
+	//sprite.setTextureRect(doorOpen->nextFrame());
+	sprite.setTextureRect(AnimationData::getSection("door_open")->getFrame(doorFrameCount));
 	if (!opening)
 	{
 		opening = true;
@@ -65,14 +66,15 @@ void Door::open()
 //still need to add sound for this
 bool Door::close()
 {
-	sprite.setTextureRect(doorClose->nextFrame());
+	//sprite.setTextureRect(doorClose->nextFrame());
+	sprite.setTextureRect(AnimationData::getSection("door_close")->getFrame(doorFrameCount));
 	if (!closing)
 	{
 		closing = true;
 	}
 	std::cout << doorFrameCount << std::endl;
-	doorFrameCount++;
-	if (doorFrameCount == 4)
+	doorFrameCount--;
+	if (doorFrameCount == 0)
 	{
 		pause = 0;
 		doorFrameCount = 0;
@@ -89,7 +91,7 @@ bool Door::close()
 //by holding the w key after entering the door
 void Door::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
-	if (clock.getElapsedTime().asSeconds() <= 0.06f)
+	if (clock.getElapsedTime().asSeconds() <= 0.50f)
 		return;
 
 
