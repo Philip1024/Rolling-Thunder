@@ -100,6 +100,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 				sprite.setTextureRect(moveRight->nextFrame());
 			else
 				sprite.setTextureRect(moveLeft->nextFrame());
+			sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
 		}
 			
 	}
@@ -184,13 +185,13 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 //foor colliding, not functional for door collision yet
 void Player::collide(Entity* other,char actionFlags)
 {
-	if (doorTime.getElapsedTime().asSeconds() <= 0.5f)
+	if (doorTime.getElapsedTime().asSeconds() <= 0.06f)
 		return;
 
 	Door* doorCast = dynamic_cast<Door*>(other);
 	if (doorCast != nullptr && ((actionFlags & 0b10000000)||inDoor) && !activeRightJump && !activeJump && !activeLeftJump && !falling)
 	{
-		//starts door opening and has player walk into door
+		//starts door opening and has player walk into door one frame
 		if (!enterDoor&&!inDoor)
 		{
 			inDoor = true;
@@ -199,36 +200,47 @@ void Player::collide(Entity* other,char actionFlags)
 			sprite.move({ 0,-1 });
 			enterDoor = true;
 		}
-		if (doorCast->getOpen()&&enterDoor)
+		//while door is opening player walks in door
+		if (!doorCast->getClosing()&&enterDoor)
 		{
 			sprite.setTextureRect(walkInDoor->nextFrame());
 			sprite.move({ 0,-1 });//player animation
 		}
-		if (!doorCast->getOpen()&&enterDoor)
+		//when door is closing player becomes invisible
+		if (doorCast->getClosing()&&enterDoor)
 		{
 			sprite.setColor(sf::Color(255, 255, 255, 0));
 			enterDoor = false;
 		}
+		//once key is released player can exit door
 		if (!(actionFlags & 0b10000000))
 		{
 			exitDoor = true;
 		}
-		if (!enterDoor && exitDoor )
+		if (!enterDoor && exitDoor&&!doorCast->getClosing())
 		{
+			//starts door opening animation
 			if (!exitOnce)
 			{
 				doorCast->setOpening(true);
 				exitOnce = true;
 			}
-			if (doorCast->getClosing())
+			//after door is opened player becomes visible and can exit door
+			if (!doorCast->getOpen())
 			{
 				sprite.setTextureRect(walkOutDoor->nextFrame());
 				sprite.move({ 0,1 });
 				sprite.setColor(sf::Color(255, 255, 255, 255));
 			}
-			else if(!doorCast->getOpen())
+			//after player has exited door and door isn't doing anything reset to walking position
+			if(!doorCast->getClosing()&&!doorCast->getStop()&& !doorCast->getOpen())
 			{
-				std::cout << "works" << std::endl;;
+				if (!faceRight)
+					sprite.setTextureRect(moveLeft->nextFrame());
+				else
+					sprite.setTextureRect(moveRight->nextFrame());
+				sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+				//std::cout << "works" << std::endl;;
 				inDoor = false;
 				exitDoor = false;
 				exitOnce = false;
@@ -243,6 +255,7 @@ void Player::collide(Entity* other,char actionFlags)
 bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 {
 	t += 0.4;
+	//parabolic equation for jump, pos keeps track of position while Mov uses pos to track how much movement is required each frame
 	xMov = velo * cos(angle) * t - xPos;
 	xPos = velo * cos(angle) * t;
 	yMov = -0.5 * g * t * t + velo * sin(angle) * t - yPos;

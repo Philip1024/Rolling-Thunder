@@ -23,6 +23,10 @@ Door::Door(int x,int y): Entity(AnimationData::getTexture(AnimationData::DOOR))
 	doors.push_back(this);
 	pause = 0;
 	stop = false;
+	opening = false;
+	startOpen = false;
+	closing = false;
+	opened = false;
 }
 
 
@@ -42,7 +46,7 @@ void Door::setPos(sf::Vector2f a)
 
 
 //This opens the door for when the enmeyy leaves the room
-//still need to add sound for this 
+//still need to add sound for this, not using
 void Door::open()
 {
 	//sprite.setTextureRect(doorOpen->nextFrame());
@@ -51,7 +55,6 @@ void Door::open()
 	{
 		opening = true;
 	}
-	std::cout << doorFrameCount << std::endl;
 	doorFrameCount++;
 	if (doorFrameCount == 4)
 	{
@@ -64,7 +67,7 @@ void Door::open()
 
 
 //this just  a reverse of the the door opening animation
-//still need to add sound for this
+//still need to add sound for this,not using
 bool Door::close()
 {
 	//sprite.setTextureRect(doorClose->nextFrame());
@@ -72,6 +75,7 @@ bool Door::close()
 	{
 		closing = true;
 		doorFrameCount = 3;
+		pause = 0;
 	}
 	sprite.setTextureRect(AnimationData::getSection("door_close")->getFrame(doorFrameCount));
 	doorFrameCount--;
@@ -92,34 +96,39 @@ bool Door::close()
 //by holding the w key after entering the door
 void Door::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
-	if (clock.getElapsedTime().asSeconds() <= 0.50f)
+	if (clock.getElapsedTime().asSeconds() <= 0.06f)
 		return;
 
-	std::cout << closing <<' '<<stop<< std::endl;
-	if ((opening) && !doorOpened)
+	if (startOpen)
 	{
-		open();
-		closed = false;
-		stop = false;
-	}
-	else if (pause < 4&&!closed)
-	{
-		pause++;
-		closed = false;
-		stop = true;
-	}
-	else if (doorOpened || closing)
-	{
-		//if this is true the door animation is donew
-		close();
-		closed = false;
-		stop = false;
-	}
-	else
-	{
-		closed = true;
-		pause = 0;
-		stop = false;
+		if (doorFrameCount < 4 && !opened)
+		{
+			sprite.setTextureRect(AnimationData::getSection("door_close")->getFrame(doorFrameCount));
+			doorFrameCount++;
+			opening = true;
+		}
+		else if (pause<2)
+		{
+			opening = false;
+			opened = true;
+			pause++;
+			stop = true;
+		}
+		else
+		{
+			closing = true;
+			doorFrameCount--;
+			sprite.setTextureRect(AnimationData::getSection("door_close")->getFrame(doorFrameCount));
+			if (doorFrameCount == 0)
+			{
+				startOpen = false;
+				opened = false;
+				pause = 0;
+				stop = false;
+				closing = false;
+			}
+			stop = false;
+		}
 	}
 	clock.restart();
 
@@ -143,6 +152,7 @@ void Door::changeOpacity(bool visible)
 
 void Door::setOpening(bool newOpening)
 {
+	startOpen = newOpening;
 	opening = newOpening;
 }
 
@@ -154,13 +164,19 @@ void Door::setClosing(bool newClosing)
 
 bool Door::getOpen()
 {
-	return opening||stop;
+	return opening;
+}
+
+
+bool Door::getStop()
+{
+	return stop;
 }
 
 
 bool Door::getClosing()
 {
-	return closing||stop;
+	return closing;
 }
 
 

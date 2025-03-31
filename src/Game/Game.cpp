@@ -56,7 +56,35 @@ void Game::run()
     std::vector<Entity*>& doors = Entity::getDoors();
 
     //rails
-    Rail* rail = new Rail(82, 55);
+    //Rail* rail = new Rail(82, 55);
+    new Rail(126, 64);
+    new Rail(171, 64);
+    new Rail(216, 64);
+    new Rail(261, 64);
+    new Rail(306, 64);
+    new Rail(351, 64);
+    new Rail(396, 64);
+    new Rail(441, 64);
+    new Rail(486, 64);
+    new Rail(531, 64);
+    new Rail(762, 64);
+    new Rail(807, 64);
+    new Rail(852, 64);
+    new Rail(897, 64);
+    new Rail(942, 64);
+    new Rail(987, 64);
+    new Rail(1032, 64);
+    new Rail(1075, 64);
+    new Rail(1322, 64);
+    new Rail(1365, 64);
+    new Rail(1408, 64);
+    new Rail(1451, 64);
+    new Rail(1494, 64);
+    new Rail(1537, 64);
+    new Rail(1580, 64);
+    new Rail(1623, 64);
+    new Rail(1666, 64);
+    new Rail(1709, 64);
     std::vector<Entity*>& rails = Entity::getRails();
     
     //for testing
@@ -177,7 +205,9 @@ void Game::run()
 			debugRail->changeOpacity(false);
         }
         
-        
+       std:: cout << rails.size() << std::endl;
+       std::cout << doors.size() << std::endl;
+
 
         //draw doors
         for (int i =0; i < doors.size(); i++)
@@ -232,6 +262,8 @@ void Game::isColliding(char actionFlags)
         {
              for (int j = i + 1; j < entities.size(); j++)
              {
+                Rail* railCast = dynamic_cast<Rail*>(entities.at(i));
+                Rail* railCast = dynamic_cast<Rail*>(entities.at(j));
                 if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
                 {
                     entities.at(i)->collide(entities.at(j), actionFlags);

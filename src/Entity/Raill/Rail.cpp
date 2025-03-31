@@ -10,11 +10,12 @@ Rail::Rail(int x, int y) : Entity(AnimationData::getTexture(AnimationData::RAIL)
 	xPos = x;
 	yPos = y;
 	sprite.setPosition(sf::Vector2f((float)x, (float)y));
-	sprite.setScale({ 0.3f,0.3f });
+	sprite.setScale({ 0.23f,0.23f });
 	sf::Vector2i position(0, 0);
 	sf::Vector2i size(200, 200);
 	sf::IntRect frame(position, size);
 	sprite.setTextureRect(frame);
+	rails.push_back(this);
 	rail = new AnimationData::SectionData(AnimationData::getSection("Rail"));
 }
 

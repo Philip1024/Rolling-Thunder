@@ -21,6 +21,7 @@ public:
 	//retruns when door is open of closing
 	bool getClosing();
 	bool isClosed();
+	bool getStop();
 	void changeOpacity(bool visible);
 	//void collide(Entity* other) override;
 
@@ -29,6 +30,8 @@ private:
 	void open();
 	bool close();
 	sf::Clock clock;
+	bool startOpen;
+	bool opened;
 	bool opening = false;
 	bool closing = false;
 	bool stop;
