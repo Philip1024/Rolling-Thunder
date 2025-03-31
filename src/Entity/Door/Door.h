@@ -31,6 +31,7 @@ private:
 	sf::Clock clock;
 	bool opening = false;
 	bool closing = false;
+	bool stop;
 	bool closed;
 	int pause;
 	int doorFrameCount = 0;

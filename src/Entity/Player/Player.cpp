@@ -12,7 +12,11 @@ Player::Player()
 {
 	sprite.setPosition(sf::Vector2f(100, 120));
 	sf::Vector2i position(230, 58);
-	sf::Vector2i size(30, 60);
+	sf::Vector2i size(30, 60); 
+	xPosition = 230;
+	yPosition = 58;
+	xSize = 30;
+	ySize = 60;
 	sf::IntRect frame(position, size);
 	sprite.setTextureRect(frame);
 	sprite.setScale({0.8f,0.8f});
@@ -27,6 +31,7 @@ Player::Player()
 	exitDoor = false;
 	exitOnce = false;
 	jumpFrame = 1;
+	//for jumps
 	xMov = 0;
 	yMov = 0;
 	xPos = 0;
@@ -70,7 +75,6 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		return; // only update the animation past this point
 	//meant to determine whether player is on ground, if not player should fall
 	//test
-	std::cout << (sprite.getGlobalBounds().findIntersection(ground->at(0)) != std::nullopt) << ' '<< sprite.getGlobalBounds().position.y + sprite.getGlobalBounds().size.y <<' '<< ground->at(0).position.y << std::endl;
 	shouldFall = true;
 	for (int i = 0; i < ground->size(); i++)
 	{
@@ -164,13 +168,15 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		}
 		activeRightJump = jump(angle, ground);
 	}
-	sf::RectangleShape bounds;
-	bounds.setSize(sprite.getLocalBounds().size);
-	bounds.setPosition(sprite.getLocalBounds().position);
-	bounds.setFillColor(sf::Color::Transparent);
-	bounds.setOutlineColor(sf::Color::Green);
-	bounds.setOutlineThickness(1);
-	window->draw(bounds);
+	/*
+	sf::RectangleShape bound;
+	bound.setSize(bounds.size);
+	bound.setPosition(bounds.position);
+	bound.setFillColor(sf::Color::Transparent);
+	bound.setOutlineColor(sf::Color::Green);
+	bound.setOutlineThickness(1);
+	window->draw(bound);
+	*/
 	//std::cout << sprite.getPosition().x <<' '<< sprite.getPosition().y << std::endl;
 	clock.restart();
 }
@@ -242,20 +248,21 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 	yMov = -0.5 * g * t * t + velo * sin(angle) * t - yPos;
 	yPos = -0.5 * g * t * t + velo * sin(angle) * t;
 	sprite.move({ xMov, -1 * yMov });
-	view->move({ xMov, -1 * yMov });
+	view->move({ xMov, 0});
 	if(faceRight)
 		sprite.setTextureRect(AnimationData::getSection("albatross_standard_right_jump")->getFrame(0));
 	else
 		sprite.setTextureRect(AnimationData::getSection("albatross_standard_left_jump")->getFrame(0));
 	for (int i = 0; i < ground->size(); i++)
 	{
-		if (sprite.getLocalBounds().findIntersection(ground->at(i)))
+		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) != std::nullopt)
 		{
 			if (!faceRight)
 				sprite.setTextureRect(moveLeft->nextFrame());
 			else
 				sprite.setTextureRect(moveRight->nextFrame());
-			sprite.move({ 0,-7 });
+			sprite.move({ 0,(120-sprite.getGlobalBounds().position.y) });
+			view->move({ 0,(120 - sprite.getGlobalBounds().position.y) });
 			xMov = 0;
 			yMov = 0;
 			xPos = 0;

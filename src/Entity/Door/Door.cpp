@@ -22,6 +22,7 @@ Door::Door(int x,int y): Entity(AnimationData::getTexture(AnimationData::DOOR))
 	sprite.setTextureRect(AnimationData::getSection("door_open")->getFrame(0));
 	doors.push_back(this);
 	pause = 0;
+	stop = false;
 }
 
 
@@ -52,9 +53,9 @@ void Door::open()
 	}
 	std::cout << doorFrameCount << std::endl;
 	doorFrameCount++;
-	if (doorFrameCount == 3)
+	if (doorFrameCount == 4)
 	{
-		doorFrameCount = 0;
+
 		opening = false;
 		doorOpened = true;
 		pause = true;
@@ -67,14 +68,14 @@ void Door::open()
 bool Door::close()
 {
 	//sprite.setTextureRect(doorClose->nextFrame());
-	sprite.setTextureRect(AnimationData::getSection("door_close")->getFrame(doorFrameCount));
 	if (!closing)
 	{
 		closing = true;
+		doorFrameCount = 3;
 	}
-	std::cout << doorFrameCount << std::endl;
+	sprite.setTextureRect(AnimationData::getSection("door_close")->getFrame(doorFrameCount));
 	doorFrameCount--;
-	if (doorFrameCount == 0)
+	if (doorFrameCount == -1)
 	{
 		pause = 0;
 		doorFrameCount = 0;
@@ -94,26 +95,32 @@ void Door::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	if (clock.getElapsedTime().asSeconds() <= 0.50f)
 		return;
 
-
-
+	std::cout << closing <<' '<<stop<< std::endl;
 	if ((opening) && !doorOpened)
 	{
 		open();
 		closed = false;
+		stop = false;
 	}
-	else if (pause < 4)
+	else if (pause < 4&&!closed)
 	{
 		pause++;
 		closed = false;
+		stop = true;
 	}
 	else if (doorOpened || closing)
 	{
-		//if this is true the door animation is done
+		//if this is true the door animation is donew
 		close();
 		closed = false;
+		stop = false;
 	}
 	else
+	{
 		closed = true;
+		pause = 0;
+		stop = false;
+	}
 	clock.restart();
 
 }
@@ -147,13 +154,13 @@ void Door::setClosing(bool newClosing)
 
 bool Door::getOpen()
 {
-	return opening||(pause<4);
+	return opening||stop;
 }
 
 
 bool Door::getClosing()
 {
-	return closing||(pause<4);
+	return closing||stop;
 }
 
 

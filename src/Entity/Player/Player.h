@@ -33,6 +33,7 @@ private:
 	double velo;
 	double g;
 	double angle;
+	float xSize, ySize, xPosition, yPosition;//used to detect collisions
 	int doorCount; //used to determine how door should open when collides with door
 	AnimationData::SectionData* moveLeft, * moveRight,*jumpLeft, *jumpRight, *walkInDoor, * walkOutDoor;
 	bool jump(double angle, std::vector<sf::FloatRect>*);
