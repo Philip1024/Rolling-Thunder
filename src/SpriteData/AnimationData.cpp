@@ -60,6 +60,13 @@ void AnimationData::load()
 	//rails
 	sectionMap["Rail"] = new Section(textureMap[RAIL],
 		3, 1, sf::Vector2u(0, 0), sf::Vector2u(1000, 300));
+
+	//bullet
+	sectionMap["bulletLeft"] = new Section(textureMap[BULLET],
+		3, 1, sf::Vector2u(0, 0), sf::Vector2u(111, 35));
+	sectionMap["bulletRight"] = new Section(textureMap[BULLET],
+		3, 1, sf::Vector2u(141, 0), sf::Vector2u(247, 35));
+
 }
 
 //This deletes all of the data so no leak
