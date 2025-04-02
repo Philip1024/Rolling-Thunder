@@ -4,6 +4,10 @@
 #include"../Entity.h"
 class Bullet : public Entity
 {
+
+public:
+
+private:
 	void collide(Entity* other);
 };
 

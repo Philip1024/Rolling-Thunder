@@ -167,9 +167,6 @@ void Game::run()
                     break;
                 case sf::Keyboard::Scan::W:
                     wPressed = true;
-					break;
-                case sf::Keyboard::Scan::R:
-                    player->setPos(sf::Vector2f(100, 120));
                     break;
                  
                 }
@@ -263,7 +260,7 @@ void Game::isColliding(char actionFlags)
              for (int j = i + 1; j < entities.size(); j++)
              {
                 Rail* railCast = dynamic_cast<Rail*>(entities.at(i));
-                Rail* railCast = dynamic_cast<Rail*>(entities.at(j));
+                Rail* railCast2 = dynamic_cast<Rail*>(entities.at(j));
                 if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
                 {
                     entities.at(i)->collide(entities.at(j), actionFlags);
