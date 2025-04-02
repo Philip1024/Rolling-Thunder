@@ -35,6 +35,12 @@ void AnimationData::load()
 	getSection("albatross_walk_in_door")->setNextFrameFunction(rightToLeftFunction);
 	sectionMap["albatross_walk_out_door"] = new Section(textureMap[ALBATROSS],
 		1, 3, sf::Vector2u(200, 0), sf::Vector2u(220, 180));
+	sectionMap["albatross_shooting_left"] = new Section(textureMap[ALBATROSS],
+		3, 1, sf::Vector2u(31, 243), sf::Vector2u(185, 295));
+	sectionMap["albatross_shooting_right"] = new Section(textureMap[ALBATROSS],
+		3, 1, sf::Vector2u(238, 241), sf::Vector2u(391, 294));
+	getSection("albatross_shooting_right")->setNextFrameFunction(rightToLeftFunction);
+
 
 	//enemies
 	sectionMap["enemy_move_left"] = new Section(textureMap[ENEMY],

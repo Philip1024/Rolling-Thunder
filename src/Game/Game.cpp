@@ -114,6 +114,8 @@ void Game::run()
     bool firstA = true;
     // if the player is moving right or left
     bool movingLeft = false, movingRight = false;
+    //if player is shooting
+    bool shooting = false;
     //used to determine height of jump
     double jumpHeight=0;
     //used to determine if jumping
@@ -169,7 +171,7 @@ void Game::run()
                     wPressed = true;
 					break;
                 case sf::Keyboard::Scan::R:
-                    player->setPos(sf::Vector2f(100, 120));
+                    shooting = true;
                     break;
                  
                 }
@@ -189,6 +191,9 @@ void Game::run()
                     break;
                 case sf::Keyboard::Scan::W:
                     wPressed = false;
+                    break;
+                case sf::Keyboard::Scan::R:
+                    shooting = false;
                     break;
 
                 }
@@ -232,6 +237,7 @@ void Game::run()
         if (movingRight&&jumping) actionFlags |= 0b00001000;
         if (jumping&&!movingRight&&!movingLeft) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
+        if(shooting) actionFlags |= 0b00100000;
         player->update(actionFlags,&ground);
         enemy->update(player->getSprite().getPosition());
 
@@ -263,7 +269,7 @@ void Game::isColliding(char actionFlags)
              for (int j = i + 1; j < entities.size(); j++)
              {
                 Rail* railCast = dynamic_cast<Rail*>(entities.at(i));
-                Rail* railCast = dynamic_cast<Rail*>(entities.at(j));
+                Rail* railCast2 = dynamic_cast<Rail*>(entities.at(j));
                 if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
                 {
                     entities.at(i)->collide(entities.at(j), actionFlags);
