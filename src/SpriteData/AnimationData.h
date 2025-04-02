@@ -49,6 +49,7 @@ enum AnimationData::TextureName
 	ALBATROSS,
 	DOOR,
 	RAIL,
+	BULLET,
 };
 
 // interior class to AnimationData

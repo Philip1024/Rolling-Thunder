@@ -2,6 +2,7 @@
 std::vector<Entity*> Entity::entities;
 std::vector<Entity*> Entity::doors;
 std::vector<Entity*> Entity::rails;
+std::vector<Entity*> Entity::bullets;
 sf::View* Entity::view = nullptr;
 sf::RenderWindow* Entity::window = nullptr;
 unsigned int* Entity::currentTick = nullptr;

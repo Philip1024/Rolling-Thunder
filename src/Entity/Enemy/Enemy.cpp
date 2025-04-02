@@ -56,11 +56,11 @@ void Enemy::update(sf::Vector2f playerPos)
 	sprite.setScale(sf::Vector2f(0.9, 0.9));
 
 	// when the animation ends
-	/*if (moveTicks <= 0)
+	if (moveTicks <= 0)
 	{
 
-		if ()
-		else if (rand() % 100 == 1)
+		
+		if (rand() % 100 == 1)
 		{
 			curMove = IDLE_CROUCH;
 			moveTicks = 9*4;
@@ -73,7 +73,7 @@ void Enemy::update(sf::Vector2f playerPos)
 			else
 				curMove = WALK_RIGHT;
 		}
-	}*/
+	}
 	moveTicks--;
 	curMove = SHOOT_RIGHT;
 	
