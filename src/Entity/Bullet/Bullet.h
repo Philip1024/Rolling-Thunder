@@ -9,11 +9,12 @@ public:
 	void collide(Entity* other, char actionFlags);
 	sf::Vector2f getPos() { return sf::Vector2f(xPos, yPos); }
 	bool team;
-	void update(bool side);
+	void update(char actionFlags, std::vector<sf::FloatRect>*);
 	bool direction;
 	Bullet(bool bTeam, bool bDirection,float x, float y);
 	AnimationData::SectionData* bulletRight, * bulletLeft;
 private:
 	float xPos, yPos;
+	bool fired;
 };
 

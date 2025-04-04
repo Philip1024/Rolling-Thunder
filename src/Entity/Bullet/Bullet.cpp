@@ -7,8 +7,8 @@
 
 Bullet::Bullet(bool bTeam,bool bDirection, float x, float y) : Entity(AnimationData::getTexture(AnimationData::BULLET))
 {
-	team = bTeam;
-	direction = bDirection;
+	team = bTeam;//true means player, flase means enemy
+	direction = bDirection;//true means right, false means left
 	xPos = x;
 	yPos = y;
 	sprite.setPosition(sf::Vector2f((float)x, (float)y));
@@ -20,6 +20,7 @@ Bullet::Bullet(bool bTeam,bool bDirection, float x, float y) : Entity(AnimationD
 	bullets.push_back(this);
 	bulletLeft = new AnimationData::SectionData(AnimationData::getSection("bulletLeft"));
 	bulletRight = new AnimationData::SectionData(AnimationData::getSection("bulletRight"));
+	fired = false;
 	//true is left, false is right
 	if(direction)
 	{ 
@@ -39,15 +40,19 @@ void Bullet::collide(Entity* other, char actionFlags)
 
 //if side is true then use left, else use right
 //this will be called by player
-void Bullet::update(bool side)
+void Bullet::update(char actionFlags, std::vector<sf::FloatRect>*)
 {
-	if (side)
+	if (!fired)
 	{
-		bulletLeft->nextFrame();
+		if (direction)
+			bulletLeft->nextFrame();
+		else
+			bulletRight->nextFrame();
+		fired = true;
 	}
-	else
-	{
-		bulletRight->nextFrame();
-	}
+	if(direction)
+		sprite.move({ 1,0 });
+	else 
+		sprite.move({ -1,0 });
 }
 

@@ -173,10 +173,10 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	}
 	if ((actionFlags & 0b00100000||shooting) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor)
 	{
-		if (shootTime.getElapsedTime().asSeconds() <= 0.15f)
+		if (shootTime.getElapsedTime().asSeconds() <= 0.9f)
 			return;
 		shooting = true;
-		if (faceRight)
+		if (faceRight&&shootingFrame!=3)
 		{
 			sprite.setTextureRect(shootRight->nextFrame());
 		}

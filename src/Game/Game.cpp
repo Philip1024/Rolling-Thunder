@@ -86,6 +86,7 @@ void Game::run()
     new Rail(1666, 64);
     new Rail(1709, 64);
     std::vector<Entity*>& rails = Entity::getRails();
+    std::vector<Entity*>& bullets = Entity::getBullets();
     
     //for testing
     std::vector<sf::RectangleShape> groundSprites;
@@ -219,6 +220,12 @@ void Game::run()
         for (int i = 0; i < rails.size(); i++)
         {
             window.draw(rails.at(i)->getSprite());
+        }
+        //update bullete and draw
+        for (int i = 0; i < bullets.size(); i++)
+        {
+            bullets.at(i)->update();
+            window.draw(bullets.at(i)->getSprite());
         }
         window.draw(debugRail->getSprite());
         for (sf::RectangleShape sprite : groundSprites)
