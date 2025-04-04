@@ -1,5 +1,6 @@
 #include "Player.h"
 #include"../Entity.h"
+#include"../Bullet/Bullet.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <optional>
@@ -176,16 +177,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		if (shootTime.getElapsedTime().asSeconds() <= 0.9f)
 			return;
 		shooting = true;
-		if (faceRight&&shootingFrame!=3)
-		{
-			sprite.setTextureRect(shootRight->nextFrame());
-		}
-		else
-		{
-			sprite.setTextureRect(shootLeft->nextFrame());
-		}
-		shootingFrame++;
-		if (shootingFrame == 4)
+		if (shootingFrame == 3)
 		{
 			shooting = false;
 			shootingFrame = 0;
@@ -194,6 +186,26 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 			else
 				sprite.setTextureRect(moveLeft->nextFrame());
 			sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+		}
+		else
+		{
+			shootingFrame++;
+			if (faceRight)
+			{
+				sprite.setTextureRect(shootRight->nextFrame());
+				if (shootingFrame == 2)
+				{
+					new Bullet(true, true, sprite.getPosition().x+35, sprite.getPosition().y-12);
+				}
+			}
+			else
+			{
+				sprite.setTextureRect(shootLeft->nextFrame());
+				if (shootingFrame == 2)
+				{
+
+				}
+			}
 		}
 		shootTime.restart();
 

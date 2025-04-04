@@ -16,5 +16,6 @@ public:
 private:
 	float xPos, yPos;
 	bool fired;
+	sf::Clock pause;
 };
 

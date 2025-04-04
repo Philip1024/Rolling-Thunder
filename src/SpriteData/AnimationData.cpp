@@ -11,6 +11,7 @@ void AnimationData::load()
 	textureMap[ALBATROSS] = new sf::Texture("res/SpriteSheets/Albatross.png");
 	textureMap[DOOR] = new sf::Texture("res/SpriteSheets/Door(1).png");
 	textureMap[RAIL] = new sf::Texture("res/SpriteSheets/RailFinal.png");
+	textureMap[BULLET] = new sf::Texture("res/SpriteSheets/bullet.png");
 	auto rightToLeftFunction = [](unsigned int& curFrame, unsigned int maxFrames) -> void { // LAMBDA
 		if (curFrame == 0)
 			curFrame = maxFrames;
@@ -69,9 +70,9 @@ void AnimationData::load()
 		3, 1, sf::Vector2u(0, 0), sf::Vector2u(1000, 300));
 
 	//bullet
-	sectionMap["bulletLeft"] = new Section(textureMap[BULLET],
+	sectionMap["bullet_left"] = new Section(textureMap[BULLET],
 		3, 1, sf::Vector2u(0, 0), sf::Vector2u(111, 35));
-	sectionMap["bulletRight"] = new Section(textureMap[BULLET],
+	sectionMap["bullet_right"] = new Section(textureMap[BULLET],
 		3, 1, sf::Vector2u(141, 0), sf::Vector2u(247, 35));
 
 }

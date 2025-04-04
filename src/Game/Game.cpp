@@ -221,12 +221,6 @@ void Game::run()
         {
             window.draw(rails.at(i)->getSprite());
         }
-        //update bullete and draw
-        for (int i = 0; i < bullets.size(); i++)
-        {
-            bullets.at(i)->update();
-            window.draw(bullets.at(i)->getSprite());
-        }
         window.draw(debugRail->getSprite());
         for (sf::RectangleShape sprite : groundSprites)
             window.draw(sprite);
@@ -250,6 +244,12 @@ void Game::run()
         }
 		debugDoor->update(actionFlags,&ground);
 
+        //update bullete and draw
+        for (int i = 0; i < bullets.size(); i++)
+        {
+            window.draw(bullets.at(i)->getSprite());
+            bullets.at(i)->update(actionFlags, &ground);
+        }
         //find which door is being collied with if "W" is pressed
 
         isColliding(actionFlags);

@@ -12,23 +12,20 @@ Bullet::Bullet(bool bTeam,bool bDirection, float x, float y) : Entity(AnimationD
 	xPos = x;
 	yPos = y;
 	sprite.setPosition(sf::Vector2f((float)x, (float)y));
-	sprite.setScale({ 0.23f,0.23f });
-	sf::Vector2i position(0, 0);
-	sf::Vector2i size(200, 200);
-	sf::IntRect frame(position, size);
-	sprite.setTextureRect(frame);
+	sprite.setTextureRect(AnimationData::getSection("bullet_right")->getFrame(0));
+	sprite.setScale({ 0.8f,0.8f });
 	bullets.push_back(this);
-	bulletLeft = new AnimationData::SectionData(AnimationData::getSection("bulletLeft"));
-	bulletRight = new AnimationData::SectionData(AnimationData::getSection("bulletRight"));
+	bulletLeft = new AnimationData::SectionData(AnimationData::getSection("bullet_left"));
+	bulletRight = new AnimationData::SectionData(AnimationData::getSection("bullet_right"));
 	fired = false;
 	//true is left, false is right
 	if(direction)
 	{ 
-		AnimationData::getSection("bulletLeft")->getFrame(0);
+		sprite.setTextureRect(AnimationData::getSection("bullet_right")->getFrame(0));
 	}
 	else
 	{
-		AnimationData::getSection("bulletRight")->getFrame(0);
+		sprite.setTextureRect(AnimationData::getSection("bullet_left")->getFrame(0));
 	}
 }
 
@@ -42,12 +39,12 @@ void Bullet::collide(Entity* other, char actionFlags)
 //this will be called by player
 void Bullet::update(char actionFlags, std::vector<sf::FloatRect>*)
 {
-	if (!fired)
+	if (!fired&&pause.getElapsedTime().asSeconds()>=0.1f)
 	{
 		if (direction)
-			bulletLeft->nextFrame();
+			sprite.setTextureRect(AnimationData::getSection("bullet_right")->getFrame(1));
 		else
-			bulletRight->nextFrame();
+			sprite.setTextureRect(AnimationData::getSection("bullet_left")->getFrame(1));
 		fired = true;
 	}
 	if(direction)
