@@ -1,4 +1,5 @@
 #include "AnimationData.h"
+#include<iostream>
 std::unordered_map<AnimationData::TextureName, sf::Texture*> AnimationData::textureMap;
 std::unordered_map<std::string, AnimationData::Section*> AnimationData::sectionMap;
 

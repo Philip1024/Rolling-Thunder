@@ -209,10 +209,6 @@ void Game::run()
             debugRail->setPos(worldPos);
 			debugRail->changeOpacity(false);
         }
-        
-       std:: cout << rails.size() << std::endl;
-       std::cout << doors.size() << std::endl;
-
 
         //draw doors
         for (int i =0; i < doors.size(); i++)

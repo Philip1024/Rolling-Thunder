@@ -185,7 +185,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 			sprite.setTextureRect(shootLeft->nextFrame());
 		}
 		shootingFrame++;
-		if (shootingFrame == 3)
+		if (shootingFrame == 4)
 		{
 			shooting = false;
 			shootingFrame = 0;
