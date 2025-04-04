@@ -174,7 +174,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	}
 	if ((actionFlags & 0b00100000||shooting) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor)
 	{
-		if (shootTime.getElapsedTime().asSeconds() <= 0.9f)
+		if (shootTime.getElapsedTime().asSeconds() <= 0.15f)
 			return;
 		shooting = true;
 		if (shootingFrame == 3)
@@ -203,7 +203,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 				sprite.setTextureRect(shootLeft->nextFrame());
 				if (shootingFrame == 2)
 				{
-
+					new Bullet(true, false, sprite.getPosition().x - 15, sprite.getPosition().y - 12);//still need to fix
 				}
 			}
 		}

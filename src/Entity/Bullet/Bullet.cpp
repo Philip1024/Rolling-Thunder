@@ -48,8 +48,8 @@ void Bullet::update(char actionFlags, std::vector<sf::FloatRect>*)
 		fired = true;
 	}
 	if(direction)
-		sprite.move({ 1,0 });
+		sprite.move({ 5,0 });
 	else 
-		sprite.move({ -1,0 });
+		sprite.move({ -5,0 });
 }
 
