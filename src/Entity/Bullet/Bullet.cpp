@@ -35,3 +35,19 @@ void Bullet::collide(Entity* other, char actionFlags)
 {
 	
 }
+
+
+//if side is true then use left, else use right
+//this will be called by player
+void Bullet::update(bool side)
+{
+	if (side)
+	{
+		bulletLeft->nextFrame();
+	}
+	else
+	{
+		bulletRight->nextFrame();
+	}
+}
+

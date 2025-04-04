@@ -9,6 +9,7 @@ public:
 	void collide(Entity* other, char actionFlags);
 	sf::Vector2f getPos() { return sf::Vector2f(xPos, yPos); }
 	bool team;
+	void update(bool side);
 	bool direction;
 	Bullet(bool bTeam, bool bDirection,float x, float y);
 	AnimationData::SectionData* bulletRight, * bulletLeft;
