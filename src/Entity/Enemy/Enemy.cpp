@@ -2,6 +2,7 @@
 #include "../Player/Player.h"
 #include"../Bullet/Bullet.h"
 #include <iostream>
+#include <math.h>
 
 Enemy::Enemy(sf::Vector2f pos)
 	: Entity(AnimationData::getTexture(AnimationData::ENEMY))
@@ -60,7 +61,7 @@ void Enemy::update(sf::Vector2f playerPos)
 	{
 
 		
-		if (rand() % 100 == 1)
+		if (sqrt((playerPos.x - getSprite().getPosition().x) + (playerPos.y - getSprite().getPosition().y)) > 50)
 		{
 			curMove = IDLE_CROUCH;
 			moveTicks = 9*4;
@@ -73,9 +74,10 @@ void Enemy::update(sf::Vector2f playerPos)
 			else
 				curMove = WALK_RIGHT;
 		}
+
 	}
 	moveTicks--;
-	curMove = SHOOT_RIGHT;
+
 	
 
 	sprite.setTexture(*AnimationData::getTexture(AnimationData::ENEMY));
