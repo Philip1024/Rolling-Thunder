@@ -75,11 +75,11 @@ void Enemy::update(sf::Vector2f playerPos)
 			curMove = IDLE_CROUCH;
 			moveTicks = 9*4;
 		}
-		//this makes the enemy have a 1% chance to shoot the player per tick
+		//if the enemy is close to the player
 		else if( rand() % 100 < 2)
 		{
 			if (playerPos.x < sprite.getPosition().x)
-				curMove = SHOOT_LEFT;
+				curMove = ;
 			else
 				curMove = SHOOT_RIGHT;
 		}
