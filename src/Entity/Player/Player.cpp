@@ -217,15 +217,15 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 
 	}
 
-	/*
-	sf::RectangleShape bound;
-	bound.setSize(bounds.size);
-	bound.setPosition(bounds.position);
-	bound.setFillColor(sf::Color::Transparent);
-	bound.setOutlineColor(sf::Color::Green);
-	bound.setOutlineThickness(1);
-	window->draw(bound);
-	*/
+	
+	sf::RectangleShape bounds;
+	bounds.setSize(sprite.getGlobalBounds().size);
+	bounds.setPosition(sprite.getGlobalBounds().position);
+	bounds.setFillColor(sf::Color::Transparent);
+	bounds.setOutlineColor(sf::Color::Green);
+	bounds.setOutlineThickness(1);
+	window->draw(bounds);
+	
 	//std::cout << sprite.getPosition().x <<' '<< sprite.getPosition().y << std::endl;
 	clock.restart();
 }

@@ -71,9 +71,9 @@ void Enemy::update(sf::Vector2f playerPos)
 	// when the animation ends
 	//if the enemy is in the process of death skip this statement
 	//
-	/*if (moveTicks <= 0 || curMove != DIE_LEFT || curMove != DIE_RIGHT)
+	if (moveTicks <= 0 || curMove != DIE_LEFT || curMove != DIE_RIGHT)
 	{
-		if (abs(playerPos.x - sprite.getPosition().x) > 150 || rand() % 100 < ) 
+		if (abs(playerPos.x - sprite.getPosition().x) > 150 || rand() % 100 < 5) 
 		{
 			curMove = IDLE_CROUCH;
 			moveTicks = 9*4;
@@ -97,7 +97,7 @@ void Enemy::update(sf::Vector2f playerPos)
 		}
 
 	}
-	moveTicks--;*/
+	moveTicks--;
 
 	sprite.setTexture(*AnimationData::getTexture(AnimationData::ENEMY));
 
