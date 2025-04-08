@@ -73,19 +73,18 @@ void Enemy::update(sf::Vector2f playerPos)
 	//
 	/*if (moveTicks <= 0 || curMove != DIE_LEFT || curMove != DIE_RIGHT)
 	{
-		if (sqrt((playerPos.x - getSprite().getPosition().x) + (playerPos.y - getSprite().getPosition().y)) > 50)
-		if (sqrt((playerPos.x - getSprite().getPosition().x) + (playerPos.y - getSprite().getPosition().y)) > 50)
+		if (abs(playerPos.x - sprite.getPosition().x) > 150 || rand() % 100 < ) 
 		{
 			curMove = IDLE_CROUCH;
 			moveTicks = 9*4;
 		}
 		//if the enemy is close to the player
-		else if( rand() % 100 < 2)
+		else if(abs(playerPos.x - sprite.getPosition().x) < 30)
 		{
 			if (playerPos.x < sprite.getPosition().x)
-				curMove = ;
+				curMove = PUNCH_LEFT;
 			else
-				curMove = SHOOT_RIGHT;
+				curMove = PUNCH_RIGHT;
 		}
 		//this determines where to walk
 		else
@@ -100,8 +99,6 @@ void Enemy::update(sf::Vector2f playerPos)
 	}
 	moveTicks--;*/
 
-	
-	curMove = PUNCH_RIGHT;
 	sprite.setTexture(*AnimationData::getTexture(AnimationData::ENEMY));
 
 	switch (curMove)
