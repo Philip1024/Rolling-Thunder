@@ -35,6 +35,7 @@ public:
 
 	static Section* getSection(std::string sectionName);
 	static sf::Texture* getTexture(TextureName name) { return textureMap[name]; }
+	static void reloadTextures();
 private:
 	static std::string toLowerCase(std::string i);
 
@@ -45,11 +46,11 @@ private:
 enum AnimationData::TextureName
 {
 	ENEMY,
-	ENEMY_FLIPPED,
 	ALBATROSS,
 	DOOR,
 	RAIL,
 	BULLET,
+	SIZE
 };
 
 // interior class to AnimationData

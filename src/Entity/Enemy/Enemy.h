@@ -20,6 +20,8 @@ public:
 		IDLE_LEFT,
 		IDLE_RIGHT,
 		IDLE_CROUCH,
+		PUNCH_RIGHT,
+		PUNCH_LEFT
 	};
 	Enemy(sf::Vector2f pos);
 	~Enemy();

@@ -6,12 +6,10 @@ std::unordered_map<std::string, AnimationData::Section*> AnimationData::sectionM
 
 void AnimationData::load()
 {
-	textureMap[ENEMY] = new sf::Texture("res/SpriteSheets/EnemyRemake.png");
-	//textureMap[ENEMY_FLIPPED] = new sf::Texture("res/SpriteSheets/Enemy_flipped.png");
-	textureMap[ALBATROSS] = new sf::Texture("res/SpriteSheets/Albatross.png");
-	textureMap[DOOR] = new sf::Texture("res/SpriteSheets/Door(1).png");
-	textureMap[RAIL] = new sf::Texture("res/SpriteSheets/RailFinal.png");
-	textureMap[BULLET] = new sf::Texture("res/SpriteSheets/bullet.png");
+	for (unsigned int i = 0; i < TextureName::SIZE; i++)
+		textureMap[(TextureName)i] = new sf::Texture();
+
+	reloadTextures();
 	auto rightToLeftFunction = [](unsigned int& curFrame, unsigned int maxFrames) -> void { // LAMBDA
 		if (curFrame == 0)
 			curFrame = maxFrames;
@@ -58,6 +56,8 @@ void AnimationData::load()
 		4, 1, sf::Vector2u(0, 0), sf::Vector2u(48, 64), true);
 	sectionMap["enemy_shoot_left"] = new Section(textureMap[ENEMY],
 		4, 1, sf::Vector2u(0, 64), sf::Vector2u(48, 64), true);
+	sectionMap["enemy_punch_right"] = new Section(textureMap[ENEMY],
+		4, 1, sf::Vector2u(0, 704), sf::Vector2u(64, 64), true);
 
 	//doors
 	sectionMap["door_open"] = new Section(textureMap[DOOR],
@@ -76,6 +76,17 @@ void AnimationData::load()
 		3, 1, sf::Vector2u(141, 0), sf::Vector2u(247, 35));
 
 }
+
+
+void AnimationData::reloadTextures()
+{
+	textureMap[ENEMY]->loadFromFile("res/SpriteSheets/EnemyRemake.png");
+	textureMap[ALBATROSS]->loadFromFile("res/SpriteSheets/Albatross.png");
+	textureMap[DOOR]->loadFromFile("res/SpriteSheets/Door(1).png");
+	textureMap[RAIL]->loadFromFile("res/SpriteSheets/RailFinal.png");
+	textureMap[BULLET]->loadFromFile("res/SpriteSheets/bullet.png");
+}
+
 
 //This deletes all of the data so no leak
 void AnimationData::unload()

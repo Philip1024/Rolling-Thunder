@@ -3,18 +3,22 @@
 #include"../Bullet/Bullet.h"
 #include <iostream>
 #include <math.h>
+typedef AnimationData::SectionData SectionData;
+
 
 Enemy::Enemy(sf::Vector2f pos)
 	: Entity(AnimationData::getTexture(AnimationData::ENEMY))
 {
 	sprite.setPosition(pos);
 
-	animationMap[WALK_LEFT] = new AnimationData::SectionData(AnimationData::getSection("enemy_move_left"));
-	animationMap[WALK_RIGHT] = new AnimationData::SectionData(AnimationData::getSection("enemy_move_right"));
-	animationMap[IDLE_CROUCH] = new AnimationData::SectionData(AnimationData::getSection("enemy_idle_sneak"));
-	animationMap[IDLE_RIGHT] = new AnimationData::SectionData(AnimationData::getSection("enemy_idle_right"));
-	animationMap[IDLE_LEFT] = new AnimationData::SectionData(AnimationData::getSection("enemy_idle_left"));
-	animationMap[SHOOT_RIGHT] = new AnimationData::SectionData(AnimationData::getSection("enemy_shoot_right"));
+	animationMap[WALK_LEFT] = new SectionData(AnimationData::getSection("enemy_move_left"));
+	animationMap[WALK_RIGHT] = new SectionData(AnimationData::getSection("enemy_move_right"));
+	animationMap[IDLE_CROUCH] = new SectionData(AnimationData::getSection("enemy_idle_sneak"));
+	animationMap[IDLE_RIGHT] = new SectionData(AnimationData::getSection("enemy_idle_right"));
+	animationMap[IDLE_LEFT] = new SectionData(AnimationData::getSection("enemy_idle_left"));
+	animationMap[SHOOT_RIGHT] = new SectionData(AnimationData::getSection("enemy_shoot_right"));
+	animationMap[PUNCH_LEFT] = new SectionData(AnimationData::getSection("enemy_punch_left"));
+	animationMap[PUNCH_RIGHT] = new SectionData(AnimationData::getSection("enemy_punch_right"));
 }
 
 
@@ -59,8 +63,6 @@ void Enemy::update(sf::Vector2f playerPos)
 	// when the animation ends
 	if (moveTicks <= 0)
 	{
-
-		
 		if (sqrt((playerPos.x - getSprite().getPosition().x) + (playerPos.y - getSprite().getPosition().y)) > 50)
 		{
 			curMove = IDLE_CROUCH;
@@ -79,7 +81,7 @@ void Enemy::update(sf::Vector2f playerPos)
 	moveTicks--;
 
 	
-
+	curMove = PUNCH_RIGHT;
 	sprite.setTexture(*AnimationData::getTexture(AnimationData::ENEMY));
 
 	switch (curMove)

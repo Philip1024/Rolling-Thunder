@@ -85,8 +85,10 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		if (sprite.getGlobalBounds().findIntersection(ground->at(0)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting)
 			shouldFall = false;
 	}
+
 	if (shouldFall)
 		falling = true;
+
 	//falling animation
 	if (falling)
 	{
@@ -107,6 +109,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		}
 			
 	}
+
 	if ((actionFlags & 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump&&!falling&&!inDoor && !shooting) // moving right. 
 	{
 		sprite.setTextureRect(moveRight->nextFrame());
@@ -116,6 +119,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		faceRight = true;
 
 	}
+
 	if ((actionFlags & 0b00000010) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting) // moving left TODO: bound check on the left using view
 	{
 		sprite.setTextureRect(moveLeft->nextFrame());
@@ -157,6 +161,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		}
 		activeRightJump = jump(angle, ground);
 	}
+
 	if (((actionFlags & 0b00010000) || activeLeftJump) && !activeJump && !activeRightJump && !falling && !inDoor&&!shooting)//jump
 	{
 		//represents time
@@ -172,6 +177,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		}
 		activeRightJump = jump(angle, ground);
 	}
+
 	if ((actionFlags & 0b00100000||shooting) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor)
 	{
 		if (shootTime.getElapsedTime().asSeconds() <= 0.15f)
@@ -210,6 +216,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		shootTime.restart();
 
 	}
+
 	/*
 	sf::RectangleShape bound;
 	bound.setSize(bounds.size);

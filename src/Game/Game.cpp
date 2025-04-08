@@ -174,7 +174,6 @@ void Game::run()
                 case sf::Keyboard::Scan::R:
                     shooting = true;
                     break;
-                 
                 }
             }
             if (const auto* keyReleased = event->getIf<sf::Event::KeyReleased>())
@@ -196,7 +195,9 @@ void Game::run()
                 case sf::Keyboard::Scan::R:
                     shooting = false;
                     break;
-
+                case sf::Keyboard::Scan::K:
+                    AnimationData::reloadTextures();
+                    break;
                 }
             }
         }
