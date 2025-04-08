@@ -44,6 +44,14 @@ void Enemy::collide(Entity* other)
 	if (bulletCast != nullptr)
 	{
 		//bulletCast->update();
+		if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT)
+		{
+			curMove = DIE_LEFT;
+		}
+		else
+		{
+			curMove = DIE_RIGHT;
+		}
 	}
 
 
@@ -61,13 +69,25 @@ void Enemy::update(sf::Vector2f playerPos)
 	sprite.setScale(sf::Vector2f(0.9, 0.9));
 
 	// when the animation ends
-	if (moveTicks <= 0)
+	//if the enemy is in the process of death skip this statement
+	//
+	if (moveTicks <= 0 || curMove != DIE_LEFT || curMove != DIE_RIGHT)
 	{
+		if (sqrt((playerPos.x - getSprite().getPosition().x) + (playerPos.y - getSprite().getPosition().y)) > 50)
 		if (sqrt((playerPos.x - getSprite().getPosition().x) + (playerPos.y - getSprite().getPosition().y)) > 50)
 		{
 			curMove = IDLE_CROUCH;
 			moveTicks = 9*4;
 		}
+		//if the enemy is close to the player
+		else if( rand() % 100 < 2)
+		{
+			if (playerPos.x < sprite.getPosition().x)
+				curMove = ;
+			else
+				curMove = SHOOT_RIGHT;
+		}
+		//this determines where to walk
 		else
 		{
 

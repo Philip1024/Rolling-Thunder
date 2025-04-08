@@ -138,7 +138,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 			activeJump = true;
 			t = 0;
 			velo = 30;
-			g = 9.8;
+			g = 13;
 			angle = 90 * PI / 180;
 		}
 		activeJump = jump(angle, ground);
@@ -156,7 +156,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 			activeRightJump = true;
 			t = 0;
 			velo = 30;
-			g = 9.8;
+			g = 13;
 			angle = 75 * PI / 180;
 		}
 		activeRightJump = jump(angle, ground);
@@ -172,7 +172,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 			activeRightJump = true;
 			t = 0;
 			velo = 30;
-			g = 9.8;
+			g = 13;
 			angle = 105 * PI / 180;
 		}
 		activeRightJump = jump(angle, ground);
@@ -180,7 +180,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 
 	if ((actionFlags & 0b00100000||shooting) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor)
 	{
-		if (shootTime.getElapsedTime().asSeconds() <= 0.15f)
+		if (shootTime.getElapsedTime().asSeconds() <= 0.1f)
 			return;
 		shooting = true;
 		if (shootingFrame == 3)
@@ -209,7 +209,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 				sprite.setTextureRect(shootLeft->nextFrame());
 				if (shootingFrame == 2)
 				{
-					new Bullet(true, false, sprite.getPosition().x - 15, sprite.getPosition().y - 12);//still need to fix
+					new Bullet(true, false, sprite.getPosition().x -25, sprite.getPosition().y -13);//still need to fix
 				}
 			}
 		}
