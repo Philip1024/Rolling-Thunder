@@ -273,10 +273,21 @@ void Game::isColliding(char actionFlags)
              {
                 Rail* railCast = dynamic_cast<Rail*>(entities.at(i));
                 Rail* railCast2 = dynamic_cast<Rail*>(entities.at(j));
-                if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
+                Player* playerCast = dynamic_cast<Player*>(entities.at(i));
+                Player* playerCast2 = dynamic_cast<Player*>(entities.at(j));
+                // rail player collision, not working yet
+                if ((playerCast!=nullptr||playerCast2!=nullptr)&&(railCast!=nullptr||railCast2!=nullptr))
                 {
-                    entities.at(i)->collide(entities.at(j), actionFlags);
-                    entities.at(j)->collide(entities.at(i), actionFlags);
+                    //check player rail colision
+                    std::cout<<"works"<<std::endl;
+                }
+                else
+                {
+                    if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
+                    {
+                        entities.at(i)->collide(entities.at(j), actionFlags);
+                        entities.at(j)->collide(entities.at(i), actionFlags);
+                    }
                 }
              }
         }
