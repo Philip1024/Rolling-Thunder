@@ -81,9 +81,9 @@ void Enemy::update(sf::Vector2f playerPos)
 		//if the enemy is close to the player
 		else if(abs(playerPos.x - sprite.getPosition().x) < 30)
 		{
-			if (playerPos.x < sprite.getPosition().x)
+			if (playerPos.x < sprite.getPosition().x && abs(playerPos.x - sprite.getPosition().x) < 10)
 				curMove = PUNCH_LEFT;
-			else
+			else if (playerPos.x > sprite.getPosition().x)
 				curMove = PUNCH_RIGHT;
 		}
 		//this determines where to walk
