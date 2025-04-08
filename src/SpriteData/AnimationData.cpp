@@ -64,6 +64,7 @@ void AnimationData::load()
 		4, 1, sf::Vector2u(24, 2), sf::Vector2u(222, 62));
 	sectionMap["door_close"] = new Section(textureMap[DOOR],
 		4, 1, sf::Vector2u(24, 2), sf::Vector2u(222, 62));
+
 	getSection("door_close")->setNextFrameFunction(rightToLeftFunction);
 	//rails
 	sectionMap["Rail"] = new Section(textureMap[RAIL],
