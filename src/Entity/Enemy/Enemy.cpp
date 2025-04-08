@@ -71,7 +71,7 @@ void Enemy::update(sf::Vector2f playerPos)
 	// when the animation ends
 	//if the enemy is in the process of death skip this statement
 	//
-	if (moveTicks <= 0 || curMove != DIE_LEFT || curMove != DIE_RIGHT)
+	/*if (moveTicks <= 0 || curMove != DIE_LEFT || curMove != DIE_RIGHT)
 	{
 		if (sqrt((playerPos.x - getSprite().getPosition().x) + (playerPos.y - getSprite().getPosition().y)) > 50)
 		if (sqrt((playerPos.x - getSprite().getPosition().x) + (playerPos.y - getSprite().getPosition().y)) > 50)
@@ -98,7 +98,7 @@ void Enemy::update(sf::Vector2f playerPos)
 		}
 
 	}
-	moveTicks--;
+	moveTicks--;*/
 
 	
 	curMove = PUNCH_RIGHT;
