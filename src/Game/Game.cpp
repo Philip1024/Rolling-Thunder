@@ -304,11 +304,33 @@ void Game::isColliding(char actionFlags)
                 }
                 else if ((playerCast != nullptr && doorCast2 != nullptr))
                 {
-
+                    if (entities.at(i)->getSprite().getPosition().x > doorCast2->getFront())
+                    {
+                        if (entities.at(i)->getSprite().getPosition().x < doorCast2->getBack())
+                        {
+                            std::cout << "TRUE";
+                            if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
+                            {
+                                entities.at(i)->collide(entities.at(j), actionFlags);
+                                entities.at(j)->collide(entities.at(i), actionFlags);
+                            }
+                        }
+                    }
                 }
                 else if (playerCast2 != nullptr && doorCast != nullptr)
                 {
-
+                    if (entities.at(j)->getSprite().getPosition().x > doorCast->getFront())
+                    {
+                        if (entities.at(j)->getSprite().getPosition().x < doorCast->getBack())
+                        {
+                            std::cout << "TRUE";
+                            if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
+                            {
+                                entities.at(i)->collide(entities.at(j), actionFlags);
+                                entities.at(j)->collide(entities.at(i), actionFlags);
+                            }
+                        }
+                    }
                 }
                 else
                 {

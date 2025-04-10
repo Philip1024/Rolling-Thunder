@@ -235,7 +235,6 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 //foor colliding, not functional for door collision yet
 void Player::collide(Entity* other,char actionFlags)
 {
-	std::cout << "TRUE";
 	if (doorTime.getElapsedTime().asSeconds() <= 0.06f)
 		return;
 
@@ -297,7 +296,7 @@ void Player::collide(Entity* other,char actionFlags)
 			if (!doorCast->getOpen())
 			{
 				sprite.setTextureRect(walkOutDoor->nextFrame());
-				sprite.move({ 0,1 });
+				sprite.move({ 0,5 });
 				sprite.setColor(sf::Color(255, 255, 255, 255));
 			}
 			//after player has exited door and door isn't doing anything reset to walking position
