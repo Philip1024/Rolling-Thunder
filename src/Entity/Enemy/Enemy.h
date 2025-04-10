@@ -1,5 +1,6 @@
 #pragma once
 #include "../Entity.h"
+#include "../Player/Player.h"
 
 
 class Enemy : public Entity
@@ -28,7 +29,7 @@ public:
 
 	void collide(Entity* other);
 	void update(char actionFlags);
-	void update(sf::Vector2f playerPos);
+	void update(Player* pl);
 private:
 	Movement curMove, lastMove;
 	int moveTicks;

@@ -238,7 +238,7 @@ void Game::run()
         if (movingLeft && jumping) actionFlags |= 0b00010000;
         if(shooting) actionFlags |= 0b00100000;
         player->update(actionFlags,&ground);
-        enemy->update(player->getSprite().getPosition());
+        enemy->update(player);
 
         for (int i = 0; i < doors.size(); i++)
         {

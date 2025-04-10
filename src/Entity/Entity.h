@@ -31,6 +31,7 @@ protected:
 	// constructed until texture is loaded from file
 	sf::Sprite sprite;
 	static sf::View* view;
+	// 30Tps
 	static unsigned int& getCurrentTick() { return *currentTick; }
 	static sf::RenderWindow* window;
 private:

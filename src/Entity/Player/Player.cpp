@@ -235,6 +235,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 //foor colliding, not functional for door collision yet
 void Player::collide(Entity* other,char actionFlags)
 {
+	std::cout << "TRUE";
 	if (doorTime.getElapsedTime().asSeconds() <= 0.06f)
 		return;
 

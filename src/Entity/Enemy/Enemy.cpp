@@ -64,33 +64,47 @@ void Enemy::update(char actionFlags)
 }
 
 
-void Enemy::update(sf::Vector2f playerPos)
+void Enemy::update(Player* player)
 {
 	sprite.setScale(sf::Vector2f(0.9, 0.9));
 
 	// when the animation ends
 	//if the enemy is in the process of death skip this statement
 	//
+	int playerDistance = abs(player->getSprite().getPosition().x - sprite.getPosition().x);
 	if (moveTicks <= 0 || curMove != DIE_LEFT || curMove != DIE_RIGHT)
 	{
-		if (abs(playerPos.x - sprite.getPosition().x) > 150 || rand() % 100 < 5) 
+		if (player->playerInDoor() && playerDistance < 70)
+		{
+			int cycleTick = getCurrentTick() % 190;
+
+			if (cycleTick < 60) 
+				curMove = WALK_LEFT;
+			else if (cycleTick < 95) 
+				curMove = IDLE_RIGHT;//change to idle left later on when we have the animation
+			else if (cycleTick < 150) 
+				curMove = WALK_RIGHT;
+			else 
+				curMove = IDLE_RIGHT;
+		}
+		else if (playerDistance > 150 || rand() % 100 < 5)
 		{
 			curMove = IDLE_CROUCH;
 			moveTicks = 9*4;
 		}
 		//if the enemy is close to the player
-		else if(abs(playerPos.x - sprite.getPosition().x) < 30)
+		else if(playerDistance < 30)
 		{
-			if (playerPos.x < sprite.getPosition().x && abs(playerPos.x - sprite.getPosition().x) < 10)
+			if (player->getSprite().getPosition().x < sprite.getPosition().x && playerDistance < 10)
 				curMove = PUNCH_LEFT;
-			else if (playerPos.x > sprite.getPosition().x)
+			else if (player->getSprite().getPosition().x > sprite.getPosition().x)
 				curMove = PUNCH_RIGHT;
 		}
 		//this determines where to walk
 		else
 		{
 
-			if (playerPos.x < sprite.getPosition().x)
+			if (player->getSprite().getPosition().x < sprite.getPosition().x)
 				curMove = WALK_LEFT;
 			else
 				curMove = WALK_RIGHT;

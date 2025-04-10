@@ -23,6 +23,7 @@ public:
 	bool isClosed();
 	bool getStop();
 	void changeOpacity(bool visible);
+	float getFront() { return door.getPosition().x; }
 	//void collide(Entity* other) override;
 
 private:
