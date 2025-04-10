@@ -230,14 +230,15 @@ void Game::run()
         // done this way to allow input to be read in Game.cpp
         char actionFlags = 0b0;
 		if (wPressed) actionFlags |= 0b10000000;
+        if (wPressed&&jumping) actionFlags |= 0b01000000;
         if (movingRight) actionFlags |= 0b00000001;
         if (movingLeft) actionFlags |= 0b00000010;
         if (movingRight&&jumping) actionFlags |= 0b00001000;
-        if (jumping&&!movingRight&&!movingLeft) actionFlags |= 0b00000100;
+        if (jumping&&!movingRight&&!movingLeft&&!wPressed) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
         if(shooting) actionFlags |= 0b00100000;
         player->update(actionFlags,&ground);
-        enemy->update(player->getSprite().getPosition());
+        enemy->update(player);
 
         for (int i = 0; i < doors.size(); i++)
         {
@@ -276,11 +277,61 @@ void Game::isColliding(char actionFlags)
                 Rail* railCast2 = dynamic_cast<Rail*>(entities.at(j));
                 Player* playerCast = dynamic_cast<Player*>(entities.at(i));
                 Player* playerCast2 = dynamic_cast<Player*>(entities.at(j));
-                // rail player collision, not working yet
-                if ((playerCast!=nullptr||playerCast2!=nullptr)&&(railCast!=nullptr||railCast2!=nullptr))
+                Door* doorCast = dynamic_cast<Door*>(entities.at(i));
+                Door* doorCast2 = dynamic_cast<Door*>(entities.at(j));
+                // rail player collision
+                if ((playerCast!=nullptr&&railCast2!=nullptr))
                 {
-                    //check player rail colision
-                    std::cout<<"works"<<std::endl;
+                    if (entities.at(i)->getSprite().getPosition().x>railCast2->getFront())
+                    {
+                        if (entities.at(i)->getSprite().getPosition().x < railCast2->getBack())
+                        {
+                            entities.at(i)->collide(entities.at(j), actionFlags);
+                            entities.at(j)->collide(entities.at(i), actionFlags);
+                        }
+                    }
+                }
+                else if ((railCast != nullptr && playerCast2 != nullptr))
+                {
+                    if (entities.at(j)->getSprite().getPosition().x > railCast->getFront())
+                    {
+                        if (entities.at(j)->getSprite().getPosition().x < railCast->getBack())
+                        {
+                            entities.at(i)->collide(entities.at(j), actionFlags);
+                            entities.at(j)->collide(entities.at(i), actionFlags);
+                        }
+                    }
+                }
+                // player door collisions
+                else if ((playerCast != nullptr && doorCast2 != nullptr))
+                {
+                    if (entities.at(i)->getSprite().getPosition().x > doorCast2->getFront())
+                    {
+                        if (entities.at(i)->getSprite().getPosition().x < doorCast2->getBack())
+                        {
+                            std::cout << "TRUE";
+                            if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
+                            {
+                                entities.at(i)->collide(entities.at(j), actionFlags);
+                                entities.at(j)->collide(entities.at(i), actionFlags);
+                            }
+                        }
+                    }
+                }
+                else if (playerCast2 != nullptr && doorCast != nullptr)
+                {
+                    if (entities.at(j)->getSprite().getPosition().x > doorCast->getFront())
+                    {
+                        if (entities.at(j)->getSprite().getPosition().x < doorCast->getBack())
+                        {
+                            std::cout << "TRUE";
+                            if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
+                            {
+                                entities.at(i)->collide(entities.at(j), actionFlags);
+                                entities.at(j)->collide(entities.at(i), actionFlags);
+                            }
+                        }
+                    }
                 }
                 else
                 {

@@ -23,6 +23,8 @@ public:
 	bool isClosed();
 	bool getStop();
 	void changeOpacity(bool visible);
+	float getFront() { return (float) (xPos-5); }
+	float getBack() { return (float) (xPos + 5); }
 	//void collide(Entity* other) override;
 
 private:

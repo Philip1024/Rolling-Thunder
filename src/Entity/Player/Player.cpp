@@ -50,6 +50,8 @@ Player::Player()
 	walkOutDoor = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_out_door"));
 	shootRight = new AnimationData::SectionData(AnimationData::getSection("albatross_shooting_right"));
 	shootLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_shooting_left"));
+	floor = 0;
+	jumpingRail = false;
 }
 
 
@@ -74,15 +76,14 @@ right most bit (00000001): move right
 void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
 	Entity::update(actionFlags,ground);
-	if (clock.getElapsedTime().asSeconds() <= 0.05f)
-		return; // only update the animation past this point
+	 // only update the animation past this point
 	//meant to determine whether player is on ground, if not player should fall
 	//test
 	shouldFall = true;
 	for (int i = 0; i < ground->size(); i++)
 	{
 		//if intersects with ground or in any of the other unique animations don't fall
-		if (sprite.getGlobalBounds().findIntersection(ground->at(0)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting)
+		if (sprite.getGlobalBounds().findIntersection(ground->at(0)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting||jumpingRail)
 			shouldFall = false;
 	}
 
@@ -213,6 +214,8 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 				}
 			}
 		}
+		if (getCurrentTick() % 3 == 0)
+			sprite.setTextureRect(frameUpdate);
 		shootTime.restart();
 
 	}
@@ -237,6 +240,23 @@ void Player::collide(Entity* other,char actionFlags)
 		return;
 
 	Door* doorCast = dynamic_cast<Door*>(other);
+	Rail* railCast = dynamic_cast<Rail*>(other);
+	if ((railCast != nullptr && (actionFlags & 0b01000000)||jumpingRail) && !activeRightJump && !activeJump && !activeLeftJump && !falling&&!inDoor)
+	{
+		if (!jumpingRail)
+		{
+			if (faceRight)
+			{
+				sprite.setTextureRect((AnimationData::getSection("albatross_jumping_to_rail_right")->getFrame(0)));
+				jumpingRail = true;
+			}
+		}
+		else
+		{
+			sprite.setTextureRect((AnimationData::getSection("albatross_jumping_to_rail_right")->getFrame(1)));
+			sprite.move({ 0,-2 });
+		}
+	}
 	if (doorCast != nullptr && ((actionFlags & 0b10000000)||inDoor) && !activeRightJump && !activeJump && !activeLeftJump && !falling)
 	{
 		//starts door opening and has player walk into door one frame
@@ -277,7 +297,7 @@ void Player::collide(Entity* other,char actionFlags)
 			if (!doorCast->getOpen())
 			{
 				sprite.setTextureRect(walkOutDoor->nextFrame());
-				sprite.move({ 0,1 });
+				sprite.move({ 0,5 });
 				sprite.setColor(sf::Color(255, 255, 255, 255));
 			}
 			//after player has exited door and door isn't doing anything reset to walking position
@@ -294,8 +314,8 @@ void Player::collide(Entity* other,char actionFlags)
 				exitOnce = false;
 			}
 		}
+		doorTime.restart();
 	}
-	doorTime.restart();
 }
 
 

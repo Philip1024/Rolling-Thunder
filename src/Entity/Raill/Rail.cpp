@@ -46,8 +46,14 @@ void Rail::setPos(sf::Vector2f a)
 	sprite.setPosition(sf::Vector2f(x, y));
 }
 
-float Rail::getfront()
+float Rail::getFront()
 {
 	return (float)xPos;
+}
+
+
+float Rail::getBack()
+{
+	return (float)(xPos + 45);
 }
 

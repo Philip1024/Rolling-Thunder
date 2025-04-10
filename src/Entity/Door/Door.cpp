@@ -8,8 +8,8 @@
 
 Door::Door(int x,int y): Entity(AnimationData::getTexture(AnimationData::DOOR))
 {
-	xPos = 215;
-	yPos = 0; 
+	xPos = x;
+	yPos = y; 
 	closed = true;
 	sprite.setPosition(sf::Vector2f((float)x, (float)y));
 	sprite.setScale({ 0.8f,0.8f });
@@ -96,6 +96,13 @@ bool Door::close()
 //by holding the w key after entering the door
 void Door::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
+	sf::RectangleShape bounds;
+	bounds.setSize(sprite.getGlobalBounds().size);
+	bounds.setPosition(sprite.getGlobalBounds().position);
+	bounds.setFillColor(sf::Color::Transparent);
+	bounds.setOutlineColor(sf::Color::Green);
+	bounds.setOutlineThickness(1);
+	window->draw(bounds);
 	if (clock.getElapsedTime().asSeconds() <= 0.06f)
 		return;
 

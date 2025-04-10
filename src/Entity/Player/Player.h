@@ -3,6 +3,7 @@
 #include "../../SpriteData/AnimationData.h"
 #include "../Entity.h"
 #include "../Door/Door.h"
+#include "../Raill/Rail.h"//typo
 #include<vector>
 class Player : public Entity
 {
@@ -11,6 +12,7 @@ public:
 	~Player();
 	void collide(Entity* other,char ActionFlags) override;
 	void update(char actionFlags,std::vector<sf::FloatRect>*);
+	bool playerInDoor() { return inDoor; }
 	void setPos(sf::Vector2f);
 	//sf::Vector2f getPosition();
 private:
@@ -40,5 +42,8 @@ private:
 	int doorCount; //used to determine how door should open when collides with door
 	AnimationData::SectionData* moveLeft, * moveRight,*jumpLeft, *jumpRight, *walkInDoor, * walkOutDoor,*shootRight, *shootLeft;
 	bool jump(double angle, std::vector<sf::FloatRect>*);
+	int floor;//meant to represent what floor the player is on
+	bool jumpingRail;
+	sf::IntRect frameUpdate;
 };
 
