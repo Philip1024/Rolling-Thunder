@@ -3,6 +3,7 @@
 #include "../../SpriteData/AnimationData.h"
 #include "../Entity.h"
 #include "../Door/Door.h"
+#include "../Raill/Rail.h"//typo
 #include<vector>
 class Player : public Entity
 {

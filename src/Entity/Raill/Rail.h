@@ -9,7 +9,7 @@ public:
 	void update(char actionFlags);
 	void changeOpacity(bool visible);
 	void setPos(sf::Vector2f a);
-	float getfront();
+	float getFront();
 	float getBack();
 private:
 	int xPos, yPos;

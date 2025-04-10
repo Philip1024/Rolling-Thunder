@@ -237,6 +237,7 @@ void Player::collide(Entity* other,char actionFlags)
 		return;
 
 	Door* doorCast = dynamic_cast<Door*>(other);
+	Rail* railCast = dynamic_cast<Rail*>(other);
 	if (doorCast != nullptr && ((actionFlags & 0b10000000)||inDoor) && !activeRightJump && !activeJump && !activeLeftJump && !falling)
 	{
 		//starts door opening and has player walk into door one frame
@@ -294,8 +295,8 @@ void Player::collide(Entity* other,char actionFlags)
 				exitOnce = false;
 			}
 		}
+		doorTime.restart();
 	}
-	doorTime.restart();
 }
 
 

@@ -230,6 +230,7 @@ void Game::run()
         // done this way to allow input to be read in Game.cpp
         char actionFlags = 0b0;
 		if (wPressed) actionFlags |= 0b10000000;
+        if (wPressed&&jumping) actionFlags |= 0b01000000;
         if (movingRight) actionFlags |= 0b00000001;
         if (movingLeft) actionFlags |= 0b00000010;
         if (movingRight&&jumping) actionFlags |= 0b00001000;
@@ -277,10 +278,27 @@ void Game::isColliding(char actionFlags)
                 Player* playerCast = dynamic_cast<Player*>(entities.at(i));
                 Player* playerCast2 = dynamic_cast<Player*>(entities.at(j));
                 // rail player collision, not working yet
-                if ((playerCast!=nullptr||playerCast2!=nullptr)&&(railCast!=nullptr||railCast2!=nullptr))
+                if ((playerCast!=nullptr&&railCast2!=nullptr))
                 {
-                    //check player rail colision
-                    std::cout<<"works"<<std::endl;
+                    if (entities.at(i)->getSprite().getPosition().x>railCast2->getFront())
+                    {
+                        if (entities.at(i)->getSprite().getPosition().x < railCast2->getBack())
+                        {
+                            entities.at(i)->collide(entities.at(j), actionFlags);
+                            entities.at(j)->collide(entities.at(i), actionFlags);
+                        }
+                    }
+                }
+                else if ((railCast != nullptr && playerCast2 != nullptr))
+                {
+                    if (entities.at(j)->getSprite().getPosition().x > railCast->getFront())
+                    {
+                        if (entities.at(j)->getSprite().getPosition().x < railCast->getBack())
+                        {
+                            entities.at(i)->collide(entities.at(j), actionFlags);
+                            entities.at(j)->collide(entities.at(i), actionFlags);
+                        }
+                    }
                 }
                 else
                 {
