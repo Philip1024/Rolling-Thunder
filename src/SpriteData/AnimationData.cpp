@@ -31,15 +31,20 @@ void AnimationData::load()
 	sectionMap["albatross_falling_right"] = new Section(textureMap[ALBATROSS],
 		1, 1, sf::Vector2u(353, 540), sf::Vector2u(401, 600));
 	sectionMap["albatross_walk_in_door"] = new Section(textureMap[ALBATROSS],
-		1, 3, sf::Vector2u(200, 180), sf::Vector2u(220, 358));
+		1, 3, sf::Vector2u(195, 180), sf::Vector2u(230, 358));
 	getSection("albatross_walk_in_door")->setNextFrameFunction(rightToLeftFunction);
 	sectionMap["albatross_walk_out_door"] = new Section(textureMap[ALBATROSS],
-		1, 3, sf::Vector2u(200, 0), sf::Vector2u(220, 180));
+		1, 3, sf::Vector2u(195, 0), sf::Vector2u(230, 180));
 	sectionMap["albatross_shooting_left"] = new Section(textureMap[ALBATROSS],
 		3, 1, sf::Vector2u(31, 243), sf::Vector2u(185, 295));
 	sectionMap["albatross_shooting_right"] = new Section(textureMap[ALBATROSS],
 		3, 1, sf::Vector2u(238, 241), sf::Vector2u(391, 294));
 	getSection("albatross_shooting_right")->setNextFrameFunction(rightToLeftFunction);
+	sectionMap["albatross_jumping_to_rail_right"] = new Section(textureMap[ALBATROSS],
+		2, 1, sf::Vector2u(229, 174), sf::Vector2u(285, 241));
+	sectionMap["albatross_jumping_to_rail_left"] = new Section(textureMap[ALBATROSS],
+		2, 1, sf::Vector2u(137, 175), sf::Vector2u(196, 241));
+	getSection("albatross_jumping_to_rail_left")->setNextFrameFunction(rightToLeftFunction);
 
 
 	//enemies

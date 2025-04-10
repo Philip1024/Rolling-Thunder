@@ -41,5 +41,7 @@ private:
 	int doorCount; //used to determine how door should open when collides with door
 	AnimationData::SectionData* moveLeft, * moveRight,*jumpLeft, *jumpRight, *walkInDoor, * walkOutDoor,*shootRight, *shootLeft;
 	bool jump(double angle, std::vector<sf::FloatRect>*);
+	int floor;//meant to represent what floor the player is on
+	bool jumpingRail;
 };
 

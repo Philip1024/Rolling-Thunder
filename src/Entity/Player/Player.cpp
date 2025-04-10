@@ -50,6 +50,8 @@ Player::Player()
 	walkOutDoor = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_out_door"));
 	shootRight = new AnimationData::SectionData(AnimationData::getSection("albatross_shooting_right"));
 	shootLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_shooting_left"));
+	floor = 0;
+	jumpingRail = false;
 }
 
 
@@ -82,7 +84,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	for (int i = 0; i < ground->size(); i++)
 	{
 		//if intersects with ground or in any of the other unique animations don't fall
-		if (sprite.getGlobalBounds().findIntersection(ground->at(0)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting)
+		if (sprite.getGlobalBounds().findIntersection(ground->at(0)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting||jumpingRail)
 			shouldFall = false;
 	}
 
@@ -238,6 +240,22 @@ void Player::collide(Entity* other,char actionFlags)
 
 	Door* doorCast = dynamic_cast<Door*>(other);
 	Rail* railCast = dynamic_cast<Rail*>(other);
+	if ((railCast != nullptr && (actionFlags & 0b01000000)||jumpingRail) && !activeRightJump && !activeJump && !activeLeftJump && !falling&&!inDoor)
+	{
+		if (!jumpingRail)
+		{
+			if (faceRight)
+			{
+				sprite.setTextureRect((AnimationData::getSection("albatross_jumping_to_rail_right")->getFrame(0)));
+				jumpingRail = true;
+			}
+		}
+		else
+		{
+			sprite.setTextureRect((AnimationData::getSection("albatross_jumping_to_rail_right")->getFrame(1)));
+			sprite.move({ 0,-2 });
+		}
+	}
 	if (doorCast != nullptr && ((actionFlags & 0b10000000)||inDoor) && !activeRightJump && !activeJump && !activeLeftJump && !falling)
 	{
 		//starts door opening and has player walk into door one frame

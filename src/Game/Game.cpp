@@ -234,7 +234,7 @@ void Game::run()
         if (movingRight) actionFlags |= 0b00000001;
         if (movingLeft) actionFlags |= 0b00000010;
         if (movingRight&&jumping) actionFlags |= 0b00001000;
-        if (jumping&&!movingRight&&!movingLeft) actionFlags |= 0b00000100;
+        if (jumping&&!movingRight&&!movingLeft&&!wPressed) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
         if(shooting) actionFlags |= 0b00100000;
         player->update(actionFlags,&ground);
@@ -277,6 +277,8 @@ void Game::isColliding(char actionFlags)
                 Rail* railCast2 = dynamic_cast<Rail*>(entities.at(j));
                 Player* playerCast = dynamic_cast<Player*>(entities.at(i));
                 Player* playerCast2 = dynamic_cast<Player*>(entities.at(j));
+                Door* doorCast = dynamic_cast<Door*>(entities.at(i));
+                Door* doorCast2 = dynamic_cast<Door*>(entities.at(j));
                 // rail player collision, not working yet
                 if ((playerCast!=nullptr&&railCast2!=nullptr))
                 {
@@ -299,6 +301,14 @@ void Game::isColliding(char actionFlags)
                             entities.at(j)->collide(entities.at(i), actionFlags);
                         }
                     }
+                }
+                else if ((playerCast != nullptr && doorCast2 != nullptr))
+                {
+
+                }
+                else if (playerCast2 != nullptr && doorCast != nullptr)
+                {
+
                 }
                 else
                 {
