@@ -96,6 +96,13 @@ bool Door::close()
 //by holding the w key after entering the door
 void Door::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
+	sf::RectangleShape bounds;
+	bounds.setSize(sprite.getGlobalBounds().size);
+	bounds.setPosition(sprite.getGlobalBounds().position);
+	bounds.setFillColor(sf::Color::Transparent);
+	bounds.setOutlineColor(sf::Color::Green);
+	bounds.setOutlineThickness(1);
+	window->draw(bounds);
 	if (clock.getElapsedTime().asSeconds() <= 0.06f)
 		return;
 

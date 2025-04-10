@@ -12,6 +12,7 @@ public:
 	~Player();
 	void collide(Entity* other,char ActionFlags) override;
 	void update(char actionFlags,std::vector<sf::FloatRect>*);
+	bool playerInDoor() { return inDoor; }
 	void setPos(sf::Vector2f);
 	//sf::Vector2f getPosition();
 private:
