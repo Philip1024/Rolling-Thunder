@@ -279,7 +279,7 @@ void Game::isColliding(char actionFlags)
                 Player* playerCast2 = dynamic_cast<Player*>(entities.at(j));
                 Door* doorCast = dynamic_cast<Door*>(entities.at(i));
                 Door* doorCast2 = dynamic_cast<Door*>(entities.at(j));
-                // rail player collision, not working yet
+                // rail player collision
                 if ((playerCast!=nullptr&&railCast2!=nullptr))
                 {
                     if (entities.at(i)->getSprite().getPosition().x>railCast2->getFront())
@@ -302,6 +302,7 @@ void Game::isColliding(char actionFlags)
                         }
                     }
                 }
+                // player door collisions
                 else if ((playerCast != nullptr && doorCast2 != nullptr))
                 {
                     if (entities.at(i)->getSprite().getPosition().x > doorCast2->getFront())

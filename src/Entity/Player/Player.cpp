@@ -76,8 +76,7 @@ right most bit (00000001): move right
 void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
 	Entity::update(actionFlags,ground);
-	if (clock.getElapsedTime().asSeconds() <= 0.05f)
-		return; // only update the animation past this point
+	 // only update the animation past this point
 	//meant to determine whether player is on ground, if not player should fall
 	//test
 	shouldFall = true;
@@ -215,6 +214,8 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 				}
 			}
 		}
+		if (getCurrentTick() % 3 == 0)
+			sprite.setTextureRect(frameUpdate);
 		shootTime.restart();
 
 	}
