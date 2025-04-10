@@ -6,4 +6,3 @@ class GameText : public sf::Text
 {
 
 };
-
