@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\UI\GameText\GameText.cpp" />
     <ClCompile Include="src\Entity\Raill\Rail.cpp" />
     <ClCompile Include="src\Entity\Player\Player.cpp" />
     <ClCompile Include="src\SpriteData\AnimationData.cpp" />
@@ -34,8 +35,10 @@
     <ClCompile Include="src\Entity\Enemy\Enemy.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Entity\Enemy\TwoLives\TwoLives.cpp" />
+    <ClCompile Include="src\UI\UIScreen\GUI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\UI\GameText\GameText.h" />
     <ClInclude Include="src\Entity\Raill\Rail.h" />
     <ClInclude Include="src\Entity\Player\Player.h" />
     <ClInclude Include="src\SpriteData\AnimationData.h" />
@@ -50,6 +53,7 @@
     <ClInclude Include="src\Game\Game.h" />
     <ClInclude Include="src\Entity\Enemy\Enemy.h" />
     <ClInclude Include="src\Entity\Enemy\TwoLives\TwoLives.h" />
+    <ClInclude Include="src\UI\UIScreen\GUI.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
