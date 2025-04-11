@@ -6,6 +6,8 @@
 #include "../Entity/Player/Player.h"
 #include "../Entity/Door/Door.h"
 #include "../Entity/Raill/Rail.h"
+#include "../Entity/Bullet/Bullet.h"
+#include "../Entity/Enemy/Enemy.h"
 #include<vector>
 #include<iostream>
 
@@ -86,7 +88,6 @@ void Game::run()
     new Rail(1666, 64);
     new Rail(1709, 64);
     std::vector<Entity*>& rails = Entity::getRails();
-    std::vector<Entity*>& bullets = Entity::getBullets();
     
     //for testing
     std::vector<sf::RectangleShape> groundSprites;
@@ -98,12 +99,12 @@ void Game::run()
     }
 
     //debug objects
-	bool debug = true;
-    Rail* debugRail = new Rail(50, 50);
-	Door* debugDoor = new Door(0, 0);
-	debugDoor->changeOpacity(false);
-    debugRail->changeOpacity(false);
-    sf::Vector2f worldPos;
+	//bool debug = true;
+    //Rail* debugRail = new Rail(50, 50);
+	//Door* debugDoor = new Door(0, 0);
+	//debugDoor->changeOpacity(false);
+   // debugRail->changeOpacity(false);
+   // sf::Vector2f worldPos;
 
     //doors
     bool wPressed = false;
@@ -140,6 +141,9 @@ void Game::run()
     view.setViewport(sf::FloatRect({ 0.f, -.1023f }, { 6.72f, 6.72f }));
     window.setKeyRepeatEnabled(false);
 
+    std::vector<Entity*>& bullets = Entity::getBullets();
+    std::vector<Entity*>& enemys = Entity::getEnemys();
+
     //Main gameplay loop
     while (window.isOpen())
     {
@@ -162,7 +166,7 @@ void Game::run()
                     jumping = true;
                     break;
                 case sf::Keyboard::Scan::F5:
-                    debug = true;
+                    //debug = true;
                     break;
                 case sf::Keyboard::Scan::F6:
 					std::cout << window.mapPixelToCoords(sf::Mouse::getPosition()).x <<
@@ -205,12 +209,12 @@ void Game::run()
         window.clear();
         window.draw(stage1Sprite);
         //this is subject to change
-        if (debug)
+        /*if (debug)
         {
             worldPos = window.mapPixelToCoords(sf::Mouse::getPosition());
             debugRail->setPos(worldPos);
 			debugRail->changeOpacity(false);
-        }
+        }*/
 
         //draw doors
         for (int i =0; i < doors.size(); i++)
@@ -222,7 +226,7 @@ void Game::run()
         {
             window.draw(rails.at(i)->getSprite());
         }
-        window.draw(debugRail->getSprite());
+      //  window.draw(debugRail->getSprite());
         for (sf::RectangleShape sprite : groundSprites)
             window.draw(sprite);
 
@@ -239,18 +243,24 @@ void Game::run()
         if(shooting) actionFlags |= 0b00100000;
         player->update(actionFlags,&ground);
         enemy->update(player);
-
         for (int i = 0; i < doors.size(); i++)
         {
             doors.at(i)->update(actionFlags, &ground);
         }
-		debugDoor->update(actionFlags,&ground);
+		//debugDoor->update(actionFlags,&ground);
 
         //update bullete and draw
         for (int i = 0; i < bullets.size(); i++)
         {
             window.draw(bullets.at(i)->getSprite());
             bullets.at(i)->update(actionFlags, &ground);
+        }
+
+        //enemy update
+        for (int i = 0; i < enemys.size(); i++)
+        {
+            window.draw(enemys.at(i)->getSprite());
+            
         }
         //find which door is being collied with if "W" is pressed
 
@@ -261,6 +271,7 @@ void Game::run()
         window.display();
         currentTick++; // keep track of the ticks that have passed
     }
+   
 }
 
 //checks if any entities are colliding
@@ -279,6 +290,10 @@ void Game::isColliding(char actionFlags)
                 Player* playerCast2 = dynamic_cast<Player*>(entities.at(j));
                 Door* doorCast = dynamic_cast<Door*>(entities.at(i));
                 Door* doorCast2 = dynamic_cast<Door*>(entities.at(j));
+                Bullet* bulletCast = dynamic_cast<Bullet*>(entities.at(i));
+                Bullet* bulletCast2 = dynamic_cast<Bullet*>(entities.at(j));
+                Enemy* enemyCast = dynamic_cast<Enemy*>(entities.at(i));
+                Enemy* enemyCast2 = dynamic_cast<Enemy*>(entities.at(j));
                 // rail player collision
                 if ((playerCast!=nullptr&&railCast2!=nullptr))
                 {
@@ -302,6 +317,7 @@ void Game::isColliding(char actionFlags)
                         }
                     }
                 }
+                
                 // player door collisions
                 else if ((playerCast != nullptr && doorCast2 != nullptr))
                 {
@@ -309,7 +325,6 @@ void Game::isColliding(char actionFlags)
                     {
                         if (entities.at(i)->getSprite().getPosition().x < doorCast2->getBack())
                         {
-                            std::cout << "TRUE";
                             if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
                             {
                                 entities.at(i)->collide(entities.at(j), actionFlags);
@@ -324,7 +339,6 @@ void Game::isColliding(char actionFlags)
                     {
                         if (entities.at(j)->getSprite().getPosition().x < doorCast->getBack())
                         {
-                            std::cout << "TRUE";
                             if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
                             {
                                 entities.at(i)->collide(entities.at(j), actionFlags);
@@ -333,6 +347,10 @@ void Game::isColliding(char actionFlags)
                         }
                     }
                 }
+
+				//bullet collision
+				
+
                 else
                 {
                     if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))

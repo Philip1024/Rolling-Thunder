@@ -29,8 +29,14 @@ Bullet::Bullet(bool bTeam,bool bDirection, float x, float y) : Entity(AnimationD
 	}
 }
 
+
 void Bullet::collide(Entity* other, char actionFlags)
 {
+	Enemy* enemy = dynamic_cast<Enemy*>(other);
+	if (enemy != nullptr)
+	{
+		enemy->collide(this);
+	}
 	
 }
 

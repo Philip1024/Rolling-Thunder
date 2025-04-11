@@ -76,9 +76,16 @@ right most bit (00000001): move right
 void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
 	Entity::update(actionFlags,ground);
-	 // only update the animation past this point
-	//meant to determine whether player is on ground, if not player should fall
-	//test
+	sf::RectangleShape bounds;
+	bounds.setSize(sprite.getGlobalBounds().size);
+	bounds.setPosition(sprite.getGlobalBounds().position);
+	bounds.setFillColor(sf::Color::Transparent);
+	bounds.setOutlineColor(sf::Color::Green);
+	bounds.setOutlineThickness(1);
+	window->draw(bounds);
+
+	if (clock.getElapsedTime().asSeconds() <= 0.06f)
+		return;
 	shouldFall = true;
 	for (int i = 0; i < ground->size(); i++)
 	{
@@ -214,20 +221,11 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 				}
 			}
 		}
-		if (getCurrentTick() % 3 == 0)
-			sprite.setTextureRect(frameUpdate);
+	
 		shootTime.restart();
 
 	}
 
-	
-	sf::RectangleShape bounds;
-	bounds.setSize(sprite.getGlobalBounds().size);
-	bounds.setPosition(sprite.getGlobalBounds().position);
-	bounds.setFillColor(sf::Color::Transparent);
-	bounds.setOutlineColor(sf::Color::Green);
-	bounds.setOutlineThickness(1);
-	window->draw(bounds);
 	
 	//std::cout << sprite.getPosition().x <<' '<< sprite.getPosition().y << std::endl;
 	clock.restart();
