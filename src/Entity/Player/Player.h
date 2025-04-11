@@ -44,5 +44,6 @@ private:
 	bool jump(double angle, std::vector<sf::FloatRect>*);
 	int floor;//meant to represent what floor the player is on
 	bool jumpingRail;
+	sf::IntRect frameUpdate;
 };
 
