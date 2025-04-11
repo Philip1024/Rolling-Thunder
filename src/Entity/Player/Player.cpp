@@ -76,7 +76,7 @@ right most bit (00000001): move right
 void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
 	Entity::update(actionFlags,ground);
-	if (clock.getElapsedTime().asSeconds() <= 0.05f)
+	if (clock.getElapsedTime().asSeconds() <= 0.05)
 		return; // only update the animation past this point
 	//meant to determine whether player is on ground, if not player should fall
 	//test
@@ -296,7 +296,7 @@ void Player::collide(Entity* other,char actionFlags)
 			if (!doorCast->getOpen())
 			{
 				sprite.setTextureRect(walkOutDoor->nextFrame());
-				sprite.move({ 0,5 });
+				sprite.move({ 0,4 });
 				sprite.setColor(sf::Color(255, 255, 255, 255));
 			}
 			//after player has exited door and door isn't doing anything reset to walking position
