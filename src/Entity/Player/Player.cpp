@@ -84,7 +84,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	bounds.setOutlineThickness(1);
 	window->draw(bounds);
 
-	if (clock.getElapsedTime().asSeconds() <= 0.06f)
+	if (clock.getElapsedTime().asSeconds() <= 0.05f)
 		return;
 	shouldFall = true;
 	for (int i = 0; i < ground->size(); i++)
