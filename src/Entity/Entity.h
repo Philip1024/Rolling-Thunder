@@ -19,6 +19,7 @@ public:
 	static std::vector<Entity*>& getDoors() { return doors; }
 	static std::vector<Entity*>& getRails() { return rails; }
 	static std::vector<Entity*>& getBullets() { return bullets; }
+	static std::vector<Entity*>& getEnemys() { return enemys; }
 	// call these methods early or else unspecified behavior
 	static void setWindow(sf::RenderWindow* w) { window = w; }
 	static void setView(sf::View* v) { view = v; }
@@ -26,6 +27,7 @@ public:
 	static std::vector<Entity*> doors;
 	static std::vector<Entity*> rails;
 	static std::vector<Entity*> bullets;
+	static std::vector<Entity*> enemys;
 protected:
 	// optional makes it so that sprite isn't
 	// constructed until texture is loaded from file

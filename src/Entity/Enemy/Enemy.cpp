@@ -26,6 +26,7 @@ Enemy::~Enemy()
 {
 	for (auto& pair : animationMap)
 		delete pair.second;
+	
 }
 
 
@@ -37,6 +38,7 @@ void Enemy::collide(Entity* other)
 	if (playerCast != nullptr)
 	{
 		//playerCast->update();
+	
 	}
 
 	//take away health from the enemy and start bullet death animation
@@ -46,15 +48,14 @@ void Enemy::collide(Entity* other)
 		//bulletCast->update();
 		if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT)
 		{
-			curMove = DIE_LEFT;
+			//curMove = DIE_LEFT;
 		}
 		else
 		{
-			curMove = DIE_RIGHT;
+			//curMove = DIE_RIGHT;
 		}
+		alive = false;
 	}
-
-
 }
 
 
@@ -62,6 +63,7 @@ void Enemy::update(char actionFlags)
 {
 	throw std::exception("dont call this");
 }
+	
 
 
 void Enemy::update(Player* player)

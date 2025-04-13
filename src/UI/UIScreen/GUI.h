@@ -10,7 +10,7 @@
 ///
 /// Trey: record a video of the opening sequence. do not run the game in fullscreen as it scales and anti aliases the game.
 /// use obs or whatever other program you know. Record in the resolution the game runs (do not scale!), and in 30fps.
-/// Edit the video to remove the leaderboard in the frames that have it, and replace it with the blue color that's there.
+/// Edit the video to remove the leaderboard in the frames that ha ve it, and replace it with the blue color that's there.
 /// You could also edit the frames themselves if it would be easier than the video.
 /// Convert the video to frames (images) and make a folder for the frames and upload to github: https://ezgif.com/video-to-jpg
 /// 
