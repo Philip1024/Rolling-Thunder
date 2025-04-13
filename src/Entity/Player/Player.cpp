@@ -42,6 +42,15 @@ Player::Player()
 	g = 9.8;
 	angle = 45 * PI / 180;
 	shooting = false;
+	animationMap[MOVE_RIGHT] = new AnimationData::SectionData(AnimationData::getSection("albatross_move_right"));
+	animationMap[MOVE_LEFT] = new AnimationData::SectionData(AnimationData::getSection("albatross_move_left"));
+	animationMap[STAND_RIGHT] = new AnimationData::SectionData(AnimationData::getSection("albatross_stand_right"));
+	animationMap[STAND_LEFT] = new AnimationData::SectionData(AnimationData::getSection("albatross_stand_left"));
+	animationMap[JUMP_RIGHT] = new AnimationData::SectionData(AnimationData::getSection("albatross_standard_right_jump"));
+	animationMap[JUMP_LEFT] = new AnimationData::SectionData(AnimationData::getSection("albatross_standard_left_jump"));
+	animationMap[DOOR_IN] = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_in_door"));
+	animationMap[DOOR_OUT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_out_door"));
+	playerTicks = 0;
 	moveRight = new AnimationData::SectionData(AnimationData::getSection("albatross_move_right"));
 	moveLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_move_left"));
 	jumpLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_jump_left"));
@@ -52,6 +61,7 @@ Player::Player()
 	shootLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_shooting_left"));
 	floor = 0;
 	jumpingRail = false;
+	curMove = STAND_RIGHT;
 }
 
 
@@ -76,7 +86,7 @@ right most bit (00000001): move right
 void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
 	Entity::update(actionFlags,ground);
-	 // only update the animation past this point
+	 // only update the animation past this pointdddddddddd
 	//meant to determine whether player is on ground, if not player should fall
 	//test
 	shouldFall = true;
@@ -97,8 +107,8 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 			sprite.setTextureRect(AnimationData::getSection("albatross_falling_right")->getFrame(0));
 		else
 			sprite.setTextureRect(AnimationData::getSection("albatross_falling_left")->getFrame(0));
-		sprite.move({ 0,5 });
-		view->move({ 0,5 });
+		//sprite.move({ 0,5 });
+		//view->move({ 0,5 });
 		if (!shouldFall)
 		{
 			falling = false;
@@ -113,20 +123,14 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 
 	if ((actionFlags & 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump&&!falling&&!inDoor && !shooting) // moving right. 
 	{
-		sprite.setTextureRect(moveRight->nextFrame());
-		view->move({ 7.5,0 });
-
-		sprite.move({ 7.5,0 });//not exact yet
+		curMove = MOVE_RIGHT;
 		faceRight = true;
 
 	}
 
 	if ((actionFlags & 0b00000010) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting) // moving left TODO: bound check on the left using view
 	{
-		sprite.setTextureRect(moveLeft->nextFrame());
-		view->move({ -7.5,0 });
-
-		sprite.move({ -7.5,0 });//not exact yet
+		curMove = MOVE_LEFT;
 		faceRight = false;
 	}
 
@@ -214,12 +218,32 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 				}
 			}
 		}
-		if (getCurrentTick() % 3 == 0)
-			sprite.setTextureRect(frameUpdate);
+
 		shootTime.restart();
+	}
+	switch (curMove)
+	{
+	case MOVE_RIGHT:
+		view->move({ 2,0 });
+		sprite.move({ 2,0 });
+		break;
+	case MOVE_LEFT:
+		view->move({ -2,0 });
+		sprite.move({ -2,0 });
+		break;
 
 	}
+	if (playerTicks % 4 == 0)
+	{
+		sprite.setTextureRect(animationMap[curMove]->nextFrame());
+		std::cout << curMove << std::endl;
 
+	}
+	if (faceRight && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting)
+		curMove = STAND_RIGHT;
+	else
+		curMove = STAND_LEFT;
+	playerTicks++;
 	
 	sf::RectangleShape bounds;
 	bounds.setSize(sprite.getGlobalBounds().size);
@@ -236,8 +260,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 //foor colliding, not functional for door collision yet
 void Player::collide(Entity* other,char actionFlags)
 {
-	if (doorTime.getElapsedTime().asSeconds() <= 0.06f)
-		return;
+	
 
 	Door* doorCast = dynamic_cast<Door*>(other);
 	Rail* railCast = dynamic_cast<Rail*>(other);
@@ -264,15 +287,15 @@ void Player::collide(Entity* other,char actionFlags)
 		{
 			inDoor = true;
 			doorCast->setOpening(true);
-			sprite.setTextureRect(walkInDoor->nextFrame());
-			sprite.move({ 0,-1 });
+			curMove = DOOR_IN;
+			sprite.move({ 0,-0.25 });
 			enterDoor = true;
 		}
 		//while door is opening player walks in door
 		if (!doorCast->getClosing()&&enterDoor)
 		{
-			sprite.setTextureRect(walkInDoor->nextFrame());
-			sprite.move({ 0,-1 });//player animation
+			curMove = DOOR_IN;
+			sprite.move({ 0,-0.25 });//player animation
 		}
 		//when door is closing player becomes invisible
 		if (doorCast->getClosing()&&enterDoor)
@@ -296,17 +319,17 @@ void Player::collide(Entity* other,char actionFlags)
 			//after door is opened player becomes visible and can exit door
 			if (!doorCast->getOpen())
 			{
-				sprite.setTextureRect(walkOutDoor->nextFrame());
-				sprite.move({ 0,5 });
+				curMove = DOOR_OUT;
+				sprite.move({ 0,1.25 });
 				sprite.setColor(sf::Color(255, 255, 255, 255));
 			}
 			//after player has exited door and door isn't doing anything reset to walking position
 			if(!doorCast->getClosing()&&!doorCast->getStop()&& !doorCast->getOpen())
 			{
 				if (!faceRight)
-					sprite.setTextureRect(moveLeft->nextFrame());
+					curMove = MOVE_LEFT;
 				else
-					sprite.setTextureRect(moveRight->nextFrame());
+					curMove = MOVE_RIGHT;
 				sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
 				//std::cout << "works" << std::endl;;
 				inDoor = false;
@@ -322,21 +345,21 @@ void Player::collide(Entity* other,char actionFlags)
 
 bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 {
-	t += 0.4;
+	t += 0.1;
 	//parabolic equation for jump, pos keeps track of position while Mov uses pos to track how much movement is required each frame
 	xMov = velo * cos(angle) * t - xPos;
 	xPos = velo * cos(angle) * t;
 	yMov = -0.5 * g * t * t + velo * sin(angle) * t - yPos;
 	yPos = -0.5 * g * t * t + velo * sin(angle) * t;
 	sprite.move({ xMov, -1 * yMov });
-	view->move({ xMov, 0});
+	view->move({ xMov, 0 });
 	if(faceRight)
-		sprite.setTextureRect(AnimationData::getSection("albatross_standard_right_jump")->getFrame(0));
+		curMove = JUMP_RIGHT;
 	else
-		sprite.setTextureRect(AnimationData::getSection("albatross_standard_left_jump")->getFrame(0));
+		curMove = JUMP_LEFT;
 	for (int i = 0; i < ground->size(); i++)
 	{
-		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) != std::nullopt)
+		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) != std::nullopt&&t>1)
 		{
 			if (!faceRight)
 				sprite.setTextureRect(moveLeft->nextFrame());

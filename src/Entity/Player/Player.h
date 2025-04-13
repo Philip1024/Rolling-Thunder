@@ -8,6 +8,17 @@
 class Player : public Entity
 {
 public:
+	enum Movement
+	{
+		MOVE_LEFT,
+		MOVE_RIGHT,
+		STAND_LEFT,
+		STAND_RIGHT,
+		JUMP_LEFT,
+		JUMP_RIGHT,
+		DOOR_IN,
+		DOOR_OUT
+	};
 	Player();
 	~Player();
 	void collide(Entity* other,char ActionFlags) override;
@@ -20,6 +31,8 @@ private:
 	sf::Clock clock;
 	sf::Clock doorTime;
 	sf::Clock shootTime;
+	Movement curMove;
+	std::unordered_map<Movement, AnimationData::SectionData*> animationMap;
 	bool faceRight;
 	bool activeJump, activeRightJump, activeLeftJump;//used to determine whether player is actively jumping
 	bool falling;//used to determine if player is falling
@@ -43,6 +56,7 @@ private:
 	AnimationData::SectionData* moveLeft, * moveRight,*jumpLeft, *jumpRight, *walkInDoor, * walkOutDoor,*shootRight, *shootLeft;
 	bool jump(double angle, std::vector<sf::FloatRect>*);
 	int floor;//meant to represent what floor the player is on
+	int playerTicks;
 	bool jumpingRail;
 	sf::IntRect frameUpdate;
 };

@@ -237,6 +237,8 @@ void Game::run()
         if (jumping&&!movingRight&&!movingLeft&&!wPressed) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
         if(shooting) actionFlags |= 0b00100000;
+
+
         player->update(actionFlags,&ground);
         enemy->update(player);
 
@@ -260,6 +262,7 @@ void Game::run()
         window.setView(view);
         window.display();
         currentTick++; // keep track of the ticks that have passed
+        //std::cout << currentTick << std::endl;
     }
 }
 

@@ -147,6 +147,7 @@ void Enemy::update(Player* player)
 	case IDLE_CROUCH:
 		break;
 	}
+	//std::cout << getCurrentTick() << std::endl;
 	if (getCurrentTick() % 4 == 0)
 		sprite.setTextureRect(animationMap[curMove]->nextFrame());
 	lastMove = curMove;

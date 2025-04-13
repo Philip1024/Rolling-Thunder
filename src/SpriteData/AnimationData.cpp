@@ -22,10 +22,14 @@ void AnimationData::load()
 	getSection("albatross_move_left")->setNextFrameFunction(rightToLeftFunction);
 	sectionMap["albatross_move_right"] = new Section(textureMap[ALBATROSS],
 		6, 1, sf::Vector2u(230, 60), sf::Vector2u(410, 120));
+	sectionMap["albatross_stand_right"] = new Section(textureMap[ALBATROSS],
+		1, 1, sf::Vector2u(323, 0), sf::Vector2u(341, 58));
+	sectionMap["albatross_stand_left"] = new Section(textureMap[ALBATROSS],
+		1, 1, sf::Vector2u(83, 0), sf::Vector2u(101, 58));
 	sectionMap["albatross_standard_right_jump"] = new Section(textureMap[ALBATROSS],
-		1, 2, sf::Vector2u(230, 550), sf::Vector2u(260, 650));
+		1, 1, sf::Vector2u(230, 550), sf::Vector2u(260, 600));
 	sectionMap["albatross_standard_left_jump"] = new Section(textureMap[ALBATROSS],
-		1, 2, sf::Vector2u(165, 550), sf::Vector2u(195, 650));
+		1, 1, sf::Vector2u(165, 550), sf::Vector2u(195, 600));
 	sectionMap["albatross_falling_left"] = new Section(textureMap[ALBATROSS],
 		1, 1, sf::Vector2u(22, 540), sf::Vector2u(70, 600));
 	sectionMap["albatross_falling_right"] = new Section(textureMap[ALBATROSS],
