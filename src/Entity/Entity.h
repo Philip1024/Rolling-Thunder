@@ -14,6 +14,7 @@ public:
 	virtual void collide(Entity* other,char actionFlags) {}
 	// entities are expected to do their functions and draw themselves in this method
 	virtual void update(char actionFlags, std::vector<sf::FloatRect>* ground) { window->draw(sprite); }
+	bool getAlive() { return alive; }
 	const sf::Sprite& getSprite() const { return sprite;  }
 	static std::vector<Entity*>& getEntities() { return entities; }
 	static std::vector<Entity*>& getDoors() { return doors; }
@@ -36,6 +37,7 @@ protected:
 	// 30Tps
 	static unsigned int& getCurrentTick() { return *currentTick; }
 	static sf::RenderWindow* window;
+	bool alive;
 private:
 	static unsigned int* currentTick;
 	static std::vector<Entity*> entities;

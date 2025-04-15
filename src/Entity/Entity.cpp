@@ -12,5 +12,6 @@ Entity::Entity(sf::Texture* initTexture)
 	: sprite(sf::Sprite(*initTexture))
 {
 	entities.push_back(this);
+	alive = true;
 }
 

@@ -111,7 +111,7 @@ void Game::run()
     int count = 0;//for testing
 
     //used to not have to wait for clock to reach 0.075 to move
-    Enemy* enemy = new Enemy(sf::Vector2f(200, 107)); // mem leak
+    new Enemy(sf::Vector2f(200, 107)); // mem leak
     char dummy = 0;
     bool firstD = true;
     bool firstA = true;
@@ -146,6 +146,7 @@ void Game::run()
     std::vector<Entity*>& enemys = Entity::getEnemys();
 
     GUI gui;
+    std::cout << enemys.size(); 
     //Main gameplay loop
     while (window.isOpen())
     {
@@ -247,7 +248,7 @@ void Game::run()
 
         player->update(actionFlags,&ground);
         //std::cout << "true" << std::endl;
-        enemy->update(player);
+        //enemy->update(player);
         for (int i = 0; i < doors.size(); i++)
         {
             doors.at(i)->update(actionFlags, &ground);
@@ -260,12 +261,12 @@ void Game::run()
             window.draw(bullets.at(i)->getSprite());
             bullets.at(i)->update(actionFlags, &ground);
         }
-
         //enemy update
         for (int i = 0; i < enemys.size(); i++)
         {
-            window.draw(enemys.at(i)->getSprite());
-            
+                ((Enemy*)enemys.at(i))->update(player);
+                window.draw(enemys.at(i)->getSprite());
+              
         }
         //find which door is being collied with if "W" is pressed
         isColliding(actionFlags);
@@ -354,16 +355,14 @@ void Game::isColliding(char actionFlags)
                         }
                     }
                 }
-
-				//bullet collision
-				
-
+				//bullet enemy collision
                 else
                 {
                     if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
                     {
                         entities.at(i)->collide(entities.at(j), actionFlags);
                         entities.at(j)->collide(entities.at(i), actionFlags);
+                        //if(
                     }
                 }
              }

@@ -19,6 +19,8 @@ Enemy::Enemy(sf::Vector2f pos)
 	animationMap[SHOOT_RIGHT] = new SectionData(AnimationData::getSection("enemy_shoot_right"));
 	animationMap[PUNCH_LEFT] = new SectionData(AnimationData::getSection("enemy_punch_left"));
 	animationMap[PUNCH_RIGHT] = new SectionData(AnimationData::getSection("enemy_punch_right"));
+	enemys.push_back(this);
+	dying = false;
 }
 
 
@@ -26,7 +28,6 @@ Enemy::~Enemy()
 {
 	for (auto& pair : animationMap)
 		delete pair.second;
-	
 }
 
 
@@ -45,16 +46,19 @@ void Enemy::collide(Entity* other)
 	Bullet* bulletCast = dynamic_cast<Bullet*>(other);
 	if (bulletCast != nullptr)
 	{
-		//bulletCast->update();
-		if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT)
+		if (bulletCast->team)
 		{
-			//curMove = DIE_LEFT;
+			//bulletCast->update();
+			if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT)
+			{
+				//curMove = DIE_LEFT;
+			}
+			else
+			{
+				//curMove = DIE_RIGHT;
+			}
+			dying = true;
 		}
-		else
-		{
-			//curMove = DIE_RIGHT;
-		}
-		alive = false;
 	}
 }
 
@@ -74,6 +78,10 @@ void Enemy::update(Player* player)
 	//if the enemy is in the process of death skip this statement
 	//
 	int playerDistance = abs(player->getSprite().getPosition().x - sprite.getPosition().x);
+	if (dying)
+	{
+
+	}
 	if (moveTicks <= 0 || curMove != DIE_LEFT || curMove != DIE_RIGHT)
 	{
 		if (player->playerInDoor() && playerDistance < 70)
