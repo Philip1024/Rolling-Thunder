@@ -236,12 +236,13 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	if (playerTicks % 4 == 0)
 	{
 		sprite.setTextureRect(animationMap[curMove]->nextFrame());
-		std::cout << curMove << std::endl;
+		if (curMove == DOOR_OUT)
+			std::cout << "true" << std::endl;
 
 	}
 	if (faceRight && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting)
 		curMove = STAND_RIGHT;
-	else
+	else if(!activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting)
 		curMove = STAND_LEFT;
 	playerTicks++;
 	
@@ -257,7 +258,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	clock.restart();
 }
 
-//foor colliding, not functional for door collision yet
+//foor colliding, not functional for rail collision yet
 void Player::collide(Entity* other,char actionFlags)
 {
 	
@@ -320,16 +321,18 @@ void Player::collide(Entity* other,char actionFlags)
 			if (!doorCast->getOpen())
 			{
 				curMove = DOOR_OUT;
-				sprite.move({ 0,1.25 });
+				sprite.move({ 0,0.25 });
 				sprite.setColor(sf::Color(255, 255, 255, 255));
 			}
 			//after player has exited door and door isn't doing anything reset to walking position
-			if(!doorCast->getClosing()&&!doorCast->getStop()&& !doorCast->getOpen())
+			if(!doorCast->getClosing()&&!doorCast->getStop()&& !doorCast->getOpen()&& sprite.getGlobalBounds().position.y>120)
 			{
+				/*
 				if (!faceRight)
 					curMove = MOVE_LEFT;
 				else
 					curMove = MOVE_RIGHT;
+					*/
 				sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
 				//std::cout << "works" << std::endl;;
 				inDoor = false;

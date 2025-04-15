@@ -108,6 +108,7 @@ void Game::run()
 
     //doors
     bool wPressed = false;
+    int count = 0;//for testing
 
     //used to not have to wait for clock to reach 0.075 to move
     Enemy* enemy = new Enemy(sf::Vector2f(200, 107)); // mem leak
@@ -244,6 +245,7 @@ void Game::run()
 
 
         player->update(actionFlags,&ground);
+        //std::cout << "true" << std::endl;
         enemy->update(player);
         for (int i = 0; i < doors.size(); i++)
         {
