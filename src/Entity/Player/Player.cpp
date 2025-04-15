@@ -187,7 +187,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 
 	if ((actionFlags & 0b00100000||shooting) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor)
 	{
-		if (shootTime.getElapsedTime().asSeconds() <= 0.1f)
+		if (shootTime.getElapsedTime().asSeconds() <= 0.5f)
 			return;
 		shooting = true;
 		if (shootingFrame == 3)

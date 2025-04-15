@@ -36,5 +36,5 @@ private:
 	std::vector<sf::FloatRect>* vec = new std::vector<sf::FloatRect>;
 	std::unordered_map<Movement, AnimationData::SectionData*> animationMap;
 	int health = 0;
-	bool alive = true;
+	bool dying;
 };
