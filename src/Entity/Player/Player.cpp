@@ -50,6 +50,7 @@ Player::Player()
 	animationMap[JUMP_LEFT] = new AnimationData::SectionData(AnimationData::getSection("albatross_standard_left_jump"));
 	animationMap[DOOR_IN] = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_in_door"));
 	animationMap[DOOR_OUT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_out_door"));
+	animationMap[CLIMB_RAIL_RIGHT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_climbing_over_rail_right"));
 	playerTicks = 0;
 	moveRight = new AnimationData::SectionData(AnimationData::getSection("albatross_move_right"));
 	moveLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_move_left"));
@@ -61,6 +62,7 @@ Player::Player()
 	shootLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_shooting_left"));
 	floor = 0;
 	jumpingRail = false;
+	jumpingRailCount = 0;
 	curMove = STAND_RIGHT;
 }
 
@@ -236,13 +238,13 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	if (playerTicks % 4 == 0)
 	{
 		sprite.setTextureRect(animationMap[curMove]->nextFrame());
-		if (curMove == DOOR_OUT)
-			std::cout << "true" << std::endl;
+		if (curMove == CLIMB_RAIL_RIGHT)
+			jumpingRailCount++;
 
 	}
-	if (faceRight && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting)
+	if (faceRight && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting &&!jumpingRail)
 		curMove = STAND_RIGHT;
-	else if(!activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting)
+	else if(!activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail)
 		curMove = STAND_LEFT;
 	playerTicks++;
 	
@@ -267,18 +269,39 @@ void Player::collide(Entity* other,char actionFlags)
 	Rail* railCast = dynamic_cast<Rail*>(other);
 	if ((railCast != nullptr && (actionFlags & 0b01000000)||jumpingRail) && !activeRightJump && !activeJump && !activeLeftJump && !falling&&!inDoor)
 	{
-		if (!jumpingRail)
+		if (railCast->getFloor()-1==floor)
 		{
-			if (faceRight)
+			if (!jumpingRail)
 			{
-				sprite.setTextureRect((AnimationData::getSection("albatross_jumping_to_rail_right")->getFrame(0)));
-				jumpingRail = true;
+				if (faceRight)
+				{
+					sprite.setTextureRect((AnimationData::getSection("albatross_jumping_to_rail_right")->getFrame(0)));
+					jumpingRail = true;
+				}
 			}
-		}
-		else
-		{
-			sprite.setTextureRect((AnimationData::getSection("albatross_jumping_to_rail_right")->getFrame(1)));
-			sprite.move({ 0,-2 });
+			else
+			{
+				if (sprite.getPosition().y > 45)
+				{
+					sprite.setTextureRect((AnimationData::getSection("albatross_jumping_to_rail_right")->getFrame(1)));
+					sprite.move({ 0,-2 });
+				}
+				else
+				{
+					if (jumpingRail && jumpingRailCount < 4)
+					{
+						curMove = CLIMB_RAIL_RIGHT;
+						floor = 1;
+					}
+					else
+					{
+						floor = 1;
+						jumpingRail = false;
+						jumpingRailCount = 0;
+					}
+				}
+
+			}
 		}
 	}
 	if (doorCast != nullptr && ((actionFlags & 0b10000000)||inDoor) && !activeRightJump && !activeJump && !activeLeftJump && !falling)
@@ -348,7 +371,7 @@ void Player::collide(Entity* other,char actionFlags)
 
 bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 {
-	t += 0.1;
+	t += 0.2;
 	//parabolic equation for jump, pos keeps track of position while Mov uses pos to track how much movement is required each frame
 	xMov = velo * cos(angle) * t - xPos;
 	xPos = velo * cos(angle) * t;

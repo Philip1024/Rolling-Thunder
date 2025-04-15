@@ -17,6 +17,7 @@ Rail::Rail(int x, int y) : Entity(AnimationData::getTexture(AnimationData::RAIL)
 	sprite.setTextureRect(frame);
 	rails.push_back(this);
 	rail = new AnimationData::SectionData(AnimationData::getSection("Rail"));
+	floor = 1;
 }
 
 //this changes the visibilty of the debug door

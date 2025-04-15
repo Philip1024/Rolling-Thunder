@@ -49,6 +49,8 @@ void AnimationData::load()
 	sectionMap["albatross_jumping_to_rail_left"] = new Section(textureMap[ALBATROSS],
 		2, 1, sf::Vector2u(137, 175), sf::Vector2u(196, 241));
 	getSection("albatross_jumping_to_rail_left")->setNextFrameFunction(rightToLeftFunction);
+	sectionMap["albatross_climbing_over_rail_right"] = new Section(textureMap[ALBATROSS],
+		2, 2, sf::Vector2u(285, 368), sf::Vector2u(406, 473));
 
 
 	//enemies

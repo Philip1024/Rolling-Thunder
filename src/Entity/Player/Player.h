@@ -17,7 +17,9 @@ public:
 		JUMP_LEFT,
 		JUMP_RIGHT,
 		DOOR_IN,
-		DOOR_OUT
+		DOOR_OUT,
+		JUMP_RAIL_RIGHT,
+		CLIMB_RAIL_RIGHT,
 	};
 	Player();
 	~Player();
@@ -58,6 +60,7 @@ private:
 	int floor;//meant to represent what floor the player is on
 	int playerTicks;
 	bool jumpingRail;
+	int jumpingRailCount;
 	sf::IntRect frameUpdate;
 };
 
