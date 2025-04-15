@@ -3,6 +3,7 @@
 #include "../Entity/Player/Player.h"
 #include "../SpriteData/AnimationData.h"
 #include "../Entity/Enemy/Enemy.h"
+#include "../UI/UIScreen/GUI.h"
 
 
 class Game

@@ -145,6 +145,7 @@ void Game::run()
     std::vector<Entity*>& bullets = Entity::getBullets();
     std::vector<Entity*>& enemys = Entity::getEnemys();
 
+    GUI gui;
     //Main gameplay loop
     while (window.isOpen())
     {
@@ -267,8 +268,9 @@ void Game::run()
             
         }
         //find which door is being collied with if "W" is pressed
-
         isColliding(actionFlags);
+        //gui.drawGUI(window);
+
         //used to update all entites
 		//draw the foreground
         window.setView(view);
