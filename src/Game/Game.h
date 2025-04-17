@@ -21,5 +21,6 @@ public:
 	sf::Texture stage4;
 	sf::Texture stage5;
 	std::vector<sf::FloatRect> ground;
+	std::vector<sf::FloatRect> ground2;
 };
 

@@ -51,6 +51,8 @@ Player::Player()
 	animationMap[DOOR_IN] = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_in_door"));
 	animationMap[DOOR_OUT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_out_door"));
 	animationMap[CLIMB_RAIL_RIGHT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_climbing_over_rail_right"));
+	animationMap[FALL_RIGHT] = new AnimationData::SectionData(AnimationData::getSection("albatross_falling_right"));
+	animationMap[FALL_LEFT] = new AnimationData::SectionData(AnimationData::getSection("albatross_falling_left"));
 	playerTicks = 0;
 	moveRight = new AnimationData::SectionData(AnimationData::getSection("albatross_move_right"));
 	moveLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_move_left"));
@@ -106,9 +108,9 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	if (falling)
 	{
 		if (faceRight)
-			sprite.setTextureRect(AnimationData::getSection("albatross_falling_right")->getFrame(0));
+			curMove = FALL_RIGHT;
 		else
-			sprite.setTextureRect(AnimationData::getSection("albatross_falling_left")->getFrame(0));
+			curMove = FALL_LEFT;
 		//sprite.move({ 0,5 });
 		//view->move({ 0,5 });
 		if (!shouldFall)
@@ -187,7 +189,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 
 	if ((actionFlags & 0b00100000||shooting) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor)
 	{
-		if (shootTime.getElapsedTime().asSeconds() <= 0.5f)
+		if (shootTime.getElapsedTime().asSeconds() <= 0.1f)
 			return;
 		shooting = true;
 		if (shootingFrame == 3)
@@ -235,16 +237,16 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		break;
 
 	}
+	if (curMove == CLIMB_RAIL_RIGHT)
+		std::cout << "true" << std::endl;
 	if (playerTicks % 4 == 0)
 	{
 		sprite.setTextureRect(animationMap[curMove]->nextFrame());
-		if (curMove == CLIMB_RAIL_RIGHT)
-			jumpingRailCount++;
 
 	}
 	if (faceRight && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting &&!jumpingRail)
 		curMove = STAND_RIGHT;
-	else if(!activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail)
+	if(!faceRight&&!activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail)
 		curMove = STAND_LEFT;
 	playerTicks++;
 	
@@ -267,7 +269,7 @@ void Player::collide(Entity* other,char actionFlags)
 
 	Door* doorCast = dynamic_cast<Door*>(other);
 	Rail* railCast = dynamic_cast<Rail*>(other);
-	if ((railCast != nullptr && (actionFlags & 0b01000000)||jumpingRail) && !activeRightJump && !activeJump && !activeLeftJump && !falling&&!inDoor)
+	if ((railCast != nullptr && (actionFlags & 0b01000000)||jumpingRail&& railCast != nullptr) && !activeRightJump && !activeJump && !activeLeftJump && !falling&&!inDoor)
 	{
 		if (railCast->getFloor()-1==floor)
 		{
@@ -288,10 +290,11 @@ void Player::collide(Entity* other,char actionFlags)
 				}
 				else
 				{
-					if (jumpingRail && jumpingRailCount < 4)
+					if (jumpingRail && jumpingRailCount < 10)
 					{
 						curMove = CLIMB_RAIL_RIGHT;
-						floor = 1;
+						jumpingRailCount++;
+						std::cout << jumpingRailCount << std::endl;
 					}
 					else
 					{
@@ -304,7 +307,7 @@ void Player::collide(Entity* other,char actionFlags)
 			}
 		}
 	}
-	if (doorCast != nullptr && ((actionFlags & 0b10000000)||inDoor) && !activeRightJump && !activeJump && !activeLeftJump && !falling)
+	if (doorCast != nullptr && ((actionFlags & 0b10000000)||inDoor) && !activeRightJump && !activeJump && !activeLeftJump && !falling&&!jumpingRail)
 	{
 		//starts door opening and has player walk into door one frame
 		if (!enterDoor&&!inDoor)
