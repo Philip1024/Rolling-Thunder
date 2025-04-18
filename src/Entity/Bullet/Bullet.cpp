@@ -43,8 +43,9 @@ void Bullet::collide(Entity* other, char actionFlags)
 
 //if side is true then use left, else use right
 //this will be called by player
-void Bullet::update(char actionFlags, std::vector<sf::FloatRect>*)
+void Bullet::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
+	Entity::update(actionFlags, ground);//draws bullet
 	if (!fired&&pause.getElapsedTime().asSeconds()>=0.1f)
 	{
 		if (direction)

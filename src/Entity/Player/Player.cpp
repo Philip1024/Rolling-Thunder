@@ -89,7 +89,7 @@ right most bit (00000001): move right
 
 void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 {
-	Entity::update(actionFlags,ground);
+	Entity::update(actionFlags,ground);//draws player
 	 // only update the animation past this pointdddddddddd
 	//meant to determine whether player is on ground, if not player should fall
 	//test
@@ -111,7 +111,13 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 			curMove = FALL_RIGHT;
 		else
 			curMove = FALL_LEFT;
-		//sprite.move({ 0,5 });
+		/*
+		if (floor == 1)
+		{
+
+		}
+		*/
+		sprite.move({ 0,5 });
 		//view->move({ 0,5 });
 		if (!shouldFall)
 		{
@@ -120,7 +126,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 				sprite.setTextureRect(moveRight->nextFrame());
 			else
 				sprite.setTextureRect(moveLeft->nextFrame());
-			sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+			//sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
 		}
 			
 	}
@@ -351,19 +357,39 @@ void Player::collide(Entity* other,char actionFlags)
 				sprite.setColor(sf::Color(255, 255, 255, 255));
 			}
 			//after player has exited door and door isn't doing anything reset to walking position
-			if(!doorCast->getClosing()&&!doorCast->getStop()&& !doorCast->getOpen()&& sprite.getGlobalBounds().position.y>120)
+			if (floor == 0)
 			{
-				/*
-				if (!faceRight)
-					curMove = MOVE_LEFT;
-				else
-					curMove = MOVE_RIGHT;
-					*/
-				sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
-				//std::cout << "works" << std::endl;;
-				inDoor = false;
-				exitDoor = false;
-				exitOnce = false;
+				if (!doorCast->getClosing() && !doorCast->getStop() && !doorCast->getOpen() && sprite.getGlobalBounds().position.y > 120)
+				{
+					/*
+					if (!faceRight)
+						curMove = MOVE_LEFT;
+					else
+						curMove = MOVE_RIGHT;
+						*/
+					sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+					//std::cout << "works" << std::endl;;
+					inDoor = false;
+					exitDoor = false;
+					exitOnce = false;
+				}
+			}
+			else
+			{
+				if (!doorCast->getClosing() && !doorCast->getStop() && !doorCast->getOpen() && sprite.getGlobalBounds().position.y > 43)
+				{
+					/*
+					if (!faceRight)
+						curMove = MOVE_LEFT;
+					else
+						curMove = MOVE_RIGHT;
+						*/
+					sprite.move({ 0,(43 - sprite.getGlobalBounds().position.y) });
+					//std::cout << "works" << std::endl;;
+					inDoor = false;
+					exitDoor = false;
+					exitOnce = false;
+				}
 			}
 		}
 		doorTime.restart();

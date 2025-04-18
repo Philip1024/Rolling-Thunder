@@ -26,7 +26,7 @@ public:
 	Player();
 	~Player();
 	void collide(Entity* other,char ActionFlags) override;
-	void update(char actionFlags,std::vector<sf::FloatRect>*);
+	void update(char actionFlags,std::vector<sf::FloatRect>*) override;
 	bool playerInDoor() { return inDoor; }
 	void setPos(sf::Vector2f);
 	int getFloor() { return floor; }

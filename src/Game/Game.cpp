@@ -98,6 +98,11 @@ void Game::run()
         groundSprites.push_back(sf::RectangleShape(rect.size));
         groundSprites[groundSprites.size() - 1].setPosition(rect.position);
     }
+    for (sf::FloatRect rect : ground2)
+    {
+        groundSprites.push_back(sf::RectangleShape(rect.size));
+        groundSprites[groundSprites.size() - 1].setPosition(rect.position);
+    }
 
     //debug objects
 	//bool debug = true;
@@ -225,6 +230,7 @@ void Game::run()
         {
             window.draw(doors.at(i)->getSprite());
         }
+
         //draw rails
         for (int i = 0; i < rails.size(); i++)
         {
@@ -246,12 +252,20 @@ void Game::run()
         if (movingLeft && jumping) actionFlags |= 0b00010000;
         if(shooting) actionFlags |= 0b00100000;
 
+        //update draws player so this is called before rail is drawn
+        if (player->getFloor() == 1)
+            player->update(actionFlags, &ground2);
 
-        
+        //draw rails
+        for (int i = 0; i < rails.size(); i++)
+        {
+            window.draw(rails.at(i)->getSprite());
+        }
+
+        //update draws player so this is called after rail is drawn
         if(player->getFloor()==0)
             player->update(actionFlags, &ground);
-        else if(player->getFloor()==1)
-            player->update(actionFlags, &ground2);
+        
         //std::cout << "true" << std::endl;
         //enemy->update(player);
         for (int i = 0; i < doors.size(); i++)
@@ -263,14 +277,12 @@ void Game::run()
         //update bullete and draw
         for (int i = 0; i < bullets.size(); i++)
         {
-            window.draw(bullets.at(i)->getSprite());
             bullets.at(i)->update(actionFlags, &ground);
         }
         //enemy update
         for (int i = 0; i < enemys.size(); i++)
         {
                 ((Enemy*)enemys.at(i))->update(player);
-                window.draw(enemys.at(i)->getSprite());
               
         }
         //find which door is being collied with if "W" is pressed
