@@ -26,7 +26,7 @@ public:
 	Player();
 	~Player();
 	void collide(Entity* other,char ActionFlags) override;
-	void update(char actionFlags,std::vector<sf::FloatRect>*) override;
+	void update(char actionFlags) override;
 	bool playerInDoor() { return inDoor; }
 	void setPos(sf::Vector2f);
 	int getFloor() { return floor; }
@@ -65,5 +65,7 @@ private:
 	bool jumpingRail;
 	int jumpingRailCount;
 	sf::IntRect frameUpdate;
+	std::vector<sf::FloatRect>* ground;
+	std::vector<sf::FloatRect>* ground2;
 };
 

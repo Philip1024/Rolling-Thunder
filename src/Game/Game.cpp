@@ -40,7 +40,7 @@ Game::~Game()
 void Game::run()
 {
 	//doors
-    Door* door = new Door(94, 113);
+    new Door(94, 113);
     new Door(258, 113);
     new Door(282, 42);
     new Door(424, 112);
@@ -249,7 +249,7 @@ void Game::run()
 
         //update draws player so this is called before rail is drawn
         if (player->getFloor() == 1)
-            player->update(actionFlags, &ground2);
+            player->update(actionFlags);
 
         //draw rails
         for (int i = 0; i < rails.size(); i++)
@@ -259,7 +259,7 @@ void Game::run()
 
         //update draws player so this is called after rail is drawn
         if(player->getFloor()==0)
-            player->update(actionFlags, &ground);
+            player->update(actionFlags);
         
         //std::cout << "true" << std::endl;
         //enemy->update(player);
@@ -272,12 +272,12 @@ void Game::run()
         //update bullete and draw
         for (int i = 0; i < bullets.size(); i++)
         {
-            bullets.at(i)->update(actionFlags, &ground);
+            bullets.at(i)->update(actionFlags);
         }
         //enemy update
         for (int i = 0; i < enemys.size(); i++)
         {
-                ((Enemy*)enemys.at(i))->update(player);
+            ((Enemy*)enemys.at(i))->update(player);
               
         }
         //find which door is being collied with if "W" is pressed

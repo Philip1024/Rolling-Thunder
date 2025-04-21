@@ -87,9 +87,9 @@ right most bit (00000001): move right
 6th bit (00000100): jump
 */
 
-void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
+void Player::update(char actionFlags)
 {
-	Entity::update(actionFlags,ground);//draws player
+	Entity::update(actionFlags);//draws player
 	 // only update the animation past this pointdddddddddd
 	//meant to determine whether player is on ground, if not player should fall
 	//test

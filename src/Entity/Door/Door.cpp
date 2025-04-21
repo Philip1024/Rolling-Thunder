@@ -1,5 +1,6 @@
 #include "Door.h"
 #include"../Entity.h"
+#include "../Player/Player.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include<optional>
@@ -91,10 +92,16 @@ bool Door::close()
 }
 
 
+void Door::update(char actionFlags)
+{
+	throw std::exception("dont call this");
+}
+
+
 //This controls the door opening and closing
 //Im trying to implemnent a way to hold the door closed 
 //by holding the w key after entering the door
-void Door::update(Player* player)
+void Door::update2(Player* pl)
 {
 	
 	if (clock.getElapsedTime().asSeconds() <= 0.06f)

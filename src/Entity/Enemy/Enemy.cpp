@@ -162,7 +162,7 @@ void Enemy::update(Player* player)
 		sprite.setTextureRect(animationMap[curMove]->nextFrame());
 	lastMove = curMove;
 
-	Entity::update(0b0, vec);
+	Entity::update(0b0);
 #ifndef NDEBUG
 	sf::RectangleShape bounds;
 	bounds.setSize(sprite.getGlobalBounds().size);

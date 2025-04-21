@@ -1,6 +1,6 @@
 #pragma once
-#include"../Entity.h"
-#include"../Player/Player.h"
+#include "../Entity.h"
+#include "../Player/Player.h"
 
 
 class Door : public Entity
@@ -13,7 +13,8 @@ public:
     //updates player sprite based on input
 	int xPos, yPos;
 	int animationFrame = 0;
-	void update(Player* pl);
+	void update(char actionFlags);
+	void update2(Player* pl);
 	//this opens the door if the player interacts with it 
 	void setPos(sf::Vector2f);
 	void setOpening(bool);
