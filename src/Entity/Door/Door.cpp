@@ -97,6 +97,7 @@ bool Door::close()
 //by holding the w key after entering the door
 void Door::update(char actionFlags, float x, float y)
 {
+	Entity::update(0b0);
 	int playerDistance = abs(x - sprite.getPosition().x);
 
 	if (clock.getElapsedTime().asSeconds() >= 6 && enemySpawnCount < 6)
@@ -143,7 +144,6 @@ void Door::update(char actionFlags, float x, float y)
 		}
 	}
 	clock.restart();
-	Entity::update(0b0);
 }
 
 
