@@ -1,6 +1,7 @@
 #pragma once
-#include "../Entity.h"
 #include "../Player/Player.h"
+#include "../Entity.h"
+
 
 
 class Door : public Entity
@@ -13,8 +14,7 @@ public:
     //updates player sprite based on input
 	int xPos, yPos;
 	int animationFrame = 0;
-	void update(char actionFlags);
-	void update2(Player* pl);
+	void update(char actionFlags,float x, float y);
 	//this opens the door if the player interacts with it 
 	void setPos(sf::Vector2f);
 	void setOpening(bool);
@@ -44,6 +44,6 @@ private:
 	int doorFrameCount = 0;
 	bool doorOpened = false;
 	sf::RectangleShape door;
-	int enemySpawnCount = 0
+	int enemySpawnCount = 0;
 };
 

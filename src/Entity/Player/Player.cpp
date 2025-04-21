@@ -11,6 +11,7 @@
 Player::Player()
 	: Entity(AnimationData::getTexture(AnimationData::ALBATROSS))
 {
+	ground.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,5.f }));
 	sprite.setPosition(sf::Vector2f(100, 120));
 	sf::Vector2i position(230, 58);
 	sf::Vector2i size(30, 60); 
@@ -94,10 +95,10 @@ void Player::update(char actionFlags)
 	//meant to determine whether player is on ground, if not player should fall
 	//test
 	shouldFall = true;
-	for (int i = 0; i < ground->size(); i++)
+	for (int i = 0; i < ground.size(); i++)
 	{
 		//if intersects with ground or in any of the other unique animations don't fall
-		if (sprite.getGlobalBounds().findIntersection(ground->at(0)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting||jumpingRail)
+		if (sprite.getGlobalBounds().findIntersection(ground.at(0)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting||jumpingRail)
 			shouldFall = false;
 	}
 
@@ -156,7 +157,7 @@ void Player::update(char actionFlags)
 			g = 13;
 			angle = 90 * PI / 180;
 		}
-		activeJump = jump(angle, ground);
+		activeJump = jump(angle, &ground);
 	}
 
 	//jump follows a parabolic path using parametric physics equations
@@ -174,7 +175,7 @@ void Player::update(char actionFlags)
 			g = 13;
 			angle = 75 * PI / 180;
 		}
-		activeRightJump = jump(angle, ground);
+		activeRightJump = jump(angle, &ground);
 	}
 
 	if (((actionFlags & 0b00010000) || activeLeftJump) && !activeJump && !activeRightJump && !falling && !inDoor&&!shooting)//jump
@@ -190,7 +191,7 @@ void Player::update(char actionFlags)
 			g = 13;
 			angle = 105 * PI / 180;
 		}
-		activeRightJump = jump(angle, ground);
+		activeRightJump = jump(angle, &ground);
 	}
 
 	if ((actionFlags & 0b00100000||shooting) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor)

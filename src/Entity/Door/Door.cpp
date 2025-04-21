@@ -92,20 +92,14 @@ bool Door::close()
 }
 
 
-void Door::update(char actionFlags)
-{
-	throw std::exception("dont call this");
-}
-
-
 //This controls the door opening and closing
 //Im trying to implemnent a way to hold the door closed 
 //by holding the w key after entering the door
-void Door::update2(Player* pl)
+void Door::update(char actionFlags, float x, float y)
 {
-	int playerDistance = abs(player->getSprite().getPosition().x - sprite.getPosition().x);
+	int playerDistance = abs(x - sprite.getPosition().x);
 
-	if (clock.getElapsedTime().asSeconds() <= 6 && enemySpawnCount < 6)
+	if (clock.getElapsedTime().asSeconds() >= 6 && enemySpawnCount < 6)
 	{
 		if (playerDistance < 50)
 		{

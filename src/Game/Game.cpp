@@ -265,7 +265,7 @@ void Game::run()
         //enemy->update(player);
         for (int i = 0; i < doors.size(); i++)
         {
-            ((Door*)doors.at(i))->update(player);
+            ((Door*)doors.at(i))->update(actionFlags,player->getSprite().getPosition().x, player->getSprite().getPosition().y);
         }
 		//debugDoor->update(actionFlags,&ground);
 
