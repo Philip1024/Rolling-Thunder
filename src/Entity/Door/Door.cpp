@@ -4,7 +4,7 @@
 #include <iostream>
 #include<optional>
 #include "../../SpriteData/AnimationData.h"
-
+#include"../Enemy/Enemy.h"
 
 Door::Door(int x,int y): Entity(AnimationData::getTexture(AnimationData::DOOR))
 {
@@ -96,7 +96,17 @@ bool Door::close()
 //by holding the w key after entering the door
 void Door::update(Player* player)
 {
-	
+	int playerDistance = abs(player->getSprite().getPosition().x - sprite.getPosition().x);
+
+	if (clock.getElapsedTime().asSeconds() <= 6 && enemySpawnCount < 6)
+	{
+		if (playerDistance < 50)
+		{
+			new Enemy(sf::Vector2f(float(sprite.getPosition().x), float(107)));
+			enemySpawnCount++;
+		}
+	}
+
 	if (clock.getElapsedTime().asSeconds() <= 0.06f)
 		return;
 

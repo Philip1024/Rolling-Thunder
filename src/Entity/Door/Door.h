@@ -43,5 +43,6 @@ private:
 	int doorFrameCount = 0;
 	bool doorOpened = false;
 	sf::RectangleShape door;
+	int enemySpawnCount = 0
 };
 
