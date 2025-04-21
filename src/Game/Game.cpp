@@ -225,11 +225,6 @@ void Game::run()
 			debugRail->changeOpacity(false);
         }*/
 
-        //draw doors
-        for (int i =0; i < doors.size(); i++)
-        {
-            window.draw(doors.at(i)->getSprite());
-        }
 
         //draw rails
         for (int i = 0; i < rails.size(); i++)
@@ -270,7 +265,7 @@ void Game::run()
         //enemy->update(player);
         for (int i = 0; i < doors.size(); i++)
         {
-            doors.at(i)->update(actionFlags, &ground);
+            ((Door*)doors.at(i))->update(player);
         }
 		//debugDoor->update(actionFlags,&ground);
 

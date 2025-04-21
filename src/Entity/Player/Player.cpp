@@ -206,7 +206,7 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 				sprite.setTextureRect(moveRight->nextFrame());
 			else
 				sprite.setTextureRect(moveLeft->nextFrame());
-			sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+			//sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
 		}
 		else
 		{
@@ -234,18 +234,18 @@ void Player::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 	switch (curMove)
 	{
 	case MOVE_RIGHT:
-		view->move({ 2,0 });
-		sprite.move({ 2,0 });
+		view->move({ 3,0 });
+		sprite.move({ 3,0 });
 		break;
 	case MOVE_LEFT:
-		view->move({ -2,0 });
-		sprite.move({ -2,0 });
+		view->move({ -3,0 });
+		sprite.move({ -3,0 });
 		break;
 
 	}
 	if (curMove == CLIMB_RAIL_RIGHT)
 		std::cout << "true" << std::endl;
-	if (playerTicks % 4 == 0)
+	if (playerTicks % 3 == 0)
 	{
 		sprite.setTextureRect(animationMap[curMove]->nextFrame());
 

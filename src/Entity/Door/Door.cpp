@@ -94,7 +94,7 @@ bool Door::close()
 //This controls the door opening and closing
 //Im trying to implemnent a way to hold the door closed 
 //by holding the w key after entering the door
-void Door::update(char actionFlags, std::vector<sf::FloatRect>* ground)
+void Door::update(Player* player)
 {
 	
 	if (clock.getElapsedTime().asSeconds() <= 0.06f)
@@ -132,7 +132,7 @@ void Door::update(char actionFlags, std::vector<sf::FloatRect>* ground)
 		}
 	}
 	clock.restart();
-
+	Entity::update(0b0);
 }
 
 
