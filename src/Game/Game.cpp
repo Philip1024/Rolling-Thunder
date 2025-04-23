@@ -258,8 +258,6 @@ void Game::run()
         }
 
         //update draws player so this is called after rail is drawn
-        if(player->getFloor()==0)
-            player->update(actionFlags);
         
         //std::cout << "true" << std::endl;
         //enemy->update(player);
@@ -268,7 +266,8 @@ void Game::run()
             ((Door*)doors.at(i))->update(actionFlags,player->getSprite().getPosition().x, player->getSprite().getPosition().y);
         }
 		//debugDoor->update(actionFlags,&ground);
-
+        if (player->getFloor() == 0)
+            player->update(actionFlags);
         //update bullete and draw
         for (int i = 0; i < bullets.size(); i++)
         {
