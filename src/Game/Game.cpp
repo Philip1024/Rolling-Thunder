@@ -118,6 +118,16 @@ void Game::run()
 
     //used to not have to wait for clock to reach 0.075 to move
     new Enemy(sf::Vector2f(200, 107)); // mem leak
+	//The enemeyDoor spawn will allow for one door to spawn a enemy every six seconds
+    //This is passed as a paramater through door update;
+
+    sf::Clock enemySpawnClockTemp;
+    sf::Clock* enemySpawnClock = &enemySpawnClockTemp;
+    bool allowEnemySpawnTemp = true;
+    bool* allowEnemyDoorSpawn = &allowEnemySpawnTemp;
+
+	enemySpawnClock->restart();
+
     char dummy = 0;
     bool firstD = true;
     bool firstA = true;
@@ -263,10 +273,19 @@ void Game::run()
         
         //std::cout << "true" << std::endl;
         //enemy->update(player);
+
+        //This is for the enemy spawning via door.
+        if (enemySpawnClock->getElapsedTime().asSeconds() > 6)
+        {
+            *allowEnemyDoorSpawn = true;
+        }
+
+        //This is the main update for the door
         for (int i = 0; i < doors.size(); i++)
         {
-            ((Door*)doors.at(i))->update(actionFlags,player->getSprite().getPosition().x, player->getSprite().getPosition().y);
+            ((Door*)doors.at(i))->update(actionFlags, player->getSprite().getPosition().x, player->getSprite().getPosition().y, allowEnemyDoorSpawn, enemySpawnClock);
         }
+
 		//debugDoor->update(actionFlags,&ground);
 
         //update bullete and draw

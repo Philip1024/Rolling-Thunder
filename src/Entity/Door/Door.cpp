@@ -28,6 +28,7 @@ Door::Door(int x,int y): Entity(AnimationData::getTexture(AnimationData::DOOR))
 	startOpen = false;
 	closing = false;
 	opened = false;
+	enemyClock.restart();
 }
 
 
@@ -95,18 +96,17 @@ bool Door::close()
 //This controls the door opening and closing
 //Im trying to implemnent a way to hold the door closed 
 //by holding the w key after entering the door
-void Door::update(char actionFlags, float x, float y)
+void Door::update(char actionFlags, float x, float y, bool* allowEnemyDoorSpawn, sf::Clock* enemySpawnClock)
 {
 	Entity::update(0b0);
 	int playerDistance = abs(x - sprite.getPosition().x);
 
-	if (clock.getElapsedTime().asSeconds() >= 6 && enemySpawnCount < 6)
+	//change to check the Y and make the X value shorter
+	if (playerDistance < 50 && *allowEnemyDoorSpawn)
 	{
-		if (playerDistance < 50)
-		{
-			new Enemy(sf::Vector2f(float(sprite.getPosition().x), float(107)));
-			enemySpawnCount++;
-		}
+		new Enemy(sf::Vector2f(float(sprite.getPosition().x), float(107)));
+		*allowEnemyDoorSpawn = false;
+		enemySpawnClock->restart();
 	}
 
 	if (clock.getElapsedTime().asSeconds() <= 0.06f)

@@ -14,7 +14,7 @@ public:
     //updates player sprite based on input
 	int xPos, yPos;
 	int animationFrame = 0;
-	void update(char actionFlags,float x, float y);
+	void update(char actionFlags,float x, float y, bool*, sf::Clock* );
 	//this opens the door if the player interacts with it 
 	void setPos(sf::Vector2f);
 	void setOpening(bool);
@@ -34,6 +34,7 @@ private:
 	void open();
 	bool close();
 	sf::Clock clock;
+	sf::Clock enemyClock;
 	bool startOpen;
 	bool opened;
 	bool opening = false;
