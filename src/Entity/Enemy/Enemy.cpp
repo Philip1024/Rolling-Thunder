@@ -57,7 +57,6 @@ void Enemy::collide(Entity* other)
 			{
 				//curMove = DIE_RIGHT;
 			}
-			dying = true;
 		}
 	}
 }
@@ -113,7 +112,6 @@ void Enemy::update(Player* player)
 		//this determines where to walk
 		else
 		{
-
 			if (player->getSprite().getPosition().x < sprite.getPosition().x)
 				curMove = WALK_LEFT;
 			else
