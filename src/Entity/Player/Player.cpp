@@ -5,13 +5,13 @@
 #include <iostream>
 #include <optional>
 #include <math.h>
+#include<vector>
 
 
 
 Player::Player()
 	: Entity(AnimationData::getTexture(AnimationData::ALBATROSS))
 {
-	ground.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,5.f }));
 	sprite.setPosition(sf::Vector2f(100, 120));
 	sf::Vector2i position(230, 58);
 	sf::Vector2i size(30, 60); 
@@ -63,10 +63,20 @@ Player::Player()
 	walkOutDoor = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_out_door"));
 	shootRight = new AnimationData::SectionData(AnimationData::getSection("albatross_shooting_right"));
 	shootLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_shooting_left"));
+	//shootleft start on wrong frame this sets it to right frame
+	shootLeft->nextFrame();
+	shootLeft->nextFrame();
 	floor = 0;
 	jumpingRail = false;
 	jumpingRailCount = 0;
 	curMove = STAND_RIGHT;
+	ground1.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,5.f }));
+	ground1.push_back(sf::FloatRect({ 1717.f,87.f }, { 46.f, 5.f }));
+	ground1.push_back(sf::FloatRect({ 1763.f,145.f }, { 48.f,5.f }));
+	ground1.push_back(sf::FloatRect({ 1811.f,203.f }, { 48.f, 5.f }));
+	ground1.push_back(sf::FloatRect({ 1859.f,273.f }, { 46.f,5.f }));
+	ground1.push_back(sf::FloatRect({ 1905.f,342.f }, { 51.f,5.f }));
+	ground2.push_back(sf::FloatRect({ 132.f,84.f }, { 441.f,5.f }));
 }
 
 
@@ -79,7 +89,6 @@ Player::~Player()
 	delete walkInDoor;
 	delete walkOutDoor;
 }
-
 
 /*
 action flags structure:
@@ -95,11 +104,23 @@ void Player::update(char actionFlags)
 	//meant to determine whether player is on ground, if not player should fall
 	//test
 	shouldFall = true;
-	for (int i = 0; i < ground.size(); i++)
+	if (floor == 0)
 	{
-		//if intersects with ground or in any of the other unique animations don't fall
-		if (sprite.getGlobalBounds().findIntersection(ground.at(0)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting||jumpingRail)
-			shouldFall = false;
+		for (int i = 0; i < ground1.size(); i++)
+		{
+			//if intersects with ground or in any of the other unique animations don't fall
+			if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail)
+				shouldFall = false;
+		}
+	}
+	else
+	{
+		for (int i = 0; i < ground2.size(); i++)
+		{
+			//if intersects with ground or in any of the other unique animations don't fall
+			if (sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail)
+				shouldFall = false;
+		}
 	}
 
 	if (shouldFall)
@@ -112,12 +133,20 @@ void Player::update(char actionFlags)
 			curMove = FALL_RIGHT;
 		else
 			curMove = FALL_LEFT;
-		/*
 		if (floor == 1)
 		{
-
+			for (int i = 0; i < ground1.size(); i++)
+			{
+				//if intersects with ground or in any of the other unique animations don't fall
+				if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail)
+				{
+					falling = false;
+					sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+					std::cout << "true";
+					floor = 0;
+				}
+			}
 		}
-		*/
 		sprite.move({ 0,5 });
 		//view->move({ 0,5 });
 		if (!shouldFall)
@@ -127,7 +156,10 @@ void Player::update(char actionFlags)
 				sprite.setTextureRect(moveRight->nextFrame());
 			else
 				sprite.setTextureRect(moveLeft->nextFrame());
-			//sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+			if(floor==0)
+				sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+			else
+				sprite.move({ 0,(43 - sprite.getGlobalBounds().position.y) });
 		}
 			
 	}
@@ -157,7 +189,10 @@ void Player::update(char actionFlags)
 			g = 13;
 			angle = 90 * PI / 180;
 		}
-		activeJump = jump(angle, &ground);
+		if (floor == 0)
+			activeJump = jump(angle, &ground1);
+		else
+			activeJump = jump(angle, &ground2);
 	}
 
 	//jump follows a parabolic path using parametric physics equations
@@ -175,7 +210,10 @@ void Player::update(char actionFlags)
 			g = 13;
 			angle = 75 * PI / 180;
 		}
-		activeRightJump = jump(angle, &ground);
+		if (floor == 0)
+			activeRightJump = jump(angle, &ground1);
+		else
+			activeRightJump = jump(angle, &ground2);
 	}
 
 	if (((actionFlags & 0b00010000) || activeLeftJump) && !activeJump && !activeRightJump && !falling && !inDoor&&!shooting)//jump
@@ -185,23 +223,37 @@ void Player::update(char actionFlags)
 		{
 			faceRight = false;
 			sprite.move({ 0,7 });//when switchiong to jump animation player move up, this offsets that
-			activeRightJump = true;
+			activeLeftJump = true;
 			t = 0;
 			velo = 30;
 			g = 13;
 			angle = 105 * PI / 180;
 		}
-		activeRightJump = jump(angle, &ground);
+		if (floor == 0)
+			activeLeftJump = jump(angle, &ground1);
+		else
+			activeLeftJump = jump(angle, &ground2);
 	}
 
 	if ((actionFlags & 0b00100000||shooting) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor)
 	{
 		if (shootTime.getElapsedTime().asSeconds() <= 0.1f)
 			return;
-		shooting = true;
+		if (!shooting)
+		{
+			shooting = true;
+			if(!faceRight)
+				sprite.move({ -2.f,5.f });
+			else
+				sprite.move({ 2.f,5.f });
+		}
 		if (shootingFrame == 3)
 		{
 			shooting = false;
+			if(!faceRight)
+				sprite.move({ 2.f,-5.f });
+			else
+				sprite.move({ -2.f,-5.f });
 			shootingFrame = 0;
 			if (faceRight)
 				sprite.setTextureRect(moveRight->nextFrame());
@@ -214,6 +266,7 @@ void Player::update(char actionFlags)
 			shootingFrame++;
 			if (faceRight)
 			{
+				std::cout << "true" << std::endl;
 				sprite.setTextureRect(shootRight->nextFrame());
 				if (shootingFrame == 2)
 				{
@@ -246,7 +299,7 @@ void Player::update(char actionFlags)
 	}
 	if (curMove == CLIMB_RAIL_RIGHT)
 		std::cout << "true" << std::endl;
-	if (playerTicks % 3 == 0)
+	if (playerTicks % 3 == 0&&!shooting)
 	{
 		sprite.setTextureRect(animationMap[curMove]->nextFrame());
 
@@ -415,14 +468,16 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 		curMove = JUMP_LEFT;
 	for (int i = 0; i < ground->size(); i++)
 	{
-		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) != std::nullopt&&t>1)
+		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) != std::nullopt&&t>0.5)
 		{
 			if (!faceRight)
 				sprite.setTextureRect(moveLeft->nextFrame());
 			else
 				sprite.setTextureRect(moveRight->nextFrame());
-			sprite.move({ 0,(120-sprite.getGlobalBounds().position.y) });
-			view->move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+			if(floor==0)
+				sprite.move({ 0,(120-sprite.getGlobalBounds().position.y) });
+			else
+				sprite.move({ 0,(43 - sprite.getGlobalBounds().position.y) });
 			xMov = 0;
 			yMov = 0;
 			xPos = 0;

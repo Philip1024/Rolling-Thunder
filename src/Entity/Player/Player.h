@@ -30,6 +30,8 @@ public:
 	bool playerInDoor() { return inDoor; }
 	void setPos(sf::Vector2f);
 	int getFloor() { return floor; }
+	void getGround1(std::vector<sf::FloatRect>);
+	void getGround2(std::vector<sf::FloatRect>);
 	//sf::Vector2f getPosition();
 private:
 	//keeps track of time between sprite updates
@@ -65,7 +67,7 @@ private:
 	bool jumpingRail;
 	int jumpingRailCount;
 	sf::IntRect frameUpdate;
-	std::vector<sf::FloatRect> ground;
-	std::vector<sf::FloatRect>* ground2;
+	std::vector<sf::FloatRect> ground1;
+	std::vector<sf::FloatRect> ground2;
 };
 
