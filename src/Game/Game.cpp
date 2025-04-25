@@ -232,30 +232,31 @@ void Game::run()
         {
             worldPos = window.mapPixelToCoords(sf::Mouse::getPosition());
             debugRail->setPos(worldPos);
-			debugRail->changeOpacity(false);
+            debugRail->changeOpacity(false);
         }*/
 
 
         //draw rails
+
         for (int i = 0; i < rails.size(); i++)
         {
             window.draw(rails.at(i)->getSprite());
         }
-      //  window.draw(debugRail->getSprite());
+        //  window.draw(debugRail->getSprite());
         for (sf::RectangleShape sprite : groundSprites)
             window.draw(sprite);
 
         // actions flags defines booleans in Game.cpp that are passed to the entity.
         // done this way to allow input to be read in Game.cpp
         char actionFlags = 0b0;
-		if (wPressed) actionFlags |= 0b10000000;
-        if (wPressed&&jumping) actionFlags |= 0b01000000;
+        if (wPressed) actionFlags |= 0b10000000;
+        if (wPressed && jumping) actionFlags |= 0b01000000;
         if (movingRight) actionFlags |= 0b00000001;
         if (movingLeft) actionFlags |= 0b00000010;
-        if (movingRight&&jumping) actionFlags |= 0b00001000;
-        if (jumping&&!movingRight&&!movingLeft&&!wPressed) actionFlags |= 0b00000100;
+        if (movingRight && jumping) actionFlags |= 0b00001000;
+        if (jumping && !movingRight && !movingLeft && !wPressed) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
-        if(shooting) actionFlags |= 0b00100000;
+        if (shooting) actionFlags |= 0b00100000;
 
         //update draws player so this is called before rail is drawn
         if (player->getFloor() == 1)
@@ -268,7 +269,7 @@ void Game::run()
         }
 
         //update draws player so this is called after rail is drawn
-        
+
         //std::cout << "true" << std::endl;
         //enemy->update(player);
 
@@ -284,7 +285,7 @@ void Game::run()
             ((Door*)doors.at(i))->update(actionFlags, player->getSprite().getPosition().x, player->getSprite().getPosition().y, allowEnemyDoorSpawn, enemySpawnClock);
         }
 
-		//debugDoor->update(actionFlags,&ground);
+        //debugDoor->update(actionFlags,&ground);
         if (player->getFloor() == 0)
             player->update(actionFlags);
         //update bullete and draw
@@ -295,6 +296,7 @@ void Game::run()
         //enemy update
         for (int i = 0; i < enemys.size(); i++)
         {
+            //check to see if enemy is dead
             ((Enemy*)enemys.at(i))->update(player);
               
         }
@@ -385,14 +387,33 @@ void Game::isColliding(char actionFlags)
                         }
                     }
                 }
+                //This if for deletion of eneym and bulet
+                else if (enemyCast != nullptr && bulletCast2 != nullptr)
+                {
+                    if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
+                    {
+                        entities.at(i)->collide(entities.at(j), actionFlags);
+                        entities.at(j)->collide(entities.at(i), actionFlags);
+                        std::cout << "bullet death works";
+                    }
+                }
+                else if (enemyCast2 != nullptr && bulletCast != nullptr)
+                {
+                    if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
+                    {
+                        entities.at(i)->collide(entities.at(j), actionFlags);
+                        entities.at(j)->collide(entities.at(i), actionFlags);
+                        std::cout << "bullet death works";
+                    }
+                }
 				//bullet enemy collision
+                ///Bullet and enemy are the only two object for now that we will be deleting during gameplay.
                 else
                 {
                     if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
                     {
                         entities.at(i)->collide(entities.at(j), actionFlags);
                         entities.at(j)->collide(entities.at(i), actionFlags);
-                        //if(
                     }
                 }
              }

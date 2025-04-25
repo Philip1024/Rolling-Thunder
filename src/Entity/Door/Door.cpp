@@ -103,7 +103,7 @@ void Door::update(char actionFlags, float x, float y, bool* allowEnemyDoorSpawn,
 	int playerDistanceY = abs(y - sprite.getPosition().y);
 
 	//change to check the Y and make the X value shorter
-	if (playerDistanceX < 30 && playerDistanceY < 10 && *allowEnemyDoorSpawn)
+	if (playerDistanceX < 20 && playerDistanceY < 5 && *allowEnemyDoorSpawn)
 	{
 		//new Enemy(sf::Vector2f(float(sprite.getPosition().x), float(107)));
 		*allowEnemyDoorSpawn = false;

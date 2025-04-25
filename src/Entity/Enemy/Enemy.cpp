@@ -21,6 +21,7 @@ Enemy::Enemy(sf::Vector2f pos)
 	animationMap[PUNCH_RIGHT] = new SectionData(AnimationData::getSection("enemy_punch_right"));
 	enemys.push_back(this);
 	dying = false;
+	alive = true;
 }
 
 
