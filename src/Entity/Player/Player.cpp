@@ -142,6 +142,7 @@ void Player::update(char actionFlags)
 				{
 					falling = false;
 					sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+					std::cout << "true";
 					floor = 0;
 				}
 			}
@@ -155,7 +156,10 @@ void Player::update(char actionFlags)
 				sprite.setTextureRect(moveRight->nextFrame());
 			else
 				sprite.setTextureRect(moveLeft->nextFrame());
-			sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+			if(floor==0)
+				sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+			else
+				sprite.move({ 0,(43 - sprite.getGlobalBounds().position.y) });
 		}
 			
 	}
@@ -470,8 +474,10 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 				sprite.setTextureRect(moveLeft->nextFrame());
 			else
 				sprite.setTextureRect(moveRight->nextFrame());
-			sprite.move({ 0,(120-sprite.getGlobalBounds().position.y) });
-			view->move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+			if(floor==0)
+				sprite.move({ 0,(120-sprite.getGlobalBounds().position.y) });
+			else
+				sprite.move({ 0,(43 - sprite.getGlobalBounds().position.y) });
 			xMov = 0;
 			yMov = 0;
 			xPos = 0;

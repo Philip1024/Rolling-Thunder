@@ -236,11 +236,6 @@ void Game::run()
         }*/
 
 
-        //draw rails
-        for (int i = 0; i < rails.size(); i++)
-        {
-            window.draw(rails.at(i)->getSprite());
-        }
       //  window.draw(debugRail->getSprite());
         for (sf::RectangleShape sprite : groundSprites)
             window.draw(sprite);
@@ -256,6 +251,12 @@ void Game::run()
         if (jumping&&!movingRight&&!movingLeft&&!wPressed) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
         if(shooting) actionFlags |= 0b00100000;
+
+
+        for (int i = 0; i < doors.size(); i++)
+        {
+            ((Door*)doors.at(i))->update(actionFlags, player->getSprite().getPosition().x, player->getSprite().getPosition().y, allowEnemyDoorSpawn, enemySpawnClock);
+        }
 
         //update draws player so this is called before rail is drawn
         if (player->getFloor() == 1)
@@ -279,10 +280,6 @@ void Game::run()
         }
 
         //This is the main update for the door
-        for (int i = 0; i < doors.size(); i++)
-        {
-            ((Door*)doors.at(i))->update(actionFlags, player->getSprite().getPosition().x, player->getSprite().getPosition().y, allowEnemyDoorSpawn, enemySpawnClock);
-        }
 
 		//debugDoor->update(actionFlags,&ground);
         if (player->getFloor() == 0)
