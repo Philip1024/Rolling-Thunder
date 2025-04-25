@@ -52,6 +52,7 @@ Player::Player()
 	animationMap[DOOR_IN] = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_in_door"));
 	animationMap[DOOR_OUT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_out_door"));
 	animationMap[CLIMB_RAIL_RIGHT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_climbing_over_rail_right"));
+	animationMap[CLIMB_RAIL_LEFT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_climbing_over_rail_left"));
 	animationMap[FALL_RIGHT] = new AnimationData::SectionData(AnimationData::getSection("albatross_falling_right"));
 	animationMap[FALL_LEFT] = new AnimationData::SectionData(AnimationData::getSection("albatross_falling_left"));
 	playerTicks = 0;
@@ -163,7 +164,13 @@ void Player::update(char actionFlags)
 		}
 			
 	}
-
+	if (floor == 1)
+	{
+		if ((actionFlags & 0b100000000) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail)
+		{
+			std::cout << "works" << std::endl;
+		}
+	}
 	if ((actionFlags & 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump&&!falling&&!inDoor && !shooting) // moving right. 
 	{
 		curMove = MOVE_RIGHT;
@@ -340,19 +347,35 @@ void Player::collide(Entity* other,char actionFlags)
 					sprite.setTextureRect((AnimationData::getSection("albatross_jumping_to_rail_right")->getFrame(0)));
 					jumpingRail = true;
 				}
+				else
+				{
+					sprite.setTextureRect((AnimationData::getSection("albatross_jumping_to_rail_left")->getFrame(1)));
+					jumpingRail = true;
+				}
 			}
 			else
 			{
 				if (sprite.getPosition().y > 45)
 				{
-					sprite.setTextureRect((AnimationData::getSection("albatross_jumping_to_rail_right")->getFrame(1)));
-					sprite.move({ 0,-2 });
+					if (faceRight)
+					{
+						sprite.setTextureRect((AnimationData::getSection("albatross_jumping_to_rail_right")->getFrame(1)));
+						sprite.move({ 0,-2 });
+					}
+					else
+					{
+						sprite.setTextureRect((AnimationData::getSection("albatross_jumping_to_rail_left")->getFrame(0)));
+						sprite.move({ 0,-2 });
+					}
 				}
 				else
 				{
 					if (jumpingRail && jumpingRailCount < 10)
 					{
-						curMove = CLIMB_RAIL_RIGHT;
+						if (faceRight)
+							curMove = CLIMB_RAIL_RIGHT;
+						else
+							curMove = CLIMB_RAIL_LEFT;
 						jumpingRailCount++;
 						std::cout << jumpingRailCount << std::endl;
 					}
@@ -483,6 +506,26 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 			xPos = 0;
 			yPos = 0;
 			return false;
+		}
+	}
+	if (floor == 1)
+	{
+		for (int i = 0; i < ground1.size(); i++)
+		{
+			if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt && t > 0.5)
+			{
+				if (!faceRight)
+					sprite.setTextureRect(moveLeft->nextFrame());
+				else
+					sprite.setTextureRect(moveRight->nextFrame());
+				sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+				floor = 0;
+				xMov = 0;
+				yMov = 0;
+				xPos = 0;
+				yPos = 0;
+				return false;
+			}
 		}
 	}
 	return true;

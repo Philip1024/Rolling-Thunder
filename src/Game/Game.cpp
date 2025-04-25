@@ -139,6 +139,8 @@ void Game::run()
     double jumpHeight=0;
     //used to determine if jumping
     bool jumping = false;
+    //used to determined if crouching
+    bool crouching = false;
     //glogbal postion of the level
     double gamePosX = 0;
     double gamePosY = 0;
@@ -197,6 +199,9 @@ void Game::run()
                 case sf::Keyboard::Scan::R:
                     shooting = true;
                     break;
+                case sf::Keyboard::Scan::S:
+                    crouching = true;
+                    break;
                 }
             }
             if (const auto* keyReleased = event->getIf<sf::Event::KeyReleased>())
@@ -217,6 +222,9 @@ void Game::run()
                     break;
                 case sf::Keyboard::Scan::R:
                     shooting = false;
+                    break;
+                case sf::Keyboard::Scan::S:
+                    crouching = false;
                     break;
                 case sf::Keyboard::Scan::K:
                     AnimationData::reloadTextures();
@@ -251,6 +259,7 @@ void Game::run()
         if (jumping && !movingRight && !movingLeft && !wPressed) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
         if (shooting) actionFlags |= 0b00100000;
+        if (crouching && jumping) actionFlags |= 0b100000000;
 
 
         for (int i = 0; i < doors.size(); i++)

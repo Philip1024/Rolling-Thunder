@@ -20,6 +20,7 @@ public:
 		DOOR_OUT,
 		JUMP_RAIL_RIGHT,
 		CLIMB_RAIL_RIGHT,
+		CLIMB_RAIL_LEFT,
 		FALL_RIGHT,
 		FALL_LEFT
 	};
@@ -30,8 +31,8 @@ public:
 	bool playerInDoor() { return inDoor; }
 	void setPos(sf::Vector2f);
 	int getFloor() { return floor; }
-	void getGround1(std::vector<sf::FloatRect>);
-	void getGround2(std::vector<sf::FloatRect>);
+	//void getGround1(std::vector<sf::FloatRect>);
+	//void getGround2(std::vector<sf::FloatRect>);
 	//sf::Vector2f getPosition();
 private:
 	//keeps track of time between sprite updates
