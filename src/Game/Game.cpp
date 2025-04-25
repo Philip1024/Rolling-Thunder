@@ -293,7 +293,15 @@ void Game::run()
         for (int i = 0; i < enemys.size(); i++)
         {
             //check to see if enemy is dead
-            ((Enemy*)enemys.at(i))->update(player);
+            if (!(Enemy*)enemys.at(i)->getAlive())
+            {
+                enemys.erase(std::remove(enemys.begin(), enemys.end(), enemys.at(i)), enemys.end());
+            }
+            else
+            {
+                ((Enemy*)enemys.at(i))->update(player);
+
+            }
               
         }
         //find which door is being collied with if "W" is pressed
@@ -310,7 +318,8 @@ void Game::run()
    
 }
 
-//checks if any entities are colliding
+//This method iterates through the entities vector with i being one less the j 
+//to allow for comparison.
 void Game::isColliding(char actionFlags)
 {
     std::vector<Entity*>& entities = Entity::getEntities();
@@ -383,14 +392,20 @@ void Game::isColliding(char actionFlags)
                         }
                     }
                 }
-                //This if for deletion of eneym and bulet
+                //This if for deletion of enemy and bullet
                 else if (enemyCast != nullptr && bulletCast2 != nullptr)
                 {
                     if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))
                     {
                         entities.at(i)->collide(entities.at(j), actionFlags);
                         entities.at(j)->collide(entities.at(i), actionFlags);
-                        std::cout << "bullet death works";
+
+                        //this deletes the enemy from the entities vector;
+                        entities.erase(std::remove(entities.begin(), entities.end(), entities.at(i)), entities.end());
+                        //this deletes the bullet from the entities vector.
+                        j--;
+                        entities.erase(std::remove(entities.begin(), entities.end(), entities.at(j)),entities.end());
+                        i--;
                     }
                 }
                 else if (enemyCast2 != nullptr && bulletCast != nullptr)
@@ -399,11 +414,14 @@ void Game::isColliding(char actionFlags)
                     {
                         entities.at(i)->collide(entities.at(j), actionFlags);
                         entities.at(j)->collide(entities.at(i), actionFlags);
-                        std::cout << "bullet death works";
+                        //this deletes the enemy from the entities vector;
+                        entities.erase(std::remove(entities.begin(), entities.end(), entities.at(i)), entities.end());
+                        //this deletes the bullet from the entities vector.
+                        j--;
+                        entities.erase(std::remove(entities.begin(), entities.end(), entities.at(j)), entities.end());
+                        i--;
                     }
                 }
-				//bullet enemy collision
-                ///Bullet and enemy are the only two object for now that we will be deleting during gameplay.
                 else
                 {
                     if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(entities.at(j)->getSprite().getGlobalBounds()))

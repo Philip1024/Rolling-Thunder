@@ -58,6 +58,7 @@ void Enemy::collide(Entity* other)
 			{
 				//curMove = DIE_RIGHT;
 			}
+			alive = false;
 		}
 	}
 }
