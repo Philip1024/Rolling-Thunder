@@ -1,11 +1,38 @@
 #include "GUI.h"
 
+#include <iostream>
+
 
 GUI::GUI()
 	: background(sf::Sprite(introFrame))
 {
 	currentScreen = MAIN_MENU;
 	currentIntroFrame = 0;
+	// screen: 1920x1080 or 288x244 or ~288x180
+
+	// static text
+	textMap["p1UpS"] = new GameText("1UP");
+	textMap["p2UpS"] = new GameText("2UP");
+	textMap["highScoreS"] = new GameText("HIGH SCORE");
+	textMap["toStartPushS"] = new GameText("TO START PUSH");
+	textMap["select1InfoS"] = new GameText("ONLY 1 PLAYER'S BUTTON");
+	textMap["namcoCopyrightS"] = new GameText("@ 1986 NAMCO");
+	textMap["namcoRightsS"] = new GameText("ALL RIGHTS RESERVED");
+	textMap["creditS"] = new GameText("CREDIT  ");
+
+	// dynamic text
+	textMap["p1ScoreD"] = new GameText("00");
+	textMap["p2ScoreD"] = new GameText("00");
+	textMap["creditD"] = new GameText("1");
+
+	for (auto& it : textMap)
+	{
+		it.second->setScale(sf::Vector2f(0.2f, 0.2f));
+		it.second->setPosition(sf::Vector2f(50, 50));
+	}
+
+	textMap["creditS"]->setPosition(sf::Vector2f(0, 170));
+
 }
 
 
@@ -17,14 +44,34 @@ GUI::~GUI()
 
 void GUI::drawGUI(sf::RenderWindow& window)
 {
+	static std::vector<std::string> textToDraw = // we make static so we aren't create copies of this each tick
+	{
+	"p1UpS",
+	"p2UpS",
+	"highScoreS",
+	"toStartPushS",
+	"select1InfoS",
+	"namcoCopyrightS",
+	"namcoRightsS",
+	"creditS",
+	"p1ScoreD",
+	"p2ScoreD",
+	"creditD"
+	};
+
 	switch (currentScreen)
 	{
 	case MAIN_MENU:
 		// play the video etc. TODO
 		nextIntroFrame();
 		window.draw(background);
+		// 1050: high score
 		break;
 	case SELECT_1:
+		
+
+		for (std::string& s : textToDraw)
+			window.draw(*textMap[s]);
 		break;
 	case SELECT_12:
 		break;

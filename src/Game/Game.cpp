@@ -13,6 +13,7 @@
 
 //Constructor
 Game::Game()
+	: stage1Sprite(stage1)
 {
     // this MUST be called first. loads the textures.
     AnimationData::load();
@@ -26,6 +27,8 @@ Game::Game()
     ground.push_back(sf::FloatRect({ 1859.f,273.f }, { 46.f,5.f }));
     ground.push_back(sf::FloatRect({ 1905.f,342.f }, { 51.f,5.f }));
     ground2.push_back(sf::FloatRect({ 132.f,84.f }, { 441.f,5.f }));
+
+    stage1Sprite = sf::Sprite(stage1);
 }
 
 
@@ -56,7 +59,6 @@ void Game::run()
 	new Door(1436, 41);
 	new Door(1483, 41);
 	new Door(1530, 41);
-    std::vector<Entity*>& doors = Entity::getDoors();
 
     //rails
     //Rail* rail = new Rail(82, 55);
@@ -88,20 +90,17 @@ void Game::run()
     new Rail(1623, 64);
     new Rail(1666, 64);
     new Rail(1709, 64);
-    std::vector<Entity*>& rails = Entity::getRails();
     
-    //for testing
-    std::vector<sf::RectangleShape> groundSprites;
-
+    // for testing
     for (sf::FloatRect rect : ground)
     {
-        groundSprites.push_back(sf::RectangleShape(rect.size));
-        groundSprites[groundSprites.size() - 1].setPosition(rect.position);
+        groundDebugSprites.push_back(sf::RectangleShape(rect.size));
+        groundDebugSprites[groundDebugSprites.size() - 1].setPosition(rect.position);
     }
     for (sf::FloatRect rect : ground2)
     {
-        groundSprites.push_back(sf::RectangleShape(rect.size));
-        groundSprites[groundSprites.size() - 1].setPosition(rect.position);
+        groundDebugSprites.push_back(sf::RectangleShape(rect.size));
+        groundDebugSprites[groundDebugSprites.size() - 1].setPosition(rect.position);
     }
 
     //debug objects
@@ -112,63 +111,26 @@ void Game::run()
    // debugRail->changeOpacity(false);
    // sf::Vector2f worldPos;
 
-    //doors
-    bool wPressed = false;
-    int count = 0;//for testing
-
-    //used to not have to wait for clock to reach 0.075 to move
+    enemySpawnClock->restart();
     new Enemy(sf::Vector2f(200, 107)); // mem leak
-	//The enemeyDoor spawn will allow for one door to spawn a enemy every six seconds
-    //This is passed as a paramater through door update;
 
-    sf::Clock enemySpawnClockTemp;
-    sf::Clock* enemySpawnClock = &enemySpawnClockTemp;
-    bool allowEnemySpawnTemp = true;
-    bool* allowEnemyDoorSpawn = &allowEnemySpawnTemp;
-
-	enemySpawnClock->restart();
-
-    char dummy = 0;
-    bool firstD = true;
-    bool firstA = true;
-    // if the player is moving right or left
-    bool movingLeft = false, movingRight = false;
-    //if player is shooting
-    bool shooting = false;
-    //used to determine height of jump
-    double jumpHeight=0;
-    //used to determine if jumping
-    bool jumping = false;
-    //used to determined if crouching
-    bool crouching = false;
-    //glogbal postion of the level
-    double gamePosX = 0;
-    double gamePosY = 0;
-    // what tick the game is on.
-    unsigned int currentTick = 0;
-	//window/clock setup
-    sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "Rolling Thunder");
+    //window/clock setup
     Entity::setWindow(&window);
     Entity::setCurrentTick(&currentTick);
+
     window.setFramerateLimit(30);
-	//Sprtie for the background
-	sf::Sprite stage1Sprite(stage1);
+	
     //main view subject to change 
-    sf::View view(sf::FloatRect({ 0, 0 }, { 1920, 1080 }));
+   
     Entity::setView(&view);
     //DO NOT CHANGE THESE VALUES! IT IS EXACT TO THE PIXELS OF THE IMAGE!
     view.setViewport(sf::FloatRect({ 0.f, -.1023f }, { 6.72f, 6.72f }));
     window.setKeyRepeatEnabled(false);
 
-    std::vector<Entity*>& bullets = Entity::getBullets();
-    std::vector<Entity*>& enemys = Entity::getEnemys();
-
-    GUI gui;
-    std::cout << enemys.size(); 
     //Main gameplay loop
     while (window.isOpen())
     {
-        // event loop
+        // event loop, input is handled here
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
@@ -232,21 +194,6 @@ void Game::run()
                 }
             }
         }
-        //draw 
-        window.clear();
-        window.draw(stage1Sprite);
-        //this is subject to change
-        /*if (debug)
-        {
-            worldPos = window.mapPixelToCoords(sf::Mouse::getPosition());
-            debugRail->setPos(worldPos);
-            debugRail->changeOpacity(false);
-        }*/
-
-
-      //  window.draw(debugRail->getSprite());
-        for (sf::RectangleShape sprite : groundSprites)
-            window.draw(sprite);
 
         // actions flags defines booleans in Game.cpp that are passed to the entity.
         // done this way to allow input to be read in Game.cpp
@@ -261,70 +208,27 @@ void Game::run()
         if (shooting) actionFlags |= 0b00100000;
         if (crouching && jumping) actionFlags |= 0b100000000;
 
+        window.clear();
 
-        for (int i = 0; i < doors.size(); i++)
+        switch (gameState)
         {
-            ((Door*)doors.at(i))->update(actionFlags, player->getSprite().getPosition().x, player->getSprite().getPosition().y, allowEnemyDoorSpawn, enemySpawnClock);
+        case START:
+            runStartBehavior();
+	        break;
+        case GAMEPLAY:
+            runGameplayBehavior(actionFlags);
+	        break;
+        case LOSE:
+            //runLoseBehavior()
+	        break;
+        case WIN:
+	        break;
         }
 
-        //update draws player so this is called before rail is drawn
-        if (player->getFloor() == 1)
-            player->update(actionFlags);
-
-        //draw rails
-        for (int i = 0; i < rails.size(); i++)
-        {
-            window.draw(rails.at(i)->getSprite());
-        }
-
-        //update draws player so this is called after rail is drawn
-
-        //std::cout << "true" << std::endl;
-        //enemy->update(player);
-
-        //This is for the enemy spawning via door.
-        if (enemySpawnClock->getElapsedTime().asSeconds() > 6)
-        {
-            *allowEnemyDoorSpawn = true;
-        }
-
-        //This is the main update for the door
-
-        //debugDoor->update(actionFlags,&ground);
-        if (player->getFloor() == 0)
-            player->update(actionFlags);
-        //update bullete and draw
-        for (int i = 0; i < bullets.size(); i++)
-        {
-            bullets.at(i)->update(actionFlags);
-        }
-        //enemy update
-        for (int i = 0; i < enemys.size(); i++)
-        {
-            //check to see if enemy is dead
-            if (!(Enemy*)enemys.at(i)->getAlive())
-            {
-                enemys.erase(std::remove(enemys.begin(), enemys.end(), enemys.at(i)), enemys.end());
-            }
-            else
-            {
-                ((Enemy*)enemys.at(i))->update(player);
-
-            }
-              
-        }
-        //find which door is being collied with if "W" is pressed
-        isColliding(actionFlags);
-        //gui.drawGUI(window);
-
-        //used to update all entites
-		//draw the foreground
         window.setView(view);
         window.display();
-        currentTick++; // keep track of the ticks that have passed
-        //std::cout << currentTick << std::endl;
     }
-   
+
 }
 
 //This method iterates through the entities vector with i being one less the j 
@@ -448,4 +352,79 @@ void Game::isColliding(char actionFlags)
 void deleteLevel()
 {
 
+}
+
+
+void Game::runStartBehavior()
+{
+    gui.changeScreen(GUI::SELECT_1);
+    gui.drawGUI(window);
+
+}
+
+
+void Game::runGameplayBehavior(char actionFlags)
+{
+    //draw 
+    window.draw(stage1Sprite);
+    //this is subject to change
+    /*if (debug)
+    {
+        worldPos = window.mapPixelToCoords(sf::Mouse::getPosition());
+        debugRail->setPos(worldPos);
+        debugRail->changeOpacity(false);
+    }*/
+
+
+    //  window.draw(debugRail->getSprite());
+    for (sf::RectangleShape sprite : groundDebugSprites)
+        window.draw(sprite);
+
+    for (int i = 0; i < doors.size(); i++)
+    {
+        ((Door*)doors.at(i))->update(actionFlags, player->getSprite().getPosition().x, player->getSprite().getPosition().y, allowEnemyDoorSpawn, enemySpawnClock);
+    }
+
+    //update draws player so this is called before rail is drawn
+    if (player->getFloor() == 1)
+        player->update(actionFlags);
+
+    //draw rails
+    for (int i = 0; i < rails.size(); i++)
+        window.draw(rails.at(i)->getSprite());
+
+    //update draws player so this is called after rail is drawn
+
+    //std::cout << "true" << std::endl;
+    //enemy->update(player);
+
+    //This is for the enemy spawning via door.
+    if (enemySpawnClock->getElapsedTime().asSeconds() > 6)
+        *allowEnemyDoorSpawn = true;
+
+    //This is the main update for the door
+
+    //debugDoor->update(actionFlags,&ground);
+    if (player->getFloor() == 0)
+        player->update(actionFlags);
+    //update bullete and draw
+    for (int i = 0; i < bullets.size(); i++)
+        bullets.at(i)->update(actionFlags);
+
+    //enemy update
+    for (int i = 0; i < enemies.size(); i++)
+    {
+        //check to see if enemy is dead
+        if (!(Enemy*)enemies.at(i)->getAlive())
+            enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies.at(i)), enemies.end());
+        else
+            ((Enemy*)enemies.at(i))->update(player);
+    }
+    //find which door is being collied with if "W" is pressed
+    isColliding(actionFlags);
+
+    //used to update all entites
+    //draw the foreground
+    currentTick++; // keep track of the ticks that have passed
+    //std::cout << currentTick << std::endl;
 }
