@@ -304,7 +304,10 @@ void Game::run()
             //check to see if enemy is dead
             if (!(Enemy*)enemys.at(i)->getAlive())
             {
+                enemys.at(i)
                 enemys.erase(std::remove(enemys.begin(), enemys.end(), enemys.at(i)), enemys.end());
+                i--;
+
             }
             else
             {
