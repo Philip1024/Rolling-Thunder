@@ -6,5 +6,5 @@ GameText::GameText(std::string text)
 	: sf::Text(gameFont)
 {
 	setString(text);
-	setFillColor(sf::Color::White);
+	setFillColor(sf::Color(0xE0E0E1FF));
 }

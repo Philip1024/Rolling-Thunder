@@ -106,6 +106,7 @@ void AnimationData::reloadTextures()
 	textureMap[DOOR]->loadFromFile("res/SpriteSheets/Door(1).png");
 	textureMap[RAIL]->loadFromFile("res/SpriteSheets/RailFinal.png");
 	textureMap[BULLET]->loadFromFile("res/SpriteSheets/bullet.png");
+	textureMap[NAMCO]->loadFromFile("res/SpriteSheets/namco.png");
 }
 
 
