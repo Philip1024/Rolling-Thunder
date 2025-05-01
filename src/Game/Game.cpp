@@ -428,8 +428,8 @@ void Game::runGameplayBehavior(char actionFlags)
 
     /*window.setView(guiView);
     gui.changeScreen(GUI::INGAME);
-    gui.drawGUI(window);
-    window.setView(mainView);*/
+    gui.drawGUI(window);*/
+    window.setView(mainView);
 
     //used to update all entites
     //draw the foreground
