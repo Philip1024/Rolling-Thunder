@@ -209,7 +209,7 @@ void Game::run()
         if (crouching && jumping) actionFlags |= 0b100000000;
 
         window.clear();
-
+        gameState = GAMEPLAY;
         switch (gameState)
         {
         case START:
@@ -381,9 +381,8 @@ void Game::runGameplayBehavior(char actionFlags)
         window.draw(sprite);
 
     for (int i = 0; i < doors.size(); i++)
-    {
         ((Door*)doors.at(i))->update(actionFlags, player->getSprite().getPosition().x, player->getSprite().getPosition().y, allowEnemyDoorSpawn, enemySpawnClock);
-    }
+    
 
     //update draws player so this is called before rail is drawn
     if (player->getFloor() == 1)
@@ -416,9 +415,15 @@ void Game::runGameplayBehavior(char actionFlags)
     {
         //check to see if enemy is dead
         if (!(Enemy*)enemies.at(i)->getAlive())
+        {
+            delete enemies.at(i);
             enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies.at(i)), enemies.end());
+            std::cout << "removed";
+        }
         else
             ((Enemy*)enemies.at(i))->update(player);
+        delete enemies.at(i);
+        enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies.at(i)), enemies.end());
     }
     //find which door is being collied with if "W" is pressed
     isColliding(actionFlags);
