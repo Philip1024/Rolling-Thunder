@@ -47,18 +47,20 @@ void Enemy::collide(Entity* other)
 	Bullet* bulletCast = dynamic_cast<Bullet*>(other);
 	if (bulletCast != nullptr)
 	{
+		alive = false;
 		if (bulletCast->team)
 		{
 			//bulletCast->update();
 			if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT)
 			{
 				//curMove = DIE_LEFT;
+				alive = false;
 			}
 			else
 			{
 				//curMove = DIE_RIGHT;
+				alive = false;
 			}
-			alive = false;
 		}
 	}
 }

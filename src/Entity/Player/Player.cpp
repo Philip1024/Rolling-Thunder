@@ -329,7 +329,11 @@ void Player::update(char actionFlags)
 	clock.restart();
 }
 
-//foor colliding, not functional for rail collision yet
+/// <summary>
+/// This method enacts all players actions when certain collisions happen
+/// </summary>
+/// <param name="other">The entity that it collides with.</param>
+/// <param name="actionFlags">user input</param>
 void Player::collide(Entity* other,char actionFlags)
 {
 	
@@ -474,7 +478,12 @@ void Player::collide(Entity* other,char actionFlags)
 }
 
 
-
+/// <summary>
+/// does the player jumping animation given ground
+/// </summary>
+/// <param name="angle">angle jumping at</param>
+/// <param name="ground"></param>
+/// <returns></returns>
 bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 {
 	t += 0.2;
