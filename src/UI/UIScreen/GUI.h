@@ -30,6 +30,9 @@ private:
 	static std::string frameNumber(unsigned int i);
 	// advances to the next frame in the intro video
 	void nextIntroFrame();
+	static void setCenterOrigin(GameText* text);
+	// quick setPosition
+	void QSP(std::string string, sf::Vector2f vector);
 
 	sf::Texture introFrame;
 	unsigned int currentIntroFrame;

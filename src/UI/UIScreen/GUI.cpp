@@ -8,7 +8,11 @@ GUI::GUI()
 {
 	currentScreen = MAIN_MENU;
 	currentIntroFrame = 0;
-	// screen: 1920x1080 or 288x244 or ~288x180
+	/* Resolution is cooked:
+	  screen: 1920x1080 or 288x244 or ~288x180
+	  x: ~50 to ~238 to keep 4:3 resolution
+	  y: starts at 16 ends at 180
+	*/
 
 	// static text
 	textMap["p1UpS"] = new GameText("1UP");
@@ -31,7 +35,14 @@ GUI::GUI()
 		it.second->setPosition(sf::Vector2f(50, 50));
 	}
 
-	textMap["creditS"]->setPosition(sf::Vector2f(0, 170));
+	QSP("p1UpS", { 75, 16 });
+	QSP("p2UpS", { 238 - 75, 16 });
+	QSP("highScoreS", { 125, 16 });
+	setCenterOrigin(textMap["highScoreS"]);
+	QSP("toStartPushS", { 110, 100 });
+	setCenterOrigin(textMap["select1InfoS"]);
+	QSP("select1InfoS", { 144, 130 });
+	QSP("creditS", { 50, 170 });
 
 }
 
@@ -68,8 +79,6 @@ void GUI::drawGUI(sf::RenderWindow& window)
 		// 1050: high score
 		break;
 	case SELECT_1:
-		
-
 		for (std::string& s : textToDraw)
 			window.draw(*textMap[s]);
 		break;
@@ -86,6 +95,7 @@ void GUI::drawGUI(sf::RenderWindow& window)
 	}
 }
 
+
 void GUI::nextIntroFrame()
 {
 	currentIntroFrame %= 1240;
@@ -97,6 +107,17 @@ void GUI::nextIntroFrame()
 	background.setPosition({ 0,16.5f });
 	background.setScale({0.1489f, 0.1489f }); 
 }
+
+void GUI::setCenterOrigin(GameText* text)
+{
+	text->setOrigin({ text->getLocalBounds().size.x / 2.f, text->getLocalBounds().size.y / 2.f });
+}
+
+void GUI::QSP(std::string s, sf::Vector2f v)
+{
+	textMap[s]->setPosition(v);
+}
+
 
 std::string GUI::frameNumber(unsigned int i)
 {
