@@ -11,14 +11,14 @@
 #include<vector>
 #include<iostream>
 
+/*
+Change mode/screen using GameState: see the switch in main gameplay loop
+ */
 //Constructor
 Game::Game()
-	: stage1Sprite(stage1)
+    : stage1Sprite(stage1)
 {
-    // this MUST be called first. loads the textures.
-    AnimationData::load();
-
-	stage1.loadFromFile("res/Background/stage1(final).png");
+    stage1.loadFromFile("res/Background/stage1(final).png");
     player = new Player();
     ground.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,5.f }));
     ground.push_back(sf::FloatRect({ 1717.f,87.f }, { 46.f, 5.f }));
@@ -27,6 +27,8 @@ Game::Game()
     ground.push_back(sf::FloatRect({ 1859.f,273.f }, { 46.f,5.f }));
     ground.push_back(sf::FloatRect({ 1905.f,342.f }, { 51.f,5.f }));
     ground2.push_back(sf::FloatRect({ 132.f,84.f }, { 441.f,5.f }));
+
+    //window.setSize({(unsigned int)(288.f * scale), (unsigned int)(224.f * scale)});
 
     stage1Sprite = sf::Sprite(stage1);
 }
@@ -120,11 +122,11 @@ void Game::run()
 
     window.setFramerateLimit(30);
 	
-    //main view subject to change 
+    //main mainView subject to change 
    
-    Entity::setView(&view);
+    Entity::setView(&mainView);
     //DO NOT CHANGE THESE VALUES! IT IS EXACT TO THE PIXELS OF THE IMAGE!
-    view.setViewport(sf::FloatRect({ 0.f, -.1023f }, { 6.72f, 6.72f }));
+    mainView.setViewport(sf::FloatRect({ 0.f, -.1023f }, { 6.72f, 6.72f }));
     window.setKeyRepeatEnabled(false);
 
     //Main gameplay loop
@@ -211,7 +213,7 @@ void Game::run()
         if (crouching && jumping) actionFlags |= 0b01000010;
 
         window.clear();
-
+        gameState = GAMEPLAY;
         switch (gameState)
         {
         case START:
@@ -227,7 +229,6 @@ void Game::run()
 	        break;
         }
 
-        window.setView(view);
         window.display();
     }
 
@@ -359,9 +360,10 @@ void deleteLevel()
 
 void Game::runStartBehavior()
 {
+    window.setView(guiView);
     gui.changeScreen(GUI::SELECT_1);
     gui.drawGUI(window);
-
+    window.setView(mainView);
 }
 
 
@@ -383,9 +385,8 @@ void Game::runGameplayBehavior(char actionFlags)
         window.draw(sprite);
 
     for (int i = 0; i < doors.size(); i++)
-    {
         ((Door*)doors.at(i))->update(actionFlags, player->getSprite().getPosition().x, player->getSprite().getPosition().y, allowEnemyDoorSpawn, enemySpawnClock);
-    }
+    
 
     //update draws player so this is called before rail is drawn
     if (player->getFloor() == 1)
@@ -416,17 +417,29 @@ void Game::runGameplayBehavior(char actionFlags)
     for (int i = 0; i < bullets.size(); i++)
         bullets.at(i)->update(actionFlags);
 
+
     //enemy update
     for (int i = 0; i < enemies.size(); i++)
     {
         //check to see if enemy is dead
         if (!(Enemy*)enemies.at(i)->getAlive())
+        {
+            delete enemies.at(i);
             enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies.at(i)), enemies.end());
+            std::cout << "removed";
+        }
         else
             ((Enemy*)enemies.at(i))->update(player);
+        delete enemies.at(i);
+        enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies.at(i)), enemies.end());
     }
     //find which door is being collied with if "W" is pressed
     isColliding(actionFlags);
+
+    /*window.setView(guiView);
+    gui.changeScreen(GUI::INGAME);
+    gui.drawGUI(window);*/
+    window.setView(mainView);
 
     //used to update all entites
     //draw the foreground

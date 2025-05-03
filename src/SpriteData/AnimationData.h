@@ -51,6 +51,7 @@ enum AnimationData::TextureName
 	DOOR,
 	RAIL,
 	BULLET,
+	NAMCO,
 	SIZE
 };
 

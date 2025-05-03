@@ -2,9 +2,11 @@
 
 #include <iostream>
 
+#include "../../SpriteData/AnimationData.h"
+
 
 GUI::GUI()
-	: background(sf::Sprite(introFrame))
+	: background(sf::Sprite(introFrame)), redNamcoSymbol(*AnimationData::getTexture(AnimationData::NAMCO))
 {
 	currentScreen = MAIN_MENU;
 	currentIntroFrame = 0;
@@ -13,6 +15,9 @@ GUI::GUI()
 	  x: ~50 to ~238 to keep 4:3 resolution
 	  y: starts at 16 ends at 180
 	*/
+	redNamcoSymbol.setScale({ 0.08f, 0.08f });
+	redNamcoSymbol.setOrigin({ redNamcoSymbol.getLocalBounds().size.x / 2.f, 0 });
+	redNamcoSymbol.setPosition({144, 150});
 
 	// static text
 	textMap["p1UpS"] = new GameText("1UP");
@@ -20,14 +25,22 @@ GUI::GUI()
 	textMap["highScoreS"] = new GameText("HIGH SCORE");
 	textMap["toStartPushS"] = new GameText("TO START PUSH");
 	textMap["select1InfoS"] = new GameText("ONLY 1 PLAYER'S BUTTON");
-	textMap["namcoCopyrightS"] = new GameText("@ 1986 NAMCO");
+	textMap["namcoCopyrightS"] = new GameText("© 1986 NAMCO");
 	textMap["namcoRightsS"] = new GameText("ALL RIGHTS RESERVED");
 	textMap["creditS"] = new GameText("CREDIT  ");
+	textMap["manLeftS"] = new GameText("MAN");
+	textMap["manRightS"] = new GameText("MAN");
+	textMap["lifeS"] = new GameText("LIFE");
+	textMap["bulletS"] = new GameText("BULLET");
+	textMap["timeS"] = new GameText("TIME");
 
 	// dynamic text
-	textMap["p1ScoreD"] = new GameText("00");
-	textMap["p2ScoreD"] = new GameText("00");
-	textMap["creditD"] = new GameText("1");
+	textMap["p1ScoreD"] = new GameText("00"); // right aligned
+	textMap["p2ScoreD"] = new GameText("00"); // right aligned
+	textMap["creditD"] = new GameText("0"); // cannot go over 9
+	textMap["highScoreD"] = new GameText("30000");
+	textMap["bulletD"] = new GameText("50");
+	textMap["timeD"] = new GameText("150");
 
 	for (auto& it : textMap)
 	{
@@ -35,14 +48,34 @@ GUI::GUI()
 		it.second->setPosition(sf::Vector2f(50, 50));
 	}
 
+	// static text
 	QSP("p1UpS", { 75, 16 });
-	QSP("p2UpS", { 238 - 75, 16 });
-	QSP("highScoreS", { 125, 16 });
-	setCenterOrigin(textMap["highScoreS"]);
-	QSP("toStartPushS", { 110, 100 });
-	setCenterOrigin(textMap["select1InfoS"]);
-	QSP("select1InfoS", { 144, 130 });
+	QSP("p2UpS", { 238 - 30, 16 });
+	setCenterOrigin("highScoreS");
+	QSP("highScoreS", { 153, 16 });
+	setCenterOrigin("toStartPushS");
+	QSP("toStartPushS", { 144, 90 });
+	setCenterOrigin("select1InfoS");
+	QSP("select1InfoS", { 144, 103 });
+	setCenterOrigin("namcoCopyrightS");
+	QSP("namcoCopyrightS", { 144, 130 });
+	setCenterOrigin("namcoRightsS");
+	QSP("namcoRightsS", { 144, 142 });
 	QSP("creditS", { 50, 170 });
+	QSP("manLeftS", {60, 28});
+	QSP("manRightS", {238 - 20, 28});
+	QSP("lifeS", {130, 170});
+	QSP("bulletS", {105, 170});
+	QSP("timeS", {200, 170});
+
+
+	// dynamic text
+	textMap["p1ScoreD"]->setOrigin({ textMap["p1ScoreD"]->getLocalBounds().size.x, 0 });
+	QSP("p1ScoreD", {107, 22});
+	textMap["p2ScoreD"]->setOrigin({ textMap["p2ScoreD"]->getLocalBounds().size.x, 0 });
+	QSP("p2ScoreD", { 240, 22 });
+	textMap["creditD"]->setOrigin({ textMap["creditD"]->getLocalBounds().size.x, 0 });
+	QSP("creditD", { 105, 170 });
 
 }
 
@@ -53,38 +86,63 @@ GUI::~GUI()
 }
 
 
+/// <summary>
+/// Renders the current GUI based on the currentScreen. Call in Game
+/// </summary>
+/// <param name="window"></param>
 void GUI::drawGUI(sf::RenderWindow& window)
 {
-	static std::vector<std::string> textToDraw = // we make static so we aren't create copies of this each tick
+	static std::vector<std::string> textToDrawS1 = // we make static so we aren't create copies of this each tick
 	{
-	"p1UpS",
-	"p2UpS",
-	"highScoreS",
-	"toStartPushS",
-	"select1InfoS",
-	"namcoCopyrightS",
-	"namcoRightsS",
-	"creditS",
-	"p1ScoreD",
-	"p2ScoreD",
-	"creditD"
+		"p1UpS",
+		"p2UpS",
+		"highScoreS",
+		"toStartPushS",
+		"select1InfoS",
+		"namcoCopyrightS",
+		"namcoRightsS",
+		"creditS",
+		"p1ScoreD",
+		"p2ScoreD",
+		"creditD"
 	};
+	static std::vector<std::string> textToDrawIngame = // we make static so we aren't create copies of this each tick
+	{
+		"p1UpS",
+		"p2UpS",
+		"highScoreS",
+		"manLeftS",
+		"manRightS",
+		"bulletS",
+		"lifeS",
+		"timeS",
+		"p1ScoreD",
+		"p2ScoreD",
+		"highScoreD",
+		"bulletD",
+		"timeD"
+	};
+	sf::RectangleShape alignLineX, alignLineY;
 
 	switch (currentScreen)
 	{
 	case MAIN_MENU:
-		// play the video etc. TODO
+		// take input etc. TODO
 		nextIntroFrame();
 		window.draw(background);
-		// 1050: high score
+		// TODO 1050: show high score screen
 		break;
 	case SELECT_1:
-		for (std::string& s : textToDraw)
+		for (std::string& s : textToDrawS1)
 			window.draw(*textMap[s]);
+		window.draw(redNamcoSymbol);
+		// TODO: Check for player input for the credit & player 1 button
 		break;
 	case SELECT_12:
 		break;
 	case INGAME:
+		for (std::string& s : textToDrawIngame)
+			window.draw(*textMap[s]);
 		break;
 	case START_TIMER:
 		break;
@@ -93,9 +151,21 @@ void GUI::drawGUI(sf::RenderWindow& window)
 	case CONTINUE_TIMER:
 		break;
 	}
+
+	alignLineX.setSize({ 188, 1 });
+	alignLineX.setPosition({ 50, 90 });
+	alignLineX.setFillColor(sf::Color::White);
+
+	alignLineY.setSize({ 1, (float)window.getSize().y });
+	alignLineY.setPosition({ 144, 0 });
+	alignLineY.setFillColor(sf::Color::White);
+	window.draw(alignLineX);
+	window.draw(alignLineY);
 }
 
-
+/// <summary>
+/// Advances the frame for the intro by one.
+/// </summary>
 void GUI::nextIntroFrame()
 {
 	currentIntroFrame %= 1240;
@@ -108,11 +178,23 @@ void GUI::nextIntroFrame()
 	background.setScale({0.1489f, 0.1489f }); 
 }
 
-void GUI::setCenterOrigin(GameText* text)
+
+/// <summary>
+/// Sets the center origin to {middleX, 0}.
+/// </summary>
+/// <param name="textS">The string referring to the text to change.</param>
+void GUI::setCenterOrigin(std::string textS)
 {
-	text->setOrigin({ text->getLocalBounds().size.x / 2.f, text->getLocalBounds().size.y / 2.f });
+	GameText* text = textMap[textS];
+	text->setOrigin({ text->getLocalBounds().size.x / 2.f, 0 });
 }
 
+
+/// <summary>
+/// Sets the position of the text referred to by the string at position v
+/// </summary>
+/// <param name="s"></param>
+/// <param name="v">Define using {x, y}</param>
 void GUI::QSP(std::string s, sf::Vector2f v)
 {
 	textMap[s]->setPosition(v);
