@@ -141,6 +141,7 @@ void Game::run()
                 {
                 case sf::Keyboard::Scan::A:
                     movingLeft = true;
+                    gameState = GAMEPLAY;
                     break;
                 case sf::Keyboard::Scan::D:
                     movingRight = true;
@@ -197,16 +198,17 @@ void Game::run()
 
         // actions flags defines booleans in Game.cpp that are passed to the entity.
         // done this way to allow input to be read in Game.cpp
+        //actionflags binary value must be under 128
         char actionFlags = 0b0;
-        if (wPressed) actionFlags |= 0b10000000;
+        if (wPressed&&!jumping) actionFlags |= 0b01000001;
         if (wPressed && jumping) actionFlags |= 0b01000000;
         if (movingRight) actionFlags |= 0b00000001;
         if (movingLeft) actionFlags |= 0b00000010;
         if (movingRight && jumping) actionFlags |= 0b00001000;
-        if (jumping && !movingRight && !movingLeft && !wPressed) actionFlags |= 0b00000100;
+        if (jumping && !movingRight && !movingLeft && !wPressed&&!crouching) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
         if (shooting) actionFlags |= 0b00100000;
-        if (crouching && jumping) actionFlags |= 0b100000000;
+        if (crouching && jumping) actionFlags |= 0b01000010;
 
         window.clear();
 
@@ -387,7 +389,10 @@ void Game::runGameplayBehavior(char actionFlags)
 
     //update draws player so this is called before rail is drawn
     if (player->getFloor() == 1)
+    {
         player->update(actionFlags);
+        std::cout << actionFlags << std::endl;
+    }
 
     //draw rails
     for (int i = 0; i < rails.size(); i++)

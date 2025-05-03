@@ -49,6 +49,7 @@ private:
 	bool inDoor;//used to determine if player-door interaction is taking place
 	bool exitDoor;
 	bool exitOnce;//used to make sure door is only exited once
+	bool droppingDown;//used to tell when player is dropping down to bottom floor
 	int jumpFrame;
 	float xGlobal, yGlobal;
 	float xMov, yMov,xPos,yPos;//used to keep track of movement of sprite in jumping animation
