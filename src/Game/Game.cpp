@@ -421,11 +421,11 @@ void Game::runGameplayBehavior(char actionFlags)
     for (int i = 0; i < enemies.size(); i++)
     {
         //check to see if enemy is dead
-        if (!(Enemy*)enemies.at(i)->getAlive())
+        std::cout << !(Enemy*)enemies.at(i)->getAlive() << std::endl;
+        if (!((Enemy*)enemies.at(i))->getAlive())
         {
-            
-            enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies.at(i)), enemies.end());
             std::cout << "removed";
+            enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies.at(i)), enemies.end());
         }
         else
             ((Enemy*)enemies.at(i))->update(player);

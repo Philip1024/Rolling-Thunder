@@ -30,8 +30,7 @@ public:
 	void collide(Entity* other);
 	void update(char actionFlags);
 	void update(Player* pl);
-	bool getAlive() { return alive; }
-	bool alive;
+	bool getAlive();
 private:
 	Movement curMove, lastMove;
 	int moveTicks;
@@ -39,4 +38,5 @@ private:
 	std::unordered_map<Movement, AnimationData::SectionData*> animationMap;
 	int health = 0;
 	bool dying;
+	bool alive;
 };

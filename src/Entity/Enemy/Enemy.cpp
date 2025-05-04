@@ -175,3 +175,9 @@ void Enemy::update(Player* player)
 	window->draw(bounds);
 #endif
 }
+
+
+bool Enemy::getAlive()
+{
+	return alive;
+}
