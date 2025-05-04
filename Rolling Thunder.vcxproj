@@ -36,6 +36,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Entity\Enemy\TwoLives\TwoLives.cpp" />
     <ClCompile Include="src\UI\UIScreen\GUI.cpp" />
+    <ClCompile Include="src\Entity\Wall\Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\UI\GameText\GameText.h" />
@@ -54,6 +55,7 @@
     <ClInclude Include="src\Entity\Enemy\Enemy.h" />
     <ClInclude Include="src\Entity\Enemy\TwoLives\TwoLives.h" />
     <ClInclude Include="src\UI\UIScreen\GUI.h" />
+    <ClInclude Include="src\Entity\Wall\Wall.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
