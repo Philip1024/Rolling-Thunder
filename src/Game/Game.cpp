@@ -204,8 +204,8 @@ void Game::run()
         char actionFlags = 0b0;
         if (wPressed&&!jumping) actionFlags |= 0b01000001;
         if (wPressed && jumping) actionFlags |= 0b01000000;
-        if (movingRight) actionFlags |= 0b00000001;
-        if (movingLeft) actionFlags |= 0b00000010;
+        if (movingRight&&!jumping) actionFlags |= 0b00000001;
+        if (movingLeft && !jumping) actionFlags |= 0b00000010;
         if (movingRight && jumping) actionFlags |= 0b00001000;
         if (jumping && !movingRight && !movingLeft && !wPressed&&!crouching) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
@@ -392,7 +392,6 @@ void Game::runGameplayBehavior(char actionFlags)
     if (player->getFloor() == 1)
     {
         player->update(actionFlags);
-        std::cout << actionFlags << std::endl;
     }
 
     //draw rails
@@ -430,8 +429,8 @@ void Game::runGameplayBehavior(char actionFlags)
         }
         else
             ((Enemy*)enemies.at(i))->update(player);
-        delete enemies.at(i);
-        enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies.at(i)), enemies.end());
+       // delete enemies.at(i);
+        //enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies.at(i)), enemies.end());
     }
     //find which door is being collied with if "W" is pressed
     isColliding(actionFlags);

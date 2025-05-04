@@ -51,8 +51,10 @@ Player::Player()
 	animationMap[JUMP_LEFT] = new AnimationData::SectionData(AnimationData::getSection("albatross_standard_left_jump"));
 	animationMap[DOOR_IN] = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_in_door"));
 	animationMap[DOOR_OUT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_walk_out_door"));
-	animationMap[CLIMB_RAIL_RIGHT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_climbing_over_rail_right"));
-	animationMap[CLIMB_RAIL_LEFT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_climbing_over_rail_left"));
+	animationMap[CLIMB_RAIL_RIGHT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_climbing_onto_rail_right"));
+	animationMap[CLIMB_RAIL_LEFT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_climbing_onto_rail_left"));
+	animationMap[CLIMB_OFF_RAIL_RIGHT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_climbing_off_rail_right"));
+	animationMap[CLIMB_OFF_RAIL_LEFT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_climbing_off_rail_left"));
 	animationMap[FALL_RIGHT] = new AnimationData::SectionData(AnimationData::getSection("albatross_falling_right"));
 	animationMap[FALL_LEFT] = new AnimationData::SectionData(AnimationData::getSection("albatross_falling_left"));
 	playerTicks = 0;
@@ -70,6 +72,8 @@ Player::Player()
 	floor = 0;
 	jumpingRail = false;
 	jumpingRailCount = 0;
+	jumpingOffRail = false;
+	jumpingOffRailCount = 0;
 	curMove = STAND_RIGHT;
 	ground1.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,5.f }));
 	ground1.push_back(sf::FloatRect({ 1717.f,87.f }, { 46.f, 5.f }));
@@ -110,7 +114,7 @@ void Player::update(char actionFlags)
 		for (int i = 0; i < ground1.size(); i++)
 		{
 			//if intersects with ground or in any of the other unique animations don't fall
-			if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail)
+			if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail || jumpingOffRail)
 				shouldFall = false;
 		}
 	}
@@ -119,7 +123,7 @@ void Player::update(char actionFlags)
 		for (int i = 0; i < ground2.size(); i++)
 		{
 			//if intersects with ground or in any of the other unique animations don't fall
-			if (sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail)
+			if (sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail || jumpingOffRail)
 				shouldFall = false;
 		}
 	}
@@ -139,7 +143,7 @@ void Player::update(char actionFlags)
 			for (int i = 0; i < ground1.size(); i++)
 			{
 				//if intersects with ground or in any of the other unique animations don't fall
-				if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail)
+				if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail||jumpingOffRail)
 				{
 					falling = false;
 					sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
@@ -163,11 +167,32 @@ void Player::update(char actionFlags)
 		}
 			
 	}
-	if (floor==1)
+	if (floor==1||jumpingOffRail)
 	{
-		if ((actionFlags == 0b010000010) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail)
+		if ((actionFlags == 0b01000010||jumpingOffRail) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail)
 		{
-			std::cout << "works" << std::endl;
+			if (!jumpingOffRail)
+			{
+				jumpingOffRail = true;
+			}
+			else if (jumpingOffRailCount < 10)
+			{
+				//this is done so player is drawn in front of the rail
+				if (jumpingOffRailCount > 5)
+					floor = 0;
+				if (faceRight)
+					curMove = CLIMB_OFF_RAIL_RIGHT;
+				else
+					curMove = CLIMB_OFF_RAIL_LEFT;
+				jumpingOffRailCount++;
+			}
+			else
+			{
+				floor = 0;
+				jumpingOffRail = false;
+				jumpingOffRailCount = 0;
+
+			}
 		}
 	}
 	if ((actionFlags == 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump&&!falling&&!inDoor && !shooting && !jumpingRail) // moving right. 
@@ -307,9 +332,9 @@ void Player::update(char actionFlags)
 		sprite.setTextureRect(animationMap[curMove]->nextFrame());
 
 	}
-	if (faceRight && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting &&!jumpingRail)
+	if (faceRight && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting &&!jumpingRail && !jumpingOffRail)
 		curMove = STAND_RIGHT;
-	if(!faceRight&&!activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail)
+	if(!faceRight&&!activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail && !jumpingOffRail)
 		curMove = STAND_LEFT;
 	playerTicks++;
 	

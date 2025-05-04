@@ -21,6 +21,8 @@ public:
 		JUMP_RAIL_RIGHT,
 		CLIMB_RAIL_RIGHT,
 		CLIMB_RAIL_LEFT,
+		CLIMB_OFF_RAIL_RIGHT,
+		CLIMB_OFF_RAIL_LEFT,
 		FALL_RIGHT,
 		FALL_LEFT
 	};
@@ -68,6 +70,8 @@ private:
 	int playerTicks;
 	bool jumpingRail;
 	int jumpingRailCount;
+	bool jumpingOffRail;
+	int jumpingOffRailCount;
 	sf::IntRect frameUpdate;
 	std::vector<sf::FloatRect> ground1;
 	std::vector<sf::FloatRect> ground2;
