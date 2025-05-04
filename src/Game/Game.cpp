@@ -424,14 +424,12 @@ void Game::runGameplayBehavior(char actionFlags)
         //check to see if enemy is dead
         if (!(Enemy*)enemies.at(i)->getAlive())
         {
-            delete enemies.at(i);
+            
             enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies.at(i)), enemies.end());
             std::cout << "removed";
         }
         else
             ((Enemy*)enemies.at(i))->update(player);
-        delete enemies.at(i);
-        enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies.at(i)), enemies.end());
     }
     //find which door is being collied with if "W" is pressed
     isColliding(actionFlags);
