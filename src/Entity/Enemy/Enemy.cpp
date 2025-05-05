@@ -91,8 +91,9 @@ void Enemy::update(Player* player)
 			if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT)
 			{
 				curMove = HIT_LEFT;
+
 			}
-			else
+			else if(curMove == WALK_RIGHT || curMove == IDLE_RIGHT || curMove == MOUNT_RIGHT || curMove == SHOOT_RIGHT)
 			{
 				curMove = HIT_RIGHT;
 			}
@@ -100,11 +101,11 @@ void Enemy::update(Player* player)
 		}
 		else if (dyingCount < 24)
 		{
-			if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT)
+			if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT||curMove== HIT_LEFT)
 			{
 				curMove = DIE_LEFT;
 			}
-			else
+			else if(curMove == WALK_RIGHT || curMove == IDLE_RIGHT || curMove == MOUNT_RIGHT || curMove == SHOOT_RIGHT||curMove==HIT_RIGHT)
 			{
 				curMove = DIE_RIGHT;
 			}
@@ -189,6 +190,12 @@ void Enemy::update(Player* player)
 	case IDLE_RIGHT:
 		break;
 	case IDLE_CROUCH:
+		break;
+	case HIT_LEFT:
+		sprite.move(sf::Vector2f(1, 0));
+		break;
+	case HIT_RIGHT:
+		sprite.move(sf::Vector2f(-1, 0));
 		break;
 	}
 	//std::cout << getCurrentTick() << std::endl;

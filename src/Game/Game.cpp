@@ -421,7 +421,6 @@ void Game::runGameplayBehavior(char actionFlags)
     for (int i = 0; i < enemies.size(); i++)
     {
         //check to see if enemy is dead
-        std::cout << !(Enemy*)enemies.at(i)->getAlive() << std::endl;
         if (!((Enemy*)enemies.at(i))->getAlive())
         {
             std::cout << "removed";
