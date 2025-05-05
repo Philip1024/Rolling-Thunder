@@ -19,6 +19,10 @@ Enemy::Enemy(sf::Vector2f pos)
 	animationMap[SHOOT_RIGHT] = new SectionData(AnimationData::getSection("enemy_shoot_right"));
 	animationMap[PUNCH_LEFT] = new SectionData(AnimationData::getSection("enemy_punch_left"));
 	animationMap[PUNCH_RIGHT] = new SectionData(AnimationData::getSection("enemy_punch_right"));
+	animationMap[HIT_RIGHT] = new SectionData(AnimationData::getSection("enemy_hit_right"));
+	animationMap[HIT_LEFT] = new SectionData(AnimationData::getSection("enemy_hit_left"));
+	animationMap[DIE_RIGHT] = new SectionData(AnimationData::getSection("enemy_dissolve_right"));
+	animationMap[DIE_LEFT] = new SectionData(AnimationData::getSection("enemy_dissolve_left"));
 	enemys.push_back(this);
 	dying = false;
 	dyingCount = 0;
@@ -82,9 +86,38 @@ void Enemy::update(Player* player)
 	int playerDistance = abs(player->getSprite().getPosition().x - sprite.getPosition().x);
 	if (dying)
 	{
-
+		if (dyingCount < 11)
+		{
+			if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT)
+			{
+				curMove = HIT_LEFT;
+			}
+			else
+			{
+				curMove = HIT_RIGHT;
+			}
+			dyingCount++;
+		}
+		else if (dyingCount < 24)
+		{
+			if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT)
+			{
+				curMove = DIE_LEFT;
+			}
+			else
+			{
+				curMove = DIE_RIGHT;
+			}
+			dyingCount++;
+		}
+		else
+		{
+			alive = false;
+			dying = false;
+			dyingCount = 0;
+		}
 	}
-	if (moveTicks <= 0 || curMove != DIE_LEFT || curMove != DIE_RIGHT)
+	else if (moveTicks <= 0 || curMove != DIE_LEFT || curMove != DIE_RIGHT)
 	{
 		if (player->playerInDoor() && playerDistance < 70)
 		{

@@ -82,6 +82,16 @@ void AnimationData::load()
 	getSection("enemy_punch_left")->setNextFrameFunction(rightToLeftFunction);
 	sectionMap["enemy_die_left"] = new Section(textureMap[ENEMY2],
 		4, 1, sf::Vector2u(0, 272), sf::Vector2u(238,335), true);
+	sectionMap["enemy_hit_right"] = new Section(textureMap[ENEMY],
+		4, 1, sf::Vector2u(590, 166), sf::Vector2u(802, 255), true);
+	sectionMap["enemy_hit_left"] = new Section(textureMap[ENEMY],
+		4, 1, sf::Vector2u(590, 99), sf::Vector2u(797, 153), true);
+	getSection("enemy_hit_right")->setNextFrameFunction(rightToLeftFunction);
+	sectionMap["enemy_dissolve_right"] = new Section(textureMap[ENEMY],
+		2, 5, sf::Vector2u(406, 1), sf::Vector2u(559, 80), true);
+	sectionMap["enemy_dissolve_left"] = new Section(textureMap[ENEMY],
+		2, 5, sf::Vector2u(578, 1), sf::Vector2u(731, 79), true);
+	getSection("enemy_dissolve_right")->setNextFrameFunction(rightToLeftFunction);
 
 	//doors
 	sectionMap["door_open"] = new Section(textureMap[DOOR],
