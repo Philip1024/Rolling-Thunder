@@ -10,6 +10,8 @@ public:
 	{
 		WALK_LEFT,
 		WALK_RIGHT,
+		HIT_LEFT,
+		HIT_RIGHT,
 		DIE_LEFT,
 		DIE_RIGHT,
 		MOUNT_LEFT,
@@ -38,5 +40,6 @@ private:
 	std::unordered_map<Movement, AnimationData::SectionData*> animationMap;
 	int health = 0;
 	bool dying;
+	int dyingCount;
 	bool alive;
 };

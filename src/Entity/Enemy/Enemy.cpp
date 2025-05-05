@@ -21,6 +21,7 @@ Enemy::Enemy(sf::Vector2f pos)
 	animationMap[PUNCH_RIGHT] = new SectionData(AnimationData::getSection("enemy_punch_right"));
 	enemys.push_back(this);
 	dying = false;
+	dyingCount = 0;
 	alive = true;
 }
 
@@ -47,19 +48,17 @@ void Enemy::collide(Entity* other)
 	Bullet* bulletCast = dynamic_cast<Bullet*>(other);
 	if (bulletCast != nullptr)
 	{
-		alive = false;
+		
 		if (bulletCast->team)
 		{
-			//bulletCast->update();
+			dying = true;
 			if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT)
 			{
-				//curMove = DIE_LEFT;
-				alive = false;
+				curMove = HIT_LEFT;
 			}
 			else
 			{
-				//curMove = DIE_RIGHT;
-				alive = false;
+				curMove = HIT_RIGHT;
 			}
 		}
 	}
