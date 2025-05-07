@@ -114,7 +114,7 @@ void Game::run()
    // sf::Vector2f worldPos;
 
     enemySpawnClock->restart();
-    new Enemy(sf::Vector2f(200, 107)); // mem leak
+    new Enemy(sf::Vector2f(200, 107),false); // mem leak
 
     //window/clock setup
     Entity::setWindow(&window);
