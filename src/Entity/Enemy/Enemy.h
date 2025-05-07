@@ -27,7 +27,7 @@ public:
 		PUNCH_LEFT,
 		WALK_OUT
 	};
-	Enemy(sf::Vector2f pos);
+	Enemy(sf::Vector2f pos,bool spawnInDoor);
 	~Enemy();
 
 	void collide(Entity* other);
@@ -42,5 +42,6 @@ private:
 	int health = 0;
 	bool dying;
 	int dyingCount;
-	bool alive;	
+	bool alive;
+	bool spawnDoor;// tells if enemy spawns out of a door
 };

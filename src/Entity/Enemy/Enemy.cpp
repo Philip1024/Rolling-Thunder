@@ -6,7 +6,7 @@
 typedef AnimationData::SectionData SectionData;
 
 
-Enemy::Enemy(sf::Vector2f pos)
+Enemy::Enemy(sf::Vector2f pos,bool spawnInDoor)
 	: Entity(AnimationData::getTexture(AnimationData::ENEMY))
 {
 	sprite.setPosition(pos);
