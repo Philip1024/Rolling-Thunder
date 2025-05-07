@@ -23,6 +23,7 @@ Enemy::Enemy(sf::Vector2f pos)
 	animationMap[HIT_LEFT] = new SectionData(AnimationData::getSection("enemy_hit_left"));
 	animationMap[DIE_RIGHT] = new SectionData(AnimationData::getSection("enemy_dissolve_right"));
 	animationMap[DIE_LEFT] = new SectionData(AnimationData::getSection("enemy_dissolve_left"));
+	animationMap[DIE_LEFT] = new SectionData(AnimationData::getSection("enemy_walk_out"));
 	enemys.push_back(this);
 	dying = false;
 	dyingCount = 0;
@@ -86,7 +87,7 @@ void Enemy::update(Player* player)
 	int playerDistance = abs(player->getSprite().getPosition().x - sprite.getPosition().x);
 	if (dying)
 	{
-		if (dyingCount < 11)
+		if (dyingCount < 13)
 		{
 			if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT)
 			{
@@ -99,7 +100,12 @@ void Enemy::update(Player* player)
 			}
 			dyingCount++;
 		}
-		else if (dyingCount < 24)
+		else if (dyingCount == 14)
+		{
+			sprite.move({ 0,45 });
+			dyingCount++;
+		}
+		else if (dyingCount < 40)
 		{
 			if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT||curMove== HIT_LEFT)
 			{
