@@ -25,6 +25,7 @@ public:
 		IDLE_CROUCH,
 		PUNCH_RIGHT,
 		PUNCH_LEFT
+		
 	};
 	Enemy(sf::Vector2f pos);
 	~Enemy();
@@ -42,4 +43,5 @@ private:
 	bool dying;
 	int dyingCount;
 	bool alive;
+	
 };

@@ -46,5 +46,7 @@ private:
 	bool doorOpened = false;
 	sf::RectangleShape door;
 	int enemySpawnCount = 0;
+	//this is true if an enemy has recently spawned
+	bool enemySpawned
 };
 
