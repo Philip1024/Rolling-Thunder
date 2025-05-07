@@ -93,6 +93,7 @@ void AnimationData::load()
 	sectionMap["enemy_walk_out"] = new Section(textureMap[ENEMY],
 		2, 5, sf::Vector2u(492, 249), sf::Vector2u(618, 305), false);
 
+
 	//doors
 	sectionMap["door_open"] = new Section(textureMap[DOOR],
 		4, 1, sf::Vector2u(24, 2), sf::Vector2u(222, 62));
