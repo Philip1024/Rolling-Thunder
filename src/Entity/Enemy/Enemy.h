@@ -42,6 +42,5 @@ private:
 	int health = 0;
 	bool dying;
 	int dyingCount;
-	bool alive;
-	
+	bool alive;	
 };
