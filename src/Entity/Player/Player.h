@@ -33,6 +33,7 @@ public:
 	bool playerInDoor() { return inDoor; }
 	void setPos(sf::Vector2f);
 	int getFloor() { return floor; }
+	bool getDirection(){ return faceRight; }
 	//void getGround1(std::vector<sf::FloatRect>);
 	//void getGround2(std::vector<sf::FloatRect>);
 	//sf::Vector2f getPosition();

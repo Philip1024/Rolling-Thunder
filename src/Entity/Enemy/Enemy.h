@@ -44,4 +44,5 @@ private:
 	int dyingCount;
 	bool alive;
 	bool spawnDoor;// tells if enemy spawns out of a door
+	int spawnCount;
 };

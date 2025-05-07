@@ -28,6 +28,7 @@ Door::Door(int x,int y): Entity(AnimationData::getTexture(AnimationData::DOOR))
 	startOpen = false;
 	closing = false;
 	opened = false;
+	spawnOnce = false;
 	enemyClock.restart();
 }
 
@@ -103,18 +104,53 @@ void Door::update(char actionFlags, float x, float y, bool* allowEnemyDoorSpawn,
 	int playerDistanceY = abs(y - sprite.getPosition().y);
 
 	//change to check the Y and make the X value shorter
-	if (playerDistanceX < 20 && *allowEnemyDoorSpawn && doorFrameCount == 0)
+	if ((playerDistanceX < 20 && *allowEnemyDoorSpawn && doorFrameCount == 0)||enemySpawned)
 	{
-		new Enemy(sf::Vector2f(float(sprite.getPosition().x - 15), float(sprite.getPosition().y -6)));
+		enemySpawned = true;
+		if (doorFrameCount < 4 && !opened)
+		{
+			spawnOnce = true;
+			sprite.setTextureRect(AnimationData::getSection("door_close")->getFrame(doorFrameCount));
+			doorFrameCount++;
+			opening = true;
+		}
+		else if (pause < 20)
+		{
+			if (spawnOnce)
+			{
+				new Enemy(sf::Vector2f(float(sprite.getPosition().x - 9), float(sprite.getPosition().y - 4)), true);
+				spawnOnce = false;
+			}
+			opening = false;
+			opened = true;
+			pause++;
+			stop = true;
+		}
+		else
+		{
+			closing = true;
+			doorFrameCount--;
+			sprite.setTextureRect(AnimationData::getSection("door_close")->getFrame(doorFrameCount));
+			if (doorFrameCount == 0)
+			{
+				startOpen = false;
+				opened = false;
+				pause = 0;
+				stop = false;
+				closing = false;
+				enemySpawned = false;
+				spawnOnce = true;
+			}
+			stop = false;
+		}
 		*allowEnemyDoorSpawn = false;
 		enemySpawnClock->restart();
-		enemySpawned = true;
 	}
 
 	if (clock.getElapsedTime().asSeconds() <= 0.06f)
 		return;
 
-	if (startOpen)
+	if (startOpen&&!enemySpawned)
 	{
 		if (doorFrameCount < 4 && !opened)
 		{

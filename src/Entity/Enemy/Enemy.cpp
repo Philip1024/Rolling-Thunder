@@ -23,11 +23,13 @@ Enemy::Enemy(sf::Vector2f pos,bool spawnInDoor)
 	animationMap[HIT_LEFT] = new SectionData(AnimationData::getSection("enemy_hit_left"));
 	animationMap[DIE_RIGHT] = new SectionData(AnimationData::getSection("enemy_dissolve_right"));
 	animationMap[DIE_LEFT] = new SectionData(AnimationData::getSection("enemy_dissolve_left"));
-	animationMap[DIE_LEFT] = new SectionData(AnimationData::getSection("enemy_walk_out"));
+	animationMap[WALK_OUT] = new SectionData(AnimationData::getSection("enemy_walk_out"));
 	enemys.push_back(this);
 	dying = false;
 	dyingCount = 0;
 	alive = true;
+	spawnDoor = spawnInDoor;
+	spawnCount = 0;
 }
 
 
@@ -85,10 +87,29 @@ void Enemy::update(Player* player)
 	//if the enemy is in the process of death skip this statement
 	//
 	int playerDistance = abs(player->getSprite().getPosition().x - sprite.getPosition().x);
-	if (dying)
+	if (spawnDoor)
+	{
+		curMove = WALK_OUT;
+		spawnCount++;
+		if(spawnCount > 25)
+		{
+			spawnDoor = false;
+			curMove = IDLE_CROUCH;
+		}
+	}
+	else if (dying)
 	{
 		if (dyingCount < 13)
 		{
+			//enemy has no direction enemy dies based of player direction because is the player is facing right
+			//the enemy had to have died facing left
+			if (curMove == WALK_OUT || curMove == IDLE_CROUCH)
+			{
+				if (player->getDirection())
+					curMove = HIT_LEFT;
+				else
+					curMove = HIT_RIGHT;
+			}
 			if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT)
 			{
 				curMove = HIT_LEFT;
@@ -202,6 +223,8 @@ void Enemy::update(Player* player)
 		break;
 	case HIT_RIGHT:
 		sprite.move(sf::Vector2f(-1, 0));
+	case WALK_OUT:
+		sprite.move({ 0,0.24 });
 		break;
 	}
 	//std::cout << getCurrentTick() << std::endl;

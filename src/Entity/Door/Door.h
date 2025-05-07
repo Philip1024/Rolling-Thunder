@@ -41,6 +41,7 @@ private:
 	bool closing = false;
 	bool stop;
 	bool closed;
+	bool spawnOnce;//used to make sure only one enemy spawns when enemys are spawning from doors
 	int pause;
 	int doorFrameCount = 0;
 	bool doorOpened = false;
