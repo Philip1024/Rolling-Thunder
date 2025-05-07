@@ -27,6 +27,8 @@ Game::Game()
     ground.push_back(sf::FloatRect({ 1859.f,273.f }, { 46.f,5.f }));
     ground.push_back(sf::FloatRect({ 1905.f,342.f }, { 51.f,5.f }));
     ground2.push_back(sf::FloatRect({ 132.f,84.f }, { 441.f,5.f }));
+    ground2.push_back(sf::FloatRect({ 764.f,87.f }, { 375.f,5.f }));
+    ground2.push_back(sf::FloatRect({ 1952.f,415.f }, { 1650.f,5.f }));
 
     //window.setSize({(unsigned int)(288.f * scale), (unsigned int)(224.f * scale)});
 
