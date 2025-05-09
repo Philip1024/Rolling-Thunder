@@ -124,12 +124,11 @@ void GUI::drawGUI(sf::RenderWindow& window)
 		"timeD"
 	};
 	sf::RectangleShape alignLineX, alignLineY;
-	textMap["creditD"]->setString(std::string(1, *creditRef - '0'));
+	textMap["creditD"]->setString(std::string(1, '0' + *creditRef));
 
 	switch (currentScreen)
 	{
 	case MAIN_MENU:
-		// take input etc. TODO
 		nextIntroFrame();
 		window.draw(background);
 		// TODO on frame 1050: show high score screen
@@ -138,7 +137,6 @@ void GUI::drawGUI(sf::RenderWindow& window)
 		for (std::string& s : textToDrawS1)
 			window.draw(*textMap[s]);
 		window.draw(redNamcoSymbol);
-		// TODO: Check for player input for the credit & player 1 button
 		break;
 	case SELECT_12:
 		break;
@@ -176,8 +174,9 @@ void GUI::nextIntroFrame()
 		throw std::exception("Unable to load frame.");
 	background.setTexture(introFrame);
 	background.setTextureRect({{ 0,0 }, { 1920, 1080 }});
-	background.setPosition({ 0,16.5f });
-	background.setScale({0.1489f, 0.1489f }); 
+	background.setOrigin({ 1920 / 2.f, 1080 / 2.f });
+	background.setPosition({ 288/2.f,85 });
+	background.setScale({0.13f, 0.159f }); 
 }
 
 
