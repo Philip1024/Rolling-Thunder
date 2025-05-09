@@ -16,7 +16,7 @@ Change mode/screen using GameState: see the switch in main gameplay loop
  */
 //Constructor
 Game::Game()
-    : stage1Sprite(stage1)
+    : stage1Sprite(stage1), gui(&credits)
 {
     stage1.loadFromFile("res/Background/stage1(final).png");
     player = new Player();
@@ -215,7 +215,7 @@ void Game::run()
         if (crouching && jumping) actionFlags |= 0b01000010;
 
         window.clear();
-        gameState = GAMEPLAY;
+        gameState = START;
         switch (gameState)
         {
         case START:
@@ -362,10 +362,21 @@ void deleteLevel()
 
 void Game::runStartBehavior()
 {
+    // 5 to add credit 6 to start
+    if (isKeyPressed(sf::Keyboard::Key::Num5))
+        credits++;
+    if (isKeyPressed(sf::Keyboard::Key::Num6) && credits > 0)
+    {
+        gameState = GAMEPLAY;
+        credits--;
+    }
+		
     window.setView(guiView);
     gui.changeScreen(GUI::SELECT_1);
     gui.drawGUI(window);
     window.setView(mainView);
+
+    
 }
 
 

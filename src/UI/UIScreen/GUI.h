@@ -18,7 +18,7 @@ public:
 	enum Screen;
 
 	// create once in Game.cpp
-	GUI();
+	GUI(unsigned int* creditRef);
 	~GUI();
 
 	// draws the current screen
@@ -36,7 +36,7 @@ private:
 
 	sf::Texture introFrame;
 	sf::Sprite redNamcoSymbol;
-	unsigned int currentIntroFrame;
+	unsigned int currentIntroFrame, *creditRef;
 
 	Screen currentScreen;
 	sf::Sprite background;
