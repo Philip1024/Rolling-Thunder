@@ -34,6 +34,7 @@ public:
 	void update(char actionFlags);
 	void update(Player* pl);
 	bool getAlive();
+	bool getSpawn() { return spawnDoor; }
 private:
 	Movement curMove, lastMove;
 	int moveTicks;

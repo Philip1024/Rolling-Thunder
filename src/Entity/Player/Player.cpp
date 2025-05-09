@@ -1,6 +1,7 @@
 #include "Player.h"
 #include"../Entity.h"
 #include"../Bullet/Bullet.h"
+#include"../Enemy/Enemy.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <optional>
@@ -74,14 +75,18 @@ Player::Player()
 	jumpingRailCount = 0;
 	jumpingOffRail = false;
 	jumpingOffRailCount = 0;
+	dropping = false;
 	curMove = STAND_RIGHT;
 	ground1.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,5.f }));
-	ground1.push_back(sf::FloatRect({ 1717.f,87.f }, { 46.f, 5.f }));
-	ground1.push_back(sf::FloatRect({ 1763.f,145.f }, { 48.f,5.f }));
-	ground1.push_back(sf::FloatRect({ 1811.f,203.f }, { 48.f, 5.f }));
-	ground1.push_back(sf::FloatRect({ 1859.f,273.f }, { 46.f,5.f }));
-	ground1.push_back(sf::FloatRect({ 1905.f,342.f }, { 51.f,5.f }));
 	ground2.push_back(sf::FloatRect({ 132.f,84.f }, { 441.f,5.f }));
+	ground2.push_back(sf::FloatRect({ 764.f,87.f }, { 375.f,5.f }));
+	ground2.push_back(sf::FloatRect({ 1333.f,88.f }, { 385.f,5.f }));
+	ground2.push_back(sf::FloatRect({ 1717.f,87.f }, { 46.f, 5.f }));
+	ground2.push_back(sf::FloatRect({ 1763.f,145.f }, { 48.f,5.f }));
+	ground2.push_back(sf::FloatRect({ 1811.f,203.f }, { 48.f, 5.f }));
+	ground2.push_back(sf::FloatRect({ 1859.f,273.f }, { 46.f,5.f }));
+	ground2.push_back(sf::FloatRect({ 1905.f,342.f }, { 51.f,5.f }));
+	ground2.push_back(sf::FloatRect({ 1952.f,415.f }, { 1650.f,5.f }));
 }
 
 
@@ -115,7 +120,11 @@ void Player::update(char actionFlags)
 		{
 			//if intersects with ground or in any of the other unique animations don't fall
 			if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail || jumpingOffRail)
+			{
 				shouldFall = false;
+				centerGroundCollision = ground1.at(i);
+			}
+				
 		}
 	}
 	else
@@ -124,7 +133,14 @@ void Player::update(char actionFlags)
 		{
 			//if intersects with ground or in any of the other unique animations don't fall
 			if (sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail || jumpingOffRail)
+			{
 				shouldFall = false;
+				centerGroundCollision = ground2.at(i);
+				if (i >= 3 && i <= 7&& sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
+					dropping = true;
+				else
+					dropping = false;
+			}
 		}
 	}
 
@@ -152,18 +168,20 @@ void Player::update(char actionFlags)
 			}
 		}
 		sprite.move({ 0,5 });
-		//view->move({ 0,5 });
+		if(dropping)
+			view->move({ 0,5 });
 		if (!shouldFall)
 		{
+			std::cout << 0.75f * centerGroundCollision.position.y << std::endl;
 			falling = false;
 			if (faceRight)
 				sprite.setTextureRect(moveRight->nextFrame());
 			else
 				sprite.setTextureRect(moveLeft->nextFrame());
 			if(floor==0)
-				sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+				sprite.move({ 0,((centerGroundCollision.position.y-43) - sprite.getGlobalBounds().position.y)});
 			else
-				sprite.move({ 0,(43 - sprite.getGlobalBounds().position.y) });
+				sprite.move({ 0,((centerGroundCollision.position.y-43) - sprite.getGlobalBounds().position.y) });
 		}
 			
 	}
@@ -358,9 +376,17 @@ void Player::update(char actionFlags)
 void Player::collide(Entity* other,char actionFlags)
 {
 	
-
+	Enemy* enemyCast = dynamic_cast<Enemy*>(other);
 	Door* doorCast = dynamic_cast<Door*>(other);
 	Rail* railCast = dynamic_cast<Rail*>(other);
+	if (enemyCast != nullptr)
+	{
+		//getspawn is called so player can't get hit right when enemy spawns from the door
+		if (!enemyCast->getSpawn())
+		{
+			std::cout << "works" << std::endl;
+		}
+	}
 	if ((railCast != nullptr && (actionFlags == 0b01000000)||jumpingRail&& railCast != nullptr) && !activeRightJump && !activeJump && !activeLeftJump && !falling&&!inDoor)
 	{
 		if (railCast->getFloor()-1==floor)

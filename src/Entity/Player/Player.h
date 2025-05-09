@@ -73,7 +73,8 @@ private:
 	int jumpingRailCount;
 	bool jumpingOffRail;
 	int jumpingOffRailCount;
-	sf::IntRect frameUpdate;
+	bool dropping;//meant to represent when player makes big drop and viewport needs to move with jumps and fall
+	sf::FloatRect centerGroundCollision;
 	std::vector<sf::FloatRect> ground1;
 	std::vector<sf::FloatRect> ground2;
 };
