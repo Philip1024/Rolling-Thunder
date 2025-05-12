@@ -24,7 +24,9 @@ public:
 		CLIMB_OFF_RAIL_RIGHT,
 		CLIMB_OFF_RAIL_LEFT,
 		FALL_RIGHT,
-		FALL_LEFT
+		FALL_LEFT,
+		DIE_LEFT,
+		DIE_RIGHT
 	};
 	Player();
 	~Player();
@@ -46,6 +48,11 @@ public:
 	/// </summary>
 	/// <returns>returns true if player is right and false if player is facing left</returns>
 	bool getDirection(){ return faceRight; }
+	/// <summary>
+	/// gives whether player is alive
+	/// </summary>
+	/// <returns>true if player is alive, false if player is dead</returns>
+	bool getAlive() { return alive; }
 private:
 	//keeps track of time between sprite updates
 	sf::Clock clock;
@@ -85,6 +92,10 @@ private:
 	int jumpingOffRailCount;//keeps track of frame count realitive to ticks(time 3) for jumping off a rail
 	bool dropping;//meant to represent when player makes big drop and viewport needs to move with jumps and fall
 	bool invincibility;
+	int lives;
+	bool dying;
+	int dyingCount;
+	bool alive;
 	sf::FloatRect centerGroundCollision;
 	std::vector<sf::FloatRect> ground1;
 	std::vector<sf::FloatRect> ground2;

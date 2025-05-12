@@ -25,6 +25,10 @@ Player::Player()
 	sprite.setScale({0.8f,0.8f});
 	faceRight = true;
 	activeJump = false;
+	lives = 1;
+	dying = false;
+	dyingCount = 0;
+	alive = true;
 	activeRightJump = false;
 	activeLeftJump = false;
 	falling = false;
@@ -58,6 +62,8 @@ Player::Player()
 	animationMap[CLIMB_OFF_RAIL_LEFT] = new  AnimationData::SectionData(AnimationData::getSection("albatross_climbing_off_rail_left"));
 	animationMap[FALL_RIGHT] = new AnimationData::SectionData(AnimationData::getSection("albatross_falling_right"));
 	animationMap[FALL_LEFT] = new AnimationData::SectionData(AnimationData::getSection("albatross_falling_left"));
+	animationMap[DIE_RIGHT] = new AnimationData::SectionData(AnimationData::getSection("albatross_die_right"));
+	animationMap[DIE_LEFT] = new AnimationData::SectionData(AnimationData::getSection("albatross_die_left"));
 	playerTicks = 0;
 	moveRight = new AnimationData::SectionData(AnimationData::getSection("albatross_move_right"));
 	moveLeft = new AnimationData::SectionData(AnimationData::getSection("albatross_move_left"));
@@ -99,6 +105,8 @@ Player::~Player()
 	delete jumpRight;
 	delete walkInDoor;
 	delete walkOutDoor;
+	delete shootRight;
+	delete shootLeft;
 }
 
 /// <summary>
@@ -109,9 +117,22 @@ Player::~Player()
 void Player::update(char actionFlags)
 {
 	Entity::update(actionFlags);//draws player
-	 // only update the animation past this pointdddddddddd
-	//meant to determine whether player is on ground, if not player should fall
-	//test
+	 // only update the animation past this point
+	if (dying)
+	{
+		if (dyingCount < 18)
+		{
+			dyingCount++;
+			if (faceRight)
+				curMove = DIE_RIGHT;
+			else
+				curMove = DIE_LEFT;
+		}
+		else
+		{
+			alive = false;
+		}
+	}
 	if (invincibility)
 	{
 		if (invincibilityTime.getElapsedTime().asSeconds() >= 5.0f)
@@ -120,6 +141,8 @@ void Player::update(char actionFlags)
 			invincibilityTime.restart();
 		}
 	}
+	//meant to determine whether player is on ground, if not player should fall
+	//test
 	shouldFall = true;
 	if (floor == 0)
 	{
@@ -196,9 +219,10 @@ void Player::update(char actionFlags)
 		}
 			
 	}
+	//jumping off rail, must be on floor ==1 to do
 	if (floor==1||jumpingOffRail)
 	{
-		if ((actionFlags == 0b01000010||jumpingOffRail) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail)
+		if ((actionFlags == 0b01000010||jumpingOffRail) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail&&!dying)
 		{
 			if (!jumpingOffRail)
 			{
@@ -207,6 +231,7 @@ void Player::update(char actionFlags)
 			else if (jumpingOffRailCount < 10)
 			{
 				//this is done so player is drawn in front of the rail
+				//player drawn in front of rail when floor ==0
 				if (jumpingOffRailCount > 5)
 					floor = 0;
 				if (faceRight)
@@ -224,20 +249,21 @@ void Player::update(char actionFlags)
 			}
 		}
 	}
-	if ((actionFlags == 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump&&!falling&&!inDoor && !shooting && !jumpingRail) // moving right. 
+	//walk right
+	if ((actionFlags == 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump&&!falling&&!inDoor && !shooting && !jumpingRail && !jumpingOffRail && !dying) 
 	{
 		curMove = MOVE_RIGHT;
 		faceRight = true;
 
 	}
-
-	if ((actionFlags == 0b00000010) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail) // moving left TODO: bound check on the left using view
+	//walk left
+	if ((actionFlags == 0b00000010) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail && !jumpingOffRail && !dying) 
 	{
 		curMove = MOVE_LEFT;
 		faceRight = false;
 	}
-
-	if (((actionFlags == 0b00000100)||activeJump) &&!activeRightJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail)//jump
+	//straight jump
+	if (((actionFlags == 0b00000100)||activeJump) &&!activeRightJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail && !jumpingOffRail && !dying)
 	{
 		if (!activeJump)
 		{
@@ -254,9 +280,8 @@ void Player::update(char actionFlags)
 			activeJump = jump(angle, &ground2);
 	}
 
-	//jump follows a parabolic path using parametric physics equations
-	//this is the jumping while moving right animation
-	if (((actionFlags == 0b00001000) || activeRightJump) && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail)//jump
+	//right jump
+	if (((actionFlags == 0b00001000) || activeRightJump) && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail && !jumpingOffRail && !dying)
 	{
 		if (!activeRightJump)
 		{
@@ -273,8 +298,8 @@ void Player::update(char actionFlags)
 		else
 			activeRightJump = jump(angle, &ground2);
 	}
-
-	if (((actionFlags == 0b00010000) || activeLeftJump) && !activeJump && !activeRightJump && !falling && !inDoor&&!shooting && !jumpingRail)//jump
+	//left jump
+	if (((actionFlags == 0b00010000) || activeLeftJump) && !activeJump && !activeRightJump && !falling && !inDoor&&!shooting && !jumpingRail && !jumpingOffRail && !dying)
 	{
 		if (!activeLeftJump)
 		{
@@ -291,9 +316,10 @@ void Player::update(char actionFlags)
 		else
 			activeLeftJump = jump(angle, &ground2);
 	}
-
-	if ((actionFlags == 0b00100000||shooting) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !jumpingRail)
+	//shooting
+	if ((actionFlags == 0b00100000||shooting) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !jumpingRail && !jumpingOffRail && !dying)
 	{
+		//update frames every 0.1 seconds
 		if (shootTime.getElapsedTime().asSeconds() <= 0.1f)
 			return;
 		if (!shooting)
@@ -304,6 +330,7 @@ void Player::update(char actionFlags)
 			else
 				sprite.move({ 2.f,5.f });
 		}
+		//3 frames when shooting
 		if (shootingFrame == 3)
 		{
 			shooting = false;
@@ -320,6 +347,7 @@ void Player::update(char actionFlags)
 		}
 		else
 		{
+			//create bullet on second shooting frame
 			shootingFrame++;
 			if (faceRight)
 			{
@@ -358,9 +386,9 @@ void Player::update(char actionFlags)
 		sprite.setTextureRect(animationMap[curMove]->nextFrame());
 
 	}
-	if (faceRight && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting &&!jumpingRail && !jumpingOffRail)
+	if (faceRight && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting &&!jumpingRail && !jumpingOffRail&&!dying)
 		curMove = STAND_RIGHT;
-	if(!faceRight&&!activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail && !jumpingOffRail)
+	if(!faceRight&&!activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail && !jumpingOffRail&&!dying)
 		curMove = STAND_LEFT;
 	playerTicks++;
 	
@@ -391,20 +419,29 @@ void Player::collide(Entity* other,char actionFlags)
 	if (enemyCast != nullptr)
 	{
 		//getspawn is called so player can't get hit right when enemy spawns from the door
-		if (!enemyCast->getSpawn()&&!invincibility)
+		//if player hits enemy and in shooting animation game breaks
+		if (!enemyCast->getSpawn()&&!invincibility&&!shooting&&!inDoor && !jumpingOffRail && !jumpingRail)
 		{
-			sprite.move({ 0,7 });//when switchiong to jump animation player move up, this offsets that
-			activeJump = true;
-			t = 0;
-			velo = 30;
-			g = 13;
-			angle = 90 * PI / 180;
-			invincibility = true;
-			invincibilityTime.restart();
+			if (lives == 1)
+			{
+				sprite.move({ 0,7 });//when switchiong to jump animation player move up, this offsets that
+				activeJump = true;
+				t = 0;
+				velo = 30;
+				g = 13;
+				angle = 90 * PI / 180;
+				lives--;
+				invincibility = true;
+				invincibilityTime.restart();
+			}
+			else
+			{
+				dying = true;
+			}
 		}
 	}
 	//player under rail and jump rail is press
-	if ((railCast != nullptr && (actionFlags == 0b01000000)||jumpingRail&& railCast != nullptr) && !activeRightJump && !activeJump && !activeLeftJump && !falling&&!inDoor)
+	if ((railCast != nullptr && (actionFlags == 0b01000000)||jumpingRail&& railCast != nullptr) && !activeRightJump && !activeJump && !activeLeftJump && !falling&&!inDoor && !jumpingOffRail && !dying)
 	{
 		if (railCast->getFloor()-1==floor)
 		{
@@ -461,7 +498,7 @@ void Player::collide(Entity* other,char actionFlags)
 			}
 		}
 	}
-	if (doorCast != nullptr && ((actionFlags == 0b01000001)||inDoor) && !activeRightJump && !activeJump && !activeLeftJump && !falling&&!jumpingRail)
+	if (doorCast != nullptr && ((actionFlags == 0b01000001)||inDoor) && !activeRightJump && !activeJump && !activeLeftJump && !falling&&!jumpingRail&&!jumpingOffRail&&!dying)
 	{
 		//starts door opening and has player walk into door one frame
 		if (!enterDoor&&!inDoor)

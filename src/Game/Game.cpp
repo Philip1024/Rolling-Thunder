@@ -38,7 +38,6 @@ Game::Game()
 
 Game::~Game()
 {
-    delete player;
 }
 
 
@@ -230,8 +229,28 @@ void Game::run()
         case WIN:
 	        break;
         }
-
         window.display();
+        if (gameOver)
+        {
+            //prevents memory leaks 
+            for (int i = 0; i < enemies.size(); i++)
+            {
+                delete enemies.at(i);
+            }
+            for (int i = 0; i < bullets.size(); i++)
+            {
+                delete bullets.at(i);
+            }
+            for (int i = 0; i < rails.size(); i++)
+            {
+                delete rails.at(i);
+            }
+            for (int i = 0; i < doors.size(); i++)
+            {
+                delete doors.at(i);
+            }
+            delete player;
+        }
     }
 
 }
@@ -403,7 +422,6 @@ void Game::runGameplayBehavior(char actionFlags)
 
     for (int i = 0; i < doors.size(); i++)
         ((Door*)doors.at(i))->update(actionFlags, player->getSprite().getPosition().x, player->getSprite().getPosition().y, allowEnemyDoorSpawn, enemySpawnClock);
-    
 
     //update draws player so this is called before rail is drawn
     if (player->getFloor() == 1)
@@ -458,5 +476,11 @@ void Game::runGameplayBehavior(char actionFlags)
     //used to update all entites
     //draw the foreground
     currentTick++; // keep track of the ticks that have passed
-    //std::cout << currentTick << std::endl;
+    //must be at end, otherwise updating deleted objects
+    
+    if (!player->getAlive())
+    {
+        gameOver = true;
+        window.close();
+    }
 }

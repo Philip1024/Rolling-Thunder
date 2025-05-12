@@ -40,6 +40,8 @@ private:
 	//doors
 	bool wPressed = false;
 	int count = 0; //for testing
+	//used to delete all entities when game is over
+	bool gameOver = false;
 
 	sf::Clock enemySpawnClockTemp;
 	sf::Clock* enemySpawnClock = &enemySpawnClockTemp;
@@ -72,6 +74,7 @@ private:
 	std::vector<Entity*>& enemies = Entity::getEnemys();
 	std::vector<Entity*>& rails = Entity::getRails();
 	std::vector<Entity*>& doors = Entity::getDoors();
+	
 
 	std::vector<sf::RectangleShape> groundDebugSprites;
 

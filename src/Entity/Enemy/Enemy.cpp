@@ -39,7 +39,10 @@ Enemy::~Enemy()
 		delete pair.second;
 }
 
-
+/// <summary>
+/// deals with collisions with other entities
+/// </summary>
+/// <param name="other">entity colliding with</param>
 void Enemy::collide(Entity* other)
 {
 	//if they collide set the player bounce bool to true
@@ -71,14 +74,20 @@ void Enemy::collide(Entity* other)
 	}
 }
 
-
+/// <summary>
+/// don't call
+/// </summary>
+/// <param name="actionFlags"></param>
 void Enemy::update(char actionFlags)
 {
 	throw std::exception("dont call this");
 }
 	
 
-
+/// <summary>
+/// updates and draws enemy
+/// </summary>
+/// <param name="player">pointer to player in game</param>
 void Enemy::update(Player* player)
 {
 	sprite.setScale(sf::Vector2f(0.9, 0.9));
