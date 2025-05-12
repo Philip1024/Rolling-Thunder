@@ -48,8 +48,9 @@ void Door::setPos(sf::Vector2f a)
 }
 
 
-//This opens the door for when the enmeyy leaves the room
-//still need to add sound for this, not using
+/// <summary>
+/// door opening animation not currently in use
+/// </summary>
 void Door::open()
 {
 	//sprite.setTextureRect(doorOpen->nextFrame());
@@ -69,8 +70,10 @@ void Door::open()
 }
 
 
-//this just  a reverse of the the door opening animation
-//still need to add sound for this,not using
+/// <summary>
+/// door closing animation, not currently in use
+/// </summary>
+/// <returns></returns>
 bool Door::close()
 {
 	//sprite.setTextureRect(doorClose->nextFrame());
@@ -94,19 +97,25 @@ bool Door::close()
 }
 
 
-//This controls the door opening and closing
-//Im trying to implemnent a way to hold the door closed 
-//by holding the w key after entering the door
+/// <summary>
+/// updates the door and draws, spawns enemies and deals with door animations when player enters a door
+/// </summary>
+/// <param name="actionFlags">user input</param>
+/// <param name="x">player x-cordinate</param>
+/// <param name="y">player y-cordinate</param>
+/// <param name="allowEnemyDoorSpawn">determines whether enemies can spawn</param>
+/// <param name="enemySpawnClock">clock control cooldown for enemy spawning</param>
 void Door::update(char actionFlags, float x, float y, bool* allowEnemyDoorSpawn, sf::Clock* enemySpawnClock)
 {
 	Entity::update(0b0);
 	int playerDistanceX = abs(x - sprite.getPosition().x);
 	int playerDistanceY = abs(y - sprite.getPosition().y);
 
-	//change to check the Y and make the X value shorter
-	if ((playerDistanceX < 20 && *allowEnemyDoorSpawn && doorFrameCount == 0)||enemySpawned)
+	//change to check the Y coordinate of player position
+	if ((playerDistanceX < 40 && *allowEnemyDoorSpawn && doorFrameCount == 0)||enemySpawned)
 	{
 		enemySpawned = true;
+		//door opens
 		if (doorFrameCount < 4 && !opened)
 		{
 			spawnOnce = true;
@@ -114,8 +123,10 @@ void Door::update(char actionFlags, float x, float y, bool* allowEnemyDoorSpawn,
 			doorFrameCount++;
 			opening = true;
 		}
+		//door is open and enemy walks out
 		else if (pause < 20)
 		{
+			//so only one enemy spawns
 			if (spawnOnce)
 			{
 				new Enemy(sf::Vector2f(float(sprite.getPosition().x - 9), float(sprite.getPosition().y - 4)), true);
@@ -126,6 +137,7 @@ void Door::update(char actionFlags, float x, float y, bool* allowEnemyDoorSpawn,
 			pause++;
 			stop = true;
 		}
+		//door closes
 		else
 		{
 			closing = true;
@@ -146,18 +158,20 @@ void Door::update(char actionFlags, float x, float y, bool* allowEnemyDoorSpawn,
 		*allowEnemyDoorSpawn = false;
 		enemySpawnClock->restart();
 	}
-
+	//update frames every 0.06 seconds
 	if (clock.getElapsedTime().asSeconds() <= 0.06f)
 		return;
 
 	if (startOpen&&!enemySpawned)
 	{
+		//door opens
 		if (doorFrameCount < 4 && !opened)
 		{
 			sprite.setTextureRect(AnimationData::getSection("door_close")->getFrame(doorFrameCount));
 			doorFrameCount++;
 			opening = true;
 		}
+		//door stays open 
 		else if (pause<2)
 		{
 			opening = false;
@@ -165,6 +179,7 @@ void Door::update(char actionFlags, float x, float y, bool* allowEnemyDoorSpawn,
 			pause++;
 			stop = true;
 		}
+		//door closes
 		else
 		{
 			closing = true;

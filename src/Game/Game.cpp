@@ -426,6 +426,7 @@ void Game::runGameplayBehavior(char actionFlags)
         if (!((Enemy*)enemies.at(i))->getAlive())
         {
             std::cout << "removed";
+            delete enemies.at(i);
             enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies.at(i)), enemies.end());
         }
         else

@@ -75,13 +75,14 @@ Player::Player()
 	jumpingRailCount = 0;
 	jumpingOffRail = false;
 	jumpingOffRailCount = 0;
-	dropping = false;
+	dropping = false;//used to determine whether viewport should drop as player moves
 	curMove = STAND_RIGHT;
+	invincibility = false;
 	ground1.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,5.f }));
-	ground2.push_back(sf::FloatRect({ 132.f,84.f }, { 441.f,5.f }));
-	ground2.push_back(sf::FloatRect({ 764.f,87.f }, { 375.f,5.f }));
-	ground2.push_back(sf::FloatRect({ 1333.f,88.f }, { 385.f,5.f }));
-	ground2.push_back(sf::FloatRect({ 1717.f,87.f }, { 46.f, 5.f }));
+	ground2.push_back(sf::FloatRect({ 132.f,90.f }, { 441.f,5.f }));
+	ground2.push_back(sf::FloatRect({ 764.f,90.f }, { 375.f,5.f }));
+	ground2.push_back(sf::FloatRect({ 1333.f,90.f }, { 385.f,5.f }));
+	ground2.push_back(sf::FloatRect({ 1717.f,90.f }, { 46.f, 5.f }));
 	ground2.push_back(sf::FloatRect({ 1763.f,145.f }, { 48.f,5.f }));
 	ground2.push_back(sf::FloatRect({ 1811.f,203.f }, { 48.f, 5.f }));
 	ground2.push_back(sf::FloatRect({ 1859.f,273.f }, { 46.f,5.f }));
@@ -100,12 +101,10 @@ Player::~Player()
 	delete walkOutDoor;
 }
 
-/*
-action flags structure:
-right most bit (00000001): move right
-7th bit (00000010): move left
-6th bit (00000100): jump
-*/
+/// <summary>
+/// draws player, changes frames and movement of player must be called in game
+/// </summary>
+/// <param name="actionFlags">user input</param>
 
 void Player::update(char actionFlags)
 {
@@ -113,6 +112,14 @@ void Player::update(char actionFlags)
 	 // only update the animation past this pointdddddddddd
 	//meant to determine whether player is on ground, if not player should fall
 	//test
+	if (invincibility)
+	{
+		if (invincibilityTime.getElapsedTime().asSeconds() >= 5.0f)
+		{
+			invincibility = false;
+			invincibilityTime.restart();
+		}
+	}
 	shouldFall = true;
 	if (floor == 0)
 	{
@@ -122,7 +129,7 @@ void Player::update(char actionFlags)
 			if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail || jumpingOffRail)
 			{
 				shouldFall = false;
-				centerGroundCollision = ground1.at(i);
+				centerGroundCollision = ground1.at(i);//used to determine which ground player collided with to recenter player when it hits the ground
 			}
 				
 		}
@@ -136,10 +143,14 @@ void Player::update(char actionFlags)
 			{
 				shouldFall = false;
 				centerGroundCollision = ground2.at(i);
-				if (i >= 3 && i <= 7&& sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
-					dropping = true;
-				else
-					dropping = false;
+				//jumping has it's on way to determine droppingvb
+				if (!activeJump&&!activeRightJump&&!activeLeftJump)
+				{
+					if (i >= 3 && i <= 6 && sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
+						dropping = true;
+					else
+						dropping = false;
+				}
 			}
 		}
 	}
@@ -162,7 +173,8 @@ void Player::update(char actionFlags)
 				if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail||jumpingOffRail)
 				{
 					falling = false;
-					sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+					centerGroundCollision = ground1.at(i);
+					sprite.move({ 0,((centerGroundCollision.position.y - 46) - sprite.getGlobalBounds().position.y) });
 					floor = 0;
 				}
 			}
@@ -172,16 +184,15 @@ void Player::update(char actionFlags)
 			view->move({ 0,5 });
 		if (!shouldFall)
 		{
-			std::cout << 0.75f * centerGroundCollision.position.y << std::endl;
 			falling = false;
 			if (faceRight)
 				sprite.setTextureRect(moveRight->nextFrame());
 			else
 				sprite.setTextureRect(moveLeft->nextFrame());
 			if(floor==0)
-				sprite.move({ 0,((centerGroundCollision.position.y-43) - sprite.getGlobalBounds().position.y)});
+				sprite.move({ 0,((centerGroundCollision.position.y-46) - sprite.getGlobalBounds().position.y)});
 			else
-				sprite.move({ 0,((centerGroundCollision.position.y-43) - sprite.getGlobalBounds().position.y) });
+				sprite.move({ 0,((centerGroundCollision.position.y-46) - sprite.getGlobalBounds().position.y) });
 		}
 			
 	}
@@ -228,7 +239,6 @@ void Player::update(char actionFlags)
 
 	if (((actionFlags == 0b00000100)||activeJump) &&!activeRightJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail)//jump
 	{
-		//represents time
 		if (!activeJump)
 		{
 			sprite.move({ 0,7 });//when switchiong to jump animation player move up, this offsets that
@@ -248,7 +258,6 @@ void Player::update(char actionFlags)
 	//this is the jumping while moving right animation
 	if (((actionFlags == 0b00001000) || activeRightJump) && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail)//jump
 	{
-		//represents time
 		if (!activeRightJump)
 		{
 			faceRight = true;
@@ -267,7 +276,6 @@ void Player::update(char actionFlags)
 
 	if (((actionFlags == 0b00010000) || activeLeftJump) && !activeJump && !activeRightJump && !falling && !inDoor&&!shooting && !jumpingRail)//jump
 	{
-		//represents time
 		if (!activeLeftJump)
 		{
 			faceRight = false;
@@ -379,20 +387,30 @@ void Player::collide(Entity* other,char actionFlags)
 	Enemy* enemyCast = dynamic_cast<Enemy*>(other);
 	Door* doorCast = dynamic_cast<Door*>(other);
 	Rail* railCast = dynamic_cast<Rail*>(other);
+	//enemy collisons
 	if (enemyCast != nullptr)
 	{
 		//getspawn is called so player can't get hit right when enemy spawns from the door
-		if (!enemyCast->getSpawn())
+		if (!enemyCast->getSpawn()&&!invincibility)
 		{
-			std::cout << "works" << std::endl;
+			sprite.move({ 0,7 });//when switchiong to jump animation player move up, this offsets that
+			activeJump = true;
+			t = 0;
+			velo = 30;
+			g = 13;
+			angle = 90 * PI / 180;
+			invincibility = true;
+			invincibilityTime.restart();
 		}
 	}
+	//player under rail and jump rail is press
 	if ((railCast != nullptr && (actionFlags == 0b01000000)||jumpingRail&& railCast != nullptr) && !activeRightJump && !activeJump && !activeLeftJump && !falling&&!inDoor)
 	{
 		if (railCast->getFloor()-1==floor)
 		{
 			if (!jumpingRail)
 			{
+				//inital jumping rail frame
 				if (faceRight)
 				{
 					sprite.setTextureRect((AnimationData::getSection("albatross_jumping_to_rail_right")->getFrame(0)));
@@ -406,6 +424,7 @@ void Player::collide(Entity* other,char actionFlags)
 			}
 			else
 			{
+				//switch to flying up frame
 				if (sprite.getPosition().y > 45)
 				{
 					if (faceRight)
@@ -421,6 +440,7 @@ void Player::collide(Entity* other,char actionFlags)
 				}
 				else
 				{
+					//switch to climbing rail frame, 10 ticks allow animation to finish
 					if (jumpingRail && jumpingRailCount < 10)
 					{
 						if (faceRight)
@@ -431,6 +451,7 @@ void Player::collide(Entity* other,char actionFlags)
 					}
 					else
 					{
+						//player is on rail if floor = 1
 						floor = 1;
 						jumpingRail = false;
 						jumpingRailCount = 0;
@@ -528,10 +549,15 @@ void Player::collide(Entity* other,char actionFlags)
 /// does the player jumping animation given ground
 /// </summary>
 /// <param name="angle">angle jumping at</param>
-/// <param name="ground"></param>
-/// <returns></returns>
+/// <param name="ground">vector containing ground positions</param>
+/// <returns>bool for whether to continue the jump based on ground</returns>
 bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 {
+	for (int i = 0; i < ground->size(); i++)
+	{
+		if (i >= 3 && i <= 6 && sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
+			dropping = true;
+	}
 	t += 0.2;
 	//parabolic equation for jump, pos keeps track of position while Mov uses pos to track how much movement is required each frame
 	xMov = velo * cos(angle) * t - xPos;
@@ -539,23 +565,25 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 	yMov = -0.5 * g * t * t + velo * sin(angle) * t - yPos;
 	yPos = -0.5 * g * t * t + velo * sin(angle) * t;
 	sprite.move({ xMov, -1 * yMov });
-	view->move({ xMov, 0 });
+	if(!dropping)
+		view->move({ xMov, 0 });
+	else
+		view->move({ xMov, -1*yMov });
 	if(faceRight)
 		curMove = JUMP_RIGHT;
 	else
 		curMove = JUMP_LEFT;
+	//checks collisions with ground given as parameter if floor==1 its ground2
 	for (int i = 0; i < ground->size(); i++)
 	{
 		if (sprite.getGlobalBounds().findIntersection(ground->at(i)) != std::nullopt&&t>0.5)
 		{
+			centerGroundCollision = ground->at(i);
 			if (!faceRight)
 				sprite.setTextureRect(moveLeft->nextFrame());
 			else
 				sprite.setTextureRect(moveRight->nextFrame());
-			if(floor==0)
-				sprite.move({ 0,(120-sprite.getGlobalBounds().position.y) });
-			else
-				sprite.move({ 0,(43 - sprite.getGlobalBounds().position.y) });
+			sprite.move({ 0,((centerGroundCollision.position.y - 46) - sprite.getGlobalBounds().position.y) });
 			xMov = 0;
 			yMov = 0;
 			xPos = 0;
@@ -565,15 +593,17 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 	}
 	if (floor == 1)
 	{
+		//if you jump of a rail and fall to the lower ground this checks that
 		for (int i = 0; i < ground1.size(); i++)
 		{
 			if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt && t > 0.5)
 			{
+				centerGroundCollision = ground1.at(i);
 				if (!faceRight)
 					sprite.setTextureRect(moveLeft->nextFrame());
 				else
 					sprite.setTextureRect(moveRight->nextFrame());
-				sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+				sprite.move({ 0,((centerGroundCollision.position.y - 46) - sprite.getGlobalBounds().position.y) });
 				floor = 0;
 				xMov = 0;
 				yMov = 0;
