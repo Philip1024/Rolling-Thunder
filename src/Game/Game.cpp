@@ -16,7 +16,7 @@ Change mode/screen using GameState: see the switch in main gameplay loop
  */
 //Constructor
 Game::Game()
-    : stage1Sprite(stage1)
+    : stage1Sprite(stage1), gui(&credits)
 {
     stage1.loadFromFile("res/Background/stage1(final).png");
     player = new Player();
@@ -30,7 +30,7 @@ Game::Game()
     ground2.push_back(sf::FloatRect({ 764.f,87.f }, { 375.f,5.f }));
     ground2.push_back(sf::FloatRect({ 1952.f,415.f }, { 1650.f,5.f }));
 
-    //window.setSize({(unsigned int)(288.f * scale), (unsigned int)(224.f * scale)});
+    window.setSize({(unsigned int)(1920.f * scale), (unsigned int)(1080.f * scale)});
 
     stage1Sprite = sf::Sprite(stage1);
 }
@@ -215,7 +215,7 @@ void Game::run()
         if (crouching && jumping) actionFlags |= 0b01000010;
 
         window.clear();
-        gameState = GAMEPLAY;
+        //gameState = START;
         switch (gameState)
         {
         case START:
@@ -362,10 +362,25 @@ void deleteLevel()
 
 void Game::runStartBehavior()
 {
+    // 5 to add credit 6 to start
+    if (isKeyPressed(sf::Keyboard::Key::Num5) && credits < 9)
+        credits++;
+    if (isKeyPressed(sf::Keyboard::Key::Num6) && credits > 0)
+    {
+        gameState = GAMEPLAY;
+        credits--;
+    }
+
     window.setView(guiView);
-    gui.changeScreen(GUI::SELECT_1);
+    if (credits > 0)
+        gui.changeScreen(GUI::SELECT_1);
+    else
+        gui.changeScreen(GUI::MAIN_MENU);
+
     gui.drawGUI(window);
     window.setView(mainView);
+
+    
 }
 
 

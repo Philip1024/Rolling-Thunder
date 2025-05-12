@@ -56,8 +56,9 @@ private:
 	//used to determined if crouching
 	bool crouching = false;
 	// what tick the game is on.
-	unsigned int currentTick = 0;
-	const float scale = 5.f;
+	unsigned int currentTick = 0, credits = 0;
+	// indicates the scale of the window. 1.f = 1920x1080
+	const float scale = 0.5f;
 
 	sf::RenderWindow window = sf::RenderWindow(sf::VideoMode({ 1920, 1080 }), "Rolling Thunder");
 	sf::View mainView = sf::View(sf::FloatRect({ 0, 0 }, { 1920, 1080 }));

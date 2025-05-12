@@ -5,8 +5,9 @@
 #include "../../SpriteData/AnimationData.h"
 
 
-GUI::GUI()
-	: background(sf::Sprite(introFrame)), redNamcoSymbol(*AnimationData::getTexture(AnimationData::NAMCO))
+GUI::GUI(unsigned int* creditRef)
+	: background(sf::Sprite(introFrame)), redNamcoSymbol(*AnimationData::getTexture(AnimationData::NAMCO)),
+		creditRef(creditRef)
 {
 	currentScreen = MAIN_MENU;
 	currentIntroFrame = 0;
@@ -17,7 +18,7 @@ GUI::GUI()
 	*/
 	redNamcoSymbol.setScale({ 0.08f, 0.08f });
 	redNamcoSymbol.setOrigin({ redNamcoSymbol.getLocalBounds().size.x / 2.f, 0 });
-	redNamcoSymbol.setPosition({144, 150});
+	redNamcoSymbol.setPosition({ 144, 134 });
 
 	// static text
 	textMap["p1UpS"] = new GameText("1UP");
@@ -49,19 +50,19 @@ GUI::GUI()
 	}
 
 	// static text
-	QSP("p1UpS", { 75, 16 });
-	QSP("p2UpS", { 238 - 30, 16 });
+	QSP("p1UpS", { 75, 0 });
+	QSP("p2UpS", { 238 - 30, 0 });
 	setCenterOrigin("highScoreS");
-	QSP("highScoreS", { 153, 16 });
+	QSP("highScoreS", { 153, 0 });
 	setCenterOrigin("toStartPushS");
-	QSP("toStartPushS", { 144, 90 });
+	QSP("toStartPushS", { 144, 74 });
 	setCenterOrigin("select1InfoS");
-	QSP("select1InfoS", { 144, 103 });
+	QSP("select1InfoS", { 144, 87 });
 	setCenterOrigin("namcoCopyrightS");
-	QSP("namcoCopyrightS", { 144, 130 });
+	QSP("namcoCopyrightS", { 144, 114 });
 	setCenterOrigin("namcoRightsS");
-	QSP("namcoRightsS", { 144, 142 });
-	QSP("creditS", { 50, 170 });
+	QSP("namcoRightsS", { 144, 126 });
+	QSP("creditS", { 50, 164 });
 	QSP("manLeftS", {60, 28});
 	QSP("manRightS", {238 - 20, 28});
 	QSP("lifeS", {130, 170});
@@ -71,11 +72,11 @@ GUI::GUI()
 
 	// dynamic text
 	textMap["p1ScoreD"]->setOrigin({ textMap["p1ScoreD"]->getLocalBounds().size.x, 0 });
-	QSP("p1ScoreD", {107, 22});
+	QSP("p1ScoreD", {107, 6});
 	textMap["p2ScoreD"]->setOrigin({ textMap["p2ScoreD"]->getLocalBounds().size.x, 0 });
-	QSP("p2ScoreD", { 240, 22 });
+	QSP("p2ScoreD", { 240, 6 });
 	textMap["creditD"]->setOrigin({ textMap["creditD"]->getLocalBounds().size.x, 0 });
-	QSP("creditD", { 105, 170 });
+	QSP("creditD", { 105, 164 });
 
 }
 
@@ -123,20 +124,19 @@ void GUI::drawGUI(sf::RenderWindow& window)
 		"timeD"
 	};
 	sf::RectangleShape alignLineX, alignLineY;
+	textMap["creditD"]->setString(std::string(1, '0' + *creditRef));
 
 	switch (currentScreen)
 	{
 	case MAIN_MENU:
-		// take input etc. TODO
 		nextIntroFrame();
 		window.draw(background);
-		// TODO 1050: show high score screen
+		// TODO on frame 1050: show high score screen
 		break;
 	case SELECT_1:
 		for (std::string& s : textToDrawS1)
 			window.draw(*textMap[s]);
 		window.draw(redNamcoSymbol);
-		// TODO: Check for player input for the credit & player 1 button
 		break;
 	case SELECT_12:
 		break;
@@ -174,8 +174,9 @@ void GUI::nextIntroFrame()
 		throw std::exception("Unable to load frame.");
 	background.setTexture(introFrame);
 	background.setTextureRect({{ 0,0 }, { 1920, 1080 }});
-	background.setPosition({ 0,16.5f });
-	background.setScale({0.1489f, 0.1489f }); 
+	background.setOrigin({ 1920 / 2.f, 1080 / 2.f });
+	background.setPosition({ 288/2.f,85 });
+	background.setScale({0.13f, 0.159f }); 
 }
 
 
