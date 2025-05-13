@@ -1,0 +1,80 @@
+\doxysection{Platform Class Reference}
+\hypertarget{class_platform}{}\label{class_platform}\index{Platform@{Platform}}
+
+
+{\ttfamily \#include $<$Platform.\+h$>$}
+
+Inheritance diagram for Platform\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_platform}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_entity_a5c72361783213573732646e0eccc6bf9}{Entity}} (sf\+::\+Texture \texorpdfstring{$\ast$}{*}init\+Texture)
+\item 
+virtual void \mbox{\hyperlink{class_entity_a98794b6e2f95081552347c02291cf5aa}{collide}} (\mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*}other, char action\+Flags)
+\item 
+virtual void \mbox{\hyperlink{class_entity_a3d3536f56940881a07b39caa45630723}{update}} (char action\+Flags)
+\item 
+bool \mbox{\hyperlink{class_entity_ae02949fde1d01ce7010a6e5bb8646154}{get\+Alive}} ()
+\item 
+const sf\+::\+Sprite \& \mbox{\hyperlink{class_entity_aece77e1e86fae668e67a57ee7ccce265}{get\+Sprite}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_aa1a1dec571e1876664974a9b3e788444}{get\+Entities}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_ac69ac4994717a75cd3f0982ad4dc26d2}{get\+Doors}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_a761b1ca15837297df03ff0323f1d7c99}{get\+Rails}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_a41c96f9cf0a18c4f824dfea38c1c8fa7}{get\+Bullets}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_ab6e3ebb92ac824244fba4fcaacb7d794}{get\+Enemys}} ()
+\item 
+static void \mbox{\hyperlink{class_entity_a220100853ede481ca8e83879be64e633}{set\+Window}} (sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*}w)
+\item 
+static void \mbox{\hyperlink{class_entity_aafd5fa9c60bb8a9100fae702139245e7}{set\+View}} (sf\+::\+View \texorpdfstring{$\ast$}{*}v)
+\item 
+static void \mbox{\hyperlink{class_entity_a94f711e3514c829207ecfec8eda0fd7c}{set\+Current\+Tick}} (unsigned int \texorpdfstring{$\ast$}{*}t)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a5171e14419230a1261f05431df091e12}{doors}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a450dbcb7e99e0f857d6ad0a06b4bfc43}{rails}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a522650da94f36892a5a55ed07d16419c}{bullets}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a268f0453cc796825d6d94ef664551a45}{enemys}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned int \& \mbox{\hyperlink{class_entity_a3605933621ee3250859c1c57d16ebd13}{get\+Current\+Tick}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Sprite \mbox{\hyperlink{class_entity_a48ef4ab143b8d0211877c9f6be42e824}{sprite}}
+\item 
+bool \mbox{\hyperlink{class_entity_a0d09a7e175d9dcfbfb359e5f74f2e692}{alive}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static sf\+::\+View \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_entity_a853397654e99a2e072f24929fa849bcb}{view}} = nullptr
+\item 
+static sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_entity_a0dc3ba88a6cfbda3b9c6ba04abcdc9aa}{window}} = nullptr
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Entity/\+Platform/\mbox{\hyperlink{_platform_8h}{Platform.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,50 @@
+\doxysection{Entity.\+h}
+\hypertarget{_entity_8h_source}{}\label{_entity_8h_source}\index{src/Entity/Entity.h@{src/Entity/Entity.h}}
+\mbox{\hyperlink{_entity_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include<SFML/Graphics.hpp>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include<optional>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_animation_data_8h}{../SpriteData/AnimationData.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_entity_a5c72361783213573732646e0eccc6bf9}{Entity}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{class_entity_a5c72361783213573732646e0eccc6bf9}{Entity}}(sf::Texture*\ initTexture);}
+\DoxyCodeLine{00012\ \ \ \ \ }
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{comment}{//\ this\ does\ not\ check\ collision,\ it\ is\ called\ when\ entities\ collide}}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_entity_a98794b6e2f95081552347c02291cf5aa}{collide}}(\mbox{\hyperlink{class_entity_a5c72361783213573732646e0eccc6bf9}{Entity}}*\ other,\textcolor{keywordtype}{char}\ actionFlags)\ \{\}}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{comment}{//\ entities\ are\ expected\ to\ do\ their\ functions\ and\ draw\ themselves\ in\ this\ method}}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_entity_a3d3536f56940881a07b39caa45630723}{update}}(\textcolor{keywordtype}{char}\ actionFlags)\ \{\ \mbox{\hyperlink{class_entity_a0dc3ba88a6cfbda3b9c6ba04abcdc9aa}{window}}-\/>draw(\mbox{\hyperlink{class_entity_a48ef4ab143b8d0211877c9f6be42e824}{sprite}});\ \}}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_entity_ae02949fde1d01ce7010a6e5bb8646154}{getAlive}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_entity_a0d09a7e175d9dcfbfb359e5f74f2e692}{alive}};\ \}}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{const}\ sf::Sprite\&\ \mbox{\hyperlink{class_entity_aece77e1e86fae668e67a57ee7ccce265}{getSprite}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_entity_a48ef4ab143b8d0211877c9f6be42e824}{sprite}};\ \ \}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Entity*>\&\ \mbox{\hyperlink{class_entity_aa1a1dec571e1876664974a9b3e788444}{getEntities}}()\ \{\ \textcolor{keywordflow}{return}\ entities;\ \}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Entity*>\&\ \mbox{\hyperlink{class_entity_ac69ac4994717a75cd3f0982ad4dc26d2}{getDoors}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_entity_a5171e14419230a1261f05431df091e12}{doors}};\ \}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Entity*>\&\ \mbox{\hyperlink{class_entity_a761b1ca15837297df03ff0323f1d7c99}{getRails}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_entity_a450dbcb7e99e0f857d6ad0a06b4bfc43}{rails}};\ \}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Entity*>\&\ \mbox{\hyperlink{class_entity_a41c96f9cf0a18c4f824dfea38c1c8fa7}{getBullets}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_entity_a522650da94f36892a5a55ed07d16419c}{bullets}};\ \}}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Entity*>\&\ \mbox{\hyperlink{class_entity_ab6e3ebb92ac824244fba4fcaacb7d794}{getEnemys}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_entity_a268f0453cc796825d6d94ef664551a45}{enemys}};\ \}}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ call\ these\ methods\ early\ or\ else\ unspecified\ behavior}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_entity_a220100853ede481ca8e83879be64e633}{setWindow}}(sf::RenderWindow*\ w)\ \{\ \mbox{\hyperlink{class_entity_a0dc3ba88a6cfbda3b9c6ba04abcdc9aa}{window}}\ =\ w;\ \}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_entity_aafd5fa9c60bb8a9100fae702139245e7}{setView}}(sf::View*\ v)\ \{\ \mbox{\hyperlink{class_entity_a853397654e99a2e072f24929fa849bcb}{view}}\ =\ v;\ \}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_entity_a94f711e3514c829207ecfec8eda0fd7c}{setCurrentTick}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}*\ t)\ \{\ currentTick\ =\ t;\ \}}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Entity*>\ \mbox{\hyperlink{class_entity_a5171e14419230a1261f05431df091e12}{doors}};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Entity*>\ \mbox{\hyperlink{class_entity_a450dbcb7e99e0f857d6ad0a06b4bfc43}{rails}};}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Entity*>\ \mbox{\hyperlink{class_entity_a522650da94f36892a5a55ed07d16419c}{bullets}};}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Entity*>\ \mbox{\hyperlink{class_entity_a268f0453cc796825d6d94ef664551a45}{enemys}};}
+\DoxyCodeLine{00032\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{comment}{//\ optional\ makes\ it\ so\ that\ sprite\ isn't}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ constructed\ until\ texture\ is\ loaded\ from\ file}}
+\DoxyCodeLine{00035\ \ \ \ \ sf::Sprite\ \mbox{\hyperlink{class_entity_a48ef4ab143b8d0211877c9f6be42e824}{sprite}};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{static}\ sf::View*\ \mbox{\hyperlink{class_entity_a853397654e99a2e072f24929fa849bcb}{view}};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//\ 30Tps}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\&\ \mbox{\hyperlink{class_entity_a3605933621ee3250859c1c57d16ebd13}{getCurrentTick}}()\ \{\ \textcolor{keywordflow}{return}\ *currentTick;\ \}}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{static}\ sf::RenderWindow*\ \mbox{\hyperlink{class_entity_a0dc3ba88a6cfbda3b9c6ba04abcdc9aa}{window}};}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_entity_a0d09a7e175d9dcfbfb359e5f74f2e692}{alive}};}
+\DoxyCodeLine{00041\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}*\ currentTick;}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Entity*>\ entities;}
+\DoxyCodeLine{00044\ \};}
+
+\end{DoxyCode}

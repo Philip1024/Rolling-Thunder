@@ -1,0 +1,184 @@
+\doxysection{Bullet Class Reference}
+\hypertarget{class_bullet}{}\label{class_bullet}\index{Bullet@{Bullet}}
+
+
+{\ttfamily \#include $<$Bullet.\+h$>$}
+
+Inheritance diagram for Bullet\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_bullet}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_bullet_a687a1d7f375b4e572b058c735fdedfd9}{collide}} (\mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*}other, char action\+Flags)
+\begin{DoxyCompactList}\small\item\em deals with animations for when bullet collides with enemy \end{DoxyCompactList}\item 
+sf\+::\+Vector2f \mbox{\hyperlink{class_bullet_aa0163d91e28a47cd89cfdda4923bd30a}{get\+Pos}} ()
+\item 
+void \mbox{\hyperlink{class_bullet_a26a2bd273b7ac2b11615a4e2bc79c08b}{update}} (char action\+Flags)
+\begin{DoxyCompactList}\small\item\em updates bullet animation \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_bullet_a0ba664b0efd9de995fef01afd06672ea}{Bullet}} (bool b\+Team, bool b\+Direction, float x, float y)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_entity_a5c72361783213573732646e0eccc6bf9}{Entity}} (sf\+::\+Texture \texorpdfstring{$\ast$}{*}init\+Texture)
+\item 
+bool \mbox{\hyperlink{class_entity_ae02949fde1d01ce7010a6e5bb8646154}{get\+Alive}} ()
+\item 
+const sf\+::\+Sprite \& \mbox{\hyperlink{class_entity_aece77e1e86fae668e67a57ee7ccce265}{get\+Sprite}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_bullet_a13c2353ce9195c7c1042414c8baf9368}{team}}
+\item 
+bool \mbox{\hyperlink{class_bullet_a6b43bc849fb0664485971c2bf440ad76}{direction}}
+\item 
+\mbox{\hyperlink{class_animation_data_1_1_section_data}{Animation\+Data\+::\+Section\+Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_bullet_a81c84fb32fb56cf4d2d3fea8657d8591}{bullet\+Right}}
+\item 
+\mbox{\hyperlink{class_animation_data_1_1_section_data}{Animation\+Data\+::\+Section\+Data}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_bullet_a208a847fc126aa5a21fe75c0e27f1b0f}{bullet\+Left}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_aa1a1dec571e1876664974a9b3e788444}{get\+Entities}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_ac69ac4994717a75cd3f0982ad4dc26d2}{get\+Doors}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_a761b1ca15837297df03ff0323f1d7c99}{get\+Rails}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_a41c96f9cf0a18c4f824dfea38c1c8fa7}{get\+Bullets}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_ab6e3ebb92ac824244fba4fcaacb7d794}{get\+Enemys}} ()
+\item 
+static void \mbox{\hyperlink{class_entity_a220100853ede481ca8e83879be64e633}{set\+Window}} (sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*}w)
+\item 
+static void \mbox{\hyperlink{class_entity_aafd5fa9c60bb8a9100fae702139245e7}{set\+View}} (sf\+::\+View \texorpdfstring{$\ast$}{*}v)
+\item 
+static void \mbox{\hyperlink{class_entity_a94f711e3514c829207ecfec8eda0fd7c}{set\+Current\+Tick}} (unsigned int \texorpdfstring{$\ast$}{*}t)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a5171e14419230a1261f05431df091e12}{doors}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a450dbcb7e99e0f857d6ad0a06b4bfc43}{rails}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a522650da94f36892a5a55ed07d16419c}{bullets}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a268f0453cc796825d6d94ef664551a45}{enemys}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned int \& \mbox{\hyperlink{class_entity_a3605933621ee3250859c1c57d16ebd13}{get\+Current\+Tick}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Sprite \mbox{\hyperlink{class_entity_a48ef4ab143b8d0211877c9f6be42e824}{sprite}}
+\item 
+bool \mbox{\hyperlink{class_entity_a0d09a7e175d9dcfbfb359e5f74f2e692}{alive}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static sf\+::\+View \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_entity_a853397654e99a2e072f24929fa849bcb}{view}} = nullptr
+\item 
+static sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_entity_a0dc3ba88a6cfbda3b9c6ba04abcdc9aa}{window}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_bullet_a0ba664b0efd9de995fef01afd06672ea}\index{Bullet@{Bullet}!Bullet@{Bullet}}
+\index{Bullet@{Bullet}!Bullet@{Bullet}}
+\doxysubsubsection{\texorpdfstring{Bullet()}{Bullet()}}
+{\footnotesize\ttfamily \label{class_bullet_a0ba664b0efd9de995fef01afd06672ea} 
+Bullet\+::\+Bullet (\begin{DoxyParamCaption}\item[{bool}]{b\+Team}{, }\item[{bool}]{b\+Direction}{, }\item[{float}]{x}{, }\item[{float}]{y}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_bullet_a687a1d7f375b4e572b058c735fdedfd9}\index{Bullet@{Bullet}!collide@{collide}}
+\index{collide@{collide}!Bullet@{Bullet}}
+\doxysubsubsection{\texorpdfstring{collide()}{collide()}}
+{\footnotesize\ttfamily \label{class_bullet_a687a1d7f375b4e572b058c735fdedfd9} 
+void Bullet\+::collide (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*}}]{other}{, }\item[{char}]{action\+Flags}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+deals with animations for when bullet collides with enemy 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & entity colliding with\\
+\hline
+{\em action\+Flags} & user input\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_entity_a98794b6e2f95081552347c02291cf5aa}{Entity}}.
+
+\Hypertarget{class_bullet_aa0163d91e28a47cd89cfdda4923bd30a}\index{Bullet@{Bullet}!getPos@{getPos}}
+\index{getPos@{getPos}!Bullet@{Bullet}}
+\doxysubsubsection{\texorpdfstring{getPos()}{getPos()}}
+{\footnotesize\ttfamily \label{class_bullet_aa0163d91e28a47cd89cfdda4923bd30a} 
+sf\+::\+Vector2f Bullet\+::get\+Pos (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_bullet_a26a2bd273b7ac2b11615a4e2bc79c08b}\index{Bullet@{Bullet}!update@{update}}
+\index{update@{update}!Bullet@{Bullet}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{class_bullet_a26a2bd273b7ac2b11615a4e2bc79c08b} 
+void Bullet\+::update (\begin{DoxyParamCaption}\item[{char}]{action\+Flags}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+updates bullet animation 
+
+
+\begin{DoxyParams}{Parameters}
+{\em action\+Flags} & user input\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_entity_a3d3536f56940881a07b39caa45630723}{Entity}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_bullet_a208a847fc126aa5a21fe75c0e27f1b0f}\index{Bullet@{Bullet}!bulletLeft@{bulletLeft}}
+\index{bulletLeft@{bulletLeft}!Bullet@{Bullet}}
+\doxysubsubsection{\texorpdfstring{bulletLeft}{bulletLeft}}
+{\footnotesize\ttfamily \label{class_bullet_a208a847fc126aa5a21fe75c0e27f1b0f} 
+\mbox{\hyperlink{class_animation_data_1_1_section_data}{Animation\+Data\+::\+Section\+Data}} \texorpdfstring{$\ast$}{*} Bullet\+::bullet\+Left}
+
+\Hypertarget{class_bullet_a81c84fb32fb56cf4d2d3fea8657d8591}\index{Bullet@{Bullet}!bulletRight@{bulletRight}}
+\index{bulletRight@{bulletRight}!Bullet@{Bullet}}
+\doxysubsubsection{\texorpdfstring{bulletRight}{bulletRight}}
+{\footnotesize\ttfamily \label{class_bullet_a81c84fb32fb56cf4d2d3fea8657d8591} 
+\mbox{\hyperlink{class_animation_data_1_1_section_data}{Animation\+Data\+::\+Section\+Data}}\texorpdfstring{$\ast$}{*} Bullet\+::bullet\+Right}
+
+\Hypertarget{class_bullet_a6b43bc849fb0664485971c2bf440ad76}\index{Bullet@{Bullet}!direction@{direction}}
+\index{direction@{direction}!Bullet@{Bullet}}
+\doxysubsubsection{\texorpdfstring{direction}{direction}}
+{\footnotesize\ttfamily \label{class_bullet_a6b43bc849fb0664485971c2bf440ad76} 
+bool Bullet\+::direction}
+
+\Hypertarget{class_bullet_a13c2353ce9195c7c1042414c8baf9368}\index{Bullet@{Bullet}!team@{team}}
+\index{team@{team}!Bullet@{Bullet}}
+\doxysubsubsection{\texorpdfstring{team}{team}}
+{\footnotesize\ttfamily \label{class_bullet_a13c2353ce9195c7c1042414c8baf9368} 
+bool Bullet\+::team}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Entity/\+Bullet/\mbox{\hyperlink{_bullet_8h}{Bullet.\+h}}\item 
+src/\+Entity/\+Bullet/\mbox{\hyperlink{_bullet_8cpp}{Bullet.\+cpp}}\end{DoxyCompactItemize}

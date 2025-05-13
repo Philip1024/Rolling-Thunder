@@ -1,0 +1,88 @@
+\doxysection{Game.\+h}
+\hypertarget{_game_8h_source}{}\label{_game_8h_source}\index{src/Game/Game.h@{src/Game/Game.h}}
+\mbox{\hyperlink{_game_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_player_8h}{../Entity/Player/Player.h}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_animation_data_8h}{../SpriteData/AnimationData.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_enemy_8h}{../Entity/Enemy/Enemy.h}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_g_u_i_8h}{../UI/UIScreen/GUI.h}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_ad59df6562a58a614fda24622d3715b65}{Game}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_game_a7f57a7a8408e554d0a72882c287e1d04}{GameState}}}
+\DoxyCodeLine{00013\ \ \ \ \ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a7f57a7a8408e554d0a72882c287e1d04ab9b9da92fdcf5e997b6a1967be357ef0}{START}},}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a7f57a7a8408e554d0a72882c287e1d04aef0058db51eece08150667cd25ed55df}{GAMEPLAY}},}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a7f57a7a8408e554d0a72882c287e1d04a76b1ca1fb521f0ea780e84d6e3ff407c}{LOSE}},}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_a7f57a7a8408e554d0a72882c287e1d04af7ee6d6382ac4efdb257b361a1b7b2ea}{WIN}}}
+\DoxyCodeLine{00018\ \ \ \ \ \};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{class_game_ad59df6562a58a614fda24622d3715b65}{Game}}();}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_game_ae3d112ca6e0e55150d2fdbc704474530}{\string~Game}}();}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a1ab78f5ed0d5ea879157357cf2fb2afa}{run}}();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ genLevel();}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ isColliding(\textcolor{keywordtype}{char});}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ runStartBehavior();}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ runGameplayBehavior(\textcolor{keywordtype}{char}\ actionFlags);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}*\ player;}
+\DoxyCodeLine{00032\ \ \ \ \ sf::Texture\ stage1;}
+\DoxyCodeLine{00033\ \ \ \ \ sf::Texture\ stage2;}
+\DoxyCodeLine{00034\ \ \ \ \ sf::Texture\ stage3;}
+\DoxyCodeLine{00035\ \ \ \ \ sf::Texture\ stage4;}
+\DoxyCodeLine{00036\ \ \ \ \ sf::Texture\ stage5;}
+\DoxyCodeLine{00037\ \ \ \ \ std::vector<sf::FloatRect>\ ground;}
+\DoxyCodeLine{00038\ \ \ \ \ std::vector<sf::FloatRect>\ ground2;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//doors}}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{bool}\ wPressed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ 0;\ \textcolor{comment}{//for\ testing}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{comment}{//used\ to\ delete\ all\ entities\ when\ game\ is\ over}}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{bool}\ gameOver\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ sf::Clock\ enemySpawnClockTemp;}
+\DoxyCodeLine{00047\ \ \ \ \ sf::Clock*\ enemySpawnClock\ =\ \&enemySpawnClockTemp;}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ allowEnemySpawnTemp\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}*\ allowEnemyDoorSpawn\ =\ \&allowEnemySpawnTemp;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_game_a7f57a7a8408e554d0a72882c287e1d04}{GameState}}\ gameState\ =\ \mbox{\hyperlink{class_game_a7f57a7a8408e554d0a72882c287e1d04ab9b9da92fdcf5e997b6a1967be357ef0}{GameState::START}};}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{//\ if\ the\ player\ is\ moving\ right\ or\ left}}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ movingLeft\ =\ \textcolor{keyword}{false},\ movingRight\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//if\ player\ is\ shooting}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{bool}\ shooting\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//used\ to\ determine\ if\ jumping}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{bool}\ jumping\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{comment}{//used\ to\ determined\ if\ crouching}}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{bool}\ crouching\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{comment}{//\ what\ tick\ the\ game\ is\ on.}}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ currentTick\ =\ 0,\ credits\ =\ 0;}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{//\ indicates\ the\ scale\ of\ the\ window.\ 1.f\ =\ 1920x1080}}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ scale\ =\ 0.5f;}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ sf::RenderWindow\ window\ =\ sf::RenderWindow(sf::VideoMode(\{\ 1920,\ 1080\ \}),\ \textcolor{stringliteral}{"{}Rolling\ Thunder"{}});}
+\DoxyCodeLine{00066\ \ \ \ \ sf::View\ mainView\ =\ sf::View(sf::FloatRect(\{\ 0,\ 0\ \},\ \{\ 1920,\ 1080\ \}));}
+\DoxyCodeLine{00067\ \ \ \ \ sf::View\ guiView\ =\ sf::View(sf::FloatRect(\{\ 0,0\ \},\ \{\ 288,\ 170\ \}));}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{comment}{//Sprite\ for\ the\ background}}
+\DoxyCodeLine{00070\ \ \ \ \ sf::Sprite\ stage1Sprite;}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{comment}{//\ static\ references\ from\ Entity\ to\ be\ used\ in\ Game}}
+\DoxyCodeLine{00073\ \ \ \ \ std::vector<Entity*>\&\ bullets\ =\ \mbox{\hyperlink{class_entity_a41c96f9cf0a18c4f824dfea38c1c8fa7}{Entity::getBullets}}();}
+\DoxyCodeLine{00074\ \ \ \ \ std::vector<Entity*>\&\ enemies\ =\ \mbox{\hyperlink{class_entity_ab6e3ebb92ac824244fba4fcaacb7d794}{Entity::getEnemys}}();}
+\DoxyCodeLine{00075\ \ \ \ \ std::vector<Entity*>\&\ rails\ =\ \mbox{\hyperlink{class_entity_a761b1ca15837297df03ff0323f1d7c99}{Entity::getRails}}();}
+\DoxyCodeLine{00076\ \ \ \ \ std::vector<Entity*>\&\ doors\ =\ \mbox{\hyperlink{class_entity_ac69ac4994717a75cd3f0982ad4dc26d2}{Entity::getDoors}}();}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ std::vector<sf::RectangleShape>\ groundDebugSprites;}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ GUI\ gui;}
+\DoxyCodeLine{00082\ \};}
+
+\end{DoxyCode}

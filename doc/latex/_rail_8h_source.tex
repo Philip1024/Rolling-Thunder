@@ -1,0 +1,25 @@
+\doxysection{Rail.\+h}
+\hypertarget{_rail_8h_source}{}\label{_rail_8h_source}\index{src/Entity/Raill/Rail.h@{src/Entity/Raill/Rail.h}}
+\mbox{\hyperlink{_rail_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_entity_8h}{../Entity.h}}"{}}}
+\DoxyCodeLine{00003\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_rail_a47afaa33c97f5e89a4f0f5bc57c981a8}{Rail}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_entity_a5c72361783213573732646e0eccc6bf9}{Entity}}}
+\DoxyCodeLine{00004\ \{}
+\DoxyCodeLine{00005\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00006\ \ \ \ \ \mbox{\hyperlink{class_rail_a47afaa33c97f5e89a4f0f5bc57c981a8}{Rail}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00007\ \ \ \ \ \mbox{\hyperlink{class_rail_a0d70742edd3f63db3f26f46fd1968e61}{\string~Rail}}();}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_rail_a1ba392b2682f3fa48584375764f4ac47}{update}}(\textcolor{keywordtype}{char}\ actionFlags);}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_rail_a43ca2718216205d0f399f465d904d40e}{changeOpacity}}(\textcolor{keywordtype}{bool}\ visible);}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_rail_a3b9393414d4781af07059a61372b5062}{setPos}}(sf::Vector2f\ a);}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_rail_aabfc047d99b69b73ae16f01c0f5b1e3a}{getFloor}}()\ \{\ \textcolor{keywordflow}{return}\ floor;\ \}}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_rail_ad472227414df97f2fef420b6de4cfb80}{getFront}}();}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_rail_a1028540349fd95fada39b4f8d8b29004}{getBack}}();}
+\DoxyCodeLine{00015\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{int}\ xPos,\ yPos,floor;}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{class_animation_data_1_1_section_data}{AnimationData::SectionData}}*\ rail;}
+\DoxyCodeLine{00018\ \};}
+\DoxyCodeLine{00019\ }
+
+\end{DoxyCode}

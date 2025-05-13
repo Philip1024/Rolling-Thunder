@@ -1,0 +1,273 @@
+\doxysection{Door Class Reference}
+\hypertarget{class_door}{}\label{class_door}\index{Door@{Door}}
+
+
+{\ttfamily \#include $<$Door.\+h$>$}
+
+Inheritance diagram for Door\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_door}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_door_ab1d64110aa001dbb8fa0886cbd6e34c6}{Door}} (int x, int y)
+\item 
+\mbox{\hyperlink{class_door_a3dbbbd7a49698a8461d3c22df60bd2d3}{\texorpdfstring{$\sim$}{\string~}\+Door}} ()
+\item 
+void \mbox{\hyperlink{class_door_ad808986f41c71f6e779a54d6e2a35f5b}{update}} (char action\+Flags, float x, float y, bool \texorpdfstring{$\ast$}{*}, sf\+::\+Clock \texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em updates the door and draws, spawns enemies and deals with door animations when player enters a door \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_door_a80f93fe10f34b13db9ae16162acf0e72}{set\+Pos}} (sf\+::\+Vector2f)
+\begin{DoxyCompactList}\small\item\em This sets the pos of the door. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_door_a898e3e5812cac72687206c3646b6b9ff}{set\+Opening}} (bool)
+\begin{DoxyCompactList}\small\item\em tells door to open \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_door_a7d49563f6055e01b98e7f82f562077a1}{get\+Open}} ()
+\begin{DoxyCompactList}\small\item\em returns whether dor is in opening animation \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_door_ab273c004e9d0159aea10cb903431f1d0}{get\+Closing}} ()
+\begin{DoxyCompactList}\small\item\em returns whether door is in closing animation \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_door_aad1406bb2477bc22286d3fda9c3ea7c5}{get\+Stop}} ()
+\begin{DoxyCompactList}\small\item\em returns whether door is open and not is closing animation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_door_a46aed51c9b697d2c14037c63243fe950}{change\+Opacity}} (bool visible)
+\begin{DoxyCompactList}\small\item\em This makes the door visible or invisible. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_door_a55a1a496f486ee1b9a5f01c830d04af7}{get\+Front}} ()
+\item 
+float \mbox{\hyperlink{class_door_a04cd7dd3d22be399cabd63897fd2316a}{get\+Back}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_entity_a5c72361783213573732646e0eccc6bf9}{Entity}} (sf\+::\+Texture \texorpdfstring{$\ast$}{*}init\+Texture)
+\item 
+virtual void \mbox{\hyperlink{class_entity_a98794b6e2f95081552347c02291cf5aa}{collide}} (\mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*}other, char action\+Flags)
+\item 
+virtual void \mbox{\hyperlink{class_entity_a3d3536f56940881a07b39caa45630723}{update}} (char action\+Flags)
+\item 
+bool \mbox{\hyperlink{class_entity_ae02949fde1d01ce7010a6e5bb8646154}{get\+Alive}} ()
+\item 
+const sf\+::\+Sprite \& \mbox{\hyperlink{class_entity_aece77e1e86fae668e67a57ee7ccce265}{get\+Sprite}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_door_ab045b0696a5f36bb02f3860a5dd9e0a2}{x\+Pos}}
+\item 
+int \mbox{\hyperlink{class_door_a3efc861451857bddbabfb6f417121954}{y\+Pos}}
+\item 
+int \mbox{\hyperlink{class_door_afe31142119ef737c9efca3111191a02a}{animation\+Frame}} = 0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_aa1a1dec571e1876664974a9b3e788444}{get\+Entities}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_ac69ac4994717a75cd3f0982ad4dc26d2}{get\+Doors}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_a761b1ca15837297df03ff0323f1d7c99}{get\+Rails}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_a41c96f9cf0a18c4f824dfea38c1c8fa7}{get\+Bullets}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_ab6e3ebb92ac824244fba4fcaacb7d794}{get\+Enemys}} ()
+\item 
+static void \mbox{\hyperlink{class_entity_a220100853ede481ca8e83879be64e633}{set\+Window}} (sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*}w)
+\item 
+static void \mbox{\hyperlink{class_entity_aafd5fa9c60bb8a9100fae702139245e7}{set\+View}} (sf\+::\+View \texorpdfstring{$\ast$}{*}v)
+\item 
+static void \mbox{\hyperlink{class_entity_a94f711e3514c829207ecfec8eda0fd7c}{set\+Current\+Tick}} (unsigned int \texorpdfstring{$\ast$}{*}t)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a5171e14419230a1261f05431df091e12}{doors}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a450dbcb7e99e0f857d6ad0a06b4bfc43}{rails}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a522650da94f36892a5a55ed07d16419c}{bullets}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a268f0453cc796825d6d94ef664551a45}{enemys}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned int \& \mbox{\hyperlink{class_entity_a3605933621ee3250859c1c57d16ebd13}{get\+Current\+Tick}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Sprite \mbox{\hyperlink{class_entity_a48ef4ab143b8d0211877c9f6be42e824}{sprite}}
+\item 
+bool \mbox{\hyperlink{class_entity_a0d09a7e175d9dcfbfb359e5f74f2e692}{alive}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static sf\+::\+View \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_entity_a853397654e99a2e072f24929fa849bcb}{view}} = nullptr
+\item 
+static sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_entity_a0dc3ba88a6cfbda3b9c6ba04abcdc9aa}{window}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_door_ab1d64110aa001dbb8fa0886cbd6e34c6}\index{Door@{Door}!Door@{Door}}
+\index{Door@{Door}!Door@{Door}}
+\doxysubsubsection{\texorpdfstring{Door()}{Door()}}
+{\footnotesize\ttfamily \label{class_door_ab1d64110aa001dbb8fa0886cbd6e34c6} 
+Door\+::\+Door (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_door_a3dbbbd7a49698a8461d3c22df60bd2d3}\index{Door@{Door}!````~Door@{\texorpdfstring{$\sim$}{\string~}Door}}
+\index{````~Door@{\texorpdfstring{$\sim$}{\string~}Door}!Door@{Door}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Door()}{\string~Door()}}
+{\footnotesize\ttfamily \label{class_door_a3dbbbd7a49698a8461d3c22df60bd2d3} 
+Door\+::\texorpdfstring{$\sim$}{\string~}\+Door (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_door_a46aed51c9b697d2c14037c63243fe950}\index{Door@{Door}!changeOpacity@{changeOpacity}}
+\index{changeOpacity@{changeOpacity}!Door@{Door}}
+\doxysubsubsection{\texorpdfstring{changeOpacity()}{changeOpacity()}}
+{\footnotesize\ttfamily \label{class_door_a46aed51c9b697d2c14037c63243fe950} 
+void Door\+::change\+Opacity (\begin{DoxyParamCaption}\item[{bool}]{visible}{}\end{DoxyParamCaption})}
+
+
+
+This makes the door visible or invisible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em visible} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_door_a04cd7dd3d22be399cabd63897fd2316a}\index{Door@{Door}!getBack@{getBack}}
+\index{getBack@{getBack}!Door@{Door}}
+\doxysubsubsection{\texorpdfstring{getBack()}{getBack()}}
+{\footnotesize\ttfamily \label{class_door_a04cd7dd3d22be399cabd63897fd2316a} 
+float Door\+::get\+Back (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_door_ab273c004e9d0159aea10cb903431f1d0}\index{Door@{Door}!getClosing@{getClosing}}
+\index{getClosing@{getClosing}!Door@{Door}}
+\doxysubsubsection{\texorpdfstring{getClosing()}{getClosing()}}
+{\footnotesize\ttfamily \label{class_door_ab273c004e9d0159aea10cb903431f1d0} 
+bool Door\+::get\+Closing (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+returns whether door is in closing animation 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_door_a55a1a496f486ee1b9a5f01c830d04af7}\index{Door@{Door}!getFront@{getFront}}
+\index{getFront@{getFront}!Door@{Door}}
+\doxysubsubsection{\texorpdfstring{getFront()}{getFront()}}
+{\footnotesize\ttfamily \label{class_door_a55a1a496f486ee1b9a5f01c830d04af7} 
+float Door\+::get\+Front (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_door_a7d49563f6055e01b98e7f82f562077a1}\index{Door@{Door}!getOpen@{getOpen}}
+\index{getOpen@{getOpen}!Door@{Door}}
+\doxysubsubsection{\texorpdfstring{getOpen()}{getOpen()}}
+{\footnotesize\ttfamily \label{class_door_a7d49563f6055e01b98e7f82f562077a1} 
+bool Door\+::get\+Open (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+returns whether dor is in opening animation 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_door_aad1406bb2477bc22286d3fda9c3ea7c5}\index{Door@{Door}!getStop@{getStop}}
+\index{getStop@{getStop}!Door@{Door}}
+\doxysubsubsection{\texorpdfstring{getStop()}{getStop()}}
+{\footnotesize\ttfamily \label{class_door_aad1406bb2477bc22286d3fda9c3ea7c5} 
+bool Door\+::get\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+returns whether door is open and not is closing animation 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_door_a898e3e5812cac72687206c3646b6b9ff}\index{Door@{Door}!setOpening@{setOpening}}
+\index{setOpening@{setOpening}!Door@{Door}}
+\doxysubsubsection{\texorpdfstring{setOpening()}{setOpening()}}
+{\footnotesize\ttfamily \label{class_door_a898e3e5812cac72687206c3646b6b9ff} 
+void Door\+::set\+Opening (\begin{DoxyParamCaption}\item[{bool}]{new\+Opening}{}\end{DoxyParamCaption})}
+
+
+
+tells door to open 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Opening} & true if start opening, false if don\textquotesingle{}t start opening\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_door_a80f93fe10f34b13db9ae16162acf0e72}\index{Door@{Door}!setPos@{setPos}}
+\index{setPos@{setPos}!Door@{Door}}
+\doxysubsubsection{\texorpdfstring{setPos()}{setPos()}}
+{\footnotesize\ttfamily \label{class_door_a80f93fe10f34b13db9ae16162acf0e72} 
+void Door\+::set\+Pos (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{a}{}\end{DoxyParamCaption})}
+
+
+
+This sets the pos of the door. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_door_ad808986f41c71f6e779a54d6e2a35f5b}\index{Door@{Door}!update@{update}}
+\index{update@{update}!Door@{Door}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{class_door_ad808986f41c71f6e779a54d6e2a35f5b} 
+void Door\+::update (\begin{DoxyParamCaption}\item[{char}]{action\+Flags}{, }\item[{float}]{x}{, }\item[{float}]{y}{, }\item[{bool \texorpdfstring{$\ast$}{*}}]{allow\+Enemy\+Door\+Spawn}{, }\item[{sf\+::\+Clock \texorpdfstring{$\ast$}{*}}]{enemy\+Spawn\+Clock}{}\end{DoxyParamCaption})}
+
+
+
+updates the door and draws, spawns enemies and deals with door animations when player enters a door 
+
+
+\begin{DoxyParams}{Parameters}
+{\em action\+Flags} & user input\\
+\hline
+{\em x} & player x-\/cordinate\\
+\hline
+{\em y} & player y-\/cordinate\\
+\hline
+{\em allow\+Enemy\+Door\+Spawn} & determines whether enemies can spawn\\
+\hline
+{\em enemy\+Spawn\+Clock} & clock control cooldown for enemy spawning\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_door_afe31142119ef737c9efca3111191a02a}\index{Door@{Door}!animationFrame@{animationFrame}}
+\index{animationFrame@{animationFrame}!Door@{Door}}
+\doxysubsubsection{\texorpdfstring{animationFrame}{animationFrame}}
+{\footnotesize\ttfamily \label{class_door_afe31142119ef737c9efca3111191a02a} 
+int Door\+::animation\+Frame = 0}
+
+\Hypertarget{class_door_ab045b0696a5f36bb02f3860a5dd9e0a2}\index{Door@{Door}!xPos@{xPos}}
+\index{xPos@{xPos}!Door@{Door}}
+\doxysubsubsection{\texorpdfstring{xPos}{xPos}}
+{\footnotesize\ttfamily \label{class_door_ab045b0696a5f36bb02f3860a5dd9e0a2} 
+int Door\+::x\+Pos}
+
+\Hypertarget{class_door_a3efc861451857bddbabfb6f417121954}\index{Door@{Door}!yPos@{yPos}}
+\index{yPos@{yPos}!Door@{Door}}
+\doxysubsubsection{\texorpdfstring{yPos}{yPos}}
+{\footnotesize\ttfamily \label{class_door_a3efc861451857bddbabfb6f417121954} 
+int Door\+::y\+Pos}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Entity/\+Door/\mbox{\hyperlink{_door_8h}{Door.\+h}}\item 
+src/\+Entity/\+Door/\mbox{\hyperlink{_door_8cpp}{Door.\+cpp}}\end{DoxyCompactItemize}

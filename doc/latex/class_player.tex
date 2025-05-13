@@ -1,0 +1,317 @@
+\doxysection{Player Class Reference}
+\hypertarget{class_player}{}\label{class_player}\index{Player@{Player}}
+
+
+{\ttfamily \#include $<$Player.\+h$>$}
+
+Inheritance diagram for Player\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_player}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1e}{Movement}} \{ \newline
+\mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eac18b3acdec4d6526d427ec194afce347}{MOVE\+\_\+\+LEFT}}
+, \mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eaf923c5cb462036a828b4ae0295543991}{MOVE\+\_\+\+RIGHT}}
+, \mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea9474a8b5517ba1825be84789b349bb45}{STAND\+\_\+\+LEFT}}
+, \mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea69b86c31e1698324ae004b13a741e45d}{STAND\+\_\+\+RIGHT}}
+, \newline
+\mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea77a2788c94aa172404b1abef7483161d}{JUMP\+\_\+\+LEFT}}
+, \mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea7a822bc000e80f3fe8c0436e8e8c3cdf}{JUMP\+\_\+\+RIGHT}}
+, \mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eacfe3e5220bf87b08f9a141b5535db3fd}{DOOR\+\_\+\+IN}}
+, \mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eabe81dc553a44ea478c16331bdfa09471}{DOOR\+\_\+\+OUT}}
+, \newline
+\mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea0addfa8cd0893b6dca30714b4e37ba89}{JUMP\+\_\+\+RAIL\+\_\+\+RIGHT}}
+, \mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea897873cd5af1c9c9e87a91c74bd35faf}{CLIMB\+\_\+\+RAIL\+\_\+\+RIGHT}}
+, \mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea5f9cd2d68e30cb14563e05fbe2034ba9}{CLIMB\+\_\+\+RAIL\+\_\+\+LEFT}}
+, \mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea387e1860f74e16591eae77a45c272440}{CLIMB\+\_\+\+OFF\+\_\+\+RAIL\+\_\+\+RIGHT}}
+, \newline
+\mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eacc6a17be9dea577ade786d218380cd20}{CLIMB\+\_\+\+OFF\+\_\+\+RAIL\+\_\+\+LEFT}}
+, \mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea628f3052b8ac24f5e6461f2a9513273a}{FALL\+\_\+\+RIGHT}}
+, \mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea42e996bbe2d98314bcfbf5bf0661836b}{FALL\+\_\+\+LEFT}}
+, \mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eac95a7aca0d37f7bec6a2e3d827428e34}{DIE\+\_\+\+LEFT}}
+, \newline
+\mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea9b8a450de84f6278b93762239fb0758e}{DIE\+\_\+\+RIGHT}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_player_affe0cc3cb714f6deb4e62f0c0d3f1fd8}{Player}} ()
+\item 
+\mbox{\hyperlink{class_player_a749d2c00e1fe0f5c2746f7505a58c062}{\texorpdfstring{$\sim$}{\string~}\+Player}} ()
+\item 
+void \mbox{\hyperlink{class_player_a0ea3a372f28822f0d63b05288307c490}{collide}} (\mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*}other, char Action\+Flags) override
+\begin{DoxyCompactList}\small\item\em This method enacts all players actions when certain collisions happen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a5b07d2d1e1b3fa78d2e801a844cf096b}{update}} (char action\+Flags)
+\begin{DoxyCompactList}\small\item\em draws player, changes frames and movement of player must be called in game \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_a1b242b4f761a61dba82e838c16f30581}{player\+In\+Door}} ()
+\begin{DoxyCompactList}\small\item\em returns when player is going through the door animation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a1090a3692d1c2ed1d7687fc98c53d54d}{set\+Pos}} (sf\+::\+Vector2f)
+\begin{DoxyCompactList}\small\item\em sets positions of player \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_player_a11f9683c14f0112dedb84f5f8a681ee1}{get\+Floor}} ()
+\item 
+bool \mbox{\hyperlink{class_player_a55ab1bb46619242418ef5c7d104efe23}{get\+Direction}} ()
+\begin{DoxyCompactList}\small\item\em gives players direction whether facing right of left \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_player_aa45f751e7ba8afcd9894d57ef4813d50}{get\+Alive}} ()
+\begin{DoxyCompactList}\small\item\em gives whether player is alive \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_entity_a5c72361783213573732646e0eccc6bf9}{Entity}} (sf\+::\+Texture \texorpdfstring{$\ast$}{*}init\+Texture)
+\item 
+bool \mbox{\hyperlink{class_entity_ae02949fde1d01ce7010a6e5bb8646154}{get\+Alive}} ()
+\item 
+const sf\+::\+Sprite \& \mbox{\hyperlink{class_entity_aece77e1e86fae668e67a57ee7ccce265}{get\+Sprite}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_aa1a1dec571e1876664974a9b3e788444}{get\+Entities}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_ac69ac4994717a75cd3f0982ad4dc26d2}{get\+Doors}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_a761b1ca15837297df03ff0323f1d7c99}{get\+Rails}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_a41c96f9cf0a18c4f824dfea38c1c8fa7}{get\+Bullets}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_ab6e3ebb92ac824244fba4fcaacb7d794}{get\+Enemys}} ()
+\item 
+static void \mbox{\hyperlink{class_entity_a220100853ede481ca8e83879be64e633}{set\+Window}} (sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*}w)
+\item 
+static void \mbox{\hyperlink{class_entity_aafd5fa9c60bb8a9100fae702139245e7}{set\+View}} (sf\+::\+View \texorpdfstring{$\ast$}{*}v)
+\item 
+static void \mbox{\hyperlink{class_entity_a94f711e3514c829207ecfec8eda0fd7c}{set\+Current\+Tick}} (unsigned int \texorpdfstring{$\ast$}{*}t)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a5171e14419230a1261f05431df091e12}{doors}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a450dbcb7e99e0f857d6ad0a06b4bfc43}{rails}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a522650da94f36892a5a55ed07d16419c}{bullets}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a268f0453cc796825d6d94ef664551a45}{enemys}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned int \& \mbox{\hyperlink{class_entity_a3605933621ee3250859c1c57d16ebd13}{get\+Current\+Tick}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Sprite \mbox{\hyperlink{class_entity_a48ef4ab143b8d0211877c9f6be42e824}{sprite}}
+\item 
+bool \mbox{\hyperlink{class_entity_a0d09a7e175d9dcfbfb359e5f74f2e692}{alive}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static sf\+::\+View \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_entity_a853397654e99a2e072f24929fa849bcb}{view}} = nullptr
+\item 
+static sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_entity_a0dc3ba88a6cfbda3b9c6ba04abcdc9aa}{window}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1e}\index{Player@{Player}!Movement@{Movement}}
+\index{Movement@{Movement}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Movement}{Movement}}
+{\footnotesize\ttfamily \label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1e} 
+enum \mbox{\hyperlink{class_player_af0fe41c43c8344fe70ae9dd26afc8a1e}{Player\+::\+Movement}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MOVE\_LEFT@{MOVE\_LEFT}!Player@{Player}}\index{Player@{Player}!MOVE\_LEFT@{MOVE\_LEFT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eac18b3acdec4d6526d427ec194afce347}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eac18b3acdec4d6526d427ec194afce347} 
+MOVE\+\_\+\+LEFT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MOVE\_RIGHT@{MOVE\_RIGHT}!Player@{Player}}\index{Player@{Player}!MOVE\_RIGHT@{MOVE\_RIGHT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eaf923c5cb462036a828b4ae0295543991}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eaf923c5cb462036a828b4ae0295543991} 
+MOVE\+\_\+\+RIGHT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STAND\_LEFT@{STAND\_LEFT}!Player@{Player}}\index{Player@{Player}!STAND\_LEFT@{STAND\_LEFT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea9474a8b5517ba1825be84789b349bb45}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea9474a8b5517ba1825be84789b349bb45} 
+STAND\+\_\+\+LEFT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STAND\_RIGHT@{STAND\_RIGHT}!Player@{Player}}\index{Player@{Player}!STAND\_RIGHT@{STAND\_RIGHT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea69b86c31e1698324ae004b13a741e45d}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea69b86c31e1698324ae004b13a741e45d} 
+STAND\+\_\+\+RIGHT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{JUMP\_LEFT@{JUMP\_LEFT}!Player@{Player}}\index{Player@{Player}!JUMP\_LEFT@{JUMP\_LEFT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea77a2788c94aa172404b1abef7483161d}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea77a2788c94aa172404b1abef7483161d} 
+JUMP\+\_\+\+LEFT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{JUMP\_RIGHT@{JUMP\_RIGHT}!Player@{Player}}\index{Player@{Player}!JUMP\_RIGHT@{JUMP\_RIGHT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea7a822bc000e80f3fe8c0436e8e8c3cdf}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea7a822bc000e80f3fe8c0436e8e8c3cdf} 
+JUMP\+\_\+\+RIGHT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOOR\_IN@{DOOR\_IN}!Player@{Player}}\index{Player@{Player}!DOOR\_IN@{DOOR\_IN}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eacfe3e5220bf87b08f9a141b5535db3fd}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eacfe3e5220bf87b08f9a141b5535db3fd} 
+DOOR\+\_\+\+IN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOOR\_OUT@{DOOR\_OUT}!Player@{Player}}\index{Player@{Player}!DOOR\_OUT@{DOOR\_OUT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eabe81dc553a44ea478c16331bdfa09471}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eabe81dc553a44ea478c16331bdfa09471} 
+DOOR\+\_\+\+OUT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{JUMP\_RAIL\_RIGHT@{JUMP\_RAIL\_RIGHT}!Player@{Player}}\index{Player@{Player}!JUMP\_RAIL\_RIGHT@{JUMP\_RAIL\_RIGHT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea0addfa8cd0893b6dca30714b4e37ba89}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea0addfa8cd0893b6dca30714b4e37ba89} 
+JUMP\+\_\+\+RAIL\+\_\+\+RIGHT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CLIMB\_RAIL\_RIGHT@{CLIMB\_RAIL\_RIGHT}!Player@{Player}}\index{Player@{Player}!CLIMB\_RAIL\_RIGHT@{CLIMB\_RAIL\_RIGHT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea897873cd5af1c9c9e87a91c74bd35faf}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea897873cd5af1c9c9e87a91c74bd35faf} 
+CLIMB\+\_\+\+RAIL\+\_\+\+RIGHT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CLIMB\_RAIL\_LEFT@{CLIMB\_RAIL\_LEFT}!Player@{Player}}\index{Player@{Player}!CLIMB\_RAIL\_LEFT@{CLIMB\_RAIL\_LEFT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea5f9cd2d68e30cb14563e05fbe2034ba9}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea5f9cd2d68e30cb14563e05fbe2034ba9} 
+CLIMB\+\_\+\+RAIL\+\_\+\+LEFT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CLIMB\_OFF\_RAIL\_RIGHT@{CLIMB\_OFF\_RAIL\_RIGHT}!Player@{Player}}\index{Player@{Player}!CLIMB\_OFF\_RAIL\_RIGHT@{CLIMB\_OFF\_RAIL\_RIGHT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea387e1860f74e16591eae77a45c272440}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea387e1860f74e16591eae77a45c272440} 
+CLIMB\+\_\+\+OFF\+\_\+\+RAIL\+\_\+\+RIGHT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CLIMB\_OFF\_RAIL\_LEFT@{CLIMB\_OFF\_RAIL\_LEFT}!Player@{Player}}\index{Player@{Player}!CLIMB\_OFF\_RAIL\_LEFT@{CLIMB\_OFF\_RAIL\_LEFT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eacc6a17be9dea577ade786d218380cd20}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eacc6a17be9dea577ade786d218380cd20} 
+CLIMB\+\_\+\+OFF\+\_\+\+RAIL\+\_\+\+LEFT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FALL\_RIGHT@{FALL\_RIGHT}!Player@{Player}}\index{Player@{Player}!FALL\_RIGHT@{FALL\_RIGHT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea628f3052b8ac24f5e6461f2a9513273a}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea628f3052b8ac24f5e6461f2a9513273a} 
+FALL\+\_\+\+RIGHT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FALL\_LEFT@{FALL\_LEFT}!Player@{Player}}\index{Player@{Player}!FALL\_LEFT@{FALL\_LEFT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea42e996bbe2d98314bcfbf5bf0661836b}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea42e996bbe2d98314bcfbf5bf0661836b} 
+FALL\+\_\+\+LEFT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DIE\_LEFT@{DIE\_LEFT}!Player@{Player}}\index{Player@{Player}!DIE\_LEFT@{DIE\_LEFT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eac95a7aca0d37f7bec6a2e3d827428e34}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1eac95a7aca0d37f7bec6a2e3d827428e34} 
+DIE\+\_\+\+LEFT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DIE\_RIGHT@{DIE\_RIGHT}!Player@{Player}}\index{Player@{Player}!DIE\_RIGHT@{DIE\_RIGHT}}}\Hypertarget{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea9b8a450de84f6278b93762239fb0758e}\label{class_player_af0fe41c43c8344fe70ae9dd26afc8a1ea9b8a450de84f6278b93762239fb0758e} 
+DIE\+\_\+\+RIGHT&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_player_affe0cc3cb714f6deb4e62f0c0d3f1fd8}\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}}
+{\footnotesize\ttfamily \label{class_player_affe0cc3cb714f6deb4e62f0c0d3f1fd8} 
+Player\+::\+Player (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_player_a749d2c00e1fe0f5c2746f7505a58c062}\index{Player@{Player}!````~Player@{\texorpdfstring{$\sim$}{\string~}Player}}
+\index{````~Player@{\texorpdfstring{$\sim$}{\string~}Player}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Player()}{\string~Player()}}
+{\footnotesize\ttfamily \label{class_player_a749d2c00e1fe0f5c2746f7505a58c062} 
+Player\+::\texorpdfstring{$\sim$}{\string~}\+Player (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_player_a0ea3a372f28822f0d63b05288307c490}\index{Player@{Player}!collide@{collide}}
+\index{collide@{collide}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{collide()}{collide()}}
+{\footnotesize\ttfamily \label{class_player_a0ea3a372f28822f0d63b05288307c490} 
+void Player\+::collide (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*}}]{other}{, }\item[{char}]{action\+Flags}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+This method enacts all players actions when certain collisions happen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The entity that it collides with.\\
+\hline
+{\em action\+Flags} & user input\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_entity_a98794b6e2f95081552347c02291cf5aa}{Entity}}.
+
+\Hypertarget{class_player_aa45f751e7ba8afcd9894d57ef4813d50}\index{Player@{Player}!getAlive@{getAlive}}
+\index{getAlive@{getAlive}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getAlive()}{getAlive()}}
+{\footnotesize\ttfamily \label{class_player_aa45f751e7ba8afcd9894d57ef4813d50} 
+bool Player\+::get\+Alive (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+gives whether player is alive 
+
+\begin{DoxyReturn}{Returns}
+true if player is alive, false if player is dead
+\end{DoxyReturn}
+\Hypertarget{class_player_a55ab1bb46619242418ef5c7d104efe23}\index{Player@{Player}!getDirection@{getDirection}}
+\index{getDirection@{getDirection}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getDirection()}{getDirection()}}
+{\footnotesize\ttfamily \label{class_player_a55ab1bb46619242418ef5c7d104efe23} 
+bool Player\+::get\+Direction (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+gives players direction whether facing right of left 
+
+\begin{DoxyReturn}{Returns}
+returns true if player is right and false if player is facing left
+\end{DoxyReturn}
+\Hypertarget{class_player_a11f9683c14f0112dedb84f5f8a681ee1}\index{Player@{Player}!getFloor@{getFloor}}
+\index{getFloor@{getFloor}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getFloor()}{getFloor()}}
+{\footnotesize\ttfamily \label{class_player_a11f9683c14f0112dedb84f5f8a681ee1} 
+int Player\+::get\+Floor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_player_a1b242b4f761a61dba82e838c16f30581}\index{Player@{Player}!playerInDoor@{playerInDoor}}
+\index{playerInDoor@{playerInDoor}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{playerInDoor()}{playerInDoor()}}
+{\footnotesize\ttfamily \label{class_player_a1b242b4f761a61dba82e838c16f30581} 
+bool Player\+::player\+In\+Door (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+returns when player is going through the door animation 
+
+\begin{DoxyReturn}{Returns}
+true if in door, false if not
+\end{DoxyReturn}
+\Hypertarget{class_player_a1090a3692d1c2ed1d7687fc98c53d54d}\index{Player@{Player}!setPos@{setPos}}
+\index{setPos@{setPos}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{setPos()}{setPos()}}
+{\footnotesize\ttfamily \label{class_player_a1090a3692d1c2ed1d7687fc98c53d54d} 
+void Player\+::set\+Pos (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{a}{}\end{DoxyParamCaption})}
+
+
+
+sets positions of player 
+
+\Hypertarget{class_player_a5b07d2d1e1b3fa78d2e801a844cf096b}\index{Player@{Player}!update@{update}}
+\index{update@{update}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{class_player_a5b07d2d1e1b3fa78d2e801a844cf096b} 
+void Player\+::update (\begin{DoxyParamCaption}\item[{char}]{action\+Flags}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+draws player, changes frames and movement of player must be called in game 
+
+
+\begin{DoxyParams}{Parameters}
+{\em action\+Flags} & user input\\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_entity_a3d3536f56940881a07b39caa45630723}{Entity}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Entity/\+Player/\mbox{\hyperlink{_player_8h}{Player.\+h}}\item 
+src/\+Entity/\+Player/\mbox{\hyperlink{_player_8cpp}{Player.\+cpp}}\end{DoxyCompactItemize}

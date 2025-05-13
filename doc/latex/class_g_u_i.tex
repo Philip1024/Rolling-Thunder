@@ -1,0 +1,86 @@
+\doxysection{GUI Class Reference}
+\hypertarget{class_g_u_i}{}\label{class_g_u_i}\index{GUI@{GUI}}
+
+
+This class controls the \doxylink{class_g_u_i}{GUI} of the game.  
+
+
+
+
+{\ttfamily \#include $<$GUI.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_g_u_i_a0d4b46255783214e6e36c201ca09c3be}{Screen}} 
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_g_u_i_a82f139c3d5c7d38811001d683300f33c}{GUI}} (unsigned int \texorpdfstring{$\ast$}{*}credit\+Ref)
+\item 
+\mbox{\hyperlink{class_g_u_i_ac9cae2328dcb5d83bdfaeca49a2eb695}{\texorpdfstring{$\sim$}{\string~}\+GUI}} ()
+\item 
+void \mbox{\hyperlink{class_g_u_i_ab292fd9481ef6978fec3d39ff96b07b7}{draw\+GUI}} (sf\+::\+Render\+Window \&window)
+\begin{DoxyCompactList}\small\item\em Renders the current \doxylink{class_g_u_i}{GUI} based on the current\+Screen. Call in \doxylink{class_game}{Game}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_u_i_a4d52b89d06126b639febcb0530396765}{change\+Screen}} (\mbox{\hyperlink{class_g_u_i_a0d4b46255783214e6e36c201ca09c3be}{Screen}} s)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class controls the \doxylink{class_g_u_i}{GUI} of the game. 
+
+For the main menu\+: make a recording until the player presses 5, where we will switch to ingame animation. For the leaderboard, we can edit the video and replace the included leaderboard with the blue color, then add in our own during those certain frames. 
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_g_u_i_a0d4b46255783214e6e36c201ca09c3be}\index{GUI@{GUI}!Screen@{Screen}}
+\index{Screen@{Screen}!GUI@{GUI}}
+\doxysubsubsection{\texorpdfstring{Screen}{Screen}}
+{\footnotesize\ttfamily \label{class_g_u_i_a0d4b46255783214e6e36c201ca09c3be} 
+enum \mbox{\hyperlink{class_g_u_i_a0d4b46255783214e6e36c201ca09c3be}{GUI\+::\+Screen}}}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_g_u_i_a82f139c3d5c7d38811001d683300f33c}\index{GUI@{GUI}!GUI@{GUI}}
+\index{GUI@{GUI}!GUI@{GUI}}
+\doxysubsubsection{\texorpdfstring{GUI()}{GUI()}}
+{\footnotesize\ttfamily \label{class_g_u_i_a82f139c3d5c7d38811001d683300f33c} 
+GUI\+::\+GUI (\begin{DoxyParamCaption}\item[{unsigned int \texorpdfstring{$\ast$}{*}}]{credit\+Ref}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_g_u_i_ac9cae2328dcb5d83bdfaeca49a2eb695}\index{GUI@{GUI}!````~GUI@{\texorpdfstring{$\sim$}{\string~}GUI}}
+\index{````~GUI@{\texorpdfstring{$\sim$}{\string~}GUI}!GUI@{GUI}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GUI()}{\string~GUI()}}
+{\footnotesize\ttfamily \label{class_g_u_i_ac9cae2328dcb5d83bdfaeca49a2eb695} 
+GUI\+::\texorpdfstring{$\sim$}{\string~}\+GUI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_g_u_i_a4d52b89d06126b639febcb0530396765}\index{GUI@{GUI}!changeScreen@{changeScreen}}
+\index{changeScreen@{changeScreen}!GUI@{GUI}}
+\doxysubsubsection{\texorpdfstring{changeScreen()}{changeScreen()}}
+{\footnotesize\ttfamily \label{class_g_u_i_a4d52b89d06126b639febcb0530396765} 
+void GUI\+::change\+Screen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_g_u_i_a0d4b46255783214e6e36c201ca09c3be}{Screen}}}]{s}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_g_u_i_ab292fd9481ef6978fec3d39ff96b07b7}\index{GUI@{GUI}!drawGUI@{drawGUI}}
+\index{drawGUI@{drawGUI}!GUI@{GUI}}
+\doxysubsubsection{\texorpdfstring{drawGUI()}{drawGUI()}}
+{\footnotesize\ttfamily \label{class_g_u_i_ab292fd9481ef6978fec3d39ff96b07b7} 
+void GUI\+::draw\+GUI (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{window}{}\end{DoxyParamCaption})}
+
+
+
+Renders the current \doxylink{class_g_u_i}{GUI} based on the current\+Screen. Call in \doxylink{class_game}{Game}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em window} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+UI/\+UIScreen/\mbox{\hyperlink{_g_u_i_8h}{GUI.\+h}}\item 
+src/\+UI/\+UIScreen/\mbox{\hyperlink{_g_u_i_8cpp}{GUI.\+cpp}}\end{DoxyCompactItemize}

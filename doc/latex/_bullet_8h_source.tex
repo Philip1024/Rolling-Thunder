@@ -1,0 +1,27 @@
+\doxysection{Bullet.\+h}
+\hypertarget{_bullet_8h_source}{}\label{_bullet_8h_source}\index{src/Entity/Bullet/Bullet.h@{src/Entity/Bullet/Bullet.h}}
+\mbox{\hyperlink{_bullet_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include<SFML/Graphics.hpp>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_entity_8h}{../Entity.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_bullet_a0ba664b0efd9de995fef01afd06672ea}{Bullet}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_entity_a5c72361783213573732646e0eccc6bf9}{Entity}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bullet_a687a1d7f375b4e572b058c735fdedfd9}{collide}}(\mbox{\hyperlink{class_entity_a5c72361783213573732646e0eccc6bf9}{Entity}}*\ other,\ \textcolor{keywordtype}{char}\ actionFlags);}
+\DoxyCodeLine{00010\ \ \ \ \ sf::Vector2f\ \mbox{\hyperlink{class_bullet_aa0163d91e28a47cd89cfdda4923bd30a}{getPos}}()\ \{\ \textcolor{keywordflow}{return}\ sf::Vector2f(xPos,\ yPos);\ \}}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_bullet_a13c2353ce9195c7c1042414c8baf9368}{team}};}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bullet_a26a2bd273b7ac2b11615a4e2bc79c08b}{update}}(\textcolor{keywordtype}{char}\ actionFlags);}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_bullet_a6b43bc849fb0664485971c2bf440ad76}{direction}};}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{class_bullet_a0ba664b0efd9de995fef01afd06672ea}{Bullet}}(\textcolor{keywordtype}{bool}\ bTeam,\ \textcolor{keywordtype}{bool}\ bDirection,\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y);}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{class_animation_data_1_1_section_data}{AnimationData::SectionData}}*\ \mbox{\hyperlink{class_bullet_a81c84fb32fb56cf4d2d3fea8657d8591}{bulletRight}},\ *\ \mbox{\hyperlink{class_bullet_a208a847fc126aa5a21fe75c0e27f1b0f}{bulletLeft}};}
+\DoxyCodeLine{00016\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{float}\ xPos,\ yPos;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ fired;}
+\DoxyCodeLine{00019\ \ \ \ \ sf::Clock\ pause;}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+
+\end{DoxyCode}

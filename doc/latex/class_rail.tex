@@ -1,0 +1,188 @@
+\doxysection{Rail Class Reference}
+\hypertarget{class_rail}{}\label{class_rail}\index{Rail@{Rail}}
+
+
+{\ttfamily \#include $<$Rail.\+h$>$}
+
+Inheritance diagram for Rail\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_rail}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_rail_a47afaa33c97f5e89a4f0f5bc57c981a8}{Rail}} (int x, int y)
+\item 
+\mbox{\hyperlink{class_rail_a0d70742edd3f63db3f26f46fd1968e61}{\texorpdfstring{$\sim$}{\string~}\+Rail}} ()
+\item 
+void \mbox{\hyperlink{class_rail_a1ba392b2682f3fa48584375764f4ac47}{update}} (char action\+Flags)
+\item 
+void \mbox{\hyperlink{class_rail_a43ca2718216205d0f399f465d904d40e}{change\+Opacity}} (bool visible)
+\begin{DoxyCompactList}\small\item\em This makes the rail change from visible to invisible. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_rail_a3b9393414d4781af07059a61372b5062}{set\+Pos}} (sf\+::\+Vector2f a)
+\begin{DoxyCompactList}\small\item\em This sets the pos of the rail. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_rail_aabfc047d99b69b73ae16f01c0f5b1e3a}{get\+Floor}} ()
+\item 
+float \mbox{\hyperlink{class_rail_ad472227414df97f2fef420b6de4cfb80}{get\+Front}} ()
+\begin{DoxyCompactList}\small\item\em This gets the front of the rails pos. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_rail_a1028540349fd95fada39b4f8d8b29004}{get\+Back}} ()
+\begin{DoxyCompactList}\small\item\em This returns the back of the rails pos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_entity_a5c72361783213573732646e0eccc6bf9}{Entity}} (sf\+::\+Texture \texorpdfstring{$\ast$}{*}init\+Texture)
+\item 
+virtual void \mbox{\hyperlink{class_entity_a98794b6e2f95081552347c02291cf5aa}{collide}} (\mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*}other, char action\+Flags)
+\item 
+bool \mbox{\hyperlink{class_entity_ae02949fde1d01ce7010a6e5bb8646154}{get\+Alive}} ()
+\item 
+const sf\+::\+Sprite \& \mbox{\hyperlink{class_entity_aece77e1e86fae668e67a57ee7ccce265}{get\+Sprite}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_aa1a1dec571e1876664974a9b3e788444}{get\+Entities}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_ac69ac4994717a75cd3f0982ad4dc26d2}{get\+Doors}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_a761b1ca15837297df03ff0323f1d7c99}{get\+Rails}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_a41c96f9cf0a18c4f824dfea38c1c8fa7}{get\+Bullets}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_ab6e3ebb92ac824244fba4fcaacb7d794}{get\+Enemys}} ()
+\item 
+static void \mbox{\hyperlink{class_entity_a220100853ede481ca8e83879be64e633}{set\+Window}} (sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*}w)
+\item 
+static void \mbox{\hyperlink{class_entity_aafd5fa9c60bb8a9100fae702139245e7}{set\+View}} (sf\+::\+View \texorpdfstring{$\ast$}{*}v)
+\item 
+static void \mbox{\hyperlink{class_entity_a94f711e3514c829207ecfec8eda0fd7c}{set\+Current\+Tick}} (unsigned int \texorpdfstring{$\ast$}{*}t)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a5171e14419230a1261f05431df091e12}{doors}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a450dbcb7e99e0f857d6ad0a06b4bfc43}{rails}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a522650da94f36892a5a55ed07d16419c}{bullets}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a268f0453cc796825d6d94ef664551a45}{enemys}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned int \& \mbox{\hyperlink{class_entity_a3605933621ee3250859c1c57d16ebd13}{get\+Current\+Tick}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Sprite \mbox{\hyperlink{class_entity_a48ef4ab143b8d0211877c9f6be42e824}{sprite}}
+\item 
+bool \mbox{\hyperlink{class_entity_a0d09a7e175d9dcfbfb359e5f74f2e692}{alive}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+static sf\+::\+View \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_entity_a853397654e99a2e072f24929fa849bcb}{view}} = nullptr
+\item 
+static sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_entity_a0dc3ba88a6cfbda3b9c6ba04abcdc9aa}{window}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_rail_a47afaa33c97f5e89a4f0f5bc57c981a8}\index{Rail@{Rail}!Rail@{Rail}}
+\index{Rail@{Rail}!Rail@{Rail}}
+\doxysubsubsection{\texorpdfstring{Rail()}{Rail()}}
+{\footnotesize\ttfamily \label{class_rail_a47afaa33c97f5e89a4f0f5bc57c981a8} 
+Rail\+::\+Rail (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_rail_a0d70742edd3f63db3f26f46fd1968e61}\index{Rail@{Rail}!````~Rail@{\texorpdfstring{$\sim$}{\string~}Rail}}
+\index{````~Rail@{\texorpdfstring{$\sim$}{\string~}Rail}!Rail@{Rail}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Rail()}{\string~Rail()}}
+{\footnotesize\ttfamily \label{class_rail_a0d70742edd3f63db3f26f46fd1968e61} 
+Rail\+::\texorpdfstring{$\sim$}{\string~}\+Rail (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_rail_a43ca2718216205d0f399f465d904d40e}\index{Rail@{Rail}!changeOpacity@{changeOpacity}}
+\index{changeOpacity@{changeOpacity}!Rail@{Rail}}
+\doxysubsubsection{\texorpdfstring{changeOpacity()}{changeOpacity()}}
+{\footnotesize\ttfamily \label{class_rail_a43ca2718216205d0f399f465d904d40e} 
+void Rail\+::change\+Opacity (\begin{DoxyParamCaption}\item[{bool}]{visible}{}\end{DoxyParamCaption})}
+
+
+
+This makes the rail change from visible to invisible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em visible} & this determines what to make the rail\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_rail_a1028540349fd95fada39b4f8d8b29004}\index{Rail@{Rail}!getBack@{getBack}}
+\index{getBack@{getBack}!Rail@{Rail}}
+\doxysubsubsection{\texorpdfstring{getBack()}{getBack()}}
+{\footnotesize\ttfamily \label{class_rail_a1028540349fd95fada39b4f8d8b29004} 
+float Rail\+::get\+Back (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+This returns the back of the rails pos. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_rail_aabfc047d99b69b73ae16f01c0f5b1e3a}\index{Rail@{Rail}!getFloor@{getFloor}}
+\index{getFloor@{getFloor}!Rail@{Rail}}
+\doxysubsubsection{\texorpdfstring{getFloor()}{getFloor()}}
+{\footnotesize\ttfamily \label{class_rail_aabfc047d99b69b73ae16f01c0f5b1e3a} 
+int Rail\+::get\+Floor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_rail_ad472227414df97f2fef420b6de4cfb80}\index{Rail@{Rail}!getFront@{getFront}}
+\index{getFront@{getFront}!Rail@{Rail}}
+\doxysubsubsection{\texorpdfstring{getFront()}{getFront()}}
+{\footnotesize\ttfamily \label{class_rail_ad472227414df97f2fef420b6de4cfb80} 
+float Rail\+::get\+Front (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+This gets the front of the rails pos. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{class_rail_a3b9393414d4781af07059a61372b5062}\index{Rail@{Rail}!setPos@{setPos}}
+\index{setPos@{setPos}!Rail@{Rail}}
+\doxysubsubsection{\texorpdfstring{setPos()}{setPos()}}
+{\footnotesize\ttfamily \label{class_rail_a3b9393414d4781af07059a61372b5062} 
+void Rail\+::set\+Pos (\begin{DoxyParamCaption}\item[{sf\+::\+Vector2f}]{a}{}\end{DoxyParamCaption})}
+
+
+
+This sets the pos of the rail. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & a is the pos vector\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_rail_a1ba392b2682f3fa48584375764f4ac47}\index{Rail@{Rail}!update@{update}}
+\index{update@{update}!Rail@{Rail}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{class_rail_a1ba392b2682f3fa48584375764f4ac47} 
+void Rail\+::update (\begin{DoxyParamCaption}\item[{char}]{action\+Flags}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_entity_a3d3536f56940881a07b39caa45630723}{Entity}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Entity/\+Raill/\mbox{\hyperlink{_rail_8h}{Rail.\+h}}\item 
+src/\+Entity/\+Raill/\mbox{\hyperlink{_rail_8cpp}{Rail.\+cpp}}\end{DoxyCompactItemize}

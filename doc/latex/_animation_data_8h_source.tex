@@ -1,0 +1,104 @@
+\doxysection{Animation\+Data.\+h}
+\hypertarget{_animation_data_8h_source}{}\label{_animation_data_8h_source}\index{src/SpriteData/AnimationData.h@{src/SpriteData/AnimationData.h}}
+\mbox{\hyperlink{_animation_data_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_animation_data}{AnimationData}}}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_animation_data_ae2cb4b01be9601997a2b38a40ab1c86f}{TextureName}};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_animation_data_1_1_section}{Section}};}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_animation_data_1_1_section_data}{SectionData}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{comment}{//\ EXPECTED\ TO\ BE\ CALLED}}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_animation_data_a6189bda5b317bae5c25281ff77a359b6}{load}}();}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_animation_data_ac20a5454cc22cf480f1341ac7d398195}{unload}}();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_animation_data_1_1_section}{Section}}*\ \mbox{\hyperlink{class_animation_data_ad6d71a12d4da3f03d6e8c5dd202e3d09}{getSection}}(std::string\ sectionName);}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{static}\ sf::Texture*\ \mbox{\hyperlink{class_animation_data_a8614abcf75352b0c44622d2c8efb3f36}{getTexture}}(\mbox{\hyperlink{class_animation_data_ae2cb4b01be9601997a2b38a40ab1c86f}{TextureName}}\ name)\ \{\ \textcolor{keywordflow}{return}\ textureMap[name];\ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_animation_data_a87adf30c8b61e80aa4f9b076215c00f2}{reloadTextures}}();}
+\DoxyCodeLine{00039\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ toLowerCase(std::string\ i);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{static}\ std::unordered\_map<std::string,\ Section*>\ sectionMap;}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{static}\ std::unordered\_map<TextureName,\ sf::Texture*>\ textureMap;}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_animation_data_ae2cb4b01be9601997a2b38a40ab1c86f}{AnimationData::TextureName}}}
+\DoxyCodeLine{00047\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{_animation_data_8h_a5ce368bdfc444a87fef6c208b4101571}{ENEMY}},\textcolor{comment}{//remake}}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{_animation_data_8h_a9a416f6ca476f1885ea996c34ecff7b5}{ENEMY2}},\textcolor{comment}{//original\ enemy\ sprite\ sheet,\ used\ for\ death\ animation}}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{_animation_data_8h_ae23b456478c7d5c64bed280e9beb8418}{ALBATROSS}},}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{_animation_data_8h_af5a83949bd019169467f675ef8c60ef9}{DOOR}},}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{_animation_data_8h_a4a4a22e70e144276de77028cab227c0c}{RAIL}},}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{_animation_data_8h_a4f5f01d53acb849896daaed9fdbae39d}{BULLET}},}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{_animation_data_8h_a737d2125d2c2f478c9f84441347760c6}{NAMCO}},}
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{_animation_data_8h_a4aa71180778b711338785695df5d7c52}{SIZE}}}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{comment}{//\ interior\ class\ to\ AnimationData}}
+\DoxyCodeLine{00059\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_animation_data_1_1_section}{AnimationData::Section}}}
+\DoxyCodeLine{00060\ \{}
+\DoxyCodeLine{00061\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{class_animation_data_1_1_section_a23074626af04790912d168faa4ef6a0b}{Section}}(sf::Texture*\ texture,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ horizontalFrames,}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ verticalFrames,\ sf::Vector2u\ topLeft,\ sf::Vector2u\ bottomRight,\ \textcolor{keywordtype}{bool}\ useSize\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ :\ texture(texture),\ horizontalFrames(horizontalFrames),}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ verticalFrames(verticalFrames)}
+\DoxyCodeLine{00074\ \ \ \ \ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ sf::Vector2u\ end\ =\ useSize\ ?\ sf::Vector2u(topLeft.x\ +\ bottomRight.x\ *\ horizontalFrames,\ topLeft.y\ +\ bottomRight.y\ *\ verticalFrames)\ :\ bottomRight;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ start\ =\ topLeft;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ this-\/>end\ =\ end;}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ xDiff\ =\ end.x\ -\/\ topLeft.x,\ yDiff\ =\ end.y\ -\/\ topLeft.y;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ xSize\ =\ xDiff\ /\ horizontalFrames;}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ ySize\ =\ yDiff\ /\ verticalFrames;}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ nextFrameFunc\ =\ [](\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\&\ curFrame,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ maxFrames)\ -\/>\ \textcolor{keywordtype}{void}\ \{\ \textcolor{comment}{//\ LAMBDA}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ curFrame++;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ curFrame\ \%=\ maxFrames;\ \textcolor{comment}{//\ if\ bigger,\ reset\ to\ 0}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{comment}{//\ this\ updates\ the\ function\ called\ in\ nextFrame\ in\ the\ SectionData\ for\ an\ Entity.\ By\ default\ this\ simply\ does\ curFrame++\ (and\ checks\ bounds)}}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_animation_data_1_1_section_af8386f2e521f4a0cfc8b382c92e951f6}{setNextFrameFunction}}(\textcolor{keywordtype}{void}\ (*func)(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\&,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}))\ \{\ this-\/>nextFrameFunc\ =\ func;\ \}}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{class_animation_data_1_1_section_a3c9347712bf8b693502e65e86a3db5bb}{getNextFrameFunction}}()\ \{\ \textcolor{keywordflow}{return}\ nextFrameFunc;\ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//\ the\ one\ with\ one\ int\ gets\ the\ frame\ from\ top\ left\ to\ bottom\ right}}
+\DoxyCodeLine{00092\ \ \ \ \ sf::IntRect\ \mbox{\hyperlink{class_animation_data_1_1_section_aff2f8a833f5ad5d6b080c14138ab6774}{getFrame}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ c)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{comment}{//\ this\ getFrame\ gets\ the\ frame\ with\ x\ indicating\ the\ left\ to\ right\ position,\ and\ the\ y\ indicating\ the\ top\ to\ bottom\ position.}}
+\DoxyCodeLine{00094\ \ \ \ \ sf::IntRect\ \mbox{\hyperlink{class_animation_data_1_1_section_aff2f8a833f5ad5d6b080c14138ab6774}{getFrame}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ y)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_animation_data_1_1_section_acd2389d3f99684dba46a2e3983e7c613}{getMaxFramesHorizontal}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ horizontalFrames;\ \}}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_animation_data_1_1_section_a2d350a11e14706f5c8c308ec678a45a1}{getMaxFramesVertical}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ verticalFrames;\ \}}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_animation_data_1_1_section_a2cfc0a8450ceb647ed61ee73f9ccfc8f}{getMaxFrames}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ horizontalFrames*verticalFrames;\ \}}
+\DoxyCodeLine{00098\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00099\ \ \ \ \ sf::Texture*\ texture;}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ horizontalFrames,\ verticalFrames;}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ xSize,\ ySize;}
+\DoxyCodeLine{00102\ \ \ \ \ sf::Vector2u\ start,\ end;}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{comment}{//\ this\ is\ a\ function\ pointer.\ when\ called,\ curFrame\ and\ maxFrames\ from\ this\ object\ will\ be\ passed\ in.}}
+\DoxyCodeLine{00105\ \ \ \ \ void\ (*nextFrameFunc)(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\&\ curFrame,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ maxFrames);}
+\DoxyCodeLine{00106\ \};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{comment}{//\ what\ this\ does:\ track\ the\ current\ frame\ for\ the\ Section\ an\ Entity\ uses.\ This\ is\ to\ allow\ multiple\ Entities\ to\ use\ the\ same\ section.}}
+\DoxyCodeLine{00110\ \textcolor{comment}{//\ Entities\ need\ to\ track\ however\ many\ SectionDatas\ as\ they\ have\ animations,\ through\ which\ they\ can\ request\ the\ nextFrame\ for\ each\ sectiondata.}}
+\DoxyCodeLine{00111\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_animation_data_1_1_section_data}{AnimationData::SectionData}}}
+\DoxyCodeLine{00112\ \{}
+\DoxyCodeLine{00113\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00114\ \ \ \ \ \mbox{\hyperlink{class_animation_data_1_1_section_data_a4dec42d194e62e0871f72e1559d55a65}{SectionData}}(\mbox{\hyperlink{class_animation_data_1_1_section}{Section}}*\ linkedSection)}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ :\ linkedSection(linkedSection),\ curFrame(0)}
+\DoxyCodeLine{00116\ \ \ \ \ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00118\ \ \ \ \ \}}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{comment}{//\ this\ calls\ the\ nextFrameFunc\ then\ returns\ getFrame(curFrame);}}
+\DoxyCodeLine{00120\ \ \ \ \ sf::IntRect\ \mbox{\hyperlink{class_animation_data_1_1_section_data_a71df81d1587df4a2a33187a6a9c8e03a}{nextFrame}}();}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_animation_data_1_1_section_data_ac439dd8129cfc5a477ead654290259ef}{getCurFrame}}()\ \{\ \textcolor{keywordflow}{return}\ curFrame;\ \}}
+\DoxyCodeLine{00123\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{class_animation_data_1_1_section}{Section}}*\ linkedSection;}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ curFrame;}
+\DoxyCodeLine{00126\ \};}
+
+\end{DoxyCode}

@@ -20,8 +20,8 @@ public:
 	Game();
 	~Game();
 	void run();
-	
-	
+
+
 private:
 	void genLevel();
 	void isColliding(char);
@@ -74,10 +74,9 @@ private:
 	std::vector<Entity*>& enemies = Entity::getEnemys();
 	std::vector<Entity*>& rails = Entity::getRails();
 	std::vector<Entity*>& doors = Entity::getDoors();
-	
+
 
 	std::vector<sf::RectangleShape> groundDebugSprites;
 
 	GUI gui;
 };
-

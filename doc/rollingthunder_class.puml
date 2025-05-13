@@ -1,0 +1,438 @@
+@startuml
+class "AnimationData" as C_0017942800908196260189
+class C_0017942800908196260189 {
+{static} +getSection(std::string sectionName) : Section *
+{static} +getTexture(TextureName name) : sf::Texture *
+{static} +load() : void
+{static} +reloadTextures() : void
+{static} -toLowerCase(std::string i) : std::string
+{static} +unload() : void
+__
+{static} -sectionMap : std::unordered_map<std::string,Section *>
+{static} -textureMap : std::unordered_map<TextureName,sf::Texture *>
+}
+enum "AnimationData::TextureName" as C_0016684968208013857937
+enum C_0016684968208013857937 {
+ENEMY
+ENEMY2
+ALBATROSS
+DOOR
+RAIL
+BULLET
+NAMCO
+SIZE
+}
+class "AnimationData::Section" as C_0008111175260690871118
+class C_0008111175260690871118 {
++Section(sf::Texture * texture, unsigned int horizontalFrames, unsigned int verticalFrames, sf::Vector2u topLeft, sf::Vector2u bottomRight, bool useSize = false) : void
++getFrame(unsigned int c) const : sf::IntRect
++getFrame(unsigned int x, unsigned int y) const : sf::IntRect
++getMaxFrames() const : unsigned int
++getMaxFramesHorizontal() const : unsigned int
++getMaxFramesVertical() const : unsigned int
++getNextFrameFunction() : void (*)(unsigned int &,unsigned int)
++setNextFrameFunction(void (*)(unsigned int &,unsigned int) func) : void
+__
+-end : sf::Vector2u
+-horizontalFrames : unsigned int
+-nextFrameFunc : void (*)(unsigned int &,unsigned int)
+-start : sf::Vector2u
+-texture : sf::Texture *
+-verticalFrames : unsigned int
+-xSize : unsigned int
+-ySize : unsigned int
+}
+class "AnimationData::SectionData" as C_0009280517445389401838
+class C_0009280517445389401838 {
++SectionData(Section * linkedSection) : void
++getCurFrame() : unsigned int
++nextFrame() : sf::IntRect
+__
+-curFrame : unsigned int
+-linkedSection : Section *
+}
+class "Entity" as C_0008465162159729457626
+class C_0008465162159729457626 {
++Entity(sf::Texture * initTexture) : void
+..
++collide(Entity * other, char actionFlags) : void
++getAlive() : bool
+{static} +getBullets() : std::vector<Entity *> &
+{static} #getCurrentTick() : unsigned int &
+{static} +getDoors() : std::vector<Entity *> &
+{static} +getEnemys() : std::vector<Entity *> &
+{static} +getEntities() : std::vector<Entity *> &
+{static} +getRails() : std::vector<Entity *> &
++getSprite() const : const sf::Sprite &
+{static} +setCurrentTick(unsigned int * t) : void
+{static} +setView(sf::View * v) : void
+{static} +setWindow(sf::RenderWindow * w) : void
++update(char actionFlags) : void
+__
+#alive : bool
+{static} +bullets : std::vector<Entity *>
+{static} -currentTick : unsigned int *
+{static} +doors : std::vector<Entity *>
+{static} +enemys : std::vector<Entity *>
+{static} -entities : std::vector<Entity *>
+{static} +rails : std::vector<Entity *>
+#sprite : sf::Sprite
+{static} #view : sf::View *
+{static} #window : sf::RenderWindow *
+}
+class "Door" as C_0000251347754139051721
+class C_0000251347754139051721 {
++Door(int x, int y) : void
++~Door() : void
+..
++changeOpacity(bool visible) : void
+-close() : bool
++getBack() : float
++getClosing() : bool
++getFront() : float
++getOpen() : bool
++getStop() : bool
+-open() : void
++setOpening(bool) : void
++setPos(sf::Vector2f) : void
++update(char actionFlags, float x, float y, bool *, sf::Clock *) : void
+__
++animationFrame : int
+-clock : sf::Clock
+-closed : bool
+-closing : bool
+-door : sf::RectangleShape
+-doorClose : AnimationData::SectionData *
+-doorFrameCount : int
+-doorOpen : AnimationData::SectionData *
+-doorOpened : bool
+-enemyClock : sf::Clock
+-enemySpawnCount : int
+-enemySpawned : bool
+-opened : bool
+-opening : bool
+-pause : int
+-spawnCount : int
+-spawnOnce : bool
+-startOpen : bool
+-stop : bool
+-topFloor : bool
++xPos : int
++yPos : int
+}
+class "Rail" as C_0010973865105248471193
+class C_0010973865105248471193 {
++Rail(int x, int y) : void
++~Rail() : void
+..
++changeOpacity(bool visible) : void
++getBack() : float
++getFloor() : int
++getFront() : float
++setPos(sf::Vector2f a) : void
++update(char actionFlags) : void
+__
+-floor : int
+-rail : AnimationData::SectionData *
+-xPos : int
+-yPos : int
+}
+class "Player" as C_0003692324345213718176
+class C_0003692324345213718176 {
++Player() : void
++~Player() : void
+..
++collide(Entity * other, char ActionFlags) : void
++getAlive() : bool
++getDirection() : bool
++getFloor() : int
+-jump(double angle, std::vector<sf::FloatRect> *) : bool
++playerInDoor() : bool
++setPos(sf::Vector2f) : void
++update(char actionFlags) : void
+__
+-PI : const double
+-activeJump : bool
+-activeLeftJump : bool
+-activeRightJump : bool
+-alive : bool
+-angle : double
+-animationMap : std::unordered_map<Movement,AnimationData::SectionData *>
+-centerGroundCollision : sf::FloatRect
+-clock : sf::Clock
+-curMove : Movement
+-doorCount : int
+-doorTime : sf::Clock
+-dropping : bool
+-droppingDown : bool
+-dying : bool
+-dyingCount : int
+-enterDoor : bool
+-exitDoor : bool
+-exitOnce : bool
+-faceRight : bool
+-falling : bool
+-floor : int
+-g : double
+-ground1 : std::vector<sf::FloatRect>
+-ground2 : std::vector<sf::FloatRect>
+-inDoor : bool
+-invincibility : bool
+-invincibilityTime : sf::Clock
+-jumpFrame : int
+-jumpLeft : AnimationData::SectionData *
+-jumpRight : AnimationData::SectionData *
+-jumpingOffRail : bool
+-jumpingOffRailCount : int
+-jumpingRail : bool
+-jumpingRailCount : int
+-lives : int
+-moveLeft : AnimationData::SectionData *
+-moveRight : AnimationData::SectionData *
+-playerTicks : int
+-shootLeft : AnimationData::SectionData *
+-shootRight : AnimationData::SectionData *
+-shootTime : sf::Clock
+-shooting : bool
+-shootingFrame : int
+-shouldFall : bool
+-t : double
+-velo : double
+-walkInDoor : AnimationData::SectionData *
+-walkOutDoor : AnimationData::SectionData *
+-xGlobal : float
+-xMov : float
+-xPos : float
+-xPosition : float
+-xSize : float
+-yGlobal : float
+-yMov : float
+-yPos : float
+-yPosition : float
+-ySize : float
+}
+enum "Player::Movement" as C_0014507532561944560543
+enum C_0014507532561944560543 {
+MOVE_LEFT
+MOVE_RIGHT
+STAND_LEFT
+STAND_RIGHT
+JUMP_LEFT
+JUMP_RIGHT
+DOOR_IN
+DOOR_OUT
+JUMP_RAIL_RIGHT
+CLIMB_RAIL_RIGHT
+CLIMB_RAIL_LEFT
+CLIMB_OFF_RAIL_RIGHT
+CLIMB_OFF_RAIL_LEFT
+FALL_RIGHT
+FALL_LEFT
+DIE_LEFT
+DIE_RIGHT
+}
+class "Enemy" as C_0018162179630194765227
+class C_0018162179630194765227 {
++Enemy(sf::Vector2f pos, bool spawnInDoor) : void
++~Enemy() : void
+..
++collide(Entity * other) : void
++getAlive() : bool
++getDying() : bool
++getSpawn() : bool
++update(char actionFlags) : void
++update(Player * pl) : void
+__
+-alive : bool
+-animationMap : std::unordered_map<Movement,AnimationData::SectionData *>
+-curMove : Movement
+-dying : bool
+-dyingCount : int
+-health : int
+-lastMove : Movement
+-moveTicks : int
+-spawnCount : int
+-spawnDoor : bool
+-vec : std::vector<sf::FloatRect> *
+}
+enum "Enemy::Movement" as C_0016958765840510961428
+enum C_0016958765840510961428 {
+WALK_LEFT
+WALK_RIGHT
+HIT_LEFT
+HIT_RIGHT
+DIE_LEFT
+DIE_RIGHT
+MOUNT_LEFT
+MOUNT_RIGHT
+SHOOT_LEFT
+SHOOT_RIGHT
+DOOR_WALK_OUT
+DOOR_WALK_IN
+IDLE_LEFT
+IDLE_RIGHT
+IDLE_CROUCH
+PUNCH_RIGHT
+PUNCH_LEFT
+WALK_OUT
+}
+class "GameText" as C_0014683785461997098944
+class C_0014683785461997098944 {
++GameText(std::string text) : void
+__
+{static} -gameFont : sf::Font
+}
+class "GUI" as C_0016912501051401539392
+class C_0016912501051401539392 {
++GUI(unsigned int * creditRef) : void
++~GUI() : void
+..
+-QSP(std::string string, sf::Vector2f vector) : void
++changeScreen(Screen s) : void
++drawGUI(sf::RenderWindow & window) : void
+{static} -frameNumber(unsigned int i) : std::string
+-nextIntroFrame() : void
+-setCenterOrigin(std::string text) : void
+__
+-background : sf::Sprite
+-creditRef : unsigned int *
+-currentIntroFrame : unsigned int
+-currentScreen : Screen
+-introFrame : sf::Texture
+-redNamcoSymbol : sf::Sprite
+-textMap : std::unordered_map<std::string,GameText *>
+}
+enum "GUI::Screen" as C_0006046288613793423138
+enum C_0006046288613793423138 {
+MAIN_MENU
+SELECT_1
+SELECT_12
+INGAME
+START_TIMER
+GAME_OVER
+CONTINUE_TIMER
+}
+class "Game" as C_0013071880978633431303
+class C_0013071880978633431303 {
++Game() : void
++~Game() : void
+..
+-genLevel() : void
+-isColliding(char) : void
++run() : void
+-runGameplayBehavior(char actionFlags) : void
+-runStartBehavior() : void
+__
+-allowEnemyDoorSpawn : bool *
+-allowEnemySpawnTemp : bool
+-bullets : std::vector<Entity *> &
+-count : int
+-credits : unsigned int
+-crouching : bool
+-currentTick : unsigned int
+-doors : std::vector<Entity *> &
+-enemies : std::vector<Entity *> &
+-enemySpawnClock : sf::Clock *
+-enemySpawnClockTemp : sf::Clock
+-gameOver : bool
+-gameState : GameState
+-ground : std::vector<sf::FloatRect>
+-ground2 : std::vector<sf::FloatRect>
+-groundDebugSprites : std::vector<sf::RectangleShape>
+-gui : GUI
+-guiView : sf::View
+-jumping : bool
+-mainView : sf::View
+-movingLeft : bool
+-movingRight : bool
+-player : Player *
+-rails : std::vector<Entity *> &
+-scale : const float
+-shooting : bool
+-stage1 : sf::Texture
+-stage1Sprite : sf::Sprite
+-stage2 : sf::Texture
+-stage3 : sf::Texture
+-stage4 : sf::Texture
+-stage5 : sf::Texture
+-wPressed : bool
+-window : sf::RenderWindow
+}
+enum "Game::GameState" as C_0011445343293385620672
+enum C_0011445343293385620672 {
+START
+GAMEPLAY
+LOSE
+WIN
+}
+class "VkAllocationCallbacks" as C_0005803364313622802684
+class C_0005803364313622802684 {
+__
+}
+class "VkSurfaceKHR_T" as C_0005847180061233807991
+class C_0005847180061233807991 {
+__
+}
+class "VkInstance_T" as C_0008330084255853699818
+class C_0008330084255853699818 {
+__
+}
+class "HWND__" as C_0011662571118906908976
+class C_0011662571118906908976 {
+__
+}
+C_0017942800908196260189 --> C_0008111175260690871118 : -sectionMap
+C_0017942800908196260189 --> C_0016684968208013857937 : -textureMap
+C_0016684968208013857937 --+ C_0017942800908196260189
+C_0008111175260690871118 --+ C_0017942800908196260189
+C_0009280517445389401838 --+ C_0017942800908196260189
+C_0009280517445389401838 --> C_0008111175260690871118 : -linkedSection
+C_0008465162159729457626 --> C_0008465162159729457626 : +doors
+C_0008465162159729457626 --> C_0008465162159729457626 : +rails
+C_0008465162159729457626 --> C_0008465162159729457626 : +bullets
+C_0008465162159729457626 --> C_0008465162159729457626 : +enemys
+C_0008465162159729457626 --> C_0008465162159729457626 : -entities
+C_0000251347754139051721 --> C_0009280517445389401838 : -doorOpen
+C_0000251347754139051721 --> C_0009280517445389401838 : -doorClose
+C_0008465162159729457626 <|-- C_0000251347754139051721
+
+C_0010973865105248471193 --> C_0009280517445389401838 : -rail
+C_0008465162159729457626 <|-- C_0010973865105248471193
+
+C_0003692324345213718176 o-- C_0014507532561944560543 : -curMove
+C_0003692324345213718176 o-- C_0014507532561944560543 : -animationMap
+C_0003692324345213718176 --> C_0009280517445389401838 : -animationMap
+C_0003692324345213718176 --> C_0009280517445389401838 : -moveLeft
+C_0003692324345213718176 --> C_0009280517445389401838 : -moveRight
+C_0003692324345213718176 --> C_0009280517445389401838 : -jumpLeft
+C_0003692324345213718176 --> C_0009280517445389401838 : -jumpRight
+C_0003692324345213718176 --> C_0009280517445389401838 : -walkInDoor
+C_0003692324345213718176 --> C_0009280517445389401838 : -walkOutDoor
+C_0003692324345213718176 --> C_0009280517445389401838 : -shootRight
+C_0003692324345213718176 --> C_0009280517445389401838 : -shootLeft
+C_0008465162159729457626 <|-- C_0003692324345213718176
+
+C_0014507532561944560543 --+ C_0003692324345213718176
+C_0018162179630194765227 ..> C_0003692324345213718176
+C_0018162179630194765227 o-- C_0016958765840510961428 : -curMove
+C_0018162179630194765227 o-- C_0016958765840510961428 : -lastMove
+C_0018162179630194765227 o-- C_0016958765840510961428 : -animationMap
+C_0018162179630194765227 --> C_0009280517445389401838 : -animationMap
+C_0008465162159729457626 <|-- C_0018162179630194765227
+
+C_0016958765840510961428 --+ C_0018162179630194765227
+C_0016912501051401539392 o-- C_0006046288613793423138 : -currentScreen
+C_0016912501051401539392 --> C_0014683785461997098944 : -textMap
+C_0006046288613793423138 --+ C_0016912501051401539392
+C_0013071880978633431303 --> C_0003692324345213718176 : -player
+C_0013071880978633431303 o-- C_0011445343293385620672 : -gameState
+C_0013071880978633431303 --> C_0008465162159729457626 : -bullets
+C_0013071880978633431303 --> C_0008465162159729457626 : -enemies
+C_0013071880978633431303 --> C_0008465162159729457626 : -rails
+C_0013071880978633431303 --> C_0008465162159729457626 : -doors
+C_0013071880978633431303 o-- C_0016912501051401539392 : -gui
+C_0011445343293385620672 --+ C_0013071880978633431303
+
+'Generated with clang-uml, version 0.5.6
+'LLVM version clang version 19.1.3 (https://github.com/llvm/llvm-project.git ab51eccf88f5321e7c60591c5546b254b6afab99)
+@enduml

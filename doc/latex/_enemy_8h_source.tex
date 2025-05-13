@@ -1,0 +1,56 @@
+\doxysection{Enemy.\+h}
+\hypertarget{_enemy_8h_source}{}\label{_enemy_8h_source}\index{src/Entity/Enemy/Enemy.h@{src/Entity/Enemy/Enemy.h}}
+\mbox{\hyperlink{_enemy_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_entity_8h}{../Entity.h}}"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_player_8h}{../Player/Player.h}}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_enemy_a3b1c0af0ba6a77129b0f2cdd1dedf679}{Enemy}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_entity_a5c72361783213573732646e0eccc6bf9}{Entity}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605dd}{Movement}}}
+\DoxyCodeLine{00010\ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605ddac9fff2fc9d31d3315c0d04ebce2c7bc9}{WALK\_LEFT}},}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605dda2d4b7a162ee554251db3d2e0221d77dc}{WALK\_RIGHT}},}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605ddabe752852b6f071f8d7fe1b914975aed4}{HIT\_LEFT}},}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605ddae48bd1e058ce465a7c98624e29e056c1}{HIT\_RIGHT}},}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605ddaff2b9f8c5787057e2e6cf3e2872c353f}{DIE\_LEFT}},}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605ddad19dbcde02df1e0f00f3a92007851ccd}{DIE\_RIGHT}},}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605dda14dfec0f91521bd9b6b8e27a050d04c5}{MOUNT\_LEFT}},}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605dda438cdde16d358a0d1192731dfa5e2c93}{MOUNT\_RIGHT}},}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605dda33def90f1f0883f86cd6f5d891a03698}{SHOOT\_LEFT}},}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605dda117b5321ec3c07e0dda17daf1cb6dbb8}{SHOOT\_RIGHT}},}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605ddab81a907b623b62cd5cecb3c9b5aeb8b9}{DOOR\_WALK\_OUT}},}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605dda1cdfadf4abeb497f9a4d6bd2747fc3e9}{DOOR\_WALK\_IN}},}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605dda5adb8c174afa9e6267f721f886ea3c85}{IDLE\_LEFT}},}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605ddabb4d9998aa2701ad18921fb9bac770e4}{IDLE\_RIGHT}},}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605dda879fe00c184d9de92d1848dbbc682538}{IDLE\_CROUCH}},}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605dda899a75974ae9e39afe74df5c27eb7815}{PUNCH\_RIGHT}},}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605ddac45f0d4d329039e0d6558cac5f0cbd64}{PUNCH\_LEFT}},}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605dda92d6f37762a1158a4c737ace88039b59}{WALK\_OUT}}}
+\DoxyCodeLine{00029\ \ \ \ \ \};}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{class_enemy_a3b1c0af0ba6a77129b0f2cdd1dedf679}{Enemy}}(sf::Vector2f\ pos,\textcolor{keywordtype}{bool}\ spawnInDoor);}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{class_enemy_ac0eec4755e28c02688065f9657150ac3}{\string~Enemy}}();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_ac112e1442a47db0272bf3355d74b710b}{collide}}(\mbox{\hyperlink{class_entity}{Entity}}*\ other);}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_afd10545f9268b839fd176fbf71225483}{update}}(\textcolor{keywordtype}{char}\ actionFlags);}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_enemy_afd10545f9268b839fd176fbf71225483}{update}}(\mbox{\hyperlink{class_player}{Player}}*\ pl);}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_a4c6c4bfd244315ba6cfd338428f33d48}{getAlive}}();}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_a9c71061b9a4f060c4d519bab4e930b6b}{getSpawn}}()\ \{\ \textcolor{keywordflow}{return}\ spawnDoor;\ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_enemy_a6fcd23fa0982bc77ec38f103a72b0830}{getDying}}()\ \{\ \textcolor{keywordflow}{return}\ dying;\ \}}
+\DoxyCodeLine{00051\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{class_enemy_adcb6019b67f505c5b731b3711a3605dd}{Movement}}\ curMove,\ lastMove;}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{int}\ moveTicks;}
+\DoxyCodeLine{00054\ \ \ \ \ std::vector<sf::FloatRect>*\ vec\ =\ \textcolor{keyword}{new}\ std::vector<sf::FloatRect>;}
+\DoxyCodeLine{00055\ \ \ \ \ std::unordered\_map<Movement,\ AnimationData::SectionData*>\ animationMap;}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{int}\ health\ =\ 0;}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{bool}\ dying;}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{int}\ dyingCount;}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{bool}\ alive;}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{bool}\ spawnDoor;\textcolor{comment}{//\ tells\ if\ enemy\ spawns\ out\ of\ a\ door}}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{int}\ spawnCount;}
+\DoxyCodeLine{00062\ \};}
+
+\end{DoxyCode}

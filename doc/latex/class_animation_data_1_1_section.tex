@@ -1,0 +1,102 @@
+\doxysection{Animation\+Data\+::Section Class Reference}
+\hypertarget{class_animation_data_1_1_section}{}\label{class_animation_data_1_1_section}\index{AnimationData::Section@{AnimationData::Section}}
+
+
+{\ttfamily \#include $<$Animation\+Data.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_animation_data_1_1_section_a23074626af04790912d168faa4ef6a0b}{Section}} (sf\+::\+Texture \texorpdfstring{$\ast$}{*}texture, unsigned int horizontal\+Frames, unsigned int vertical\+Frames, sf\+::\+Vector2u top\+Left, sf\+::\+Vector2u bottom\+Right, bool use\+Size=false)
+\item 
+void \mbox{\hyperlink{class_animation_data_1_1_section_af8386f2e521f4a0cfc8b382c92e951f6}{set\+Next\+Frame\+Function}} (void(\texorpdfstring{$\ast$}{*}func)(unsigned int \&, unsigned int))
+\item 
+auto \mbox{\hyperlink{class_animation_data_1_1_section_a3c9347712bf8b693502e65e86a3db5bb}{get\+Next\+Frame\+Function}} ()
+\item 
+sf\+::\+Int\+Rect \mbox{\hyperlink{class_animation_data_1_1_section_aff2f8a833f5ad5d6b080c14138ab6774}{get\+Frame}} (unsigned int c) const
+\item 
+sf\+::\+Int\+Rect \mbox{\hyperlink{class_animation_data_1_1_section_a151d7027eaa81e843c6511f8b8003582}{get\+Frame}} (unsigned int x, unsigned int y) const
+\item 
+unsigned int \mbox{\hyperlink{class_animation_data_1_1_section_acd2389d3f99684dba46a2e3983e7c613}{get\+Max\+Frames\+Horizontal}} () const
+\item 
+unsigned int \mbox{\hyperlink{class_animation_data_1_1_section_a2d350a11e14706f5c8c308ec678a45a1}{get\+Max\+Frames\+Vertical}} () const
+\item 
+unsigned int \mbox{\hyperlink{class_animation_data_1_1_section_a2cfc0a8450ceb647ed61ee73f9ccfc8f}{get\+Max\+Frames}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_animation_data_1_1_section_a23074626af04790912d168faa4ef6a0b}\index{AnimationData::Section@{AnimationData::Section}!Section@{Section}}
+\index{Section@{Section}!AnimationData::Section@{AnimationData::Section}}
+\doxysubsubsection{\texorpdfstring{Section()}{Section()}}
+{\footnotesize\ttfamily \label{class_animation_data_1_1_section_a23074626af04790912d168faa4ef6a0b} 
+Animation\+Data\+::\+Section\+::\+Section (\begin{DoxyParamCaption}\item[{sf\+::\+Texture \texorpdfstring{$\ast$}{*}}]{texture}{, }\item[{unsigned int}]{horizontal\+Frames}{, }\item[{unsigned int}]{vertical\+Frames}{, }\item[{sf\+::\+Vector2u}]{top\+Left}{, }\item[{sf\+::\+Vector2u}]{bottom\+Right}{, }\item[{bool}]{use\+Size}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Sections are animation strips to provide data for animating other objects.
+
+
+\begin{DoxyParams}{Parameters}
+{\em texture} & The reference to the texture for the section to use. \\
+\hline
+{\em horizontal\+Frames} & The amount of frames left to right. \\
+\hline
+{\em vertical\+Frames} & The amount of frames top to bottom. \\
+\hline
+{\em top\+Left} & Top left corner of the animation strip. \\
+\hline
+{\em bottom\+Right} & Either the bottom right corner or the size of the animation. \\
+\hline
+{\em use\+Size} & If true, will use the size of the animations instead of the bottom right corner. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_animation_data_1_1_section_aff2f8a833f5ad5d6b080c14138ab6774}\index{AnimationData::Section@{AnimationData::Section}!getFrame@{getFrame}}
+\index{getFrame@{getFrame}!AnimationData::Section@{AnimationData::Section}}
+\doxysubsubsection{\texorpdfstring{getFrame()}{getFrame()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_animation_data_1_1_section_aff2f8a833f5ad5d6b080c14138ab6774} 
+sf\+::\+Int\+Rect Animation\+Data\+::\+Section\+::get\+Frame (\begin{DoxyParamCaption}\item[{unsigned int}]{c}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_animation_data_1_1_section_a151d7027eaa81e843c6511f8b8003582}\index{AnimationData::Section@{AnimationData::Section}!getFrame@{getFrame}}
+\index{getFrame@{getFrame}!AnimationData::Section@{AnimationData::Section}}
+\doxysubsubsection{\texorpdfstring{getFrame()}{getFrame()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_animation_data_1_1_section_a151d7027eaa81e843c6511f8b8003582} 
+sf\+::\+Int\+Rect Animation\+Data\+::\+Section\+::get\+Frame (\begin{DoxyParamCaption}\item[{unsigned int}]{x}{, }\item[{unsigned int}]{y}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_animation_data_1_1_section_a2cfc0a8450ceb647ed61ee73f9ccfc8f}\index{AnimationData::Section@{AnimationData::Section}!getMaxFrames@{getMaxFrames}}
+\index{getMaxFrames@{getMaxFrames}!AnimationData::Section@{AnimationData::Section}}
+\doxysubsubsection{\texorpdfstring{getMaxFrames()}{getMaxFrames()}}
+{\footnotesize\ttfamily \label{class_animation_data_1_1_section_a2cfc0a8450ceb647ed61ee73f9ccfc8f} 
+unsigned int Animation\+Data\+::\+Section\+::get\+Max\+Frames (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_animation_data_1_1_section_acd2389d3f99684dba46a2e3983e7c613}\index{AnimationData::Section@{AnimationData::Section}!getMaxFramesHorizontal@{getMaxFramesHorizontal}}
+\index{getMaxFramesHorizontal@{getMaxFramesHorizontal}!AnimationData::Section@{AnimationData::Section}}
+\doxysubsubsection{\texorpdfstring{getMaxFramesHorizontal()}{getMaxFramesHorizontal()}}
+{\footnotesize\ttfamily \label{class_animation_data_1_1_section_acd2389d3f99684dba46a2e3983e7c613} 
+unsigned int Animation\+Data\+::\+Section\+::get\+Max\+Frames\+Horizontal (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_animation_data_1_1_section_a2d350a11e14706f5c8c308ec678a45a1}\index{AnimationData::Section@{AnimationData::Section}!getMaxFramesVertical@{getMaxFramesVertical}}
+\index{getMaxFramesVertical@{getMaxFramesVertical}!AnimationData::Section@{AnimationData::Section}}
+\doxysubsubsection{\texorpdfstring{getMaxFramesVertical()}{getMaxFramesVertical()}}
+{\footnotesize\ttfamily \label{class_animation_data_1_1_section_a2d350a11e14706f5c8c308ec678a45a1} 
+unsigned int Animation\+Data\+::\+Section\+::get\+Max\+Frames\+Vertical (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_animation_data_1_1_section_a3c9347712bf8b693502e65e86a3db5bb}\index{AnimationData::Section@{AnimationData::Section}!getNextFrameFunction@{getNextFrameFunction}}
+\index{getNextFrameFunction@{getNextFrameFunction}!AnimationData::Section@{AnimationData::Section}}
+\doxysubsubsection{\texorpdfstring{getNextFrameFunction()}{getNextFrameFunction()}}
+{\footnotesize\ttfamily \label{class_animation_data_1_1_section_a3c9347712bf8b693502e65e86a3db5bb} 
+auto Animation\+Data\+::\+Section\+::get\+Next\+Frame\+Function (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_animation_data_1_1_section_af8386f2e521f4a0cfc8b382c92e951f6}\index{AnimationData::Section@{AnimationData::Section}!setNextFrameFunction@{setNextFrameFunction}}
+\index{setNextFrameFunction@{setNextFrameFunction}!AnimationData::Section@{AnimationData::Section}}
+\doxysubsubsection{\texorpdfstring{setNextFrameFunction()}{setNextFrameFunction()}}
+{\footnotesize\ttfamily \label{class_animation_data_1_1_section_af8386f2e521f4a0cfc8b382c92e951f6} 
+void Animation\+Data\+::\+Section\+::set\+Next\+Frame\+Function (\begin{DoxyParamCaption}\item[{void(\texorpdfstring{$\ast$}{*}}]{func~}{)(unsigned int \&, unsigned int)}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sprite\+Data/\mbox{\hyperlink{_animation_data_8h}{Animation\+Data.\+h}}\item 
+src/\+Sprite\+Data/\mbox{\hyperlink{_animation_data_8cpp}{Animation\+Data.\+cpp}}\end{DoxyCompactItemize}

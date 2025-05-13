@@ -1,0 +1,23 @@
+\doxysection{Wall.\+h}
+\hypertarget{_wall_8h_source}{}\label{_wall_8h_source}\index{src/Entity/Wall/Wall.h@{src/Entity/Wall/Wall.h}}
+\mbox{\hyperlink{_wall_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_player_8h}{../Player/Player.h}}"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_entity_8h}{../Entity.h}}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_wall_a1a4b53f7a7c173b429fa11d33c17b7f9}{Wall}}\ }
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{comment}{//When\ making\ a\ wall\ Make\ sure\ the\ Y\ pos\ is\ the\ bottom\ of\ the\ wall\ no\ the\ top\ }}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{comment}{//\ Then\ when\ chosing\ the\ height\ make\ the\ height\ how\ high\ you\ want\ the\ wall\ to\ extend\ up.}}
+\DoxyCodeLine{00010\ \ \ \ \ \mbox{\hyperlink{class_wall_a1a4b53f7a7c173b429fa11d33c17b7f9}{Wall}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ height);}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{int}\ xPos;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{int}\ \ yPos;}
+\DoxyCodeLine{00015\ \ \ \ \ sf::RectangleShape\ hitBox;}
+\DoxyCodeLine{00016\ \};}
+\DoxyCodeLine{00017\ }
+
+\end{DoxyCode}

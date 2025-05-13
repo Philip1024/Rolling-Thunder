@@ -1,0 +1,103 @@
+\doxysection{Animation\+Data Class Reference}
+\hypertarget{class_animation_data}{}\label{class_animation_data}\index{AnimationData@{AnimationData}}
+
+
+This class stores the data needed for entities\textquotesingle{} animations. Split into sections\+: named with what the purpose is.  
+
+
+
+
+{\ttfamily \#include $<$Animation\+Data.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_animation_data_1_1_section}{Section}}
+\item 
+class \mbox{\hyperlink{class_animation_data_1_1_section_data}{Section\+Data}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_animation_data_ae2cb4b01be9601997a2b38a40ab1c86f}{Texture\+Name}} 
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_animation_data_a6189bda5b317bae5c25281ff77a359b6}{load}} ()
+\item 
+static void \mbox{\hyperlink{class_animation_data_ac20a5454cc22cf480f1341ac7d398195}{unload}} ()
+\item 
+static \mbox{\hyperlink{class_animation_data_1_1_section}{Section}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_animation_data_ad6d71a12d4da3f03d6e8c5dd202e3d09}{get\+Section}} (std\+::string section\+Name)
+\item 
+static sf\+::\+Texture \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_animation_data_a8614abcf75352b0c44622d2c8efb3f36}{get\+Texture}} (\mbox{\hyperlink{class_animation_data_ae2cb4b01be9601997a2b38a40ab1c86f}{Texture\+Name}} name)
+\item 
+static void \mbox{\hyperlink{class_animation_data_a87adf30c8b61e80aa4f9b076215c00f2}{reload\+Textures}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class stores the data needed for entities\textquotesingle{} animations. Split into sections\+: named with what the purpose is. 
+
+Sections include\+:
+\begin{DoxyItemize}
+\item name
+\item the texture\texorpdfstring{$\ast$}{*}
+\item horizontal\+: how many frames on the x axis
+\item vertical\+: how many frames on the y axis
+\item vec2i start (top left)
+\item vec2i end (bottom right)
+\end{DoxyItemize}
+
+Based on this info, it will automatically split the section into frames. \doxylink{class_animation_data}{Animation\+Data} is a collection of sections for specific entities.
+
+Why are we doing this? Many of the frames in the spritesheets are spaced differently. Each section has consistent spacing. It also allows us to split them up by their action, such as "{}\+Move\+Left"{} or "{}\+Die"{}
+
+Note\+: Frames go from top-\/left to bottom-\/right or left to right if vertical\+Frames = 1 
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{class_animation_data_ae2cb4b01be9601997a2b38a40ab1c86f}\index{AnimationData@{AnimationData}!TextureName@{TextureName}}
+\index{TextureName@{TextureName}!AnimationData@{AnimationData}}
+\doxysubsubsection{\texorpdfstring{TextureName}{TextureName}}
+{\footnotesize\ttfamily \label{class_animation_data_ae2cb4b01be9601997a2b38a40ab1c86f} 
+enum \mbox{\hyperlink{class_animation_data_ae2cb4b01be9601997a2b38a40ab1c86f}{Animation\+Data\+::\+Texture\+Name}}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_animation_data_ad6d71a12d4da3f03d6e8c5dd202e3d09}\index{AnimationData@{AnimationData}!getSection@{getSection}}
+\index{getSection@{getSection}!AnimationData@{AnimationData}}
+\doxysubsubsection{\texorpdfstring{getSection()}{getSection()}}
+{\footnotesize\ttfamily \label{class_animation_data_ad6d71a12d4da3f03d6e8c5dd202e3d09} 
+\mbox{\hyperlink{class_animation_data_1_1_section}{Animation\+Data\+::\+Section}} \texorpdfstring{$\ast$}{*} Animation\+Data\+::get\+Section (\begin{DoxyParamCaption}\item[{std\+::string}]{section\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_animation_data_a8614abcf75352b0c44622d2c8efb3f36}\index{AnimationData@{AnimationData}!getTexture@{getTexture}}
+\index{getTexture@{getTexture}!AnimationData@{AnimationData}}
+\doxysubsubsection{\texorpdfstring{getTexture()}{getTexture()}}
+{\footnotesize\ttfamily \label{class_animation_data_a8614abcf75352b0c44622d2c8efb3f36} 
+static sf\+::\+Texture \texorpdfstring{$\ast$}{*} Animation\+Data\+::get\+Texture (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_animation_data_ae2cb4b01be9601997a2b38a40ab1c86f}{Texture\+Name}}}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_animation_data_a6189bda5b317bae5c25281ff77a359b6}\index{AnimationData@{AnimationData}!load@{load}}
+\index{load@{load}!AnimationData@{AnimationData}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily \label{class_animation_data_a6189bda5b317bae5c25281ff77a359b6} 
+void Animation\+Data\+::load (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_animation_data_a87adf30c8b61e80aa4f9b076215c00f2}\index{AnimationData@{AnimationData}!reloadTextures@{reloadTextures}}
+\index{reloadTextures@{reloadTextures}!AnimationData@{AnimationData}}
+\doxysubsubsection{\texorpdfstring{reloadTextures()}{reloadTextures()}}
+{\footnotesize\ttfamily \label{class_animation_data_a87adf30c8b61e80aa4f9b076215c00f2} 
+void Animation\+Data\+::reload\+Textures (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_animation_data_ac20a5454cc22cf480f1341ac7d398195}\index{AnimationData@{AnimationData}!unload@{unload}}
+\index{unload@{unload}!AnimationData@{AnimationData}}
+\doxysubsubsection{\texorpdfstring{unload()}{unload()}}
+{\footnotesize\ttfamily \label{class_animation_data_ac20a5454cc22cf480f1341ac7d398195} 
+void Animation\+Data\+::unload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Sprite\+Data/\mbox{\hyperlink{_animation_data_8h}{Animation\+Data.\+h}}\item 
+src/\+Sprite\+Data/\mbox{\hyperlink{_animation_data_8cpp}{Animation\+Data.\+cpp}}\end{DoxyCompactItemize}

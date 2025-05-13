@@ -1,0 +1,57 @@
+\doxysection{GUI.\+h}
+\hypertarget{_g_u_i_8h_source}{}\label{_g_u_i_8h_source}\index{src/UI/UIScreen/GUI.h@{src/UI/UIScreen/GUI.h}}
+\mbox{\hyperlink{_g_u_i_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <SFML/Graphics.hpp>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_text_8h}{../GameText/GameText.h}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_g_u_i_a82f139c3d5c7d38811001d683300f33c}{GUI}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_g_u_i_a0d4b46255783214e6e36c201ca09c3be}{Screen}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{//\ create\ once\ in\ Game.cpp}}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_g_u_i_a82f139c3d5c7d38811001d683300f33c}{GUI}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}*\ creditRef);}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_g_u_i_ac9cae2328dcb5d83bdfaeca49a2eb695}{\string~GUI}}();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ draws\ the\ current\ screen}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_g_u_i_ab292fd9481ef6978fec3d39ff96b07b7}{drawGUI}}(sf::RenderWindow\&\ window);}
+\DoxyCodeLine{00026\ \ \ \ \ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_g_u_i_a4d52b89d06126b639febcb0530396765}{changeScreen}}(\mbox{\hyperlink{class_g_u_i_a0d4b46255783214e6e36c201ca09c3be}{Screen}}\ s)\ \{\ this-\/>currentScreen\ =\ s;\ \}}
+\DoxyCodeLine{00028\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//\ converts\ an\ int\ to\ a\ usuable\ string\ for\ the\ frames}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ frameNumber(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ i);}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{//\ advances\ to\ the\ next\ frame\ in\ the\ intro\ video}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ nextIntroFrame();}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ setCenterOrigin(std::string\ text);}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ quick\ setPosition}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ QSP(std::string\ \textcolor{keywordtype}{string},\ sf::Vector2f\ vector);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ sf::Texture\ introFrame;}
+\DoxyCodeLine{00038\ \ \ \ \ sf::Sprite\ redNamcoSymbol;}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ currentIntroFrame,\ *creditRef;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{class_g_u_i_a0d4b46255783214e6e36c201ca09c3be}{Screen}}\ currentScreen;}
+\DoxyCodeLine{00042\ \ \ \ \ sf::Sprite\ background;}
+\DoxyCodeLine{00043\ \ \ \ \ std::unordered\_map<std::string,\ GameText*>\ textMap;}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_g_u_i_a0d4b46255783214e6e36c201ca09c3be}{GUI::Screen}}}
+\DoxyCodeLine{00048\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{_g_u_i_8h_ac22743f1fc74de09544ecc9bab74a17b}{MAIN\_MENU}},}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{_g_u_i_8h_a6d1e5a6dd7bc9c8af376d4fa0783f222}{SELECT\_1}},}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{_g_u_i_8h_a591ca5b453cf8b677a833c6ce529823d}{SELECT\_12}},\ \textcolor{comment}{//\ includes\ the\ text\ for\ both\ players}}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{_g_u_i_8h_a7c3b28372eab88e0810f28cca056d82b}{INGAME}},}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{_g_u_i_8h_a99c5a74f3c468a6aab66de25b65f71dd}{START\_TIMER}},}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{_g_u_i_8h_a871723195985a4ae22d7e10d99bf8a00}{GAME\_OVER}},}
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{_g_u_i_8h_a89ffae1611c81ede37881707f8b0f44d}{CONTINUE\_TIMER}},}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ }
+
+\end{DoxyCode}

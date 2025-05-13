@@ -1,0 +1,229 @@
+\doxysection{Entity Class Reference}
+\hypertarget{class_entity}{}\label{class_entity}\index{Entity@{Entity}}
+
+
+{\ttfamily \#include $<$Entity.\+h$>$}
+
+Inheritance diagram for Entity\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_entity}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_entity_a5c72361783213573732646e0eccc6bf9}{Entity}} (sf\+::\+Texture \texorpdfstring{$\ast$}{*}init\+Texture)
+\item 
+virtual void \mbox{\hyperlink{class_entity_a98794b6e2f95081552347c02291cf5aa}{collide}} (\mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*}other, char action\+Flags)
+\item 
+virtual void \mbox{\hyperlink{class_entity_a3d3536f56940881a07b39caa45630723}{update}} (char action\+Flags)
+\item 
+bool \mbox{\hyperlink{class_entity_ae02949fde1d01ce7010a6e5bb8646154}{get\+Alive}} ()
+\item 
+const sf\+::\+Sprite \& \mbox{\hyperlink{class_entity_aece77e1e86fae668e67a57ee7ccce265}{get\+Sprite}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_aa1a1dec571e1876664974a9b3e788444}{get\+Entities}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_ac69ac4994717a75cd3f0982ad4dc26d2}{get\+Doors}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_a761b1ca15837297df03ff0323f1d7c99}{get\+Rails}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_a41c96f9cf0a18c4f824dfea38c1c8fa7}{get\+Bullets}} ()
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& \mbox{\hyperlink{class_entity_ab6e3ebb92ac824244fba4fcaacb7d794}{get\+Enemys}} ()
+\item 
+static void \mbox{\hyperlink{class_entity_a220100853ede481ca8e83879be64e633}{set\+Window}} (sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*}w)
+\item 
+static void \mbox{\hyperlink{class_entity_aafd5fa9c60bb8a9100fae702139245e7}{set\+View}} (sf\+::\+View \texorpdfstring{$\ast$}{*}v)
+\item 
+static void \mbox{\hyperlink{class_entity_a94f711e3514c829207ecfec8eda0fd7c}{set\+Current\+Tick}} (unsigned int \texorpdfstring{$\ast$}{*}t)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a5171e14419230a1261f05431df091e12}{doors}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a450dbcb7e99e0f857d6ad0a06b4bfc43}{rails}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a522650da94f36892a5a55ed07d16419c}{bullets}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_entity_a268f0453cc796825d6d94ef664551a45}{enemys}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static unsigned int \& \mbox{\hyperlink{class_entity_a3605933621ee3250859c1c57d16ebd13}{get\+Current\+Tick}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+sf\+::\+Sprite \mbox{\hyperlink{class_entity_a48ef4ab143b8d0211877c9f6be42e824}{sprite}}
+\item 
+bool \mbox{\hyperlink{class_entity_a0d09a7e175d9dcfbfb359e5f74f2e692}{alive}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static sf\+::\+View \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_entity_a853397654e99a2e072f24929fa849bcb}{view}} = nullptr
+\item 
+static sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_entity_a0dc3ba88a6cfbda3b9c6ba04abcdc9aa}{window}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_entity_a5c72361783213573732646e0eccc6bf9}\index{Entity@{Entity}!Entity@{Entity}}
+\index{Entity@{Entity}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{Entity()}{Entity()}}
+{\footnotesize\ttfamily \label{class_entity_a5c72361783213573732646e0eccc6bf9} 
+Entity\+::\+Entity (\begin{DoxyParamCaption}\item[{sf\+::\+Texture \texorpdfstring{$\ast$}{*}}]{init\+Texture}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_entity_a98794b6e2f95081552347c02291cf5aa}\index{Entity@{Entity}!collide@{collide}}
+\index{collide@{collide}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{collide()}{collide()}}
+{\footnotesize\ttfamily \label{class_entity_a98794b6e2f95081552347c02291cf5aa} 
+virtual void Entity\+::collide (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*}}]{other}{, }\item[{char}]{action\+Flags}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_bullet_a687a1d7f375b4e572b058c735fdedfd9}{Bullet}}, and \mbox{\hyperlink{class_player_a0ea3a372f28822f0d63b05288307c490}{Player}}.
+
+\Hypertarget{class_entity_ae02949fde1d01ce7010a6e5bb8646154}\index{Entity@{Entity}!getAlive@{getAlive}}
+\index{getAlive@{getAlive}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{getAlive()}{getAlive()}}
+{\footnotesize\ttfamily \label{class_entity_ae02949fde1d01ce7010a6e5bb8646154} 
+bool Entity\+::get\+Alive (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_entity_a41c96f9cf0a18c4f824dfea38c1c8fa7}\index{Entity@{Entity}!getBullets@{getBullets}}
+\index{getBullets@{getBullets}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{getBullets()}{getBullets()}}
+{\footnotesize\ttfamily \label{class_entity_a41c96f9cf0a18c4f824dfea38c1c8fa7} 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& Entity\+::get\+Bullets (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_entity_a3605933621ee3250859c1c57d16ebd13}\index{Entity@{Entity}!getCurrentTick@{getCurrentTick}}
+\index{getCurrentTick@{getCurrentTick}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{getCurrentTick()}{getCurrentTick()}}
+{\footnotesize\ttfamily \label{class_entity_a3605933621ee3250859c1c57d16ebd13} 
+static unsigned int \& Entity\+::get\+Current\+Tick (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [protected]}}
+
+\Hypertarget{class_entity_ac69ac4994717a75cd3f0982ad4dc26d2}\index{Entity@{Entity}!getDoors@{getDoors}}
+\index{getDoors@{getDoors}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{getDoors()}{getDoors()}}
+{\footnotesize\ttfamily \label{class_entity_ac69ac4994717a75cd3f0982ad4dc26d2} 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& Entity\+::get\+Doors (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_entity_ab6e3ebb92ac824244fba4fcaacb7d794}\index{Entity@{Entity}!getEnemys@{getEnemys}}
+\index{getEnemys@{getEnemys}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{getEnemys()}{getEnemys()}}
+{\footnotesize\ttfamily \label{class_entity_ab6e3ebb92ac824244fba4fcaacb7d794} 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& Entity\+::get\+Enemys (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_entity_aa1a1dec571e1876664974a9b3e788444}\index{Entity@{Entity}!getEntities@{getEntities}}
+\index{getEntities@{getEntities}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{getEntities()}{getEntities()}}
+{\footnotesize\ttfamily \label{class_entity_aa1a1dec571e1876664974a9b3e788444} 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& Entity\+::get\+Entities (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_entity_a761b1ca15837297df03ff0323f1d7c99}\index{Entity@{Entity}!getRails@{getRails}}
+\index{getRails@{getRails}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{getRails()}{getRails()}}
+{\footnotesize\ttfamily \label{class_entity_a761b1ca15837297df03ff0323f1d7c99} 
+static std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ \& Entity\+::get\+Rails (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_entity_aece77e1e86fae668e67a57ee7ccce265}\index{Entity@{Entity}!getSprite@{getSprite}}
+\index{getSprite@{getSprite}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{getSprite()}{getSprite()}}
+{\footnotesize\ttfamily \label{class_entity_aece77e1e86fae668e67a57ee7ccce265} 
+const sf\+::\+Sprite \& Entity\+::get\+Sprite (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_entity_a94f711e3514c829207ecfec8eda0fd7c}\index{Entity@{Entity}!setCurrentTick@{setCurrentTick}}
+\index{setCurrentTick@{setCurrentTick}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{setCurrentTick()}{setCurrentTick()}}
+{\footnotesize\ttfamily \label{class_entity_a94f711e3514c829207ecfec8eda0fd7c} 
+static void Entity\+::set\+Current\+Tick (\begin{DoxyParamCaption}\item[{unsigned int \texorpdfstring{$\ast$}{*}}]{t}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_entity_aafd5fa9c60bb8a9100fae702139245e7}\index{Entity@{Entity}!setView@{setView}}
+\index{setView@{setView}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{setView()}{setView()}}
+{\footnotesize\ttfamily \label{class_entity_aafd5fa9c60bb8a9100fae702139245e7} 
+static void Entity\+::set\+View (\begin{DoxyParamCaption}\item[{sf\+::\+View \texorpdfstring{$\ast$}{*}}]{v}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_entity_a220100853ede481ca8e83879be64e633}\index{Entity@{Entity}!setWindow@{setWindow}}
+\index{setWindow@{setWindow}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{setWindow()}{setWindow()}}
+{\footnotesize\ttfamily \label{class_entity_a220100853ede481ca8e83879be64e633} 
+static void Entity\+::set\+Window (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*}}]{w}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{class_entity_a3d3536f56940881a07b39caa45630723}\index{Entity@{Entity}!update@{update}}
+\index{update@{update}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{class_entity_a3d3536f56940881a07b39caa45630723} 
+virtual void Entity\+::update (\begin{DoxyParamCaption}\item[{char}]{action\+Flags}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_bullet_a26a2bd273b7ac2b11615a4e2bc79c08b}{Bullet}}, \mbox{\hyperlink{class_enemy_afd10545f9268b839fd176fbf71225483}{Enemy}}, \mbox{\hyperlink{class_player_a5b07d2d1e1b3fa78d2e801a844cf096b}{Player}}, and \mbox{\hyperlink{class_rail_a1ba392b2682f3fa48584375764f4ac47}{Rail}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_entity_a0d09a7e175d9dcfbfb359e5f74f2e692}\index{Entity@{Entity}!alive@{alive}}
+\index{alive@{alive}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{alive}{alive}}
+{\footnotesize\ttfamily \label{class_entity_a0d09a7e175d9dcfbfb359e5f74f2e692} 
+bool Entity\+::alive\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_entity_a522650da94f36892a5a55ed07d16419c}\index{Entity@{Entity}!bullets@{bullets}}
+\index{bullets@{bullets}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{bullets}{bullets}}
+{\footnotesize\ttfamily \label{class_entity_a522650da94f36892a5a55ed07d16419c} 
+std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ Entity\+::bullets\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_entity_a5171e14419230a1261f05431df091e12}\index{Entity@{Entity}!doors@{doors}}
+\index{doors@{doors}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{doors}{doors}}
+{\footnotesize\ttfamily \label{class_entity_a5171e14419230a1261f05431df091e12} 
+std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ Entity\+::doors\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_entity_a268f0453cc796825d6d94ef664551a45}\index{Entity@{Entity}!enemys@{enemys}}
+\index{enemys@{enemys}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{enemys}{enemys}}
+{\footnotesize\ttfamily \label{class_entity_a268f0453cc796825d6d94ef664551a45} 
+std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ Entity\+::enemys\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_entity_a450dbcb7e99e0f857d6ad0a06b4bfc43}\index{Entity@{Entity}!rails@{rails}}
+\index{rails@{rails}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{rails}{rails}}
+{\footnotesize\ttfamily \label{class_entity_a450dbcb7e99e0f857d6ad0a06b4bfc43} 
+std\+::vector$<$ \mbox{\hyperlink{class_entity}{Entity}} \texorpdfstring{$\ast$}{*} $>$ Entity\+::rails\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_entity_a48ef4ab143b8d0211877c9f6be42e824}\index{Entity@{Entity}!sprite@{sprite}}
+\index{sprite@{sprite}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{sprite}{sprite}}
+{\footnotesize\ttfamily \label{class_entity_a48ef4ab143b8d0211877c9f6be42e824} 
+sf\+::\+Sprite Entity\+::sprite\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_entity_a853397654e99a2e072f24929fa849bcb}\index{Entity@{Entity}!view@{view}}
+\index{view@{view}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{view}{view}}
+{\footnotesize\ttfamily \label{class_entity_a853397654e99a2e072f24929fa849bcb} 
+sf\+::\+View \texorpdfstring{$\ast$}{*} Entity\+::view = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+\Hypertarget{class_entity_a0dc3ba88a6cfbda3b9c6ba04abcdc9aa}\index{Entity@{Entity}!window@{window}}
+\index{window@{window}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{window}{window}}
+{\footnotesize\ttfamily \label{class_entity_a0dc3ba88a6cfbda3b9c6ba04abcdc9aa} 
+sf\+::\+Render\+Window \texorpdfstring{$\ast$}{*} Entity\+::window = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Entity/\mbox{\hyperlink{_entity_8h}{Entity.\+h}}\item 
+src/\+Entity/\mbox{\hyperlink{_entity_8cpp}{Entity.\+cpp}}\end{DoxyCompactItemize}
