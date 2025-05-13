@@ -420,7 +420,7 @@ void Player::collide(Entity* other,char actionFlags)
 	{
 		//getspawn is called so player can't get hit right when enemy spawns from the door
 		//if player hits enemy and in shooting animation game breaks
-		if (!enemyCast->getSpawn()&&!invincibility&&!shooting&&!inDoor && !jumpingOffRail && !jumpingRail)
+		if (!enemyCast->getSpawn()&& !enemyCast->getDying()&&!invincibility&&!shooting&&!inDoor && !jumpingOffRail && !jumpingRail)
 		{
 			if (lives == 1)
 			{

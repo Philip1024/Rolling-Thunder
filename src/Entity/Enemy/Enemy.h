@@ -33,8 +33,21 @@ public:
 	void collide(Entity* other);
 	void update(char actionFlags);
 	void update(Player* pl);
+	/// <summary>
+	/// gives whether enemy is alive
+	/// </summary>
+	/// <returns>true if enemy is alive, false if enemy is dead</returns>
 	bool getAlive();
+	/// <summary>
+	/// gives whether enemy is spawning
+	/// </summary>
+	/// <returns>true if enemy is spawning, false if enemy isn't spawning</returns>
 	bool getSpawn() { return spawnDoor; }
+	/// <summary>
+	/// gives whether enemy is in dying animation
+	/// </summary>
+	/// <returns>true if enemy is dying, false if enemy isn't dying</returns>
+	bool getDying() { return dying; }
 private:
 	Movement curMove, lastMove;
 	int moveTicks;
