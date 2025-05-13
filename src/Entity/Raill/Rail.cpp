@@ -20,8 +20,11 @@ Rail::Rail(int x, int y) : Entity(AnimationData::getTexture(AnimationData::RAIL)
 	floor = 1;
 }
 
-//this changes the visibilty of the debug door
-//
+
+/// <summary>
+/// This makes the rail change from visible to invisible
+/// </summary>
+/// <param name="visible">this determines what to make the rail</param>
 void Rail::changeOpacity(bool visible)
 {
 	if (visible)
@@ -39,7 +42,10 @@ void Rail::update(char actionFlags)
 {
 	
 }
-
+/// <summary>
+/// This sets the pos of the rail
+/// </summary>
+/// <param name="a"> a is the pos vector</param>
 void Rail::setPos(sf::Vector2f a)
 {
 	int x = a.x;
@@ -47,12 +53,19 @@ void Rail::setPos(sf::Vector2f a)
 	sprite.setPosition(sf::Vector2f(x, y));
 }
 
+/// <summary>
+/// This gets the front of the rails pos
+/// </summary>
+/// <returns></returns>
 float Rail::getFront()
 {
 	return (float)xPos;
 }
 
-
+/// <summary>
+/// This returns the back of the rails pos
+/// </summary>
+/// <returns></returns>
 float Rail::getBack()
 {
 	return (float)(xPos + 45);

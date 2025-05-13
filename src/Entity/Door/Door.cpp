@@ -39,7 +39,10 @@ Door::~Door()
 	delete doorClose;
 }
 
-
+/// <summary>
+/// This sets the pos of the door
+/// </summary>
+/// <param name="a"></param>
 void Door::setPos(sf::Vector2f a)
 {
 	int x = a.x;
@@ -200,8 +203,10 @@ void Door::update(char actionFlags, float x, float y, bool* allowEnemyDoorSpawn,
 }
 
 
-//this changes the visibilty of the debug door
-//
+/// <summary>
+/// This makes the door visible or invisible
+/// </summary>
+/// <param name="visible"></param>
 void Door::changeOpacity(bool visible)
 {
 	if (visible)

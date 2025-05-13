@@ -11,10 +11,9 @@
 #include<vector>
 #include<iostream>
 
-/*
-Change mode/screen using GameState: see the switch in main gameplay loop
- */
-//Constructor
+/// <summary>
+/// The constructor for main, This creates the ground and loads the level data and creates the window size
+/// </summary>
 Game::Game()
     : stage1Sprite(stage1), gui(&credits)
 {
@@ -42,7 +41,9 @@ Game::~Game()
 
 
 
-//Runs the game
+/// <summary>
+/// This is the main gameplay loop
+/// </summary>
 void Game::run()
 {
 	//doors
@@ -388,7 +389,9 @@ void deleteLevel()
 
 }
 
-
+/// <summary>
+/// This is for the main menu, It is called at the start of the program
+/// </summary>
 void Game::runStartBehavior()
 {
     // 5 to add credit 6 to start
@@ -412,7 +415,10 @@ void Game::runStartBehavior()
     
 }
 
-
+/// <summary>
+/// This is for updating all of the classes in realtion to the main gameplay loop
+/// </summary>
+/// <param name="actionFlags"></param>
 void Game::runGameplayBehavior(char actionFlags)
 {
     //draw 
