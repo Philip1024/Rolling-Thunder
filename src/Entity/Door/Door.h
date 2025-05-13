@@ -18,11 +18,9 @@ public:
 	//this opens the door if the player interacts with it 
 	void setPos(sf::Vector2f);
 	void setOpening(bool);
-	void setClosing(bool);
 	bool getOpen();//returns when door is opening or open
 	//retruns when door is open of closing
 	bool getClosing();
-	bool isClosed();
 	bool getStop();
 	void changeOpacity(bool visible);
 	float getFront() { return (float)(xPos - 5); }

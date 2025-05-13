@@ -214,40 +214,41 @@ void Door::changeOpacity(bool visible)
 	}
 }
 
-
+/// <summary>
+/// tells door to open
+/// </summary>
+/// <param name="newOpening">true if start opening, false if don't start opening</param>
 void Door::setOpening(bool newOpening)
 {
 	startOpen = newOpening;
 	opening = newOpening;
 }
 
-
-void Door::setClosing(bool newClosing)
-{
-	closing = newClosing;
-}
-
+/// <summary>
+/// returns whether dor is in opening animation
+/// </summary>
+/// <returns></returns>
 bool Door::getOpen()
 {
 	return opening;
 }
 
 
+/// <summary>
+/// returns whether door is open and not is closing animation
+/// </summary>
+/// <returns></returns>
 bool Door::getStop()
 {
 	return stop;
 }
 
-
+/// <summary>
+/// returns whether door is in closing animation
+/// </summary>
+/// <returns></returns>
 bool Door::getClosing()
 {
 	return closing;
 }
 
-
-bool Door::isClosed()
-{
-	return closed;
-
-
-}

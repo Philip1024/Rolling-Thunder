@@ -152,7 +152,8 @@ void Player::update(char actionFlags)
 			if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail || jumpingOffRail)
 			{
 				shouldFall = false;
-				centerGroundCollision = ground1.at(i);//used to determine which ground player collided with to recenter player when it hits the ground
+				if(sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt)
+					centerGroundCollision = ground1.at(i);//used to determine which ground player collided with to recenter player when it hits the ground
 			}
 				
 		}
@@ -165,7 +166,8 @@ void Player::update(char actionFlags)
 			if (sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail || jumpingOffRail)
 			{
 				shouldFall = false;
-				centerGroundCollision = ground2.at(i);
+				if (sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
+					centerGroundCollision = ground2.at(i);
 				//jumping has it's on way to determine droppingvb
 				if (!activeJump&&!activeRightJump&&!activeLeftJump)
 				{
@@ -196,7 +198,8 @@ void Player::update(char actionFlags)
 				if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail||jumpingOffRail)
 				{
 					falling = false;
-					centerGroundCollision = ground1.at(i);
+					if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt)
+						centerGroundCollision = ground1.at(i);
 					//you minus 46 from centerGround Collision due to height of player
 					sprite.move({ 0,((centerGroundCollision.position.y - 46) - sprite.getGlobalBounds().position.y) });
 					floor = 0;
