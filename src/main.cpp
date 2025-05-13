@@ -31,6 +31,7 @@ What needs work:
 - enemy recolors/other enemies
 - other levels
 - UI needs finished/polishing
+- obstacles
 
 We did not cheat.
 */

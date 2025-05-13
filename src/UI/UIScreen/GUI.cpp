@@ -83,7 +83,8 @@ GUI::GUI(unsigned int* creditRef)
 
 GUI::~GUI()
 {
-	
+	for (auto& pair : textMap)
+		delete pair.second;
 }
 
 

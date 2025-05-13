@@ -37,6 +37,7 @@ Game::Game()
 
 Game::~Game()
 {
+
 }
 
 
@@ -125,6 +126,13 @@ void Game::run()
     new Enemy(sf::Vector2f(600, 107), false);
     new Enemy(sf::Vector2f(800, 107), false);
     new Enemy(sf::Vector2f(1000, 107), false);
+    new Enemy(sf::Vector2f(2382, 360), false);
+    new Enemy(sf::Vector2f(2582, 360), false);
+    new Enemy(sf::Vector2f(2782, 360), false);
+    new Enemy(sf::Vector2f(2982, 360), false);
+    new Enemy(sf::Vector2f(3182, 360), false);
+    new Enemy(sf::Vector2f(3382, 370), false);
+    new Enemy(sf::Vector2f(3582, 370), false);
 
     //window/clock setup
     Entity::setWindow(&window);
@@ -243,21 +251,13 @@ void Game::run()
         {
             //prevents memory leaks 
             for (int i = 0; i < enemies.size(); i++)
-            {
                 delete enemies.at(i);
-            }
             for (int i = 0; i < bullets.size(); i++)
-            {
                 delete bullets.at(i);
-            }
             for (int i = 0; i < rails.size(); i++)
-            {
                 delete rails.at(i);
-            }
             for (int i = 0; i < doors.size(); i++)
-            {
                 delete doors.at(i);
-            }
             delete player;
         }
     }

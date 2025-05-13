@@ -99,6 +99,9 @@ Player::Player()
 
 Player::~Player()
 {
+	for (auto& pair : animationMap)
+		delete pair.second;
+
 	delete moveLeft;
 	delete moveRight;
 	delete jumpLeft;
