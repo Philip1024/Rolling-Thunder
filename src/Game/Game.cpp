@@ -62,6 +62,10 @@ void Game::run()
 	new Door(1436, 41);
 	new Door(1483, 41);
 	new Door(1530, 41);
+    new Door(2091, 356);
+    new Door(2185, 356);
+    new Door(2323, 356);
+  
 
     //rails
     //Rail* rail = new Rail(82, 55);
@@ -112,7 +116,7 @@ void Game::run()
 	//Door* debugDoor = new Door(0, 0);
 	//debugDoor->changeOpacity(false);
    // debugRail->changeOpacity(false);
-   // sf::Vector2f worldPos;
+    //sf::Vector2f worldPos;
 
     enemySpawnClock->restart();
     new Enemy(sf::Vector2f(200, 107),false); 
@@ -417,8 +421,8 @@ void Game::runGameplayBehavior(char actionFlags)
     /*if (debug)
     {
         worldPos = window.mapPixelToCoords(sf::Mouse::getPosition());
-        debugRail->setPos(worldPos);
-        debugRail->changeOpacity(false);
+        debugDoor->setPos(worldPos);
+        debugDoor->changeOpacity(false);
     }*/
 
 
@@ -445,7 +449,7 @@ void Game::runGameplayBehavior(char actionFlags)
     //enemy->update(player);
 
     //This is for the enemy spawning via door.
-    if (enemySpawnClock->getElapsedTime().asSeconds() > 3)
+    if (enemySpawnClock->getElapsedTime().asSeconds() > 8)
         *allowEnemyDoorSpawn = true;
 
     //This is the main update for the door
