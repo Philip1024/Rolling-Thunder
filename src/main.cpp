@@ -32,6 +32,11 @@ What needs work:
 - other levels
 - UI needs finished/polishing
 - obstacles
+- Enemy ground collisions
+- walls
+- left side off map
+- bullet collision
+- bosses
 
 We did not cheat.
 */
