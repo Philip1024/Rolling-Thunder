@@ -37,9 +37,12 @@ private:
 	sf::Clock enemyClock;
 	bool startOpen;
 	bool opened;
+	//for walking out
+	bool topFloor;
 	bool opening = false;
 	bool closing = false;
 	bool stop;
+	int spawnCount = 0;
 	bool closed;
 	bool spawnOnce;//used to make sure only one enemy spawns when enemys are spawning from doors
 	int pause;
