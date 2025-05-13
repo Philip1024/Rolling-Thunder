@@ -197,6 +197,7 @@ void Player::update(char actionFlags)
 				{
 					falling = false;
 					centerGroundCollision = ground1.at(i);
+					//you minus 46 from centerGround Collision due to height of player
 					sprite.move({ 0,((centerGroundCollision.position.y - 46) - sprite.getGlobalBounds().position.y) });
 					floor = 0;
 				}
@@ -544,7 +545,7 @@ void Player::collide(Entity* other,char actionFlags)
 			//after player has exited door and door isn't doing anything reset to walking position
 			if (floor == 0)
 			{
-				if (!doorCast->getClosing() && !doorCast->getStop() && !doorCast->getOpen() && sprite.getGlobalBounds().position.y > 120)
+				if (!doorCast->getClosing() && !doorCast->getStop() && !doorCast->getOpen() && sprite.getGlobalBounds().position.y > centerGroundCollision.position.y-46)
 				{
 					/*
 					if (!faceRight)
@@ -552,7 +553,8 @@ void Player::collide(Entity* other,char actionFlags)
 					else
 						curMove = MOVE_RIGHT;
 						*/
-					sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
+					//you minus 46 from centerGround Collision due to height of player
+					sprite.move({ 0,(centerGroundCollision.position.y-46 - sprite.getGlobalBounds().position.y) });
 					//std::cout << "works" << std::endl;;
 					inDoor = false;
 					exitDoor = false;
@@ -561,7 +563,7 @@ void Player::collide(Entity* other,char actionFlags)
 			}
 			else
 			{
-				if (!doorCast->getClosing() && !doorCast->getStop() && !doorCast->getOpen() && sprite.getGlobalBounds().position.y > 43)
+				if (!doorCast->getClosing() && !doorCast->getStop() && !doorCast->getOpen() && sprite.getGlobalBounds().position.y > centerGroundCollision.position.y-46)
 				{
 					/*
 					if (!faceRight)
@@ -569,7 +571,7 @@ void Player::collide(Entity* other,char actionFlags)
 					else
 						curMove = MOVE_RIGHT;
 						*/
-					sprite.move({ 0,(43 - sprite.getGlobalBounds().position.y) });
+					sprite.move({ 0,(centerGroundCollision.position.y - 46 - sprite.getGlobalBounds().position.y) });
 					//std::cout << "works" << std::endl;;
 					inDoor = false;
 					exitDoor = false;
