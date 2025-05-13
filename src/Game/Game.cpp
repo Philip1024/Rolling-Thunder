@@ -434,7 +434,7 @@ void Game::runGameplayBehavior(char actionFlags)
 
     //  window.draw(debugRail->getSprite());
     for (sf::RectangleShape sprite : groundDebugSprites)
-        window.draw(sprite);
+        //window.draw(sprite); // TODO ndebug this
 
     for (int i = 0; i < doors.size(); i++)
         ((Door*)doors.at(i))->update(actionFlags, player->getSprite().getPosition().x, player->getSprite().getPosition().y, allowEnemyDoorSpawn, enemySpawnClock);

@@ -249,7 +249,7 @@ void Enemy::update(Player* player)
 	bounds.setFillColor(sf::Color::Transparent);
 	bounds.setOutlineColor(sf::Color::Green);
 	bounds.setOutlineThickness(1);
-	window->draw(bounds);
+	//window->draw(bounds);
 #endif
 }
 

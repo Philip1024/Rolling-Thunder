@@ -159,8 +159,8 @@ void GUI::drawGUI(sf::RenderWindow& window)
 	alignLineY.setSize({ 1, (float)window.getSize().y });
 	alignLineY.setPosition({ 144, 0 });
 	alignLineY.setFillColor(sf::Color::White);
-	window.draw(alignLineX);
-	window.draw(alignLineY);
+	//window.draw(alignLineX); // TODO Ndebug this
+	//window.draw(alignLineY);
 }
 
 /// <summary>

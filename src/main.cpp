@@ -1,10 +1,19 @@
 ﻿/*
 Rolling Thunder (https://github.com/Ninjune/Rolling-Thunder)
-An arcade game
+desc: Rolling thunder is a side scrolling arcade game where the main character, Albatross,
+tries to take out enemies to earn points. Eventually, after making it past 10 levels,
+Albatross must take out the final boss Maboo to complete the game.
+
 
 Authors:
+Andrew T
+Phillip 
+Trey C
 
 Keymap:
+(Debug)
+F5
+
 (Menu)
 5 - Add credit
 6 - Player one button

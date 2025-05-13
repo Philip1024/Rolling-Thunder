@@ -402,7 +402,7 @@ void Player::update(char actionFlags)
 	bounds.setFillColor(sf::Color::Transparent);
 	bounds.setOutlineColor(sf::Color::Green);
 	bounds.setOutlineThickness(1);
-	window->draw(bounds);
+	//window->draw(bounds);
 	
 	//std::cout << sprite.getPosition().x <<' '<< sprite.getPosition().y << std::endl;
 	clock.restart();
