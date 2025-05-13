@@ -7,7 +7,7 @@ Albatross must take out the final boss Maboo to complete the game.
 
 Authors:
 Andrew T
-Phillip 
+Phillip C
 Trey C
 
 Keymap:
