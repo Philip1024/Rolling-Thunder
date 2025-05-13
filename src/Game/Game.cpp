@@ -115,7 +115,11 @@ void Game::run()
    // sf::Vector2f worldPos;
 
     enemySpawnClock->restart();
-    new Enemy(sf::Vector2f(200, 107),false); // mem leak
+    new Enemy(sf::Vector2f(200, 107),false); 
+    new Enemy(sf::Vector2f(400, 107), false);
+    new Enemy(sf::Vector2f(600, 107), false);
+    new Enemy(sf::Vector2f(800, 107), false);
+    new Enemy(sf::Vector2f(1000, 107), false);
 
     //window/clock setup
     Entity::setWindow(&window);
@@ -439,7 +443,7 @@ void Game::runGameplayBehavior(char actionFlags)
     //enemy->update(player);
 
     //This is for the enemy spawning via door.
-    if (enemySpawnClock->getElapsedTime().asSeconds() > 6)
+    if (enemySpawnClock->getElapsedTime().asSeconds() > 3)
         *allowEnemyDoorSpawn = true;
 
     //This is the main update for the door

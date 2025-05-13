@@ -112,7 +112,7 @@ void Door::update(char actionFlags, float x, float y, bool* allowEnemyDoorSpawn,
 	int playerDistanceY = abs(y - sprite.getPosition().y);
 
 	//change to check the Y coordinate of player position
-	if ((playerDistanceX < 40 && *allowEnemyDoorSpawn && doorFrameCount == 0)||enemySpawned)
+	if ((playerDistanceX < 50 && *allowEnemyDoorSpawn && doorFrameCount == 0)||enemySpawned)
 	{
 		enemySpawned = true;
 		//door opens
