@@ -29,7 +29,11 @@ Bullet::Bullet(bool bTeam,bool bDirection, float x, float y) : Entity(AnimationD
 	}
 }
 
-
+/// <summary>
+/// deals with animations for when bullet collides with enemy
+/// </summary>
+/// <param name="other">entity colliding with</param>
+/// <param name="actionFlags">user input</param>
 void Bullet::collide(Entity* other, char actionFlags)
 {
 	Enemy* enemy = dynamic_cast<Enemy*>(other);
@@ -41,8 +45,10 @@ void Bullet::collide(Entity* other, char actionFlags)
 }
 
 
-//if side is true then use left, else use right
-//this will be called by player
+/// <summary>
+/// updates bullet animation
+/// </summary>
+/// <param name="actionFlags">user input</param>
 void Bullet::update(char actionFlags)
 {
 	Entity::update(actionFlags);//draws bullet

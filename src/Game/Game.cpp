@@ -259,8 +259,10 @@ void Game::run()
 
 }
 
-//This method iterates through the entities vector with i being one less the j 
-//to allow for comparison.
+/// <summary>
+/// methods calls collision functions for all entities that are "colliding"
+/// </summary>
+/// <param name="actionFlags">user input</param>
 void Game::isColliding(char actionFlags)
 {
     std::vector<Entity*>& entities = Entity::getEntities();
