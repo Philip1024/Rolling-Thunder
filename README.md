@@ -11,3 +11,15 @@ shoot -> R
 climb Up -> W+F
 climb down -> S+F
 ## Bugs/ unfinished work
+- more animations
+- enemy recolors/other enemies
+- other levels
+- UI needs finished/polishing
+- obstacles
+- Enemy ground collisions
+- walls
+- left side off map
+- bullet collision
+- bosses
+- levels 2-10
+- get Emluator to play game and rip background spritesheets
