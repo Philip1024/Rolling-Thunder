@@ -58,17 +58,20 @@ void Enemy::collide(Entity* other)
 	Bullet* bulletCast = dynamic_cast<Bullet*>(other);
 	if (bulletCast != nullptr)
 	{
-		
-		if (bulletCast->team)
+		if (!(bulletCast->getUsed()))
 		{
-			dying = true;
-			if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT)
+			if (bulletCast->team)
 			{
-				curMove = HIT_LEFT;
-			}
-			else
-			{
-				curMove = HIT_RIGHT;
+				dying = true;
+				if (curMove == WALK_LEFT || curMove == IDLE_LEFT || curMove == MOUNT_LEFT || curMove == SHOOT_LEFT)
+				{
+					curMove = HIT_LEFT;
+				}
+				else
+				{
+					curMove = HIT_RIGHT;
+				}
+				bulletCast->setUsed(true);
 			}
 		}
 	}

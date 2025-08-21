@@ -11,11 +11,14 @@ public:
 	bool team;
 	void update(char actionFlags);
 	bool direction;
+	void setUsed(bool isUsed) { used = isUsed; }
+	bool getUsed() { return used; }
+	bool getInUse(){return inUse;}
 	Bullet(bool bTeam, bool bDirection,float x, float y);
 	AnimationData::SectionData* bulletRight, * bulletLeft;
 private:
 	float xPos, yPos;
-	bool fired;
+	bool fired,used,inUse;
 	sf::Clock pause;
 };
 

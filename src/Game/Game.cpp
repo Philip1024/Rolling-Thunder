@@ -465,7 +465,10 @@ void Game::runGameplayBehavior(char actionFlags)
         player->update(actionFlags);
     //update bullete and draw
     for (int i = 0; i < bullets.size(); i++)
-        bullets.at(i)->update(actionFlags);
+    {
+        if(((Bullet*)bullets.at(i))->getInUse())
+            bullets.at(i)->update(actionFlags);
+    }
 
 
     //enemy update

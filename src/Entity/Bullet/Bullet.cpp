@@ -18,6 +18,7 @@ Bullet::Bullet(bool bTeam,bool bDirection, float x, float y) : Entity(AnimationD
 	bulletLeft = new AnimationData::SectionData(AnimationData::getSection("bullet_left"));
 	bulletRight = new AnimationData::SectionData(AnimationData::getSection("bullet_right"));
 	fired = false;
+	inUse = true;
 	//true is left, false is right
 	if(direction)
 	{ 
@@ -52,17 +53,34 @@ void Bullet::collide(Entity* other, char actionFlags)
 void Bullet::update(char actionFlags)
 {
 	Entity::update(actionFlags);//draws bullet
-	if (!fired&&pause.getElapsedTime().asSeconds()>=0.1f)
+	if (used)
 	{
-		if (direction)
-			sprite.setTextureRect(AnimationData::getSection("bullet_right")->getFrame(1));
+		if (pause.getElapsedTime().asSeconds() <= 0.1f)
+		{
+			if (direction)
+				sprite.setTextureRect(AnimationData::getSection("bullet_right")->getFrame(2));
+			else
+				sprite.setTextureRect(AnimationData::getSection("bullet_left")->getFrame(2));
+		}
 		else
-			sprite.setTextureRect(AnimationData::getSection("bullet_left")->getFrame(1));
-		fired = true;
+		{
+			inUse = false;
+		}
 	}
-	if(direction)
-		sprite.move({ 5,0 });
-	else 
-		sprite.move({ -5,0 });
+	else
+	{
+		if (!fired)
+		{
+			if (direction)
+				sprite.setTextureRect(AnimationData::getSection("bullet_right")->getFrame(1));
+			else
+				sprite.setTextureRect(AnimationData::getSection("bullet_left")->getFrame(1));
+			fired = true;
+		}
+		if (direction)
+			sprite.move({ 5,0 });
+		else
+			sprite.move({ -5,0 });
+	}
 }
 
