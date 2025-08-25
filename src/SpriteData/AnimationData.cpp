@@ -97,6 +97,10 @@ void AnimationData::load()
 	getSection("enemy_dissolve_left")->setNextFrameFunction(rightToLeftFunction);
 	sectionMap["enemy_walk_out"] = new Section(textureMap[ENEMY],
 		4, 1, sf::Vector2u(492, 249), sf::Vector2u(618, 305), false);
+	sectionMap["enemy_walk_out"] = new Section(textureMap[ENEMY],
+		4, 1, sf::Vector2u(492, 249), sf::Vector2u(618, 305), false);
+
+
 
 
 	//doors
@@ -122,7 +126,8 @@ void AnimationData::load()
 void AnimationData::reloadTextures()
 {
 	textureMap[ENEMY]->loadFromFile("res/SpriteSheets/EnemyRemake.png");
-	//textureMap[ENEMY2]->loadFromFile("res/SpriteSheets/Enemy.png");
+	textureMap[ENEMY2]->loadFromFile("res/SpriteSheets/Enemy.png");
+	textureMap[ENEMY3]->loadFromFile("res/SpriteSheets/Enemy_flipped.png");
 	textureMap[ALBATROSS]->loadFromFile("res/SpriteSheets/Albatross.png");
 	textureMap[DOOR]->loadFromFile("res/SpriteSheets/Door(1).png");
 	textureMap[RAIL]->loadFromFile("res/SpriteSheets/RailFinal.png");
