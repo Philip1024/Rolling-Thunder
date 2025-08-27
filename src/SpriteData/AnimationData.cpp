@@ -95,11 +95,12 @@ void AnimationData::load()
 	sectionMap["enemy_dissolve_right"] = new Section(textureMap[ENEMY],
 		2, 5, sf::Vector2u(578, 1), sf::Vector2u(84, 19), true);
 	getSection("enemy_dissolve_left")->setNextFrameFunction(rightToLeftFunction);
+	/*
 	sectionMap["enemy_fall_right"] = new Section(textureMap[ENEMY],
-		1, 1, sf::Vector2u(324, 208), sf::Vector2u(366, 257), false);
+		1, 1, sf::Vector2u(198, 890), sf::Vector2u(241, 938), false);
 	sectionMap["enemy_fall_left"] = new Section(textureMap[ENEMY],
-		1, 1, sf::Vector2u(656, 208), sf::Vector2u(698, 257), false);
-
+		1, 1, sf::Vector2u(136, 891), sf::Vector2u(180, 940), false);
+		*/
 
 
 
