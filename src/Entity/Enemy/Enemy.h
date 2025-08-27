@@ -25,7 +25,9 @@ public:
 		IDLE_CROUCH,
 		PUNCH_RIGHT,
 		PUNCH_LEFT,
-		WALK_OUT
+		WALK_OUT,
+		FALL_LEFT,
+		FALL_RIGHT
 	};
 	Enemy(sf::Vector2f pos,bool spawnInDoor);
 	~Enemy();

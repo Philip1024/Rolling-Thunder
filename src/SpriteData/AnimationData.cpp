@@ -95,10 +95,10 @@ void AnimationData::load()
 	sectionMap["enemy_dissolve_right"] = new Section(textureMap[ENEMY],
 		2, 5, sf::Vector2u(578, 1), sf::Vector2u(84, 19), true);
 	getSection("enemy_dissolve_left")->setNextFrameFunction(rightToLeftFunction);
-	sectionMap["enemy_walk_out"] = new Section(textureMap[ENEMY],
-		4, 1, sf::Vector2u(492, 249), sf::Vector2u(618, 305), false);
-	sectionMap["enemy_walk_out"] = new Section(textureMap[ENEMY],
-		4, 1, sf::Vector2u(492, 249), sf::Vector2u(618, 305), false);
+	sectionMap["enemy_fall_right"] = new Section(textureMap[ENEMY],
+		1, 1, sf::Vector2u(324, 208), sf::Vector2u(366, 257), false);
+	sectionMap["enemy_fall_left"] = new Section(textureMap[ENEMY],
+		1, 1, sf::Vector2u(656, 208), sf::Vector2u(698, 257), false);
 
 
 
@@ -126,8 +126,8 @@ void AnimationData::load()
 void AnimationData::reloadTextures()
 {
 	textureMap[ENEMY]->loadFromFile("res/SpriteSheets/EnemyRemake.png");
-	textureMap[ENEMY2]->loadFromFile("res/SpriteSheets/Enemy.png");
-	textureMap[ENEMY3]->loadFromFile("res/SpriteSheets/Enemy_flipped.png");
+	//textureMap[ENEMY2]->loadFromFile("res/SpriteSheets/Enemy.png");
+	//textureMap[ENEMY3]->loadFromFile("res/SpriteSheets/Enemy_flipped.png");
 	textureMap[ALBATROSS]->loadFromFile("res/SpriteSheets/Albatross.png");
 	textureMap[DOOR]->loadFromFile("res/SpriteSheets/Door(1).png");
 	textureMap[RAIL]->loadFromFile("res/SpriteSheets/RailFinal.png");
