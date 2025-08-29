@@ -46,8 +46,6 @@ private:
 enum AnimationData::TextureName
 {
 	ENEMY,//remake
-	ENEMY2,//original enemy sprite sheet, used for death animation
-	ENEMY3,//enemy sprite sheet flipped
 	ALBATROSS,
 	DOOR,
 	RAIL,

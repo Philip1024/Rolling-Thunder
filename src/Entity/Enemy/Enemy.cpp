@@ -24,8 +24,8 @@ Enemy::Enemy(sf::Vector2f pos,bool spawnInDoor)
 	animationMap[DIE_RIGHT] = new SectionData(AnimationData::getSection("enemy_dissolve_right"));
 	animationMap[DIE_LEFT] = new SectionData(AnimationData::getSection("enemy_dissolve_left"));
 	animationMap[WALK_OUT] = new SectionData(AnimationData::getSection("enemy_walk_out"));
-	//animationMap[FALL_LEFT] = new SectionData(AnimationData::getSection("enemy_fall_left"));
-	//animationMap[FALL_RIGHT] = new SectionData(AnimationData::getSection("enemy_fall_right"));
+	animationMap[FALL_LEFT] = new SectionData(AnimationData::getSection("enemy_fall_left"));
+	animationMap[FALL_RIGHT] = new SectionData(AnimationData::getSection("enemy_fall_right"));
 	enemys.push_back(this);
 	dying = false;
 	dyingCount = 0;
