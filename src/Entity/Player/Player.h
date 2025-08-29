@@ -53,6 +53,8 @@ public:
 	/// </summary>
 	/// <returns>true if player is alive, false if player is dead</returns>
 	bool getAlive() { return alive; }
+	void wall();
+	void unWall();
 private:
 	//keeps track of time between sprite updates
 	sf::Clock clock;
@@ -96,6 +98,8 @@ private:
 	bool dying;
 	int dyingCount;
 	bool alive;
+	bool Lwalled;
+	bool Rwalled;
 	sf::FloatRect centerGroundCollision;
 	std::vector<sf::FloatRect> ground1;
 	std::vector<sf::FloatRect> ground2;

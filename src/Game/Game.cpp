@@ -8,6 +8,7 @@
 #include "../Entity/Raill/Rail.h"
 #include "../Entity/Bullet/Bullet.h"
 #include "../Entity/Enemy/Enemy.h"
+#include "../Entity/Wall/Wall.h"
 #include<vector>
 #include<iostream>
 
@@ -270,6 +271,10 @@ void Game::run()
 /// <param name="actionFlags">user input</param>
 void Game::isColliding(char actionFlags)
 {
+    std::vector<Wall*> walls;
+    walls.push_back(new Wall(8.5, 175, 100));
+    walls.push_back(new Wall(1720, 175, 100));
+
     std::vector<Entity*>& entities = Entity::getEntities();
     if (entities.size() > 1)
     {
@@ -287,6 +292,22 @@ void Game::isColliding(char actionFlags)
                 Bullet* bulletCast2 = dynamic_cast<Bullet*>(entities.at(j));
                 Enemy* enemyCast = dynamic_cast<Enemy*>(entities.at(i));
                 Enemy* enemyCast2 = dynamic_cast<Enemy*>(entities.at(j));
+                //Wall player collision
+                if ((playerCast != nullptr))
+                {
+                    int waller = 0;
+                    for (int k = 0; k < walls.size(); k++)
+                    {
+                        if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(*walls.at(k)->getBox()))
+                        {
+                            waller++;
+                        }
+                    }
+                    if (waller > 0)
+                        playerCast->wall();
+                    else
+                        playerCast->unWall();
+                }
                 // rail player collision
                 if ((playerCast!=nullptr&&railCast2!=nullptr))
                 {
@@ -381,6 +402,8 @@ void Game::isColliding(char actionFlags)
              }
         }
     }
+    for (int i = 0; i < walls.size(); i++)
+        delete walls.at(i);
 }
 
 
