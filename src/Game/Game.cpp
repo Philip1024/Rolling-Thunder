@@ -121,18 +121,18 @@ void Game::run()
     //sf::Vector2f worldPos;
 
     enemySpawnClock->restart();
-    new Enemy(sf::Vector2f(200, 107),false); 
-    new Enemy(sf::Vector2f(400, 107), false);
-    new Enemy(sf::Vector2f(600, 107), false);
-    new Enemy(sf::Vector2f(800, 107), false);
-    new Enemy(sf::Vector2f(1000, 107), false);
-    new Enemy(sf::Vector2f(2382, 360), false);
-    new Enemy(sf::Vector2f(2582, 360), false);
-    new Enemy(sf::Vector2f(2782, 360), false);
-    new Enemy(sf::Vector2f(2982, 360), false);
-    new Enemy(sf::Vector2f(3182, 360), false);
-    new Enemy(sf::Vector2f(3382, 370), false);
-    new Enemy(sf::Vector2f(3582, 370), false);
+    //new Enemy(sf::Vector2f(200, 107),false); 
+    //new Enemy(sf::Vector2f(400, 107), false);
+    //new Enemy(sf::Vector2f(600, 107), false);
+    //new Enemy(sf::Vector2f(800, 107), false);
+   // new Enemy(sf::Vector2f(1000, 107), false);
+    //new Enemy(sf::Vector2f(2382, 360), false);
+    //new Enemy(sf::Vector2f(2582, 360), false);
+    //new Enemy(sf::Vector2f(2782, 360), false);
+    //new Enemy(sf::Vector2f(2982, 360), false);
+    //new Enemy(sf::Vector2f(3182, 360), false);
+    //new Enemy(sf::Vector2f(3382, 370), false);
+    //new Enemy(sf::Vector2f(3582, 370), false);
 
     //window/clock setup
     Entity::setWindow(&window);
@@ -434,7 +434,7 @@ void Game::runGameplayBehavior(char actionFlags)
 
     //  window.draw(debugRail->getSprite());
     for (sf::RectangleShape sprite : groundDebugSprites)
-        //window.draw(sprite); // TODO ndebug this
+        window.draw(sprite); // TODO ndebug this
 
     for (int i = 0; i < doors.size(); i++)
         ((Door*)doors.at(i))->update(actionFlags, player->getSprite().getPosition().x, player->getSprite().getPosition().y, allowEnemyDoorSpawn, enemySpawnClock);
