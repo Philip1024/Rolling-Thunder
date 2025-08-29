@@ -120,10 +120,8 @@ void Enemy::update(Player* player)
 		if (sprite.getGlobalBounds().findIntersection(ground.at(i)) != std::nullopt||spawnDoor||dying)
 		{
 			shouldFall = false;
-			/*
 			if(!spawnDoor&&!dying)
 				sprite.move({ 0,((ground.at(i).position.y-40) - sprite.getGlobalBounds().position.y)});
-				*/
 		}
 	}
 
