@@ -32,6 +32,17 @@ Enemy::Enemy(sf::Vector2f pos,bool spawnInDoor)
 	alive = true;
 	spawnDoor = spawnInDoor;
 	spawnCount = 0;
+	faceRight = true;
+	ground.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,5.f }));
+	ground.push_back(sf::FloatRect({ 132.f,90.f }, { 441.f,5.f }));
+	ground.push_back(sf::FloatRect({ 764.f,90.f }, { 375.f,5.f }));
+	ground.push_back(sf::FloatRect({ 1333.f,90.f }, { 385.f,5.f }));
+	ground.push_back(sf::FloatRect({ 1717.f,90.f }, { 46.f, 5.f }));
+	ground.push_back(sf::FloatRect({ 1763.f,145.f }, { 48.f,5.f }));
+	ground.push_back(sf::FloatRect({ 1811.f,203.f }, { 48.f, 5.f }));
+	ground.push_back(sf::FloatRect({ 1859.f,273.f }, { 46.f,5.f }));
+	ground.push_back(sf::FloatRect({ 1905.f,342.f }, { 51.f,5.f }));
+	ground.push_back(sf::FloatRect({ 1952.f,415.f }, { 1650.f,5.f }));
 }
 
 
@@ -100,7 +111,41 @@ void Enemy::update(Player* player)
 	// when the animation ends
 	//if the enemy is in the process of death skip this statement
 	//
+	curMove = IDLE_RIGHT;
+	shouldFall = true;
 	int playerDistance = abs(player->getSprite().getPosition().x - sprite.getPosition().x);
+	for (int i = 0; i < ground.size(); i++)
+	{
+		//std::cout << sprite.getGlobalBounds().position.x << sprite.getGlobalBounds().size.x << std::endl;
+		if (sprite.getGlobalBounds().findIntersection(ground.at(i)) != std::nullopt||spawnDoor||dying)
+		{
+			shouldFall = false;
+			/*
+			if(!spawnDoor&&!dying)
+				sprite.move({ 0,((ground.at(i).position.y-40) - sprite.getGlobalBounds().position.y)});
+				*/
+		}
+	}
+
+	if (shouldFall)
+	{
+		std::cout << "test";
+		if (faceRight)
+			curMove = FALL_RIGHT;
+		else
+			curMove = FALL_LEFT;
+		/*
+		for (int i = 0; i < ground.size(); i++)
+		{
+			if (sprite.getGlobalBounds().findIntersection(ground.at(i)) != std::nullopt||spawnDoor||dying)
+			{
+				shouldFall = false;
+				if(!spawnDoor&&!dying)
+					sprite.move({ 0,((ground.at(i).position.y - 46) - sprite.getGlobalBounds().position.y) });
+			}
+		}
+		*/
+	}
 	if (spawnDoor)
 	{
 		curMove = WALK_OUT;
@@ -159,20 +204,32 @@ void Enemy::update(Player* player)
 			dyingCount = 0;
 		}
 	}
-	else if (moveTicks <= 0 || curMove != DIE_LEFT || curMove != DIE_RIGHT)
+	else if (moveTicks <= 0 && curMove != DIE_LEFT && curMove != DIE_RIGHT&&curMove != FALL_LEFT&&curMove != FALL_RIGHT)
 	{
 		if (player->playerInDoor() && playerDistance < 70)
 		{
 			int cycleTick = getCurrentTick() % 190;
 
-			if (cycleTick < 60) 
+			if (cycleTick < 60)
+			{
 				curMove = WALK_LEFT;
-			else if (cycleTick < 95) 
+				faceRight = false;
+			}
+			else if (cycleTick < 95)
+			{
 				curMove = IDLE_RIGHT;//change to idle left later on when we have the animation
-			else if (cycleTick < 150) 
+				faceRight = false;//because should be IDLE_LEFT we're just missing animation
+			}
+			else if (cycleTick < 150)
+			{
 				curMove = WALK_RIGHT;
-			else 
+				faceRight = true;
+			}
+			else
+			{
 				curMove = IDLE_RIGHT;
+				faceRight = true;
+			}
 		}
 		else if (playerDistance > 150 || rand() % 100 < 5)
 		{
@@ -191,9 +248,15 @@ void Enemy::update(Player* player)
 		else
 		{
 			if (player->getSprite().getPosition().x < sprite.getPosition().x)
+			{
 				curMove = WALK_LEFT;
+				faceRight = false;
+			}
 			else
+			{
 				curMove = WALK_RIGHT;
+				faceRight = true;
+			}
 		}
 
 	}
@@ -237,8 +300,15 @@ void Enemy::update(Player* player)
 		break;
 	case HIT_RIGHT:
 		sprite.move(sf::Vector2f(-1, 0));
+		break;
 	case WALK_OUT:
 		sprite.move({ 0,0.24 });
+		break;
+	case FALL_LEFT:
+		sprite.move({ 0,1 });
+		break;
+	case FALL_RIGHT:
+		sprite.move({ 0,1 });
 		break;
 	}
 	//std::cout << getCurrentTick() << std::endl;

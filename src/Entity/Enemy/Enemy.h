@@ -61,4 +61,7 @@ private:
 	bool alive;
 	bool spawnDoor;// tells if enemy spawns out of a door
 	int spawnCount;
+	bool shouldFall;//if enemy isn't on the ground it should fall
+	bool faceRight;
+	std::vector<sf::FloatRect> ground;
 };
