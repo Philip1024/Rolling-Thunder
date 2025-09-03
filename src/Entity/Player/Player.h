@@ -72,6 +72,7 @@ private:
 	bool exitDoor;
 	bool exitOnce;//used to make sure door is only exited once
 	bool droppingDown;//used to tell when player is dropping down to bottom floor
+	bool noDropDown;//used to determine when player can't jump off the rail onto the ground below
 	int jumpFrame;
 	float xGlobal, yGlobal;
 	float xMov, yMov,xPos,yPos;//used to keep track of movement of sprite in jumping animation

@@ -12,12 +12,13 @@ public:
 	void update(char actionFlags);
 	bool direction;
 	void setUsed(bool isUsed) { used = isUsed; }
+	void setPauseTime(float setPauseTime) { pauseTime = setPauseTime; }
 	bool getUsed() { return used; }
 	bool getInUse(){return inUse;}
 	Bullet(bool bTeam, bool bDirection,float x, float y);
 	AnimationData::SectionData* bulletRight, * bulletLeft;
 private:
-	float xPos, yPos;
+	float xPos, yPos,pauseTime;
 	bool fired,used,inUse;
 	sf::Clock pause;
 };

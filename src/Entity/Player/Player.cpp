@@ -86,6 +86,7 @@ Player::Player()
 	dropping = false;//used to determine whether viewport should drop as player moves
 	curMove = STAND_RIGHT;
 	invincibility = false;
+	noDropDown = false;
 	ground1.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,5.f }));
 	ground2.push_back(sf::FloatRect({ 132.f,90.f }, { 441.f,5.f }));
 	ground2.push_back(sf::FloatRect({ 764.f,90.f }, { 375.f,5.f }));
@@ -121,6 +122,7 @@ Player::~Player()
 
 void Player::update(char actionFlags)
 {
+	std::cout << noDropDown << std::endl;
 	Entity::update(actionFlags);//draws player
 	 // only update the animation past this point
 	if (dying)
@@ -172,8 +174,12 @@ void Player::update(char actionFlags)
 			{
 				shouldFall = false;
 				if (sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
+				{
 					centerGroundCollision = ground2.at(i);
-				//jumping has it's on way to determine droppingvb
+					if (i > 2)
+						noDropDown = true;
+				}
+				//jumping has it's own way to determine dropping
 				if (!activeJump&&!activeRightJump&&!activeLeftJump)
 				{
 					if (i >= 3 && i <= 6 && sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
@@ -228,8 +234,8 @@ void Player::update(char actionFlags)
 		}
 			
 	}
-	//jumping off rail, must be on floor ==1 to do
-	if (floor==1||jumpingOffRail)
+	//jumping off rail, must be on floor ==1 to do, can't be off a rail and going down steps
+	if (((floor==1 && !noDropDown )||jumpingOffRail))
 	{
 		if ((actionFlags == 0b01000010||jumpingOffRail) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail&&!dying)
 		{

@@ -86,6 +86,7 @@ void Enemy::collide(Entity* other)
 					curMove = HIT_RIGHT;
 				}
 				bulletCast->setUsed(true);
+				bulletCast->setPauseTime(0.1f);
 			}
 		}
 	}
@@ -126,7 +127,6 @@ void Enemy::update(Player* player)
 			{
 				centerGroundCollision = ground.at(i);
 				testGroundIndex = i;
-				std::cout << centerGroundCollision.position.y << ' ' << testGroundIndex << std::endl;
 				groundFound = true;
 			}
 		}
@@ -134,7 +134,6 @@ void Enemy::update(Player* player)
 
 	if (shouldFall)
 	{
-		std::cout << "test";
 		if (faceRight)
 			curMove = FALL_RIGHT;
 		else
@@ -149,7 +148,6 @@ void Enemy::update(Player* player)
 				{
 					centerGroundCollision = ground.at(i);
 					testGroundIndex = i;
-					std::cout << centerGroundCollision.position.y << ' ' << testGroundIndex << std::endl;
 					groundFound = true;
 				}
 				sprite.move({ 0,((centerGroundCollision.position.y- sprite.getGlobalBounds().size.y + 1) - sprite.getGlobalBounds().position.y) });
@@ -165,7 +163,6 @@ void Enemy::update(Player* player)
 			spawnDoor = false;
 			curMove = IDLE_CROUCH;
 			sprite.move({ 0,((centerGroundCollision.position.y- sprite.getGlobalBounds().size.y + 1) - sprite.getGlobalBounds().position.y) });
-			std::cout << "test" << std::endl;
 		}
 	}
 	else if (dying)

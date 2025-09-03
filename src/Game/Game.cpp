@@ -324,6 +324,7 @@ void Game::isColliding(char actionFlags)
                         if (waller > 0)
                         {
                             bulletCast->setUsed(true);
+                            bulletCast->setPauseTime(0.3f);
                         }
                     }
                 }
@@ -338,6 +339,7 @@ void Game::isColliding(char actionFlags)
                         if (waller > 0)
                         {
                             bulletCast2->setUsed(true);
+                            bulletCast2->setPauseTime(0.3f);
                         }
                     }
                 }
