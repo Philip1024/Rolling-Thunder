@@ -64,4 +64,5 @@ private:
 	bool shouldFall;//if enemy isn't on the ground it should fall
 	bool faceRight;
 	std::vector<sf::FloatRect> ground;
+	sf::FloatRect centerGroundCollision;
 };

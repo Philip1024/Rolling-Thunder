@@ -10,7 +10,7 @@ Enemy::Enemy(sf::Vector2f pos,bool spawnInDoor)
 	: Entity(AnimationData::getTexture(AnimationData::ENEMY))
 {
 	sprite.setPosition(pos);
-
+	sprite.setScale({ 0.8f, 0.8f });//for testing
 	animationMap[WALK_LEFT] = new SectionData(AnimationData::getSection("enemy_move_left"));
 	animationMap[WALK_RIGHT] = new SectionData(AnimationData::getSection("enemy_move_right"));
 	animationMap[IDLE_CROUCH] = new SectionData(AnimationData::getSection("enemy_idle_sneak"));
@@ -106,6 +106,7 @@ void Enemy::update(char actionFlags)
 /// <param name="player">pointer to player in game</param>
 void Enemy::update(Player* player)
 {
+	std::cout << sprite.getGlobalBounds().position.y << std::endl;
 	sprite.setScale(sf::Vector2f(0.9, 0.9));
 
 	// when the animation ends
@@ -120,8 +121,8 @@ void Enemy::update(Player* player)
 		if (sprite.getGlobalBounds().findIntersection(ground.at(i)) != std::nullopt||spawnDoor||dying)
 		{
 			shouldFall = false;
-			if(!spawnDoor&&!dying)
-				sprite.move({ 0,((ground.at(i).position.y-40) - sprite.getGlobalBounds().position.y)});
+			if (sprite.getGlobalBounds().findIntersection(ground.at(i)) != std::nullopt)
+				centerGroundCollision = ground.at(i);
 		}
 	}
 
@@ -132,17 +133,16 @@ void Enemy::update(Player* player)
 			curMove = FALL_RIGHT;
 		else
 			curMove = FALL_LEFT;
-		/*
 		for (int i = 0; i < ground.size(); i++)
 		{
 			if (sprite.getGlobalBounds().findIntersection(ground.at(i)) != std::nullopt||spawnDoor||dying)
 			{
 				shouldFall = false;
-				if(!spawnDoor&&!dying)
-					sprite.move({ 0,((ground.at(i).position.y - 46) - sprite.getGlobalBounds().position.y) });
+				if (sprite.getGlobalBounds().findIntersection(ground.at(i)) != std::nullopt)
+					centerGroundCollision = ground.at(i);
+				sprite.move({ 0,((centerGroundCollision.position.y- sprite.getGlobalBounds().size.y + 1) - sprite.getGlobalBounds().position.y) });
 			}
 		}
-		*/
 	}
 	if (spawnDoor)
 	{
@@ -152,6 +152,8 @@ void Enemy::update(Player* player)
 		{
 			spawnDoor = false;
 			curMove = IDLE_CROUCH;
+			sprite.move({ 0,((centerGroundCollision.position.y- sprite.getGlobalBounds().size.y + 1) - sprite.getGlobalBounds().position.y) });
+			std::cout << "test" << std::endl;
 		}
 	}
 	else if (dying)
@@ -303,17 +305,18 @@ void Enemy::update(Player* player)
 		sprite.move({ 0,0.24 });
 		break;
 	case FALL_LEFT:
-		sprite.move({ 0,1 });
+		sprite.move({ 0,2 });
 		break;
 	case FALL_RIGHT:
-		sprite.move({ 0,1 });
+		sprite.move({ 0,2 });
 		break;
 	}
 	//std::cout << getCurrentTick() << std::endl;
 	if (getCurrentTick() % 4 == 0)
 		sprite.setTextureRect(animationMap[curMove]->nextFrame());
 	lastMove = curMove;
-
+	if(!dying && !spawnDoor&&!shouldFall)
+		sprite.move({ 0,((centerGroundCollision.position.y - sprite.getGlobalBounds().size.y+1) - sprite.getGlobalBounds().position.y) });
 	Entity::update(0b0);
 #ifndef NDEBUG
 	sf::RectangleShape bounds;
