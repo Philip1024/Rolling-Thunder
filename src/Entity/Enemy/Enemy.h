@@ -63,6 +63,7 @@ private:
 	int spawnCount;
 	bool shouldFall;//if enemy isn't on the ground it should fall
 	bool faceRight;
+	bool groundFound;
 	std::vector<sf::FloatRect> ground;
 	sf::FloatRect centerGroundCollision;
 	int testGroundIndex;

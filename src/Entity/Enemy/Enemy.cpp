@@ -33,6 +33,7 @@ Enemy::Enemy(sf::Vector2f pos,bool spawnInDoor)
 	spawnDoor = spawnInDoor;
 	spawnCount = 0;
 	faceRight = true;
+	groundFound = false;
 	ground.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,5.f }));
 	ground.push_back(sf::FloatRect({ 132.f,90.f }, { 441.f,5.f }));
 	ground.push_back(sf::FloatRect({ 764.f,90.f }, { 375.f,5.f }));
@@ -115,7 +116,8 @@ void Enemy::update(Player* player)
 	curMove = IDLE_RIGHT;
 	shouldFall = true;
 	int playerDistance = abs(player->getSprite().getPosition().x - sprite.getPosition().x);
-	for (int i = 0; i < ground.size(); i++)
+	groundFound = false;
+	for (int i = 0; i < ground.size()&&!groundFound; i++)
 	{
 		//std::cout << sprite.getGlobalBounds().position.x << sprite.getGlobalBounds().size.x << std::endl;
 		if (sprite.getGlobalBounds().findIntersection(ground.at(i)) != std::nullopt||spawnDoor||dying)
@@ -125,6 +127,8 @@ void Enemy::update(Player* player)
 			{
 				centerGroundCollision = ground.at(i);
 				testGroundIndex = i;
+				std::cout << centerGroundCollision.position.y << ' ' << testGroundIndex << std::endl;
+				groundFound = true;
 			}
 		}
 	}
@@ -136,7 +140,8 @@ void Enemy::update(Player* player)
 			curMove = FALL_RIGHT;
 		else
 			curMove = FALL_LEFT;
-		for (int i = 0; i < ground.size(); i++)
+		groundFound = false;
+		for (int i = 0; i < ground.size()&&!groundFound; i++)
 		{
 			if (sprite.getGlobalBounds().findIntersection(ground.at(i)) != std::nullopt||spawnDoor||dying)
 			{
@@ -145,6 +150,8 @@ void Enemy::update(Player* player)
 				{
 					centerGroundCollision = ground.at(i);
 					testGroundIndex = i;
+					std::cout << centerGroundCollision.position.y << ' ' << testGroundIndex << std::endl;
+					groundFound = true;
 				}
 				sprite.move({ 0,((centerGroundCollision.position.y- sprite.getGlobalBounds().size.y + 1) - sprite.getGlobalBounds().position.y) });
 			}
