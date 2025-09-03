@@ -126,7 +126,7 @@ void Game::run()
     //new Enemy(sf::Vector2f(400, 107), false);
     //new Enemy(sf::Vector2f(600, 107), false);
     //new Enemy(sf::Vector2f(800, 107), false);
-   // new Enemy(sf::Vector2f(1000, 107), false);
+    //new Enemy(sf::Vector2f(1000, 107), false);
     //new Enemy(sf::Vector2f(2382, 360), false);
     //new Enemy(sf::Vector2f(2582, 360), false);
     //new Enemy(sf::Vector2f(2782, 360), false);

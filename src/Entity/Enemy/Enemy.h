@@ -65,4 +65,5 @@ private:
 	bool faceRight;
 	std::vector<sf::FloatRect> ground;
 	sf::FloatRect centerGroundCollision;
+	int testGroundIndex;
 };
