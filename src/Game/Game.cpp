@@ -308,6 +308,20 @@ void Game::isColliding(char actionFlags)
                     else
                         playerCast->unWall();
                 }
+                //Wall bullet collision
+                if ((bulletCast != nullptr))
+                {
+                    int waller = 0;
+                    for (int k = 0; k < walls.size(); k++)
+                    {
+                        if (entities.at(i)->getSprite().getGlobalBounds().findIntersection(*walls.at(k)->getBox()))
+                            waller++;
+                        if (waller > 0)
+                        {
+                            bulletCast->setUsed(true);
+                        }
+                    }
+                }
                 // rail player collision
                 if ((playerCast!=nullptr&&railCast2!=nullptr))
                 {
