@@ -274,6 +274,11 @@ void Game::isColliding(char actionFlags)
     std::vector<Wall*> walls;
     walls.push_back(new Wall(8.5, 175, 100));
     walls.push_back(new Wall(1720, 175, 80));
+    walls.push_back(new Wall(1763, 146, 50));
+    walls.push_back(new Wall(1810, 204, 50));
+    walls.push_back(new Wall(1857, 274, 50));
+    walls.push_back(new Wall(1904, 344, 50));
+    walls.push_back(new Wall(1954, 451, 90));
 
     std::vector<Entity*>& entities = Entity::getEntities();
     if (entities.size() > 1)
