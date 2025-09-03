@@ -107,7 +107,6 @@ void Enemy::update(char actionFlags)
 /// <param name="player">pointer to player in game</param>
 void Enemy::update(Player* player)
 {
-	std::cout << centerGroundCollision.position.y <<' '<<testGroundIndex<< std::endl;
 	sprite.setScale(sf::Vector2f(0.9, 0.9));
 
 	// when the animation ends
