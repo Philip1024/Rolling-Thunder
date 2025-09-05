@@ -240,7 +240,7 @@ void Enemy::update(Player* player)
 				faceRight = true;
 			}
 		}
-		else if (playerDistance > 150 || rand() % 100 < 5)
+		else if (playerDistance > 200 || rand() % 100 < 2)
 		{
 			curMove = IDLE_CROUCH;
 			moveTicks = 9*4;

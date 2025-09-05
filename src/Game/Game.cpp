@@ -122,18 +122,18 @@ void Game::run()
     //sf::Vector2f worldPos;
 
     enemySpawnClock->restart();
-    //new Enemy(sf::Vector2f(200, 107),false); 
-    //new Enemy(sf::Vector2f(400, 107), false);
-    //new Enemy(sf::Vector2f(600, 107), false);
-    //new Enemy(sf::Vector2f(800, 107), false);
-    //new Enemy(sf::Vector2f(1000, 107), false);
-    //new Enemy(sf::Vector2f(2382, 360), false);
-    //new Enemy(sf::Vector2f(2582, 360), false);
-    //new Enemy(sf::Vector2f(2782, 360), false);
-    //new Enemy(sf::Vector2f(2982, 360), false);
-    //new Enemy(sf::Vector2f(3182, 360), false);
-    //new Enemy(sf::Vector2f(3382, 370), false);
-    //new Enemy(sf::Vector2f(3582, 370), false);
+    new Enemy(sf::Vector2f(200, 107),false); 
+    new Enemy(sf::Vector2f(400, 107), false);
+    new Enemy(sf::Vector2f(600, 107), false);
+    new Enemy(sf::Vector2f(800, 107), false);
+    new Enemy(sf::Vector2f(1000, 107), false);
+    new Enemy(sf::Vector2f(2382, 360), false);
+    new Enemy(sf::Vector2f(2582, 360), false);
+    new Enemy(sf::Vector2f(2782, 360), false);
+    new Enemy(sf::Vector2f(2982, 360), false);
+    new Enemy(sf::Vector2f(3182, 360), false);
+    new Enemy(sf::Vector2f(3382, 370), false);
+    new Enemy(sf::Vector2f(3582, 370), false);
 
     //window/clock setup
     Entity::setWindow(&window);
@@ -513,7 +513,7 @@ void Game::runGameplayBehavior(char actionFlags)
     //enemy->update(player);
 
     //This is for the enemy spawning via door.
-    if (enemySpawnClock->getElapsedTime().asSeconds() > 8)
+    if (enemySpawnClock->getElapsedTime().asSeconds() > 2)
         *allowEnemyDoorSpawn = true;
 
     //This is the main update for the door
