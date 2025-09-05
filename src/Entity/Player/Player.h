@@ -26,7 +26,9 @@ public:
 		FALL_RIGHT,
 		FALL_LEFT,
 		DIE_LEFT,
-		DIE_RIGHT
+		DIE_RIGHT,
+		CROUCH_LEFT,//crouch contains not only crouching but also crouching and shooting, to only crouch, use only the first frame
+		CROUCH_RIGHT,
 	};
 	Player();
 	~Player();
@@ -60,6 +62,7 @@ private:
 	sf::Clock clock;
 	sf::Clock doorTime;
 	sf::Clock shootTime;
+	sf::Clock crouchShootTime;
 	sf::Clock invincibilityTime;
 	Movement curMove;
 	std::unordered_map<Movement, AnimationData::SectionData*> animationMap;
@@ -99,6 +102,8 @@ private:
 	bool dying;
 	int dyingCount;
 	bool alive;
+	bool crouch, crouchShooting;
+	int crouchShootingFrame;
 	bool Lwalled;
 	bool Rwalled;
 	sf::FloatRect centerGroundCollision;

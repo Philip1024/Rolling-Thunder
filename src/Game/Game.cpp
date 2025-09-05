@@ -229,7 +229,9 @@ void Game::run()
         if (jumping && !movingRight && !movingLeft && !wPressed&&!crouching) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
         if (shooting) actionFlags |= 0b00100000;
+        if (crouching) actionFlags |= 0b01001000;
         if (crouching && jumping) actionFlags |= 0b01000010;
+        if(crouching&&shooting) actionFlags |= 0b01000100;
 
         window.clear();
         //gameState = START;
