@@ -120,7 +120,7 @@ void Game::run()
 	//debugDoor->changeOpacity(false);
    // debugRail->changeOpacity(false);
     //sf::Vector2f worldPos;
-
+    /*
     enemySpawnClock->restart();
     new Enemy(sf::Vector2f(200, 107),false); 
     new Enemy(sf::Vector2f(400, 107), false);
@@ -134,7 +134,7 @@ void Game::run()
     new Enemy(sf::Vector2f(3182, 360), false);
     new Enemy(sf::Vector2f(3382, 370), false);
     new Enemy(sf::Vector2f(3582, 370), false);
-
+    */
     //window/clock setup
     Entity::setWindow(&window);
     Entity::setCurrentTick(&currentTick);
@@ -228,8 +228,8 @@ void Game::run()
         if (movingRight && jumping) actionFlags |= 0b00001000;
         if (jumping && !movingRight && !movingLeft && !wPressed&&!crouching) actionFlags |= 0b00000100;
         if (movingLeft && jumping) actionFlags |= 0b00010000;
-        if (shooting) actionFlags |= 0b00100000;
-        if (crouching) actionFlags |= 0b01001000;
+        if (shooting&&!crouching) actionFlags |= 0b00100000;
+        if (crouching&&!shooting&&!jumping) actionFlags |= 0b01001000;
         if (crouching && jumping) actionFlags |= 0b01000010;
         if(crouching&&shooting) actionFlags |= 0b01000100;
 
