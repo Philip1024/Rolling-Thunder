@@ -213,7 +213,7 @@ void Enemy::update(Player* player)
 			dyingCount = 0;
 		}
 	}
-	else if (moveTicks <= 0 && curMove != DIE_LEFT && curMove != DIE_RIGHT&&curMove != FALL_LEFT&&curMove != FALL_RIGHT)
+	else if (moveTicks <= 0 && curMove != DIE_LEFT && curMove != DIE_RIGHT && curMove != FALL_LEFT && curMove != FALL_RIGHT)
 	{
 		if (player->playerInDoor() && playerDistance < 70)
 		{
@@ -240,18 +240,29 @@ void Enemy::update(Player* player)
 				faceRight = true;
 			}
 		}
+		//if the enemy is close to the player
+		else if (playerDistance < 10)
+		{
+			int factor = rand() % 10;
+			if (player->getSprite().getPosition().x < sprite.getPosition().x && factor == 0)
+			{
+				curMove = PUNCH_LEFT;
+			}
+			else if (factor == 0)
+				curMove = PUNCH_RIGHT;
+		}
+		else if (playerDistance < 30 && rand() % 100>2)
+		{
+			if (player->getSprite().getPosition().x < sprite.getPosition().x)
+				curMove = WALK_LEFT;
+			else
+				curMove = WALK_RIGHT;
+		}
+		//if far away
 		else if (playerDistance > 200 || rand() % 100 < 2)
 		{
 			curMove = IDLE_CROUCH;
 			moveTicks = 9*4;
-		}
-		//if the enemy is close to the player
-		else if(playerDistance < 30)
-		{
-			if (player->getSprite().getPosition().x < sprite.getPosition().x && playerDistance < 10)
-				curMove = PUNCH_LEFT;
-			else if (player->getSprite().getPosition().x > sprite.getPosition().x)
-				curMove = PUNCH_RIGHT;
 		}
 		//this determines where to walk
 		else
