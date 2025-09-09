@@ -90,6 +90,7 @@ Player::Player()
 	invincibility = false;
 	noDropDown = false;
 	crouchShooting = false;
+	crouchShootingFrame = 0;
 	ground1.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,5.f }));
 	ground2.push_back(sf::FloatRect({ 132.f,90.f }, { 441.f,5.f }));
 	ground2.push_back(sf::FloatRect({ 764.f,90.f }, { 375.f,5.f }));
@@ -158,7 +159,7 @@ void Player::update(char actionFlags)
 		for (int i = 0; i < ground1.size(); i++)
 		{
 			//if intersects with ground or in any of the other unique animations don't fall
-			if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail || jumpingOffRail||crouch)
+			if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail || jumpingOffRail)
 			{
 				shouldFall = false;
 				if(sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt)
@@ -172,7 +173,7 @@ void Player::update(char actionFlags)
 		for (int i = 0; i < ground2.size(); i++)
 		{
 			//if intersects with ground or in any of the other unique animations don't fall
-			if (sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail || jumpingOffRail||crouch)
+			if (sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail || jumpingOffRail)
 			{
 				shouldFall = false;
 				if (sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
@@ -208,7 +209,7 @@ void Player::update(char actionFlags)
 			for (int i = 0; i < ground1.size(); i++)
 			{
 				//if intersects with ground or in any of the other unique animations don't fall
-				if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail||jumpingOffRail||crouch)
+				if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt || activeRightJump || activeJump || activeLeftJump || inDoor || shooting || jumpingRail||jumpingOffRail)
 				{
 					falling = false;
 					if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt)
@@ -244,6 +245,7 @@ void Player::update(char actionFlags)
 			if (!jumpingOffRail)
 			{
 				jumpingOffRail = true;
+				sprite.move({ 0,-10 });
 			}
 			else if (jumpingOffRailCount < 10)
 			{
@@ -267,20 +269,20 @@ void Player::update(char actionFlags)
 		}
 	}
 	//walk right
-	if ((actionFlags == 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump&&!falling&&!inDoor && !shooting && !jumpingRail && !jumpingOffRail && !dying) 
+	if ((actionFlags == 0b00000001) && !activeRightJump && !activeJump && !activeLeftJump&&!falling&&!inDoor && !shooting && !jumpingRail && !jumpingOffRail && !dying && !crouch && !crouchShooting)
 	{
 		curMove = MOVE_RIGHT;
 		faceRight = true;
 
 	}
 	//walk left
-	if ((actionFlags == 0b00000010) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail && !jumpingOffRail && !dying) 
+	if ((actionFlags == 0b00000010) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail && !jumpingOffRail && !dying && !crouch && !crouchShooting)
 	{
 		curMove = MOVE_LEFT;
 		faceRight = false;
 	}
 	//straight jump
-	if (((actionFlags == 0b00000100)||activeJump) &&!activeRightJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail && !jumpingOffRail && !dying)
+	if (((actionFlags == 0b00000100)||activeJump) &&!activeRightJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail && !jumpingOffRail && !dying && !crouch && !crouchShooting)
 	{
 		if (!activeJump)
 		{
@@ -298,7 +300,7 @@ void Player::update(char actionFlags)
 	}
 
 	//right jump
-	if (((actionFlags == 0b00001000) || activeRightJump) && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail && !jumpingOffRail && !dying)
+	if (((actionFlags == 0b00001000) || activeRightJump) && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail && !jumpingOffRail && !dying && !crouch && !crouchShooting)
 	{
 		if (!activeRightJump)
 		{
@@ -306,7 +308,7 @@ void Player::update(char actionFlags)
 			sprite.move({ 0,7 });//when switchiong to jump animation player move up, this offsets that
 			activeRightJump = true;
 			t = 0;
-			velo = 30;
+			velo = 40;
 			g = 13;
 			angle = 75 * PI / 180;
 			if (Rwalled)
@@ -318,7 +320,7 @@ void Player::update(char actionFlags)
 			activeRightJump = jump(angle, &ground2);
 	}
 	//left jump
-	if (((actionFlags == 0b00010000) || activeLeftJump) && !activeJump && !activeRightJump && !falling && !inDoor&&!shooting && !jumpingRail && !jumpingOffRail && !dying)
+	if (((actionFlags == 0b00010000) || activeLeftJump) && !activeJump && !activeRightJump && !falling && !inDoor&&!shooting && !jumpingRail && !jumpingOffRail && !dying && !crouch && !crouchShooting)
 	{
 		if (!activeLeftJump)
 		{
@@ -326,7 +328,7 @@ void Player::update(char actionFlags)
 			sprite.move({ 0,7 });//when switchiong to jump animation player move up, this offsets that
 			activeLeftJump = true;
 			t = 0;
-			velo = 30;
+			velo = 40;
 			g = 13;
 			angle = 105 * PI / 180;
 			if (Lwalled)
@@ -338,7 +340,7 @@ void Player::update(char actionFlags)
 			activeLeftJump = jump(angle, &ground2);
 	}
 	//shooting
-	if ((actionFlags == 0b00100000||shooting) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !jumpingRail && !jumpingOffRail && !dying)
+	if ((actionFlags == 0b00100000||shooting) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !jumpingRail && !jumpingOffRail && !dying &&!crouch && !crouchShooting)
 	{
 		//update frames every 0.1 seconds
 		if (shootTime.getElapsedTime().asSeconds() <= 0.1f)
@@ -390,8 +392,9 @@ void Player::update(char actionFlags)
 
 		shootTime.restart();
 	}
+	//player crouching
 	crouch = false;//used to determine if crouch has been released
-	if (actionFlags == 0b01001000 && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail && !jumpingOffRail && !dying)
+	if (actionFlags == 0b01001000 && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail && !jumpingOffRail && !dying && !crouchShooting)
 	{
 		crouch = true;
 		if(faceRight)
@@ -399,6 +402,7 @@ void Player::update(char actionFlags)
 		else
 			sprite.setTextureRect(AnimationData::getSection("albatross_crouch_shoot_left")->getFrame(0));
 	}
+	//player crouch shooting
 	if ((actionFlags == 0b01000100||crouchShooting) && !activeRightJump && !activeJump && !activeLeftJump && !falling && !inDoor && !shooting && !jumpingRail && !jumpingOffRail && !dying)
 	{
 		//update frames every 0.1 seconds
@@ -407,49 +411,46 @@ void Player::update(char actionFlags)
 		if (!crouchShooting)
 		{
 			crouchShooting = true;
-			if (!faceRight)
-				sprite.move({ -2.f,5.f });
-			else
-				sprite.move({ 2.f,5.f });
 		}
-		//3 frames when shooting
-		if (crouchShootingFrame == 4)
+		//5 frames when shooting
+		if (crouchShootingFrame == 5)
 		{
 			crouchShooting = false;
-			if (!faceRight)
-				sprite.move({ 2.f,-5.f });
-			else
-				sprite.move({ -2.f,-5.f });
-			shootingFrame = 0;
+			crouchShootingFrame = 0;
 			if (faceRight)
-				sprite.setTextureRect(moveRight->nextFrame());
+				curMove = STAND_RIGHT;
 			else
-				sprite.setTextureRect(moveLeft->nextFrame());
+				curMove = STAND_LEFT;
 			//sprite.move({ 0,(120 - sprite.getGlobalBounds().position.y) });
 		}
 		else
 		{
-			//create bullet on second shooting frame
-			shootingFrame++;
+			//don't want the first frame to be shown
+			if (crouchShootingFrame == 0)
+			{
+				animationMap[CROUCH_RIGHT]->nextFrame();
+				crouchShootingFrame++;
+			}
+			crouchShootingFrame++;
 			if (faceRight)
 			{
-				sprite.setTextureRect(shootRight->nextFrame());
-				if (shootingFrame == 2)
+				sprite.setTextureRect(animationMap[CROUCH_RIGHT]->nextFrame());
+				if (crouchShootingFrame == 3)
 				{
-					new Bullet(true, true, sprite.getPosition().x + 35, sprite.getPosition().y - 12);
+					new Bullet(true, true, sprite.getPosition().x + 28, sprite.getPosition().y - 9);
 				}
 			}
 			else
 			{
-				sprite.setTextureRect(shootLeft->nextFrame());
-				if (shootingFrame == 2)
+				sprite.setTextureRect(animationMap[CROUCH_LEFT]->nextFrame());
+				if (crouchShootingFrame == 3)
 				{
 					new Bullet(true, false, sprite.getPosition().x - 25, sprite.getPosition().y - 13);//still need to fix
 				}
 			}
 		}
 
-		shootTime.restart();
+		crouchShootTime.restart();
 	}
 	switch (curMove)
 	{
@@ -469,7 +470,7 @@ void Player::update(char actionFlags)
 		break;
 
 	}
-	if (playerTicks % 3 == 0&&!shooting&&!crouch)
+	if (playerTicks % 3 == 0&&!shooting&&!crouch&&!crouchShootingFrame)
 	{
 		sprite.setTextureRect(animationMap[curMove]->nextFrame());
 
@@ -493,7 +494,7 @@ void Player::update(char actionFlags)
 	bounds.setFillColor(sf::Color::Transparent);
 	bounds.setOutlineColor(sf::Color::Green);
 	bounds.setOutlineThickness(1);
-	//window->draw(bounds);
+	window->draw(bounds);
 	
 	//std::cout << sprite.getPosition().x <<' '<< sprite.getPosition().y << std::endl;
 	clock.restart();
@@ -691,7 +692,7 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 		if (i >= 3 && i <= 6 && sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
 			dropping = true;
 	}
-	t += 0.2;
+	t += 0.3;
 	//parabolic equation for jump, pos keeps track of position while Mov uses pos to track how much movement is required each frame
 	xMov = velo * cos(angle) * t - xPos;
 	xPos = velo * cos(angle) * t;
