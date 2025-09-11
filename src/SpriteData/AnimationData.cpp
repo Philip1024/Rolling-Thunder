@@ -68,7 +68,7 @@ void AnimationData::load()
 		5, 1, sf::Vector2u(231, 127), sf::Vector2u(417, 168));
 	sectionMap["albatross_crouch_shoot_left"] = new Section(textureMap[ALBATROSS],
 		5, 1, sf::Vector2u(6, 128), sf::Vector2u(193, 168));
-	getSection("albatross_crouch_shoot_left")->setNextFrameFunction(rightToLeftFunction);
+	//getSection("albatross_crouch_shoot_left")->setNextFrameFunction(rightToLeftFunction);
 	//enemies
 	sectionMap["enemy_move_left"] = new Section(textureMap[ENEMY],
 		5, 1, sf::Vector2u(0, 320), sf::Vector2u(48, 64), true);

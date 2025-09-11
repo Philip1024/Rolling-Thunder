@@ -289,8 +289,8 @@ void Player::update(char actionFlags)
 			sprite.move({ 0,7 });//when switchiong to jump animation player move up, this offsets that
 			activeJump = true;
 			t = 0;
-			velo = 30;
-			g = 13;
+			velo = 40;
+			g = 18;
 			angle = 90 * PI / 180;
 		}
 		if (floor == 0)
@@ -309,7 +309,7 @@ void Player::update(char actionFlags)
 			activeRightJump = true;
 			t = 0;
 			velo = 40;
-			g = 13;
+			g = 18;
 			angle = 75 * PI / 180;
 			if (Rwalled)
 				angle = PI/2;
@@ -329,7 +329,7 @@ void Player::update(char actionFlags)
 			activeLeftJump = true;
 			t = 0;
 			velo = 40;
-			g = 13;
+			g = 18;
 			angle = 105 * PI / 180;
 			if (Lwalled)
 				angle = PI/2;
