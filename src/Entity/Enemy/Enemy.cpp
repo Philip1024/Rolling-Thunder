@@ -243,7 +243,7 @@ void Enemy::update(Player* player)
 		//if the enemy is close to the player
 		else if (playerDistance < 10)
 		{
-			int factor = rand() % 10;
+			int factor = rand() % 1;
 			if (player->getSprite().getPosition().x < sprite.getPosition().x && factor == 0)
 			{
 				curMove = PUNCH_LEFT;
@@ -251,7 +251,7 @@ void Enemy::update(Player* player)
 			else if (factor == 0)
 				curMove = PUNCH_RIGHT;
 		}
-		else if (playerDistance < 30 && rand() % 100>2)
+		else if (playerDistance < 60 && rand() % 100>2)
 		{
 			if (player->getSprite().getPosition().x < sprite.getPosition().x)
 				curMove = WALK_LEFT;
