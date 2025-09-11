@@ -331,6 +331,7 @@ void Player::update(char actionFlags)
 			velo = 40;
 			g = 18;
 			angle = 105 * PI / 180;
+			xMoveTot = 0;
 			if (Lwalled)
 				angle = PI/2;
 		}
@@ -699,13 +700,21 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 	yMov = -0.5 * g * t * t + velo * sin(angle) * t - yPos;
 	yPos = -0.5 * g * t * t + velo * sin(angle) * t;
 	if (Rwalled || Lwalled)
+	{
 		sprite.move({ 0,-1 * yMov });
+	}
 	else
 		sprite.move({ xMov, -1 * yMov });
-	if(!dropping)
-		view->move({ xMov, 0 });
+	if (!dropping)
+	{
+		if(!(xMov<0&&Lwalled))
+			view->move({ xMov, 0 });
+	}
 	else
-		view->move({ xMov, -1*yMov });
+	{
+		if (!(xMov > 0 && Rwalled))
+			view->move({ xMov, -1 * yMov });
+	}
 	if(faceRight)
 		curMove = JUMP_RIGHT;
 	else
@@ -763,9 +772,9 @@ void Player::setPos(sf::Vector2f a)
 
 void Player::wall()
 {
-	if (faceRight)
+	if (faceRight&&!Lwalled)
 		Rwalled = true;
-	else
+	if(!faceRight&&!Rwalled)
 		Lwalled = true;
 }
 
