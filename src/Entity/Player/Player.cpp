@@ -706,13 +706,15 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 		sprite.move({ xMov, -1 * yMov });
 	if (!dropping)
 	{
-		if(!(xMov<0&&Lwalled))
+		if(!(xMov<0&&Lwalled)&& !(xMov > 0 && Rwalled))
 			view->move({ xMov, 0 });
 	}
 	else
 	{
-		if (!(xMov > 0 && Rwalled))
+		if (!(xMov < 0 && Lwalled) && !(xMov > 0 && Rwalled))
 			view->move({ xMov, -1 * yMov });
+		else
+			view->move({ 0, -1 * yMov });
 	}
 	if(faceRight)
 		curMove = JUMP_RIGHT;
