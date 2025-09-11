@@ -128,6 +128,7 @@ void Player::update(char actionFlags)
 {
 	Entity::update(actionFlags);//draws player
 	 // only update the animation past this point
+	std::cout << Lwalled << ' ' << Rwalled << std::endl;
 	if (dying)
 	{
 		if (dyingCount < 18)
