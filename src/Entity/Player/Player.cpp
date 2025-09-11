@@ -694,12 +694,19 @@ bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 	}
 	t += 0.3;
 	//parabolic equation for jump, pos keeps track of position while Mov uses pos to track how much movement is required each frame
+	float xMoveTot = 0;
 	xMov = velo * cos(angle) * t - xPos;
 	xPos = velo * cos(angle) * t;
 	yMov = -0.5 * g * t * t + velo * sin(angle) * t - yPos;
 	yPos = -0.5 * g * t * t + velo * sin(angle) * t;
+	if(!Rwalled&&!Lwalled)
+		xMoveTot += xMov;
 	if (Rwalled || Lwalled)
+	{
 		sprite.move({ 0,-1 * yMov });
+		view->move({ -1*xMoveTot, 0 });
+		xMoveTot = 0;
+	}
 	else
 		sprite.move({ xMov, -1 * yMov });
 	if(!dropping)
