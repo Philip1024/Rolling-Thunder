@@ -331,7 +331,6 @@ void Player::update(char actionFlags)
 			velo = 40;
 			g = 18;
 			angle = 105 * PI / 180;
-			xMoveTot = 0;
 			if (Lwalled)
 				angle = PI/2;
 		}
