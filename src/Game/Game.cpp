@@ -120,7 +120,7 @@ void Game::run()
 	//debugDoor->changeOpacity(false);
    // debugRail->changeOpacity(false);
     //sf::Vector2f worldPos;
-    /*
+    
     enemySpawnClock->restart();
     new Enemy(sf::Vector2f(200, 107),false); 
     new Enemy(sf::Vector2f(400, 107), false);
@@ -134,7 +134,7 @@ void Game::run()
     new Enemy(sf::Vector2f(3182, 360), false);
     new Enemy(sf::Vector2f(3382, 370), false);
     new Enemy(sf::Vector2f(3582, 370), false);
-    */
+    
     //window/clock setup
     Entity::setWindow(&window);
     Entity::setCurrentTick(&currentTick);
@@ -276,7 +276,7 @@ void Game::isColliding(char actionFlags)
     std::vector<Wall*> walls;
     walls.push_back(new Wall(8.5, 175, 100));
     walls.push_back(new Wall(1720, 175, 80));
-    walls.push_back(new Wall(1763, 146, 50));
+    walls.push_back(new Wall(1760, 146, 50));
     walls.push_back(new Wall(1810, 204, 50));
     walls.push_back(new Wall(1857, 274, 50));
     walls.push_back(new Wall(1904, 344, 50));
@@ -537,7 +537,7 @@ void Game::runGameplayBehavior(char actionFlags)
         //check to see if enemy is dead
         if (!((Enemy*)enemies.at(i))->getAlive())
         {
-            std::cout << "removed";
+            
             delete enemies.at(i);
             enemies.erase(std::remove(enemies.begin(), enemies.end(), enemies.at(i)), enemies.end());
         }
