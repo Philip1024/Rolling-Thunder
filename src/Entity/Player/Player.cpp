@@ -688,6 +688,7 @@ void Player::collide(Entity* other,char actionFlags)
 /// <returns>bool for whether to continue the jump based on ground</returns>
 bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 {
+	std::cout << dropping << std::endl;
 	for (int i = 0; i < ground->size(); i++)
 	{
 		if (i >= 3 && i <= 6 && sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
