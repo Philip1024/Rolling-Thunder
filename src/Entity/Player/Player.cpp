@@ -91,11 +91,12 @@ Player::Player()
 	noDropDown = false;
 	crouchShooting = false;
 	crouchShootingFrame = 0;
+	cantGoPast = false;
 	ground1.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,5.f }));
 	ground2.push_back(sf::FloatRect({ 132.f,90.f }, { 441.f,5.f }));
 	ground2.push_back(sf::FloatRect({ 764.f,90.f }, { 375.f,5.f }));
 	ground2.push_back(sf::FloatRect({ 1333.f,90.f }, { 385.f,5.f }));
-	ground2.push_back(sf::FloatRect({ 1717.f,90.f }, { 46.f, 5.f }));
+	ground2.push_back(sf::FloatRect({ 1717.f,90.f }, { 46.f, 5.f }));//once you go past this ground you can't go to another ground
 	ground2.push_back(sf::FloatRect({ 1763.f,145.f }, { 48.f,5.f }));
 	ground2.push_back(sf::FloatRect({ 1811.f,203.f }, { 48.f, 5.f }));
 	ground2.push_back(sf::FloatRect({ 1859.f,273.f }, { 46.f,5.f }));
@@ -126,9 +127,9 @@ Player::~Player()
 
 void Player::update(char actionFlags)
 {
+	std::cout << dropping << std::endl;
 	Entity::update(actionFlags);//draws player
 	 // only update the animation past this point
-	std::cout << Lwalled << ' ' << Rwalled << std::endl;
 	if (dying)
 	{
 		if (dyingCount < 18)
@@ -182,15 +183,19 @@ void Player::update(char actionFlags)
 					centerGroundCollision = ground2.at(i);
 					if (i > 2)
 						noDropDown = true;
+					if (i > 3&&!cantGoPast)
+					{
+						for (int i = 0; i < 4; i++)
+						{
+							ground2.erase(ground2.begin());
+							cantGoPast = true;
+						}
+						dropping = true;
+					}
+					if(i>0&&cantGoPast&& sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
+						ground2.erase(ground2.begin());
 				}
 				//jumping has it's own way to determine dropping
-				if (!activeJump&&!activeRightJump&&!activeLeftJump)
-				{
-					if (i >= 3 && i <= 6 && sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
-						dropping = true;
-					else
-						dropping = false;
-				}
 			}
 		}
 	}
@@ -688,7 +693,6 @@ void Player::collide(Entity* other,char actionFlags)
 /// <returns>bool for whether to continue the jump based on ground</returns>
 bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 {
-	std::cout << dropping << std::endl;
 	for (int i = 0; i < ground->size(); i++)
 	{
 		if (i >= 3 && i <= 6 && sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
