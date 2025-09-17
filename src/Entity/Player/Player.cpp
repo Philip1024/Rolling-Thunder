@@ -193,8 +193,12 @@ void Player::update(char actionFlags)
 						}
 						dropping = true;
 					}
-					if(i>0&&cantGoPast&& sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
+					if (i > 0 && cantGoPast && sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
+					{
 						ground2.erase(ground2.begin());
+						if (ground2.at(i).position.x > 1905)
+							dropping = false;
+					}
 				}
 				//jumping has it's own way to determine dropping
 			}
