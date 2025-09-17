@@ -127,10 +127,8 @@ Player::~Player()
 
 void Player::update(char actionFlags)
 {
-	std::cout << dropping << std::endl;
 	Entity::update(actionFlags);//draws player
 	 // only update the animation past this point
-	std::cout << Lwalled << ' ' << Rwalled << std::endl;
 	if (dying)
 	{
 		if (dyingCount < 18)
@@ -153,6 +151,16 @@ void Player::update(char actionFlags)
 			invincibility = false;
 			invincibilityTime.restart();
 		}
+	}
+	//meant to determine whether viewport should move with the player sprite
+	std::cout << dropping << std::endl;
+	if (sprite.getPosition().x > 1750.f)
+	{
+		if ((sprite.getPosition().y+sprite.getGlobalBounds().size.y) > 166 && (sprite.getPosition().y + sprite.getGlobalBounds().size.y) < 415)
+			dropping = true;
+		
+		if (sprite.getGlobalBounds().findIntersection(ground2.at(ground2.size() - 1)) != std::nullopt)
+			dropping = false;
 	}
 	//meant to determine whether player is on ground, if not player should fall
 	//test
@@ -191,13 +199,15 @@ void Player::update(char actionFlags)
 							ground2.erase(ground2.begin());
 							cantGoPast = true;
 						}
-						dropping = true;
 					}
-					if (i > 0 && cantGoPast && sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
+					else if (i > 0 && cantGoPast)
 					{
-						ground2.erase(ground2.begin());
-						if (ground2.at(i).position.x > 1905)
-							dropping = false;
+						for (int j = 0; j < i; j++)
+						{
+							ground2.erase(ground2.begin());
+							cantGoPast = true;
+						}
+						i=1;
 					}
 				}
 				//jumping has it's own way to determine dropping
@@ -226,6 +236,8 @@ void Player::update(char actionFlags)
 					if (sprite.getGlobalBounds().findIntersection(ground1.at(i)) != std::nullopt)
 						centerGroundCollision = ground1.at(i);
 					//you minus 46 from centerGround Collision due to height of player
+					if(dropping)
+						view->move({ 0,((centerGroundCollision.position.y - 46) - sprite.getGlobalBounds().position.y) });
 					sprite.move({ 0,((centerGroundCollision.position.y - 46) - sprite.getGlobalBounds().position.y) });
 					floor = 0;
 				}
@@ -241,10 +253,18 @@ void Player::update(char actionFlags)
 				sprite.setTextureRect(moveRight->nextFrame());
 			else
 				sprite.setTextureRect(moveLeft->nextFrame());
-			if(floor==0)
-				sprite.move({ 0,((centerGroundCollision.position.y-46) - sprite.getGlobalBounds().position.y)});
+			if (floor == 0)
+			{
+				sprite.move({ 0,((centerGroundCollision.position.y - 46) - sprite.getGlobalBounds().position.y) });
+				if (dropping)
+					view->move({ 0,((centerGroundCollision.position.y - 46) - sprite.getGlobalBounds().position.y) });
+			}
 			else
-				sprite.move({ 0,((centerGroundCollision.position.y-46) - sprite.getGlobalBounds().position.y) });
+			{
+				sprite.move({ 0,((centerGroundCollision.position.y - 46) - sprite.getGlobalBounds().position.y) });
+				if (dropping)
+					view->move({ 0,((centerGroundCollision.position.y - 46) - sprite.getGlobalBounds().position.y) });
+			}
 		}
 			
 	}
@@ -698,12 +718,7 @@ void Player::collide(Entity* other,char actionFlags)
 /// <returns>bool for whether to continue the jump based on ground</returns>
 bool Player::jump(double angle, std::vector<sf::FloatRect>* ground)
 {
-	std::cout << dropping << std::endl;
-	for (int i = 0; i < ground->size(); i++)
-	{
-		if (i >= 3 && i <= 6 && sprite.getGlobalBounds().findIntersection(ground2.at(i)) != std::nullopt)
-			dropping = true;
-	}
+
 	t += 0.3;
 	//parabolic equation for jump, pos keeps track of position while Mov uses pos to track how much movement is required each frame
 	xMov = velo * cos(angle) * t - xPos;
