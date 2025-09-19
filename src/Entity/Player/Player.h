@@ -107,6 +107,7 @@ private:
 	bool Lwalled;
 	bool Rwalled;
 	bool cantGoPast;//used to determine if player is past a certain ground we should delete all previous grounds because you can;t reach those grounds;
+	bool dontDropView;
 	sf::FloatRect centerGroundCollision;
 	std::vector<sf::FloatRect> ground1;
 	std::vector<sf::FloatRect> ground2;

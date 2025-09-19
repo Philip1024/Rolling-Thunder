@@ -92,6 +92,7 @@ Player::Player()
 	crouchShooting = false;
 	crouchShootingFrame = 0;
 	cantGoPast = false;
+	dontDropView = false;
 	ground1.push_back(sf::FloatRect({ 20.f,166.f }, { 1700.f,5.f }));
 	ground2.push_back(sf::FloatRect({ 132.f,90.f }, { 441.f,5.f }));
 	ground2.push_back(sf::FloatRect({ 764.f,90.f }, { 375.f,5.f }));
@@ -160,8 +161,10 @@ void Player::update(char actionFlags)
 			dropping = true;
 		
 		if (sprite.getGlobalBounds().findIntersection(ground2.at(ground2.size() - 1)) != std::nullopt)
-			dropping = false;
+			dontDropView = true;
 	}
+	if (dontDropView)
+		dropping = false;
 	//meant to determine whether player is on ground, if not player should fall
 	//test
 	shouldFall = true;
